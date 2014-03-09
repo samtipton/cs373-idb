@@ -12,6 +12,15 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 import dj_database_url
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+SETTING_DIR = os.path.dirname(__file__)
+PROJECT_PATH = os.path.join(SETTING_DIR, os.pardir)
+PROJECT_PATH = os.path.abspath(PROJECT_PATH)
+TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
+STATIC_PATH = os.path.join(PROJECT_PATH, 'static')
+DATABASE_PATH = os.path.join(PROJECT_PATH, 'db.sqlite3')
+
+
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -36,6 +45,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'idb_main'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -59,6 +69,9 @@ DATABASES = {
     'default': dj_database_url.config(default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3'))
 }
 
+TEMPLATE_DIRS = (
+    TEMPLATE_PATH,
+)
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
@@ -77,7 +90,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
+
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    STATIC_PATH,
 )
 
