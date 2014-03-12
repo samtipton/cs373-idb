@@ -1,13 +1,19 @@
 FORMAT: 1A
 HOST: http://www.google.com
 
-# IDB
-Notes API is a *short texts saving* service similar to its physical paper presence on your table.
-
-# Group Notes
-Notes related resources of the **Notes API**
+# Superbowl IDB API
+a website with a database about Superbowls past
 
 ## Superbowl Games [/games]
 ### List all Games [GET]
-+ Response 200 (text/plain)
-        Hello!        
++ Response 200 (application/json)
+    
+        [{
+            "winning_team" : "Seahawks",
+            "losing_team" : "Broncos",
+            "venue" : "MetLife Stadium",
+            "score" : "43-8",
+            "game_number" : "XLVIII",
+            "attendance" : "82529",
+            "game_day" : "2014-02-02" 
+        }]
