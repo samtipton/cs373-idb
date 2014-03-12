@@ -5,11 +5,12 @@ class Game(models.Model) :
     losing_team  = models.CharField(max_length=200) 
     venue        = models.CharField(max_length=200) 
     score        = models.CharField(max_length=200) 
-    game_number  = models.CharField(max_length=200) 
+    game_number  = models.CharField(max_length=200)
+    location     = models.CharField(max_length=200) 
     attendance   = models.IntegerField(default = 0) 
-    game_day         = models.DateTimeField('game day') 
+    game_day     = models.DateField('game day') 
   
-    def __str__ (self) : 
+    def __str__ (self) :    
         return "SuperBowl " + self.game_number 
   
 class Team(models.Model) : 

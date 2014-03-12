@@ -9,5 +9,7 @@ class test_API(TestCase) :
 		
 		response = urlopen("http://idb.apiary.io/games")
 		self.assertEquals(response.getcode(), 200)
+		data = response.read()
+				 		
 
 

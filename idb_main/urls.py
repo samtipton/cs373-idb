@@ -3,4 +3,4 @@ from idb_main import views
 
 
 urlpatterns = patterns('',
-	url(r'^$', views.index, name = "index.html"))
+	url(r'^$', views.index))
