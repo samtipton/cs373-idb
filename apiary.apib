@@ -15,19 +15,182 @@ a website with a database about Superbowls past
 404 `Not Found` - resource was not found
 405 `Method Not Allowed` - requested method is not supported for resource.
 
-## Superbowl Games [/games]
+## Superbowl Games [/api/games]
+
 ### List all Games [GET]
 + Response 200 (application/json)
 
         [
                 {
-                    "winning_team" : "Seahawks",
-                    "losing_team" : "Broncos", 
-                    "venue" : "MetLife Stadium",
-                    "score" : "43-8",
-                    "game_number" : "XLVIII",
-                    "location" : "East Rutherford, New Jersey"
-                    "attendance" : "82529",
-                    "game_day" : "2014-02-02"
+                    "home_team" : [1],
+                    "away_team" : [1],
+                    "home_score" : 48,
+                    "away_score" : 3,
+                    "venue" : [0],
+                    "game_day" : "2014-2-14",
+                    "game_number" : "XLVIII"
                 }
         ]
+
+### Add info about a single game [POST]
++ Request (application/json)
+
+        {
+            "home_team" : [1],
+            "away_team" : [1],
+            "home_score" : 48,
+            "away_score" : 3,
+            "venue" : [0],
+            "game_day" : "2014-2-14",
+            "game_number" : "XLVIII"
+        }
+        
++ Response 201 (application/json)
+
+        {"id" : 1}
+        
+## Superbowl Teams [/api/teams]
+
+### List all Teams [GET]
++ Response 200 (application/json)
+
+        [
+                {
+                    "team_name" : "Seahawks",
+                    "team_city" : "Seatle",
+                    "owner" : "Paul Allen"
+                }
+        ]
+
+### Add info about a single Team [POST]
++ Request (application/json)
+
+        {
+            "team_name" : "Seahawks",
+            "team_city" : "Seatle",
+            "owner" : "Paul Allen"
+        }
+        
++ Response 201 (application/json)
+    
+        {"id" : 1}
+
+## Superbowl Players [/api/players]
+
+### List all Players [GET]
++ Response 200 (application/json)
+
+        [
+                {
+                    "first_name" : "Peyton",
+                    "last_name" : "Manning",
+                    "birth_date" : "1976-03-24",
+                    "birth_town" : "New Orleans, LA",
+                    "high_school" : "New Orleans Newman",
+                    "college" : "University of Tennessee"
+                }
+        ]
+
+### Add info about a single player [POST]
++ Request (application/json)
+
+        {
+            "first_name" : "Peyton",
+            "last_name" : "Manning",
+            "birth_date" : "1976-03-24",
+            "birth_town" : "New Orleans, LA",
+            "high_school" : "New Orleans Newman",
+            "college" : "University of Tennessee"
+        }
+        
++ Response (application/json)
+
+        {"id" : 1}
+
+## A Specific Game [/api/games/{id}]
+
+### List info about a single game [GET]
++ Response 200 (application/json)
+
+        {
+            "home_team" : [1],
+            "away_team" : [1],
+            "home_score" : 48,
+            "away_score" : 3,
+            "venue" : [0],
+            "game_day" : "2014-2-14",
+            "game_number" : "XLVIII"
+        }
+
+### Update info about a single game [PUT]
++ Request (application/json)
+
+        {
+            "home_team" : [1],
+            "away_team" : [1],
+            "home_score" : 48,
+            "away_score" : 3,
+            "venue" : [0],
+            "game_day" : "2014-2-14",
+            "game_number" : "XLX"
+        }
++ Response 204
+
+### Remove info about a single game [DELETE]
++ Response 204
+
+## A Specific Team [/api/teams/{id}]
+
+### List info about a single team [GET]
++ Response 200 (application/json)
+
+        {
+            "team_name" : "Seahawks",
+            "team_city" : "Seatle",
+            "owner" : "Paul Allen"
+        }
+
+### Update info about a single team [PUT]
++ Request (application/json)
+
+        {
+            "team_name" : "Seahawks",
+            "team_city" : "Seatle",
+            "owner" : "Paul Allen"
+        }
++ Response 204
+
+### Remove info about a single team [DELETE]
++ Response 204
+
+## A Specific Player [/api/players/{id}]
+
+### List info about a single player [GET]
++ Response 200 (application/json)
+
+        {
+            "first_name" : "Peyton",
+            "last_name" : "Manning",
+            "birth_date" : "1976-03-24",
+            "birth_town" : "New Orleans, LA",
+            "high_school" : "New Orleans Newman",
+            "college" : "University of Tennessee"
+        }
+
+### Update info about a single player [PUT]
++ Request (application/json)
+    
+        {
+            "first_name" : "Peyton",
+            "last_name" : "Manning",
+            "birth_date" : "1976-03-24",
+            "birth_town" : "New Orleans, LA",
+            "high_school" : "New Orleans Newman",
+            "college" : "The University of Tennessee"
+        }
+
++ Response 204
+
+### Remove info about a single player [DELETE]
++ Response 204
+
