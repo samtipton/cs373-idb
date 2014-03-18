@@ -11,6 +11,54 @@ def index(request) :
 	t = loader.get_template('idb_main/design.html')
 
 	return HttpResponse(t.render(context))
+
+def games(request, id = None) :
+
+	if id.isdigit():
+		url = 'idb_main/game' + str(id) + '.html'
+	else :
+		url = 'idb_main/games.html'
+
+	context = RequestContext(request)
+	t = loader.get_template(url)
+
+	return HttpResponse(t.render(context))
+
+def teams(request, id = None) :
+
+	if id.isdigit():
+		url = 'idb_main/teams' + str(id) + '.html'
+	else :
+		url = 'idb_main/teams.html'
+
+	context = RequestContext(request)
+	t = loader.get_template(url)
+
+	return HttpResponse(t.render(context))
+
+def players(request, id = None) :
+
+	if id.isdigit():
+		url = 'idb_main/player' + str(id) + '.html'
+	else :
+		url = 'idb_main/players.html'
+
+	context = RequestContext(request)
+	t = loader.get_template(url)
+
+	return HttpResponse(t.render(context))
+
+def sitemap(request) :
+	context = RequestContext(request)
+	t = loader.get_template('idb_main/sitemap.html')
+
+	return HttpResponse(t.render(context))
+
+def contact(request) :
+	context = RequestContext(request)
+	t = loader.get_template('idb_main/contact.html')
+
+	return HttpResponse(t.render(context))
 	
 # Example of a view to inflate with a Django template in an .html file
 # Possible implementation from tutorial example shown in index.html comment
