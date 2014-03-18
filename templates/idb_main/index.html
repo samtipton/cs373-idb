@@ -1,19 +1,32 @@
 <!DOCTYPE html>
-
-{% load static %}
-
 <html>
-	<head>
-		<!-- Latest compiled and minified CSS -->
-		<link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" media="screen" >
+{% load static %}
+	<!-- Bootstrap -->
+	<link rel="stylesheet" type="text/css" href="{% static 'polls/bootstrap.min.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'polls/justified-nav.css' %}" />
+<header>
 
-		<!-- Latest compiled and minified JavaScript -->
 		<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-	</head>
+	</header>
 
 	<body>
 		<h1>Welcome.</h1>
 		<p>This is a SuperBowl database</p>
 		<h2>Tables go here</h1>
+	
+	<!-- 
+
+	{% if latest_game_list %}
+		<ul>
+    	{% for game in latest_game_list %}
+		<li><a href="{% url 'game:detail' game.id %}">{{ game.number }}</a></li>
+    	{% endfor %}
+    	</ul>
+    {% else %}
+        <p>No Super Bowl data is available.</p>
+    {% endif %}
+ 	
+ 	-->
+ 
 	</body>
 </html>
