@@ -24,7 +24,7 @@ class Venue(models.Model) :
     address = models.CharField(max_length = 500) 
     city = models.CharField(max_length = 500) 
     state = models.CharField(max_length = 500) 
-    zip = models.CharField(max_length = 500) 
+    zip_code = models.CharField(max_length = 500) 
 
     def __str__(self) : 
         return self.name    
