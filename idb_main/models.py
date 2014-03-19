@@ -1,13 +1,21 @@
 from django.db import models
 
+# This import is not used but it is required for
+# epydoc to be able to know about the 'date' type.
+from datetime import date
+
 class Team(models.Model) :
     """
-    The team model represents information about a team that participated in a superbowl.
-    Each team instance uniquely represents that team in the history of the NFL.
+    This model represents information about a team that participated in a superbowl.
+    Each team instance uniquely represents that team in the history of the
+    U{NFL<http://nfl.com>}.
 
-    team_name - The official name of the team. (e.g. Seattle Seahawks)
-    team_city - The name of the home city for the team. (e.g. Seattle, WA)
-    owner - The name of the owner (or entity) of the team. (e.g. Paul Allen)
+    @ivar team_name: The official name of the team. (e.g. Seattle Seahawks)
+    @type team_name: L{str}
+    @ivar team_city: The name of the home city for the team. (e.g. Seattle, WA)
+    @type team_city: L{str}
+    @ivar owner: The name of the owner (or entity) of the team. (e.g. Paul Allen)
+    @type owner: L{str}
     """
     team_name = models.CharField(max_length = 500)
     team_city = models.CharField(max_length = 500)
@@ -18,19 +26,26 @@ class Team(models.Model) :
 
 class Player(models.Model) :
     """
-    The player model represents information about a player that played in a superbowl.
-    Each player instance uniquely represents that player in the history of the NFL.
+    This model represents information about a player that played in a superbowl.
+    Each player instance uniquely represents that player in the history of the
+    U{NFL<http://nfl.com>}.
 
-    first_name - (e.g. Peyton)
-    last_name - (e.g. Manning)
-    birth_date - The date when the player was born in ISO-8601 format. (e.g. 1976-03-24)
-    birth_town - The town the player was born in. (e.g. New Orleans, LA)
-    high_school - The high school the player went to. (e.g. New Orleans Newman)
-    college - The college the player went to. (e.g. University of Tennessee)
+    @ivar first_name: (e.g. Peyton)
+    @type first_name: L{str}
+    @ivar last_name: (e.g. Manning)
+    @type last_name: L{str}
+    @ivar birth_date: The date when the player was born. (e.g. 1976-03-24)
+    @type birth_date: L{date}
+    @ivar birth_town: The town the player was born in. (e.g. New Orleans, LA)
+    @type birth_town: L{str}
+    @ivar high_school: The high school the player went to. (e.g. New Orleans Newman)
+    @type high_school: L{str}
+    @ivar college: The college the player went to. (e.g. University of Tennessee)
+    @type college: L{str}
     """
     first_name = models.CharField(max_length = 500)
     last_name = models.CharField(max_length = 500)
-    birth_date = models.CharField(max_length = 500)
+    birth_date = models.DateField()
     birth_town = models.CharField(max_length = 500)
     high_school = models.CharField(max_length = 500)
     college = models.CharField(max_length = 500)
@@ -40,14 +55,19 @@ class Player(models.Model) :
 
 class Venue(models.Model) :
     """
-    The venue model represents the stadium where a superbowl took place. Each venue
-    instance uniquely represents it in the history of the NFL.
+    This model represents the stadium where a superbowl took place. Each venue
+    instance uniquely represents it in the history of the U{NFL<http://nfl.com>}.
 
-    name - The offical name of the stadium. (e.g. Lucas Oil Stadium)
-    address - The street address of the statidum. (e.g. 500 S Capitol Ave)
-    city - The city the stadium is located in. (e.g. Indianapolis)
-    state - The state the stadium is located in. (e.g. IN)
-    zip_code - The zip code of the area the statudium is in. (e.g. 46225)
+    @ivar name: The offical name of the stadium. (e.g. Lucas Oil Stadium)
+    @type name: L{str}
+    @ivar address: The street address of the statidum. (e.g. 500 S Capitol Ave)
+    @type address: L{str}
+    @ivar city: The city the stadium is located in. (e.g. Indianapolis)
+    @type city: L{str}
+    @ivar state: The state the stadium is located in. (e.g. IN)
+    @type state: L{str}
+    @ivar zip_code: The zip code of the area the statudium is in. (e.g. 46225)
+    @type zip_code: L{str}
     """
     name = models.CharField(max_length = 500)
     address = models.CharField(max_length = 500)
@@ -60,16 +80,24 @@ class Venue(models.Model) :
 
 class Game(models.Model) :
     """
-    The Game model represents a superbowl. The instance uniquely represents
-    that superbowl in the history of the NFL.
+    This model represents a U{superbowl<http://en.wikipedia.org/wiki/Superbowl>}. Each
+    instance uniquely represents a superbowl game in the history of the
+    U{NFL<http://nfl.com>}.
 
-    winning_team - The team that won the game.
-    loosing_team - The team that lost the game.
-    winning_score - The score of the winning team. (e.g. 43)
-    loosing_score - The score of the loosing team. (e.g. 8)
-    venue - The venue the game was played in. (e.g. MetLife Stadium)
-    game_day - The day the was was played (in ISO-8601 format). (e.g. 2014-02-02)
-    game_number - The roman numeral symbol for the game. (e.g. XLVIII)
+    @ivar winning_team: The team that won the game.
+    @type winning_team: L{Team}
+    @ivar loosing_team: The team that lost the game.
+    @type loosing_team: L{Team}
+    @ivar winning_score: The score of the winning team. (e.g. 43)
+    @type winning_score: L{int}
+    @ivar loosing_score: The score of the loosing team. (e.g. 8)
+    @type loosing_score: L{int}
+    @ivar venue: The venue the game was played in. (e.g. MetLife Stadium)
+    @type venue: L{Venue}
+    @ivar game_day: The day the was was played. (e.g. 2014-02-02)
+    @type game_day: L{date}
+    @ivar game_number: The roman numeral symbol for the game. (e.g. XLVIII)
+    @type game_number: L{str}
     """
     winning_team = models.ForeignKey(Team, related_name = "winning_team")
     loosing_team = models.ForeignKey(Team, related_name = "loosing_team")
@@ -84,15 +112,20 @@ class Game(models.Model) :
 
 class Roster(models.Model) :
     """
-    The Roster model represents the relationship between a player and a team.
-    Each instance represents information about that player for a specific year
+    This model represents the relationship between a L{Player} and a L{Team}. Each
+    instance represents information about that player for a specific L{year<Roster.year>}
     with a team.
 
-    player - The player.
-    team - The team.
-    position - The position the player was assigned that year. (e.g. QB)
-    player_number - The t-shirt number the player wore that year. (e.g. 18)
-    year - The year number that this roster entry is representings. (e.g. 2013)
+    @ivar player: The player.
+    @type player: L{Player}
+    @ivar team: The team.
+    @type team: L{Team}
+    @ivar position: The position the player was assigned that year. (e.g. QB)
+    @type position: L{str}
+    @ivar player_number: The t-shirt number the player wore that year. (e.g. 18)
+    @type player_number: L{str}
+    @ivar year: The year number that this roster entry is representing. (e.g. 2013)
+    @type year: L{int}
     """
     player = models.ForeignKey(Player)
     team = models.ForeignKey(Team)
