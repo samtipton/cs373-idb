@@ -2,6 +2,38 @@ body {
   padding-top: 20px;
 }
 
+.twitter-container {
+  position : absolute;
+  left : 1000px;
+  top : 250px;
+  width : 25%;
+  height: 150%;
+}
+
+.googlemaps-container {
+  width: 600px;
+  margin: 0px auto;
+}
+
+.faceoff .mvp img {
+  margin: 0px auto;
+}
+
+.facebook-container {
+  position : absolute;
+  right: 1000px;
+  top : 250px;
+}
+
+.youtube-container {
+  margin-top: 80px;
+}
+
+.container {
+  position: relative;
+  text-align: center;
+}
+
 .footer {
   padding-top: 40px;
   padding-bottom: 40px;
@@ -9,13 +41,13 @@ body {
   border-top: 1px solid #eee;
 }
 
-.faceoff {
-  text-align: center;
-}
 
 .faceoff * {
-  display : inline;
+  text-align: center;
+  display: inline;
   padding : 0px 25px 0px 25px;
+  width : 100%;
+  height : 100%;
 }
 
 .panel-heading p {
