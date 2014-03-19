@@ -290,3 +290,7 @@ class test_API(TestCase) :
 		request.get_method = lambda: 'PUT'
 		response = urlopen(request)
 		self.assertEqual(response.getcode(), 204)
+
+print("IngloriousBashers-tests.py")
+
+print("Done.")
