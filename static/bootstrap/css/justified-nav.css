@@ -12,10 +12,15 @@ h1, p {
 }
 .jumbotron h1 {
   color: #eadb1f;
+  font-family: arial;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
-
+.table-container {
+  position: inherit;
+  width: 750px;
+  margin: 0px auto;
+}
 .row {
   background: rgba(155, 155, 155, 0.75);
   border: solid rgba(0, 0, 0, 0) 5px;
@@ -106,7 +111,7 @@ h1, p {
   margin: 100px 0px;
 }
 
-.table tr td {
+.table * {
   text-align: center;
 }
 

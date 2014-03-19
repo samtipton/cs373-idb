@@ -20,6 +20,8 @@
     <!-- Custom styles for this template -->
     <link type="text/css" href="../../static/bootstrap/css/justified-nav.css" rel="stylesheet">
 
+    <link rel="shortcut icon" href="../../static/res/favicon.png">
+
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
@@ -60,14 +62,49 @@
 
       </div>
 
-      <div class="history">
-        <div class="game">
+      <div class="table-container">
+
+        <div id="datatable" class="panel panel-default">
+          <table class="table">
+            <tr>
+              <td class="span4"><b>Super Bowl Wins</b></td>
+              <td class="span4"><b>City</b></td>
+              <td class="span4"><b>Owner</b></td>
+              <td class="span4"><b>Founded</b></td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>Seattle</td>
+              <td>Pete Carroll</td>
+              <td>1976</td>
+            </tr>
+          </table>
         </div>
-      </div>
+
+        <div id="datatable" class="panel panel-default"> 
+            <div class="panel-heading"><p style="font-size:25px" class="text-primary">MVP History</p></div>
+            <table class="table">
+              <tr>
+                <td><a href="/players/2/"><img style = "width: 200px" src="http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/14214.png"/></a></td>
+              </tr>
+            </table>
+        </div>
+
+         <div id="datatable" class="panel panel-default"> 
+            <div class="panel-heading"><p style="font-size:25px" class="text-primary">Super Bowl History</p></div>
+            <table class="table">
+              <tr>
+                <td><a href="/games/9"><img style = "width: 200px" src="https://upload.wikimedia.org/wikipedia/en/5/51/Super_Bowl_XLVIII_logo.png"></a></td>
+              </tr>
+            </table>
+          </div>
+        </div>
 
       <div class="twitter-container">
-        <a class="twitter-timeline" href="https://twitter.com/Seahawks" data-widget-id="446087270404075520">Tweets by @Seahawks</a>
+        <a class="twitter-timeline" href="https://twitter.com/Seahawks" data-widget-id="446422083765956608">Tweets by @Seahawks</a>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
       </div>
 
       <div class="youtube-container">
