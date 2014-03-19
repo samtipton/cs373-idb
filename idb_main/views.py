@@ -27,7 +27,7 @@ def games(request, id = None) :
 def teams(request, id = None) :
 
 	if id.isdigit():
-		url = 'idb_main/teams' + str(id) + '.html'
+		url = 'idb_main/team' + str(id) + '.html'
 	else :
 		url = 'idb_main/teams.html'
 

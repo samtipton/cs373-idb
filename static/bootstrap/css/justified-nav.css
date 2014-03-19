@@ -9,6 +9,18 @@ body {
   border-top: 1px solid #eee;
 }
 
+.faceoff {
+  text-align: center;
+}
+
+.faceoff * {
+  display : inline;
+  padding : 0px 25px 0px 25px;
+}
+
+.panel-heading p {
+  text-align: center;
+}
 /* Main marketing message and sign up button */
 .jumbotron {
   text-align: center;
@@ -17,6 +29,14 @@ body {
 .jumbotron .btn {
   padding: 14px 24px;
   font-size: 21px;
+}
+
+#datatable {
+  margin: 100px 0px;
+}
+
+.table tr td {
+  text-align: center;
 }
 
 /* Customize the nav-justified links to be fill the entire space of the .navbar */
@@ -84,5 +104,8 @@ body {
   .footer {
     padding-right: 0;
     padding-left: 0;
+  }
+  .footer p {
+    text-align: center;
   }
 }
