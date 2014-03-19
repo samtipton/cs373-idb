@@ -42,6 +42,10 @@ class Player(models.Model) :
     @type high_school: L{str}
     @ivar college: The college the player went to. (e.g. University of Tennessee)
     @type college: L{str}
+    @ivar draft_year: The year the player was drafted. (e.g. 1998)
+    @type draft_year: L{int}
+    @ivar retired: Is the player retired?. (e.g. False)
+    @type retired: L{bool}
     """
     first_name = models.CharField(max_length = 500)
     last_name = models.CharField(max_length = 500)
@@ -49,6 +53,8 @@ class Player(models.Model) :
     birth_town = models.CharField(max_length = 500)
     high_school = models.CharField(max_length = 500)
     college = models.CharField(max_length = 500)
+    draft_year = models.IntegerField()
+    retired = models.BooleanField()
 
     def __str__ (self) :
         return self.first_name + " " + self.last_name
