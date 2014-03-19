@@ -8,7 +8,7 @@ from django.views import generic
 # Create your views here.
 def index(request) :
 	context = RequestContext(request)
-	t = loader.get_template('idb_main/design.html')
+	t = loader.get_template('idb_main/index.html')
 
 	return HttpResponse(t.render(context))
 
