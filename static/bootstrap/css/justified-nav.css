@@ -1,7 +1,36 @@
 body {
   padding-top: 20px;
+  background: url(http://graphics8.nytimes.com/images/2013/02/09/sports/football/09LIGHTS-IMG/09LIGHTS-IMG-superJumbo.jpg);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
+h1, p {
+  color: white;
+}
+.jumbotron h1 {
+  color: #eadb1f;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+
+.row {
+  background: rgba(155, 155, 155, 0.75);
+  border: solid rgba(0, 0, 0, 0) 5px;
+  border-radius: 5px;
+}
+.row .col-lg-4 h2 {
+  color: white;
+  font-size: 3em;
+}
+
+.row .col-lg-4 p {
+  color: white;
+  font-size: 1em;
+  font-weight: 900;
+}
 .twitter-container {
   position : absolute;
   left : 1000px;
@@ -38,7 +67,13 @@ body {
   padding-top: 40px;
   padding-bottom: 40px;
   margin-top: 40px;
-  border-top: 1px solid #eee;
+
+
+}
+
+.footer p {
+    color: #eadb1f; 
+    font-weight: bold;
 }
 
 
@@ -48,6 +83,10 @@ body {
   padding : 0px 25px 0px 25px;
   width : 100%;
   height : 100%;
+}
+
+.btn.btn-primary {
+  box-shadow: 2px 2px 5px #3979b0
 }
 
 .panel-heading p {
