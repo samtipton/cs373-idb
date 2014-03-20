@@ -100,6 +100,11 @@ class test_API(TestCase) :
 
 		self.assertTrue(actual_response_list == response_content_list)
 
+		actual_response_list = {
+		}
+
+		self.assertFalse(actual_response_list == response_content_list)
+
 		
 
 	def test_API_get_single_team_content(self) :
@@ -118,11 +123,19 @@ class test_API(TestCase) :
 		
 		self.assertTrue(actual_response_list == response_content_list)
 
+		actual_response_list = {
+		    "team_name" : "Seahawks",
+		    "team_city" : "Seattle"
+		}
+		
+		self.assertFalse(actual_response_list == response_content_list)
+
 	
 	def test_API_get_single_player_content(self) :
 		response = urlopen("http://idb.apiary.io/api/players/{id}")
 		
 		self.assertEqual(response.getcode(), 200)
+		self.assertNotEqual(response.getcode(), 404)
 
 		str_response = response.readall().decode("utf-8")
 
@@ -137,6 +150,20 @@ class test_API(TestCase) :
 		}
 
 		self.assertTrue(actual_response_list == response_content_list)
+
+
+		actual_response_list = {
+		    "first_name" : "Archie",
+		    "last_name" : "Manning",
+		    "birth_date" : "1949-05-19",
+		    "birth_town" : "New Orleans, LA",
+		    "high_school" : "New Orleans Newman",
+		    "college" : "University of Tennessee",
+		    "Totally" : "Not suppose to be here"
+		}
+
+		self.assertFalse(actual_response_list == response_content_list)
+
 
 	# ----------------------
 	# delete
@@ -161,7 +188,9 @@ class test_API(TestCase) :
 		request.get_method = lambda: 'DELETE'
 		response = urlopen(request)
 		self.assertEqual(response.getcode(), 204)
-
+		request.get_method = lambda: 'GET'
+		response = urlopen(request)
+		self.assertNotEqual(response.getcode(), 204)
 	# -----------------------------------------
 	# post
 	# -----------------------------------------
@@ -194,7 +223,7 @@ class test_API(TestCase) :
 	def test_API_post_teams_content(self) :
 		values = dumps({
 		    "team_name" : "Seahawks",
-		    "team_city" : "Seatle",
+		    "team_city" : "Seattle",
 		    "owner" : "Paul Allen"
 		})
 		headers = {"Content-Type": "application/json"}
@@ -203,6 +232,7 @@ class test_API(TestCase) :
 		
 		response = urlopen(request)
 		self.assertEqual(response.getcode(), 201)
+		self.assertNotEqual(response.getcode(), 204)
 		#formatting response
 		str_response = response.readall().decode("utf-8")
 		obj_response = loads(str_response)
@@ -233,6 +263,9 @@ class test_API(TestCase) :
 		actual_response = {'id' : 1}
 		self.assertEqual(obj_response, actual_response)
 
+		actual_response = {'id' : 2}
+		self.assertNotEqual(obj_response, actual_response)
+
 
 	# -----------------------
 	# put
@@ -258,6 +291,7 @@ class test_API(TestCase) :
 		request.get_method = lambda: 'PUT'
 		response = urlopen(request)
 		self.assertEqual(response.getcode(), 204)
+		self.assertNotEqual(response.getcode(), 304)
 
 	def test_API_put_team_response(self) :
 		values = dumps({
@@ -272,6 +306,10 @@ class test_API(TestCase) :
 		request.get_method = lambda: 'PUT'
 		response = urlopen(request)
 		self.assertEqual(response.getcode(), 204)
+
+		request.get_method = lambda: 'GET'
+		response = urlopen(request)
+		self.assertNotEqual(response.getcode(), 204)
 
 
 	def test_API_put_player_response(self) :
@@ -290,3 +328,7 @@ class test_API(TestCase) :
 		request.get_method = lambda: 'PUT'
 		response = urlopen(request)
 		self.assertEqual(response.getcode(), 204)
+
+print("IngloriousBashers-tests.py")
+
+print("Done.")
