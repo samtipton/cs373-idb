@@ -8,16 +8,16 @@ from django.views import generic
 # Create your views here.
 def index(request) :
 	context = RequestContext(request)
-	t = loader.get_template('idb_main/index.html')
+	t = loader.get_template('idb/index.html')
 
 	return HttpResponse(t.render(context))
 
 def games(request, id = None) :
 
 	if id.isdigit():
-		url = 'idb_main/game' + str(id) + '.html'
+		url = 'idb/game' + str(id) + '.html'
 	else :
-		url = 'idb_main/games.html'
+		url = 'idb/games.html'
 
 	context = RequestContext(request)
 	t = loader.get_template(url)
@@ -27,9 +27,9 @@ def games(request, id = None) :
 def teams(request, id = None) :
 
 	if id.isdigit():
-		url = 'idb_main/team' + str(id) + '.html'
+		url = 'idb/team' + str(id) + '.html'
 	else :
-		url = 'idb_main/teams.html'
+		url = 'idb/teams.html'
 
 	context = RequestContext(request)
 	t = loader.get_template(url)
@@ -39,9 +39,9 @@ def teams(request, id = None) :
 def players(request, id = None) :
 
 	if id.isdigit():
-		url = 'idb_main/player' + str(id) + '.html'
+		url = 'idb/player' + str(id) + '.html'
 	else :
-		url = 'idb_main/players.html'
+		url = 'idb/players.html'
 
 	context = RequestContext(request)
 	t = loader.get_template(url)
@@ -50,13 +50,13 @@ def players(request, id = None) :
 
 def sitemap(request) :
 	context = RequestContext(request)
-	t = loader.get_template('idb_main/sitemap.html')
+	t = loader.get_template('idb/sitemap.html')
 
 	return HttpResponse(t.render(context))
 
 def contact(request) :
 	context = RequestContext(request)
-	t = loader.get_template('idb_main/contact.html')
+	t = loader.get_template('idb/contact.html')
 
 	return HttpResponse(t.render(context))
 	
