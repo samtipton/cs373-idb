@@ -22,12 +22,13 @@ a website with a database about Superbowls past
 
         [
                 {
-                    "home_team" : [1],
-                    "away_team" : [1],
-                    "home_score" : 48,
-                    "away_score" : 3,
-                    "venue" : [0],
-                    "game_day" : "2014-2-14",
+                    "winning_team" : "Seattle Seahawks",
+                    "losing_team" : "Denver Broncos",
+                    "mvp" : "Malcom Smith",
+                    "winning_score" : 48,
+                    "losing_score" : 3,
+                    "venue" : "MetLife Stadium",
+                    "game_day" : "2014-02-14",
                     "game_number" : "XLVIII"
                 }
         ]
@@ -36,18 +37,19 @@ a website with a database about Superbowls past
 + Request (application/json)
 
         {
-            "home_team" : [1],
-            "away_team" : [1],
-            "home_score" : 48,
-            "away_score" : 3,
-            "venue" : [0],
-            "game_day" : "2014-2-14",
+            "winning_team" : "Seattle Seahawks",
+            "losing_team" : "Denver Broncos",
+            "mvp" : "Malcom Smith",
+            "winning_score" : 48,
+            "losing_score" : 3,
+            "venue" : "MetLife Stadium",
+            "game_day" : "2014-02-14",
             "game_number" : "XLVIII"
         }
         
 + Response 201 (application/json)
 
-        {"id" : 1}
+        {"id" : 48}
         
 ## Superbowl Teams [/api/teams]
 
@@ -58,7 +60,9 @@ a website with a database about Superbowls past
                 {
                     "team_name" : "Seahawks",
                     "team_city" : "Seattle",
-                    "owner" : "Paul Allen"
+                    "owner" : "Paul Allen",
+                    "sb_appearances" : [40, 48],
+                    "mvp_list" : ["Malcom Smith"]
                 }
         ]
 
@@ -68,12 +72,14 @@ a website with a database about Superbowls past
         {
             "team_name" : "Seahawks",
             "team_city" : "Seattle",
-            "owner" : "Paul Allen"
+            "owner" : "Paul Allen",
+            "sb_appearances" : [40, 48],
+            "mvp_list" : ["Malcom Smith"]
         }
         
 + Response 201 (application/json)
     
-        {"id" : 1}
+        {"id" : 48}
 
 ## Superbowl Players [/api/players]
 
@@ -84,10 +90,14 @@ a website with a database about Superbowls past
                 {
                     "first_name" : "Peyton",
                     "last_name" : "Manning",
+                    "teams" : ["Indianapolis Colts", "Denver Broncos"],
+                    "sb_appearances" : [41, 44, 48],
                     "birth_date" : "1976-03-24",
                     "birth_town" : "New Orleans, LA",
                     "high_school" : "New Orleans Newman",
-                    "college" : "University of Tennessee"
+                    "college" : "University of Tennessee",
+                    "draft_year" : 1998,
+                    "retired" : false
                 }
         ]
 
@@ -97,10 +107,14 @@ a website with a database about Superbowls past
         {
             "first_name" : "Peyton",
             "last_name" : "Manning",
+            "teams" : ["Indianapolis Colts", "Denver Broncos"],
+            "sb_appearances" : [41, 44, 48],
             "birth_date" : "1976-03-24",
             "birth_town" : "New Orleans, LA",
             "high_school" : "New Orleans Newman",
-            "college" : "University of Tennessee"
+            "college" : "University of Tennessee",
+            "draft_year" : 1998,
+            "retired" : false
         }
         
 + Response 201 (application/json)
@@ -113,12 +127,13 @@ a website with a database about Superbowls past
 + Response 200 (application/json)
 
         {
-            "home_team" : [1],
-            "away_team" : [1],
-            "home_score" : 48,
-            "away_score" : 3,
-            "venue" : [0],
-            "game_day" : "2014-2-14",
+            "winning_team" : "Seattle Seahawks",
+            "losing_team" : "Denver Broncos",
+            "mvp" : "Malcom Smith",
+            "winning_score" : 48,
+            "losing_score" : 3,
+            "venue" : "MetLife Stadium",
+            "game_day" : "2014-02-14",
             "game_number" : "XLVIII"
         }
 
@@ -126,13 +141,14 @@ a website with a database about Superbowls past
 + Request (application/json)
 
         {
-            "home_team" : [1],
-            "away_team" : [1],
-            "home_score" : 48,
-            "away_score" : 3,
-            "venue" : [0],
-            "game_day" : "2014-2-14",
-            "game_number" : "XLX"
+            "winning_team" : "Seattle Seahawks",
+            "losing_team" : "Denver Broncos",
+            "mvp" : "Malcom Smith",
+            "winning_score" : 48,
+            "losing_score" : 3,
+            "venue" : "MetLife Stadium",
+            "game_day" : "2014-02-14",
+            "game_number" : "XLVIII"
         }
 + Response 204
 
@@ -147,7 +163,9 @@ a website with a database about Superbowls past
         {
             "team_name" : "Seahawks",
             "team_city" : "Seattle",
-            "owner" : "Paul Allen"
+            "owner" : "Paul Allen",
+            "sb_appearances" : [40, 48],
+            "mvp_list" : ["Malcom Smith"]
         }
 
 ### Update info about a single team [PUT]
@@ -156,7 +174,9 @@ a website with a database about Superbowls past
         {
             "team_name" : "Seahawks",
             "team_city" : "Seattle",
-            "owner" : "Paul Allen"
+            "owner" : "Paul Allen",
+            "sb_appearances" : [40, 48],
+            "mvp_list" : ["Malcom Smith"]
         }
 + Response 204
 
@@ -171,10 +191,14 @@ a website with a database about Superbowls past
         {
             "first_name" : "Peyton",
             "last_name" : "Manning",
+            "teams" : ["Indianapolis Colts", "Denver Broncos"],
+            "sb_appearances" : [41, 44, 48],
             "birth_date" : "1976-03-24",
             "birth_town" : "New Orleans, LA",
             "high_school" : "New Orleans Newman",
-            "college" : "University of Tennessee"
+            "college" : "University of Tennessee",
+            "draft_year" : 1998,
+            "retired" : false
         }
 
 ### Update info about a single player [PUT]
@@ -183,10 +207,14 @@ a website with a database about Superbowls past
         {
             "first_name" : "Peyton",
             "last_name" : "Manning",
+            "teams" : ["Indianapolis Colts", "Denver Broncos"],
+            "sb_appearances" : [41, 44, 48],
             "birth_date" : "1976-03-24",
             "birth_town" : "New Orleans, LA",
             "high_school" : "New Orleans Newman",
-            "college" : "The University of Tennessee"
+            "college" : "University of Tennessee",
+            "draft_year" : 1998,
+            "retired" : false
         }
 
 + Response 204
