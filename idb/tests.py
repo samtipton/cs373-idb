@@ -26,12 +26,13 @@ class test_API(TestCase) :
 		response_content_list = loads(str_response)
 		actual_response_list = [
 	        {
-	            "home_team" : [1],
-	            "away_team" : [1],
-	            "home_score" : 48,
-	            "away_score" : 3,
-	            "venue" : [0],
-	            "game_day" : "2014-2-14",
+	            "winning_team" : "Seattle Seahawks",
+	            "losing_team" : "Denver Broncos",
+	            "mvp" : "Malcom Smith",
+	            "winning_score" : 48,
+	            "losing_score" : 3,
+	            "venue" : "MetLife Stadium",
+	            "game_day" : "2014-02-14",
 	            "game_number" : "XLVIII"
         	}
 		]	
@@ -51,7 +52,9 @@ class test_API(TestCase) :
 	        {
 	            "team_name" : "Seahawks",
 	            "team_city" : "Seattle",
-	            "owner" : "Paul Allen"
+	            "owner" : "Paul Allen",
+	            "sb_appearances" : [40, 48],
+	            "mvp_list" : ["Malcom Smith"]
 	        }
 		]
 		
@@ -70,10 +73,14 @@ class test_API(TestCase) :
 	        {
 	            "first_name" : "Peyton",
 	            "last_name" : "Manning",
+	            "teams" : ["Indianapolis Colts", "Denver Broncos"],
+	            "sb_appearances" : [41, 44, 48],
 	            "birth_date" : "1976-03-24",
 	            "birth_town" : "New Orleans, LA",
 	            "high_school" : "New Orleans Newman",
-	            "college" : "University of Tennessee"
+	            "college" : "University of Tennessee",
+	            "draft_year" : 1998,
+	            "retired" : false
 	        }
 		]
 		
@@ -89,13 +96,14 @@ class test_API(TestCase) :
 		
 		response_content_list = loads(str_response)
 		actual_response_list = {
-		    "home_team" : [1],
-		    "away_team" : [1],
-		    "home_score" : 48,
-		    "away_score" : 3,
-		    "venue" : [0],
-		    "game_day" : "2014-2-14",
-		    "game_number" : "XLVIII"
+		    "winning_team" : "Seattle Seahawks",
+	        "losing_team" : "Denver Broncos",
+	        "mvp" : "Malcom Smith",
+	        "winning_score" : 48,
+	        "losing_score" : 3,
+	        "venue" : "MetLife Stadium",
+	        "game_day" : "2014-02-14",
+	        "game_number" : "XLVIII"
 		}
 
 		self.assertTrue(actual_response_list == response_content_list)
@@ -117,8 +125,10 @@ class test_API(TestCase) :
 		response_content_list = loads(str_response)
 		actual_response_list = {
 		    "team_name" : "Seahawks",
-		    "team_city" : "Seattle",
-		    "owner" : "Paul Allen"
+	        "team_city" : "Seattle",
+	        "owner" : "Paul Allen",
+	        "sb_appearances" : [40, 48],
+	        "mvp_list" : ["Malcom Smith"]
 		}
 		
 		self.assertTrue(actual_response_list == response_content_list)
@@ -141,12 +151,16 @@ class test_API(TestCase) :
 
 		response_content_list = loads(str_response)
 		actual_response_list = {
-		    "first_name" : "Peyton",
-		    "last_name" : "Manning",
-		    "birth_date" : "1976-03-24",
-		    "birth_town" : "New Orleans, LA",
-		    "high_school" : "New Orleans Newman",
-		    "college" : "University of Tennessee"
+	        "first_name" : "Peyton",
+	        "last_name" : "Manning",
+	        "teams" : ["Indianapolis Colts", "Denver Broncos"],
+	        "sb_appearances" : [41, 44, 48],
+	        "birth_date" : "1976-03-24",
+	        "birth_town" : "New Orleans, LA",
+	        "high_school" : "New Orleans Newman",
+	        "college" : "University of Tennessee",
+	        "draft_year" : 1998,
+	        "retired" : false
 		}
 
 		self.assertTrue(actual_response_list == response_content_list)
@@ -199,13 +213,14 @@ class test_API(TestCase) :
 
 	def test_API_post_games_content(self) :
 		values = dumps({
-		    "home_team" : [1],
-		    "away_team" : [1],
-		    "home_score" : 48,
-		    "away_score" : 3,
-		    "venue" : [0],
-		    "game_day" : "2014-2-14",
-		    "game_number" : "XLVIII"
+		    "winning_team" : "Seattle Seahawks",
+	        "losing_team" : "Denver Broncos",
+	        "mvp" : "Malcom Smith",
+	        "winning_score" : 48,
+	        "losing_score" : 3,
+	        "venue" : "MetLife Stadium",
+	        "game_day" : "2014-02-14",
+	        "game_number" : "XLVIII"
 		})
 		headers = {"Content-Type": "application/json"}
 		vbin = values.encode("utf-8")
@@ -217,14 +232,16 @@ class test_API(TestCase) :
 		str_response = response.readall().decode("utf-8")
 		obj_response = loads(str_response)
 
-		actual_response = {'id' : 1}
+		actual_response = {'id' : 48}
 		self.assertEqual(obj_response, actual_response)
 
 	def test_API_post_teams_content(self) :
 		values = dumps({
 		    "team_name" : "Seahawks",
-		    "team_city" : "Seattle",
-		    "owner" : "Paul Allen"
+	        "team_city" : "Seattle",
+	        "owner" : "Paul Allen",
+	        "sb_appearances" : [40, 48],
+	        "mvp_list" : ["Malcom Smith"]
 		})
 		headers = {"Content-Type": "application/json"}
 		vbin = values.encode("utf-8")
@@ -243,12 +260,16 @@ class test_API(TestCase) :
 
 	def test_API_post_players_content(self) :
 		values = dumps({
-		    "first_name" : "Peyton",
-		    "last_name" : "Manning",
-		    "birth_date" : "1976-03-24",
-		    "birth_town" : "New Orleans, LA",
-		    "high_school" : "New Orleans Newman",
-		    "college" : "University of Tennessee"
+		   	"first_name" : "Peyton",
+	        "last_name" : "Manning",
+	        "teams" : ["Indianapolis Colts", "Denver Broncos"],
+	        "sb_appearances" : [41, 44, 48],
+	        "birth_date" : "1976-03-24",
+	        "birth_town" : "New Orleans, LA",
+	        "high_school" : "New Orleans Newman",
+	        "college" : "University of Tennessee",
+	        "draft_year" : 1998,
+	        "retired" : false
 		})
 		headers = {"Content-Type": "application/json"}	
 		vbin = values.encode("utf-8")
@@ -276,13 +297,14 @@ class test_API(TestCase) :
 
 	def test_API_put_game_response(self) :
 		values = dumps({
-		    "home_team" : [1],
-		    "away_team" : [1],
-		    "home_score" : 48,
-		    "away_score" : 3,
-		    "venue" : [0],
-		    "game_day" : "2014-2-14",
-		    "game_number" : "XLX"
+		    "winning_team" : "Seattle Seahawks",
+	        "losing_team" : "Denver Broncos",
+	        "mvp" : "Malcom Smith",
+	        "winning_score" : 48,
+	        "losing_score" : 3,
+	        "venue" : "MetLife Stadium",
+	        "game_day" : "2014-02-14",
+	        "game_number" : "XLVIII"
 		})
 
 		headers = {"Content-Type": "application/json"}
@@ -296,8 +318,10 @@ class test_API(TestCase) :
 	def test_API_put_team_response(self) :
 		values = dumps({
 		    "team_name" : "Seahawks",
-		    "team_city" : "Seatle",
-		    "owner" : "Paul Allen"
+	        "team_city" : "Seattle",
+	        "owner" : "Paul Allen",
+	        "sb_appearances" : [40, 48],
+	        "mvp_list" : ["Malcom Smith"]
 		})
 
 		headers = {"Content-Type": "application/json"}
@@ -315,11 +339,15 @@ class test_API(TestCase) :
 	def test_API_put_player_response(self) :
 		values = dumps({
 		    "first_name" : "Peyton",
-		    "last_name" : "Manning",
-		    "birth_date" : "1976-03-24",
-		    "birth_town" : "New Orleans, LA",
-		    "high_school" : "New Orleans Newman",
-		    "college" : "The University of Tennessee"
+	        "last_name" : "Manning",
+	        "teams" : ["Indianapolis Colts", "Denver Broncos"],
+	        "sb_appearances" : [41, 44, 48],
+	        "birth_date" : "1976-03-24",
+	        "birth_town" : "New Orleans, LA",
+	        "high_school" : "New Orleans Newman",
+	        "college" : "University of Tennessee",
+	        "draft_year" : 1998,
+	   	    "retired" : false
 		})
 
 		headers = {"Content-Type": "application/json"}
