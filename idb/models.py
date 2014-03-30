@@ -4,6 +4,41 @@ from django.db import models
 # epydoc to be able to know about the 'date' type.
 from datetime import date
 
+class Game(models.Model) :
+    """
+    This model represents a U{superbowl<http://en.wikipedia.org/wiki/Superbowl>}. Each
+    instance uniquely represents a superbowl game in the history of the
+    U{NFL<http://nfl.com>}.
+
+    @ivar winning_team: The team that won the game.
+    @type winning_team: L{Team}
+    @ivar losing_team: The team that lost the game.
+    @type losing_team: L{Team}
+    @ivar winning_score: The score of the winning team. (e.g. 43)
+    @type winning_score: L{int}
+    @ivar losing_score: The score of the losing team. (e.g. 8)
+    @type losing_score: L{int}
+    @ivar venue: The venue the game was played in. (e.g. MetLife Stadium)
+    @type venue: L{Venue}
+    @ivar game_day: The day the was was played. (e.g. 2014-02-02)
+    @type game_day: L{date}
+    @ivar game_number: The roman numeral symbol for the game. (e.g. XLVIII)
+    @type game_number: L{str}
+    """
+    #one to one field means that only one game can have one winning team
+    winning_team = models.OneToOneField(Team, related_name = "winning_team")
+    losing_team = models.OneToOneField(Team, related_name = "losing_team")
+    mvp = models.OneToOneField(Player)
+    winning_score = models.IntegerField(default = 0)
+    losing_score = models.IntegerField(default = 0)
+    venue = models.ForeignKey(Venue)
+    game_day = models.DateField()
+    game_number = models.CharField(max_length = 500)
+
+    def __str__ (self) :
+        return "SuperBowl " + self.game_number
+
+
 class Team(models.Model) :
     """
     This model represents information about a team that participated in a superbowl.
@@ -17,9 +52,12 @@ class Team(models.Model) :
     @ivar owner: The name of the owner (or entity) of the team. (e.g. Paul Allen)
     @type owner: L{str}
     """
+    
     team_name = models.CharField(max_length = 500)
     team_city = models.CharField(max_length = 500)
     owner = models.CharField(max_length = 500)
+    sb_appearances = models.ForeignKey(Game) # like article --> reporters
+    mvp_list = models.ForeignKey(Player) # like news company -- > reporters 
 
     def __str__ (self) :
         return self.team_name
@@ -49,6 +87,8 @@ class Player(models.Model) :
     """
     first_name = models.CharField(max_length = 500)
     last_name = models.CharField(max_length = 500)
+    teams = models.ForeignKey(Team) # will relate back to team (parent relation)
+    sb_appearances = models.ForeignKey(Game) # will relate back to SB (parent relation)
     birth_date = models.DateField()
     birth_town = models.CharField(max_length = 500)
     high_school = models.CharField(max_length = 500)
@@ -84,37 +124,7 @@ class Venue(models.Model) :
     def __str__(self) :
         return self.name
 
-class Game(models.Model) :
-    """
-    This model represents a U{superbowl<http://en.wikipedia.org/wiki/Superbowl>}. Each
-    instance uniquely represents a superbowl game in the history of the
-    U{NFL<http://nfl.com>}.
 
-    @ivar winning_team: The team that won the game.
-    @type winning_team: L{Team}
-    @ivar loosing_team: The team that lost the game.
-    @type loosing_team: L{Team}
-    @ivar winning_score: The score of the winning team. (e.g. 43)
-    @type winning_score: L{int}
-    @ivar loosing_score: The score of the loosing team. (e.g. 8)
-    @type loosing_score: L{int}
-    @ivar venue: The venue the game was played in. (e.g. MetLife Stadium)
-    @type venue: L{Venue}
-    @ivar game_day: The day the was was played. (e.g. 2014-02-02)
-    @type game_day: L{date}
-    @ivar game_number: The roman numeral symbol for the game. (e.g. XLVIII)
-    @type game_number: L{str}
-    """
-    winning_team = models.ForeignKey(Team, related_name = "winning_team")
-    loosing_team = models.ForeignKey(Team, related_name = "loosing_team")
-    winning_score = models.IntegerField(default = 0)
-    loosing_score = models.IntegerField(default = 0)
-    venue = models.ForeignKey(Venue)
-    game_day = models.DateField()
-    game_number = models.CharField(max_length = 500)
-
-    def __str__ (self) :
-        return "SuperBowl " + self.game_number
 
 class Roster(models.Model) :
     """
