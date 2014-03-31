@@ -32,7 +32,7 @@ class Franchise(models.Model) :
     current_owner = models.CharField(max_length = 500)
     current_gm = models.CharField(max_length = 500)
     current_head_coach =  models.CharField(max_length = 500)
-    year_founded = models.CharField(max_length = 500)
+    year_founded = models.IntegerField()
     active = models.BooleanField()
     home_stadium = models.CharField(max_length = 500)
     division = models.CharField(max_length = 500)
