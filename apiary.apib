@@ -101,40 +101,154 @@ The URL is built based on information provided by the client when the API reques
 ### List all API versions [GET]
 + Response 200 (application/json)
 
-        [
-        ]
+        {
+            "success": true,
+            "data":
+            [{
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2",
+                "name": "SBIDB API Version 2",
+                "description": "This is the endpoint root for the version 2 API."
+            }]
+        }
 
 ## The Version 2 API [/api/v2]
 ### List all resource collections [GET]
 + Response 200 (application/json)
 
-        [
-        ]
+        {
+            "success": true,
+            "data":
+            [{
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
+                "name": "The Super Bowls",
+                "description": "This is the collection endpoint for the Super Bowl resource."
+            },{
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises",
+                "name": "The Franchise",
+                "description": "This is the collection endpoint for the franchise resource.",
+            },{
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps",
+                "name": "The MVPs",
+                "description": "This is the collection endpoint for the MVP resource.",
+            }]
+        }
         
 
 # Group The Super Bowls
 
-## Superbowl Games [/api/superbowls]
-### List all Games [GET]
+## Super Bowls [/api/superbowls]
+### List all Super Bowl games. [GET]
 + Response 200 (application/json)
 
-        [
-        ]
+        {
+            "success": true,
+            "data":
+            [{
+                "id": 0,
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
+                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
+                "winning_franchise":
+                {
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                },
+                "losing_franchise":
+                {
+                    "id": 1,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/1",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                },
+                "mvp": 
+                {
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                },
+                "winning_score": 43,
+                "losing_score": 8,
+                "venue_name": "MetLife Stadium",
+                "venue_city": "East Rutherford",
+                "venue_state": "NJ",
+                "game_day": "2014-02-02",
+                "attendance": 82529,
+                "game_number": "XLVIII",
+                "halftime_performer": "Bruno Mars"
+            }]
+        }
 
 # Group The Franchises
 
-## Superbowl Teams [/api/franchises]
-### List all Teams [GET]
+## NFL Franchises [/api/franchises]
+### List all NFL franchises. [GET]
 + Response 200 (application/json)
 
-        [
-        ]
+        {
+            "success": true,
+            "data":
+            [{
+                "id": 0,
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
+                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises",
+                "mvps":
+                [{
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                }],
+                "superbowls":
+                [{
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
+                }],
+                "team_name": "Seahawks",
+                "team_city": "Seattle",
+                "team_state": "WA",
+                "current_owner": "Paul Allen",
+                "current_gm": "John Schneider",
+                "current_head_coach": "Pete Carroll",
+                "year_founded": 1974,
+                "active": true,
+                "home_stadium": "CenturyLink Field",
+                "division": "NFCW"
+            }]
+        }
 
 # Group The MVPs
 
-## Superbowl Players [/api/players]
-### List all Players [GET]
+## Super Bowl MVPs [/api/mvps]
+### List all the MVPs [GET]
 + Response 200 (application/json)
 
-        [
-        ]
+        {
+            "success": true,
+            "data":
+            [{
+                "id": 0,
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
+                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps",
+                "superbowls":
+                [{
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
+                }],
+                "franchises":
+                [{
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                }],
+                "first_name": "Malcolm",
+                "last_name": "Smith",
+                "position": "LB",
+                "birth_date": "1989-07-05",
+                "birth_town": "Woodland Hills, CA",
+                "high_school": "Woodland Hills (CA) Taft",
+                "college": "Southern California",
+                "draft_year": 2011, 
+                "active": true, 
+                "salary": 465000,
+            }]
+        }
