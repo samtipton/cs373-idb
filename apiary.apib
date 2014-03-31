@@ -11,7 +11,7 @@ The API is exposed as a RESTful webservice over HTTP with JSON as the only paylo
 the API by using undocumented HTTP verbs, HTTP headers, and/or URIs, CAN and WILL cause undefined behavior
 and/or errors.
 
-## Supported HTTP Status Codes:
+## Supported HTTP Status Codes
 * 200 `OK` - The request was successful.
 * 201 `Created` - The request was successful and a resource was created.
 * 400 `Bad Request` - The request violated the API or some constraints.
@@ -20,7 +20,7 @@ and/or errors.
 * 405 `Method Not Allowed` - The request method (verb) is not supported/allowed for the resource.
 * 500 `Internal Server Error` - Something broke the API. (You better hope it was not you.)
 
-## Supported HTTP Methods (verbs):
+## Supported HTTP Methods (verbs)
 * `GET` - Supported by most Resources and Resource Collections.
 * `POST` - Supported by most Resource Collections.
 * `PUT` - Supported by most Resources.
@@ -29,7 +29,36 @@ and/or errors.
 ## API Authentication and Authorization
 This functionality is currently not supported but security is still enforced.
 
+# Response Payload
+All API operations return a response payload (in JSON) with extra information. This is addition to returning
+an appropriate HTTP Status Code and HTTP headers.
 
+## Successfull Operations
+        {
+            "success": true,
+            "data":
+            {
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
+                "id": 0
+            }
+        }
+
+Where `success` is a boolean value indicating that the operation (as an atomic action) succeeded. And `data` 
+is result of the operation (in this case a reference to a Super Bowl resouce). If the operation does not 
+return a result, the value of `data` is `null`.
+
+## Failed Operations
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_METHOD_NOT_ALLOWED",
+                "message": "The HTTP method 'POST' is not allowed on the resource '/api/v2/superbowls/0'."
+            }
+        }
+        
+Where `success` is a boolean value indicating that the operation (as an atomic action) failed. And `error` is
+an object describing the type of error (`type`, a string) and why it failed (`message`, a string). 
 
 ## Superbowl Games [/api/games]
 
