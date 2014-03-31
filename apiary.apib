@@ -93,211 +93,48 @@ used to navigate to that resurce collection and perform additional operations on
 The URL is built based on information provided by the client when the API request is made (such as the 
 `Referer` and `Host` HTTP headers.)
 
-## Superbowl Games [/api/games]
+# The REST API (TODO: Finish everything bellow here.)
 
+# Group The Roots
+
+## The Gateway [/api]
+### List all API versions [GET]
++ Response 200 (application/json)
+
+        [
+        ]
+
+## The Version 2 API [/api/v2]
+### List all resource collections [GET]
++ Response 200 (application/json)
+
+        [
+        ]
+        
+
+# Group The Super Bowls
+
+## Superbowl Games [/api/superbowls]
 ### List all Games [GET]
 + Response 200 (application/json)
 
         [
-                {
-                    "winning_team" : "Seattle Seahawks",
-                    "losing_team" : "Denver Broncos",
-                    "mvp" : "Malcom Smith",
-                    "winning_score" : 48,
-                    "losing_score" : 3,
-                    "venue" : "MetLife Stadium",
-                    "game_day" : "2014-02-14",
-                    "game_number" : "XLVIII"
-                }
         ]
 
-### Add info about a single game [POST]
-+ Request (application/json)
+# Group The Franchises
 
-        {
-            "winning_team" : "Seattle Seahawks",
-            "losing_team" : "Denver Broncos",
-            "mvp" : "Malcom Smith",
-            "winning_score" : 48,
-            "losing_score" : 3,
-            "venue" : "MetLife Stadium",
-            "game_day" : "2014-02-14",
-            "game_number" : "XLVIII"
-        }
-        
-+ Response 201 (application/json)
-
-        {"id" : 48}
-        
-## Superbowl Teams [/api/teams]
-
+## Superbowl Teams [/api/franchises]
 ### List all Teams [GET]
 + Response 200 (application/json)
 
         [
-                {
-                    "team_name" : "Seahawks",
-                    "team_city" : "Seattle",
-                    "owner" : "Paul Allen",
-                    "sb_appearances" : [40, 48],
-                    "mvp_list" : ["Malcom Smith"]
-                }
         ]
 
-### Add info about a single Team [POST]
-+ Request (application/json)
-
-        {
-            "team_name" : "Seahawks",
-            "team_city" : "Seattle",
-            "owner" : "Paul Allen",
-            "sb_appearances" : [40, 48],
-            "mvp_list" : ["Malcom Smith"]
-        }
-        
-+ Response 201 (application/json)
-    
-        {"id" : 1}
+# Group The MVPs
 
 ## Superbowl Players [/api/players]
-
 ### List all Players [GET]
 + Response 200 (application/json)
 
         [
-                {
-                    "first_name" : "Peyton",
-                    "last_name" : "Manning",
-                    "teams" : ["Indianapolis Colts", "Denver Broncos"],
-                    "sb_appearances" : [41, 44, 48],
-                    "birth_date" : "1976-03-24",
-                    "birth_town" : "New Orleans, LA",
-                    "high_school" : "New Orleans Newman",
-                    "college" : "University of Tennessee",
-                    "draft_year" : 1998,
-                    "retired" : false
-                }
         ]
-
-### Add info about a single player [POST]
-+ Request (application/json)
-
-        {
-            "first_name" : "Peyton",
-            "last_name" : "Manning",
-            "teams" : ["Indianapolis Colts", "Denver Broncos"],
-            "sb_appearances" : [41, 44, 48],
-            "birth_date" : "1976-03-24",
-            "birth_town" : "New Orleans, LA",
-            "high_school" : "New Orleans Newman",
-            "college" : "University of Tennessee",
-            "draft_year" : 1998,
-            "retired" : false
-        }
-        
-+ Response 201 (application/json)
-
-        {"id" : 1}
-
-## A Specific Game [/api/games/{id}]
-
-### List info about a single game [GET]
-+ Response 200 (application/json)
-
-        {
-            "winning_team" : "Seattle Seahawks",
-            "losing_team" : "Denver Broncos",
-            "mvp" : "Malcom Smith",
-            "winning_score" : 48,
-            "losing_score" : 3,
-            "venue" : "MetLife Stadium",
-            "game_day" : "2014-02-14",
-            "game_number" : "XLVIII"
-        }
-
-### Update info about a single game [PUT]
-+ Request (application/json)
-
-        {
-            "winning_team" : "Seattle Seahawks",
-            "losing_team" : "Denver Broncos",
-            "mvp" : "Malcom Smith",
-            "winning_score" : 48,
-            "losing_score" : 3,
-            "venue" : "MetLife Stadium",
-            "game_day" : "2014-02-14",
-            "game_number" : "XLVIII"
-        }
-+ Response 204
-
-### Remove info about a single game [DELETE]
-+ Response 204
-
-## A Specific Team [/api/teams/{id}]
-
-### List info about a single team [GET]
-+ Response 200 (application/json)
-
-        {
-            "team_name" : "Seahawks",
-            "team_city" : "Seattle",
-            "owner" : "Paul Allen",
-            "sb_appearances" : [40, 48],
-            "mvp_list" : ["Malcom Smith"]
-        }
-
-### Update info about a single team [PUT]
-+ Request (application/json)
-
-        {
-            "team_name" : "Seahawks",
-            "team_city" : "Seattle",
-            "owner" : "Paul Allen",
-            "sb_appearances" : [40, 48],
-            "mvp_list" : ["Malcom Smith"]
-        }
-+ Response 204
-
-### Remove info about a single team [DELETE]
-+ Response 204
-
-## A Specific Player [/api/players/{id}]
-
-### List info about a single player [GET]
-+ Response 200 (application/json)
-
-        {
-            "first_name" : "Peyton",
-            "last_name" : "Manning",
-            "teams" : ["Indianapolis Colts", "Denver Broncos"],
-            "sb_appearances" : [41, 44, 48],
-            "birth_date" : "1976-03-24",
-            "birth_town" : "New Orleans, LA",
-            "high_school" : "New Orleans Newman",
-            "college" : "University of Tennessee",
-            "draft_year" : 1998,
-            "retired" : false
-        }
-
-### Update info about a single player [PUT]
-+ Request (application/json)
-    
-        {
-            "first_name" : "Peyton",
-            "last_name" : "Manning",
-            "teams" : ["Indianapolis Colts", "Denver Broncos"],
-            "sb_appearances" : [41, 44, 48],
-            "birth_date" : "1976-03-24",
-            "birth_town" : "New Orleans, LA",
-            "high_school" : "New Orleans Newman",
-            "college" : "University of Tennessee",
-            "draft_year" : 1998,
-            "retired" : false
-        }
-
-+ Response 204
-
-### Remove info about a single player [DELETE]
-+ Response 204
-
-
