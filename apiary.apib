@@ -60,6 +60,39 @@ return a result, the value of `data` is `null`.
 Where `success` is a boolean value indicating that the operation (as an atomic action) failed. And `error` is
 an object describing the type of error (`type`, a string) and why it failed (`message`, a string). 
 
+# API Patterns
+The API tries to provide some features for auto-discovery and easy navigation. Appart from common REST
+patterns, we provide: unique identifiers, direct resource links, and collection links.
+
+## Unique Identifier
+        {
+            "id": 0
+        }
+
+Every resource has a unique positive integer identifier. Whenever that resource is referenced, its `id` field
+is provided. This identifier is used for many things including identifying the resource in a resource 
+collection. (e.g. /superbowls/0)
+
+## Direct Resource Link
+        {
+            "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0"
+        }
+        
+Every resource has a `self` property with the URL that represents that specific resource. This can be used to
+navigate to that resource and perform operations on it (such as `GET`, `PUT`, `DELETE`). The URL is built 
+based on information provided by the client when the API request is made (such as the `Referer` and `Host` 
+HTTP headers.)
+
+## Collection Link
+        {
+            "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+        }
+        
+Every resource has a `collection` property with the URL that represents its resource collection. This can be
+used to navigate to that resurce collection and perform additional operations on it (such as `GET`, `POST`).
+The URL is built based on information provided by the client when the API request is made (such as the 
+`Referer` and `Host` HTTP headers.)
+
 ## Superbowl Games [/api/games]
 
 ### List all Games [GET]
