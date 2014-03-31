@@ -24,7 +24,7 @@ class MVP(models.Model) :
         return self.first_name + " " + self.last_name
 
 class Franchise(models.Model) :
-    mvp = models.ManyToManyField(MVP, verbose_name ="Most Valuable Player")
+    mvps = models.ManyToManyField(MVP, verbose_name ="Most Valuable Players")
     #information
     team_name = models.CharField(max_length = 500)
     team_city = models.CharField(max_length = 500)
