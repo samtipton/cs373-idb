@@ -1,19 +1,35 @@
 FORMAT: 1A
-HOST: http://www.google.com
+HOST: http://blooming-shelf-7492.herokuapp.com/
 
-# Superbowl IDB API
-a website with a database about Superbowls past
+# Super Bowl IDB API
+This API provides access to the underlying data that powers the Super Bowl Internet DataBase. The goal is
+to allow anyone to query information about previous Super Bowls, the franchises that participated, and the
+players that were declared the Super Bowl's Most-Valueable-Player (MVP).
 
-# HTTP status codes as stated below are expected to be followed:
+# HTTP Compliance and API
+The API is exposed as a RESTful webservice over HTTP with JSON as the only payload format. Deviation from
+the API by using undocumented HTTP verbs, HTTP headers, and/or URIs, CAN and WILL cause undefined behavior
+and/or errors.
 
-200 `OK` - the request was successful (some API calls may return 201 instead).
-201 `Created` - the request was successful and a resource was created.
-204 `No Content` - the request was successful but there is no representation to return (i.e. the response is empty).
-400 `Bad Request` - the request could not be understood or was missing required parameters.
-401 `Unauthorized` - authentication failed or user doesn't have permissions for requested operation.
-403 `Forbidden` - access denied.
-404 `Not Found` - resource was not found
-405 `Method Not Allowed` - requested method is not supported for resource.
+## Supported HTTP Status Codes:
+* 200 `OK` - The request was successful.
+* 201 `Created` - The request was successful and a resource was created.
+* 400 `Bad Request` - The request violated the API or some constraints.
+* 401 `Unauthorized` - Authentication failed or the user doesn't have permissions for requested operation.
+* 404 `Not Found` - Resource does not exist.
+* 405 `Method Not Allowed` - The request method (verb) is not supported/allowed for the resource.
+* 500 `Internal Server Error` - Something broke the API. (You better hope it was not you.)
+
+## Supported HTTP Methods (verbs):
+* `GET` - Supported by most Resources and Resource Collections.
+* `POST` - Supported by most Resource Collections.
+* `PUT` - Supported by most Resources.
+* `DELETE` - Supported by most Resources.
+
+## API Authentication and Authorization
+This functionality is currently not supported but security is still enforced.
+
+
 
 ## Superbowl Games [/api/games]
 
@@ -221,4 +237,5 @@ a website with a database about Superbowls past
 
 ### Remove info about a single player [DELETE]
 + Response 204
+
 
