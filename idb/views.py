@@ -3,21 +3,26 @@ from django.core.urlresolvers import reverse
 from django.template import RequestContext, loader
 from django.shortcuts import get_object_or_404, render, render_to_response
 from django.views import generic
-
+from idb.models import MVP, Franchise, SuperBowl
 
 # Create your views here.
 def index(request) :
 	context = RequestContext(request)
-	t = loader.get_template('idb/index.html')
+	t = loader.get_template('idb/splash.html')
 
 	return HttpResponse(t.render(context))
 
 def games(request, id = None) :
 
 	if id.isdigit():
-		url = 'idb/game' + str(id) + '.html'
+		url = 'idb/superbowl.html'
 	else :
-		url = 'idb/games.html'
+		url = 'idb/superbowls.html'
+
+	if id.isdigit():
+		game_id = id
+	else :
+		game_list = SuperBowl.objects.order_by('game_number')
 
 	context = RequestContext(request)
 	t = loader.get_template(url)
@@ -27,9 +32,9 @@ def games(request, id = None) :
 def teams(request, id = None) :
 
 	if id.isdigit():
-		url = 'idb/team' + str(id) + '.html'
+		url = 'idb/franchise.html'
 	else :
-		url = 'idb/teams.html'
+		url = 'idb/franchises.html'
 
 	context = RequestContext(request)
 	t = loader.get_template(url)

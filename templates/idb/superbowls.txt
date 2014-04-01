@@ -1,4 +1,3 @@
-{% extends "superbowls.html" %}
 {% block content %}
 
 {% if game_list %}
