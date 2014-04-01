@@ -8,6 +8,7 @@ MVP IDs (according to SQLite, need to use 0 based indexing for python data entry
 7: p manning
 8: ward
 9: branch
+10: brady
 
 Team IDs (according to SQLite, need to use 0 based indexing for python data entry)
 1: SEA
@@ -23,3 +24,17 @@ Team IDs (according to SQLite, need to use 0 based indexing for python data entr
 11: AZ
 12: SF
 13: DEN
+14: CAR
+
+SB IDs
+1: 39
+2: 40
+3: 41
+4: 42
+5: 43
+6: 44
+7: 45
+8: 46 
+9: 47
+10: 48
+11: 38
