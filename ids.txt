@@ -1,0 +1,25 @@
+MVP IDs (according to SQLite, need to use 0 based indexing for python data entry)
+1: smith
+2: flacco
+3: e manning
+4: rodgers
+5: brees
+6: holmes
+7: p manning
+8: ward
+9: branch
+
+Team IDs (according to SQLite, need to use 0 based indexing for python data entry)
+1: SEA
+2: BAL
+3: NYG
+4: GB
+5: NO
+6: PIT
+7: IND
+8: NE 
+9: PHI
+10: CHI
+11: AZ
+12: SF
+13: DEN
