@@ -177,6 +177,45 @@ The URL is built based on information provided by the client when the API reques
             }]
         }
 
+### Create a Super Bowl game entry. [POST]
++ Request (application/json)
+
+        {
+            "winning_franchise":
+            {
+                "id": 0
+            },
+            "losing_franchise":
+            {
+                "id": 1
+            },
+            "mvp": 
+            {
+                "id": 0
+            },
+            "winning_score": 43,
+            "losing_score": 8,
+            "venue_name": "MetLife Stadium",
+            "venue_city": "East Rutherford",
+            "venue_state": "NJ",
+            "game_day": "2014-02-02",
+            "attendance": 82529,
+            "game_number": "XLVIII",
+            "halftime_performer": "Bruno Mars"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
+                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+            }
+        }
+        
 # Group The Franchises
 
 ## NFL Franchises [/api/franchises]
@@ -200,7 +239,7 @@ The URL is built based on information provided by the client when the API reques
                 [{
                     "id": 0,
                     "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
                 }],
                 "team_name": "Seahawks",
                 "team_city": "Seattle",
@@ -214,6 +253,43 @@ The URL is built based on information provided by the client when the API reques
                 "division": "NFCW"
             }]
         }
+
+### Create an NFL franchise entry. [POST]
++ Request (application/json)
+
+        {
+            "mvps":
+            [{
+                "id": 0
+            }],
+            "superbowls":
+            [{
+                "id": 0
+            }],
+            "team_name": "Seahawks",
+            "team_city": "Seattle",
+            "team_state": "WA",
+            "current_owner": "Paul Allen",
+            "current_gm": "John Schneider",
+            "current_head_coach": "Pete Carroll",
+            "year_founded": 1974,
+            "active": true,
+            "home_stadium": "CenturyLink Field",
+            "division": "NFCW"
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
+                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+            }
+        }
+
 
 # Group The MVPs
 
@@ -232,7 +308,7 @@ The URL is built based on information provided by the client when the API reques
                 [{
                     "id": 0,
                     "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
                 }],
                 "franchises":
                 [{
@@ -249,6 +325,42 @@ The URL is built based on information provided by the client when the API reques
                 "college": "Southern California",
                 "draft_year": 2011, 
                 "active": true, 
-                "salary": 465000,
+                "salary": 465000
             }]
+        }
+        
+### Create an MVP entry. [POST]
++ Request (application/json)
+
+        {
+            "superbowls":
+            [{
+                "id": 0
+            }],
+            "franchises":
+            [{
+                "id": 0
+            }],
+            "first_name": "Malcolm",
+            "last_name": "Smith",
+            "position": "LB",
+            "birth_date": "1989-07-05",
+            "birth_town": "Woodland Hills, CA",
+            "high_school": "Woodland Hills (CA) Taft",
+            "college": "Southern California",
+            "draft_year": 2011, 
+            "active": true, 
+            "salary": 465000
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
+                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+            }
         }
