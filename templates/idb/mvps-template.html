@@ -1,0 +1,24 @@
+{% extends "idb/template.html" %}
+
+{% block content %}
+
+<div class="row">
+{% for mvp in mvp_list %}
+	{% if forloop.counter0|divisibleby:2 %}
+		<div class="row">
+	{% endif %}
+	<div id="image" class="col-md-3">
+		<a href="/players/{{mvp.id}}"><img style="width:200px" src="../../static/res/mvps/{{mvp.id}}.png" /></a>
+	</div>
+	<div class="col-md-3">
+          <ul>
+          	<li><p>{{mvp.first_name}} {{mvp.last_name}}</p></li>
+          	<li><p>Draft year: {{mvp.draft_year}}</p></li>
+          	<li><p>College: {{mvp.college}}</p></li>
+          </ul>
+    </div>
+    {% if not forloop.counter0|divisibleby:2 %}
+		</div>
+	{% endif %}
+{% endfor %}
+{% endblock %}
