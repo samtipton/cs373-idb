@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Superbowl Database</title>
+
+    <!-- Bootstrap core CSS -->
+    <link type="text/css" href="../../static/bootstrap-3.1.1/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link type="text/css" href="../../static/bootstrap-3.1.1/css/justified-nav.css" rel="stylesheet">
+
+    <!-- JQuery and JavaScript for page animations -->
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+    <!-- Bootstrap core JS -->
+    <script type="text/javascript" src="../../static/bootstrap-3.1.1/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="../../static/bootstrap-3.1.1/js/script.js"></script>
+
+    <link rel="shortcut icon" href="../../static/res/favicon.png">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <div class="container">
+        <div class="masthead">
+          <ul class="nav nav-justified">
+            <li class="active"><a href="">Home</a></li>
+            <li><a href="games/">Super Bowls</a></li>
+            <li><a href="teams/">Teams</a></li>
+            <li><a href="players/">Players</a></li>
+            <li><a href="contact/">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="jumbotron">
+        <h1>Internet Super Bowl Database</h1>
+        <img style="width:600px" src="../../static/res/NFL1.png">
+      </div>
+
+      <div class="container" id="carousel-container">
+        <div class="col-md-4">
+          <div id="myCarousel1" class="carousel slide" data-ride="carousel" data-interval="false">
+            <!-- carousel indicators -->
+            <ol class="carousel-indicators">
+              <li data-target="#myCarousel1" data-slide-to="0" class="active"></li>
+              <li data-target="#myCarousel1" data-slide-to="1"></li>
+              <li data-target="#myCarousel1" data-slide-to="2"></li>
+            </ol>  
+
+            <!-- Carousel items -->  
+            <div class="carousel-inner">
+
+              <div class="item active"><a href="/teams/0/"><img style="width:350px" src="../../static/res/logos/ravens.gif" /></a></div>  
+
+              <div class="item"><a href="../../static/res/seahawks.gif"><img style="width:350px" src="../../static/res/logos/seahawks.gif" /></a></div>  
+
+              <div class="item"><a href="/teams/1/"><img style="width: 350px" src="../../static/res/logos/broncos.gif" /></a></div>  
+            </div>  
+            <!-- Carousel nav -->  
+            <a class="carousel-control left" href="#myCarousel1" data-slide="prev">‹</a>  
+            <a class="carousel-control right" href="#myCarousel1" data-slide="next">›</a>  
+          </div>
+        </div>        
+        <div class="col-md-4">
+          <div id="myCarousel2" class="carousel slide" data-ride="carousel" data-interval="false">
+            <!-- carousel indicators -->
+            <ol class="carousel-indicators">
+              <li data-target="#myCarousel2" data-slide-to="0" class="active"></li>
+              <li data-target="#myCarousel2" data-slide-to="1"></li>
+              <li data-target="#myCarousel2" data-slide-to="2"></li>
+            </ol>  
+
+            <!-- Carousel items -->  
+            <div class="carousel-inner">
+
+              <div class="item active"><a href="/teams/0/"><img style="width:350px" src="../../static/res/logos/ravens.gif" /></a></div>  
+
+              <div class="item"><a href="../../static/res/seahawks.gif"><img style="width:350px" src="../../static/res/logos/seahawks.gif" /></a></div>  
+
+              <div class="item"><a href="/teams/1/"><img style="width: 350px" src="../../static/res/logos/broncos.gif" /></a></div>  
+            </div>  
+            <!-- Carousel nav -->  
+            <a class="carousel-control left" href="#myCarousel2" data-slide="prev">‹</a>  
+            <a class="carousel-control right" href="#myCarousel2" data-slide="next">›</a>  
+          </div>
+        </div>        
+        <div class="col-md-4">
+          <div id="myCarousel3" class="carousel slide" data-ride="carousel" data-interval="false">
+            <!-- carousel indicators -->
+            <ol class="carousel-indicators">
+              <li data-target="#myCarousel3" data-slide-to="0" class="active"></li>
+              <li data-target="#myCarousel3" data-slide-to="1"></li>
+              <li data-target="#myCarousel3" data-slide-to="2"></li>
+            </ol>  
+
+            <!-- Carousel items -->  
+            <div class="carousel-inner">
+
+              <div class="item active"><a href="/teams/0/"><img style="width:350px" src="../../static/res/logos/ravens.gif" /></a>
+                <div class="container">
+                  <div class="carousel-caption"><p>Baltimore Ravens</p></div>
+                </div>
+              </div>  
+
+              <div class="item"><a href="../../static/res/seahawks.gif"><img style="width:350px" src="../../static/res/logos/seahawks.gif" /></a></div>  
+
+              <div class="item"><a href="/teams/1/"><img style="width: 350px" src="../../static/res/logos/broncos.gif" /></a></div>  
+            </div>  
+            <!-- Carousel nav -->  
+            <a class="carousel-control left" href="#myCarousel3" data-slide="prev">‹</a>  
+            <a class="carousel-control right" href="#myCarousel3" data-slide="next">›</a>  
+          </div>
+        </div>
+      </div>
+    </div>  <!-- parent container -->
+  </body>
+</html>

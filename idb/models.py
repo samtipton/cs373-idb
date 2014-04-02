@@ -63,4 +63,3 @@ class SuperBowl(models.Model) :
 
     def __str__ (self) :
         return "SuperBowl " + self.game_number
-

@@ -1,0 +1,25 @@
+{% extends "idb/template.html" %}
+
+{% block content %}
+
+<div class="row">
+{% for team in team_list %}
+	{% if forloop.counter0|divisibleby:2 %}
+		<div class="row">
+	{% endif %}
+	<div id="image" class="col-md-3">
+		<a href="/teams/{{team.id}}"><img style="width:200px" src="../../static/res/logos/{{team.team_name}}.png" /></a>
+	</div>
+	<div class="col-md-3">
+          <ul>
+          	<li><p>{{team.team_name}}</p></li>
+          	<li><p>Division: {{team.division}}</p></li>
+          	<li><p>{{team.team_city}}</p></li>
+          	<li><p>est: {{team.year_founded}}</p></li>
+          </ul>
+    </div>
+    {% if not forloop.counter0|divisibleby:2 %}
+		</div>
+	{% endif %}
+{% endfor %}
+{% endblock %}
