@@ -43,8 +43,8 @@ an appropriate HTTP Status Code and HTTP headers.
             }
         }
 
-Where `success` is a boolean value indicating that the operation (as an atomic action) succeeded. And `data` 
-is result of the operation (in this case a reference to a Super Bowl resouce). If the operation does not 
+Where `success` is a boolean value indicating that the operation (as an atomic action) succeeded. And `data`
+is result of the operation (in this case a reference to a Super Bowl resouce). If the operation does not
 return a result, the value of `data` is `null`.
 
 ## Failed Operations
@@ -56,9 +56,9 @@ return a result, the value of `data` is `null`.
                 "message": "The HTTP method 'POST' is not allowed on the resource '/api/v2/superbowls/0'."
             }
         }
-        
+
 Where `success` is a boolean value indicating that the operation (as an atomic action) failed. And `error` is
-an object describing the type of error (`type`, a string) and why it failed (`message`, a string). 
+an object describing the type of error (`type`, a string) and why it failed (`message`, a string).
 
 # API Patterns
 The API tries to provide some features for auto-discovery and easy navigation. Appart from common REST
@@ -70,27 +70,27 @@ patterns, we provide: unique identifiers, direct resource links, and collection 
         }
 
 Every resource has a unique positive integer identifier. Whenever that resource is referenced, its `id` field
-is provided. This identifier is used for many things including identifying the resource in a resource 
+is provided. This identifier is used for many things including identifying the resource in a resource
 collection. (e.g. /superbowls/0)
 
 ## Direct Resource Link
         {
             "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0"
         }
-        
+
 Every resource has a `self` property with the URL that represents that specific resource. This can be used to
-navigate to that resource and perform operations on it (such as `GET`, `PUT`, `DELETE`). The URL is built 
-based on information provided by the client when the API request is made (such as the `Referer` and `Host` 
+navigate to that resource and perform operations on it (such as `GET`, `PUT`, `DELETE`). The URL is built
+based on information provided by the client when the API request is made (such as the `Referer` and `Host`
 HTTP headers.)
 
 ## Collection Link
         {
             "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
         }
-        
+
 Every resource has a `collection` property with the URL that represents its resource collection. This can be
 used to navigate to that resurce collection and perform additional operations on it (such as `GET`, `POST`).
-The URL is built based on information provided by the client when the API request is made (such as the 
+The URL is built based on information provided by the client when the API request is made (such as the
 `Referer` and `Host` HTTP headers.)
 
 # The REST API
@@ -142,7 +142,7 @@ The URL is built based on information provided by the client when the API reques
                     "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/1",
                     "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
                 },
-                "mvp": 
+                "mvp":
                 {
                     "id": 0,
                     "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
@@ -172,7 +172,7 @@ The URL is built based on information provided by the client when the API reques
             {
                 "id": 1
             },
-            "mvp": 
+            "mvp":
             {
                 "id": 0
             },
@@ -222,7 +222,7 @@ The URL is built based on information provided by the client when the API reques
                     "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/1",
                     "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
                 },
-                "mvp": 
+                "mvp":
                 {
                     "id": 0,
                     "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
@@ -239,7 +239,7 @@ The URL is built based on information provided by the client when the API reques
                 "halftime_performer": "Bruno Mars"
             }
         }
-        
+
 ### Update information about a specific Super Bowl game. [PUT]
 + Request (application/json)
 
@@ -252,7 +252,7 @@ The URL is built based on information provided by the client when the API reques
             {
                 "id": 1
             },
-            "mvp": 
+            "mvp":
             {
                 "id": 0
             },
@@ -288,7 +288,7 @@ The URL is built based on information provided by the client when the API reques
                     "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/1",
                     "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
                 },
-                "mvp": 
+                "mvp":
                 {
                     "id": 0,
                     "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
@@ -350,7 +350,7 @@ The URL is built based on information provided by the client when the API reques
                 "current_gm": "John Schneider",
                 "current_head_coach": "Pete Carroll",
                 "year_founded": 1974,
-                "active": True,
+                "active": true,
                 "home_stadium": "CenturyLink Field",
                 "division": "NFC West"
             }]
@@ -375,11 +375,11 @@ The URL is built based on information provided by the client when the API reques
             "current_gm": "John Schneider",
             "current_head_coach": "Pete Carroll",
             "year_founded": 1974,
-            "active": True,
+            "active": true,
             "home_stadium": "CenturyLink Field",
             "division": "NFC West"
         }
-        
+
 + Response 200 (application/json)
 
         {
@@ -422,12 +422,12 @@ The URL is built based on information provided by the client when the API reques
                 "current_gm": "John Schneider",
                 "current_head_coach": "Pete Carroll",
                 "year_founded": 1974,
-                "active": True,
+                "active": true,
                 "home_stadium": "CenturyLink Field",
                 "division": "NFC West"
             }
         }
-        
+
 ### Update information about a specific NFL franchise. [PUT]
 + Request (application/json)
 
@@ -447,7 +447,7 @@ The URL is built based on information provided by the client when the API reques
             "current_gm": "John Schneider",
             "current_head_coach": "Pete Carroll",
             "year_founded": 1974,
-            "active": True,
+            "active": true,
             "home_stadium": "CenturyLink Field",
             "division": "NFC West"
         }
@@ -480,7 +480,7 @@ The URL is built based on information provided by the client when the API reques
                 "current_gm": "John Schneider",
                 "current_head_coach": "Pete Carroll",
                 "year_founded": 1974,
-                "active": True,
+                "active": true,
                 "home_stadium": "CenturyLink Field",
                 "division": "NFC West"
             }
@@ -530,12 +530,12 @@ The URL is built based on information provided by the client when the API reques
                 "birth_town": "Woodland Hills, CA",
                 "high_school": "Woodland Hills (CA) Taft",
                 "college": "Southern California",
-                "draft_year": 2011, 
-                "active": True, 
+                "draft_year": 2011,
+                "active": true,
                 "salary": 465000
             }]
         }
-        
+
 ### Create an MVP entry. [POST]
 + Request (application/json)
 
@@ -555,11 +555,11 @@ The URL is built based on information provided by the client when the API reques
             "birth_town": "Woodland Hills, CA",
             "high_school": "Woodland Hills (CA) Taft",
             "college": "Southern California",
-            "draft_year": 2011, 
-            "active": True, 
+            "draft_year": 2011,
+            "active": true,
             "salary": 465000
         }
-        
+
 + Response 200 (application/json)
 
         {
@@ -602,12 +602,12 @@ The URL is built based on information provided by the client when the API reques
                 "birth_town": "Woodland Hills, CA",
                 "high_school": "Woodland Hills (CA) Taft",
                 "college": "Southern California",
-                "draft_year": 2011, 
-                "active": True, 
+                "draft_year": 2011,
+                "active": true,
                 "salary": 465000
             }
         }
-        
+
 ### Update information about a specific Super Bowl MVP. [PUT]
 + Request (application/json)
 
@@ -627,8 +627,8 @@ The URL is built based on information provided by the client when the API reques
             "birth_town": "Woodland Hills, CA",
             "high_school": "Woodland Hills (CA) Taft",
             "college": "Southern California",
-            "draft_year": 2011, 
-            "active": True, 
+            "draft_year": 2011,
+            "active": true,
             "salary": 465000
         }
 
@@ -660,7 +660,7 @@ The URL is built based on information provided by the client when the API reques
                 "current_gm": "John Schneider",
                 "current_head_coach": "Pete Carroll",
                 "year_founded": 1974,
-                "active": True,
+                "active": true,
                 "home_stadium": "CenturyLink Field",
                 "division": "NFC West"
             }
