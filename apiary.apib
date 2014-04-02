@@ -435,14 +435,10 @@ The URL is built based on information provided by the client when the API reques
             "mvps":
             [{
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
             }],
             "superbowls":
             [{
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
             }],
             "team_name": "Seahawks",
             "team_city": "Seattle",
@@ -490,7 +486,7 @@ The URL is built based on information provided by the client when the API reques
             }
         }
 
-### Remove a specific Super Bowl game. [DELETE]
+### Remove a specific franchise entry. [DELETE]
 + Request (application/json)
 
         {
@@ -574,4 +570,112 @@ The URL is built based on information provided by the client when the API reques
                 "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
                 "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
             }
+        }
+
+## A SuperBowl MVP [/api/v2/mvps/{id}]
+### Get information about a specific Super Bowl MVP. [GET]
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
+                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps",
+                "superbowls":
+                [{
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+                }],
+                "franchises":
+                [{
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                }],
+                "first_name": "Malcolm",
+                "last_name": "Smith",
+                "position": "LB",
+                "birth_date": "1989-07-05",
+                "birth_town": "Woodland Hills, CA",
+                "high_school": "Woodland Hills (CA) Taft",
+                "college": "Southern California",
+                "draft_year": 2011, 
+                "active": True, 
+                "salary": 465000
+            }
+        }
+        
+### Update information about a specific Super Bowl MVP. [PUT]
++ Request (application/json)
+
+        {
+            "superbowls":
+            [{
+                "id": 0
+            }],
+            "franchises":
+            [{
+                "id": 0
+            }],
+            "first_name": "Malcolm",
+            "last_name": "Smith",
+            "position": "LB",
+            "birth_date": "1989-07-05",
+            "birth_town": "Woodland Hills, CA",
+            "high_school": "Woodland Hills (CA) Taft",
+            "college": "Southern California",
+            "draft_year": 2011, 
+            "active": True, 
+            "salary": 465000
+        }
+
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
+                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises",
+                "mvps":
+                [{
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                }],
+                "superbowls":
+                [{
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+                }],
+                "team_name": "Seahawks",
+                "team_city": "Seattle",
+                "team_state": "WA",
+                "current_owner": "Paul Allen",
+                "current_gm": "John Schneider",
+                "current_head_coach": "Pete Carroll",
+                "year_founded": 1974,
+                "active": True,
+                "home_stadium": "CenturyLink Field",
+                "division": "NFC West"
+            }
+        }
+
+### Remove a specific Super Bowl MVP entry. [DELETE]
++ Request (application/json)
+
+        {
+            "id": 0
+        }
+
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data": null
         }
