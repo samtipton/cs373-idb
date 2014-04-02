@@ -199,6 +199,127 @@ The URL is built based on information provided by the client when the API reques
             }
         }
 
+## A Super Bowl [/api/v2/superbowls/{id}]
+### Get information about a specific Super Bowl game. [GET]
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
+                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
+                "winning_franchise":
+                {
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                },
+                "losing_franchise":
+                {
+                    "id": 1,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/1",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                },
+                "mvp": 
+                {
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                },
+                "winning_score": 43,
+                "losing_score": 8,
+                "venue_name": "MetLife Stadium",
+                "venue_city": "East Rutherford",
+                "venue_state": "NJ",
+                "game_day": "2014-02-02",
+                "attendance": 82529,
+                "game_number": "XLVIII",
+                "halftime_performer": "Bruno Mars"
+            }
+        }
+        
+### Update information about a specific Super Bowl game. [PUT]
++ Request (application/json)
+
+        {
+            "winning_franchise":
+            {
+                "id": 0
+            },
+            "losing_franchise":
+            {
+                "id": 1
+            },
+            "mvp": 
+            {
+                "id": 0
+            },
+            "winning_score": 43,
+            "losing_score": 8,
+            "venue_name": "MetLife Stadium",
+            "venue_city": "East Rutherford",
+            "venue_state": "NJ",
+            "game_day": "2014-02-02",
+            "attendance": 82529,
+            "game_number": "XLVIII",
+            "halftime_performer": "Bruno Mars"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
+                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
+                "winning_franchise":
+                {
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                },
+                "losing_franchise":
+                {
+                    "id": 1,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/1",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                },
+                "mvp": 
+                {
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                },
+                "winning_score": 43,
+                "losing_score": 8,
+                "venue_name": "MetLife Stadium",
+                "venue_city": "East Rutherford",
+                "venue_state": "NJ",
+                "game_day": "2014-02-02",
+                "attendance": 82529,
+                "game_number": "XLVIII",
+                "halftime_performer": "Bruno Mars"
+            }
+        }
+
+### Remove a specific Super Bowl game. [DELETE]
++ Request (application/json)
+
+        {
+            "id": 0
+        }
+
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data": null
+        }
+
 ## The NFL Franchises [/api/v2/franchises]
 ### List all NFL franchises. [GET]
 + Response 200 (application/json)
