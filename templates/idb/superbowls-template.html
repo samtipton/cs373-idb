@@ -1,0 +1,24 @@
+{% extends "idb/superbowls.html" %}
+
+{% block content %}
+
+<div class="row">
+{% for game in game_list %}
+	{% if forloop.counter0|divisibleby:2 %}
+		<div class="row">
+	{% endif %}
+	<div id="image" class="col-md-3">
+		<a href="/games/{{game.id}}"><img style="width:200px" src="../../static/res/gamebadges/{{game.game_number}}.png" /></a>
+	</div>
+	<div class="col-md-3">
+          <ul>
+          	<li><p>{{game.game_day}}</p></li>
+          	<li><a href="/teams/{{game.winning_franchise.id}}">{{game.winning_franchise}}</a> vs <a href="/teams/{{game.losing_franchise.id}}">{{game.losing_franchise}}</a></li>
+          	<li>MVP: <a href="/players/{{game.mvp.id}}">{{game.mvp }}</a></li>
+          </ul>
+    </div>
+    {% if not forloop.counter0|divisibleby:2 %}
+		</div>
+	{% endif %}
+{% endfor %}
+{% endblock %}

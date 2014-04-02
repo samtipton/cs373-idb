@@ -1,224 +1,254 @@
 FORMAT: 1A
-HOST: http://www.google.com
+HOST: http://blooming-shelf-7492.herokuapp.com/
 
-# Superbowl IDB API
-a website with a database about Superbowls past
+# Super Bowl IDB API
+This API provides access to the underlying data that powers the Super Bowl Internet DataBase. The goal is
+to allow anyone to query information about previous Super Bowls, the franchises that participated, and the
+players that were declared the Super Bowl's Most-Valueable-Player (MVP).
 
-# HTTP status codes as stated below are expected to be followed:
+# HTTP Compliance and API
+The API is exposed as a RESTful webservice over HTTP with JSON as the only payload format. Deviation from
+the API by using undocumented HTTP verbs, HTTP headers, and/or URIs, CAN and WILL cause undefined behavior
+and/or errors.
 
-200 `OK` - the request was successful (some API calls may return 201 instead).
-201 `Created` - the request was successful and a resource was created.
-204 `No Content` - the request was successful but there is no representation to return (i.e. the response is empty).
-400 `Bad Request` - the request could not be understood or was missing required parameters.
-401 `Unauthorized` - authentication failed or user doesn't have permissions for requested operation.
-403 `Forbidden` - access denied.
-404 `Not Found` - resource was not found
-405 `Method Not Allowed` - requested method is not supported for resource.
+## Supported HTTP Status Codes
+* 200 `OK` - The request was successful.
+* 201 `Created` - The request was successful and a resource was created.
+* 400 `Bad Request` - The request violated the API or some constraints.
+* 401 `Unauthorized` - Authentication failed or the user doesn't have permissions for requested operation.
+* 404 `Not Found` - Resource does not exist.
+* 405 `Method Not Allowed` - The request method (verb) is not supported/allowed for the resource.
+* 500 `Internal Server Error` - Something broke the API. (You better hope it was not you.)
 
-## Superbowl Games [/api/games]
+## Supported HTTP Methods (verbs)
+* `GET` - Supported by most Resources and Resource Collections.
+* `POST` - Supported by most Resource Collections.
+* `PUT` - Supported by most Resources.
+* `DELETE` - Supported by most Resources.
 
-### List all Games [GET]
+## API Authentication and Authorization
+This functionality is currently not supported but security is still enforced.
+
+# Response Payload
+All API operations return a response payload (in JSON) with extra information. This is addition to returning
+an appropriate HTTP Status Code and HTTP headers.
+
+## Successfull Operations
+        {
+            "success": true,
+            "data":
+            {
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
+                "id": 0
+            }
+        }
+
+Where `success` is a boolean value indicating that the operation (as an atomic action) succeeded. And `data` 
+is result of the operation (in this case a reference to a Super Bowl resouce). If the operation does not 
+return a result, the value of `data` is `null`.
+
+## Failed Operations
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_METHOD_NOT_ALLOWED",
+                "message": "The HTTP method 'POST' is not allowed on the resource '/api/v2/superbowls/0'."
+            }
+        }
+        
+Where `success` is a boolean value indicating that the operation (as an atomic action) failed. And `error` is
+an object describing the type of error (`type`, a string) and why it failed (`message`, a string). 
+
+# API Patterns
+The API tries to provide some features for auto-discovery and easy navigation. Appart from common REST
+patterns, we provide: unique identifiers, direct resource links, and collection links.
+
+## Unique Identifier
+        {
+            "id": 0
+        }
+
+Every resource has a unique positive integer identifier. Whenever that resource is referenced, its `id` field
+is provided. This identifier is used for many things including identifying the resource in a resource 
+collection. (e.g. /superbowls/0)
+
+## Direct Resource Link
+        {
+            "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0"
+        }
+        
+Every resource has a `self` property with the URL that represents that specific resource. This can be used to
+navigate to that resource and perform operations on it (such as `GET`, `PUT`, `DELETE`). The URL is built 
+based on information provided by the client when the API request is made (such as the `Referer` and `Host` 
+HTTP headers.)
+
+## Collection Link
+        {
+            "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+        }
+        
+Every resource has a `collection` property with the URL that represents its resource collection. This can be
+used to navigate to that resurce collection and perform additional operations on it (such as `GET`, `POST`).
+The URL is built based on information provided by the client when the API request is made (such as the 
+`Referer` and `Host` HTTP headers.)
+
+# The REST API (TODO: Finish everything bellow here.)
+
+# Group The Roots
+
+## The Gateway [/api]
+### List all API versions [GET]
 + Response 200 (application/json)
 
-        [
+        {
+            "success": true,
+            "data":
+            [{
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2",
+                "name": "SBIDB API Version 2",
+                "description": "This is the endpoint root for the version 2 API."
+            }]
+        }
+
+## The Version 2 API [/api/v2]
+### List all resource collections [GET]
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            [{
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
+                "name": "The Super Bowls",
+                "description": "This is the collection endpoint for the Super Bowl resource."
+            },{
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises",
+                "name": "The Franchise",
+                "description": "This is the collection endpoint for the franchise resource.",
+            },{
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps",
+                "name": "The MVPs",
+                "description": "This is the collection endpoint for the MVP resource.",
+            }]
+        }
+        
+
+# Group The Super Bowls
+
+## Super Bowls [/api/superbowls]
+### List all Super Bowl games. [GET]
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            [{
+                "id": 0,
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
+                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
+                "winning_franchise":
                 {
-                    "winning_team" : "Seattle Seahawks",
-                    "losing_team" : "Denver Broncos",
-                    "mvp" : "Malcom Smith",
-                    "winning_score" : 48,
-                    "losing_score" : 3,
-                    "venue" : "MetLife Stadium",
-                    "game_day" : "2014-02-14",
-                    "game_number" : "XLVIII"
-                }
-        ]
-
-### Add info about a single game [POST]
-+ Request (application/json)
-
-        {
-            "winning_team" : "Seattle Seahawks",
-            "losing_team" : "Denver Broncos",
-            "mvp" : "Malcom Smith",
-            "winning_score" : 48,
-            "losing_score" : 3,
-            "venue" : "MetLife Stadium",
-            "game_day" : "2014-02-14",
-            "game_number" : "XLVIII"
-        }
-        
-+ Response 201 (application/json)
-
-        {"id" : 48}
-        
-## Superbowl Teams [/api/teams]
-
-### List all Teams [GET]
-+ Response 200 (application/json)
-
-        [
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                },
+                "losing_franchise":
                 {
-                    "team_name" : "Seahawks",
-                    "team_city" : "Seattle",
-                    "owner" : "Paul Allen",
-                    "sb_appearances" : [40, 48],
-                    "mvp_list" : ["Malcom Smith"]
-                }
-        ]
-
-### Add info about a single Team [POST]
-+ Request (application/json)
-
-        {
-            "team_name" : "Seahawks",
-            "team_city" : "Seattle",
-            "owner" : "Paul Allen",
-            "sb_appearances" : [40, 48],
-            "mvp_list" : ["Malcom Smith"]
-        }
-        
-+ Response 201 (application/json)
-    
-        {"id" : 1}
-
-## Superbowl Players [/api/players]
-
-### List all Players [GET]
-+ Response 200 (application/json)
-
-        [
+                    "id": 1,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/1",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                },
+                "mvp": 
                 {
-                    "first_name" : "Peyton",
-                    "last_name" : "Manning",
-                    "teams" : ["Indianapolis Colts", "Denver Broncos"],
-                    "sb_appearances" : [41, 44, 48],
-                    "birth_date" : "1976-03-24",
-                    "birth_town" : "New Orleans, LA",
-                    "high_school" : "New Orleans Newman",
-                    "college" : "University of Tennessee",
-                    "draft_year" : 1998,
-                    "retired" : false
-                }
-        ]
-
-### Add info about a single player [POST]
-+ Request (application/json)
-
-        {
-            "first_name" : "Peyton",
-            "last_name" : "Manning",
-            "teams" : ["Indianapolis Colts", "Denver Broncos"],
-            "sb_appearances" : [41, 44, 48],
-            "birth_date" : "1976-03-24",
-            "birth_town" : "New Orleans, LA",
-            "high_school" : "New Orleans Newman",
-            "college" : "University of Tennessee",
-            "draft_year" : 1998,
-            "retired" : false
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                },
+                "winning_score": 43,
+                "losing_score": 8,
+                "venue_name": "MetLife Stadium",
+                "venue_city": "East Rutherford",
+                "venue_state": "NJ",
+                "game_day": "2014-02-02",
+                "attendance": 82529,
+                "game_number": "XLVIII",
+                "halftime_performer": "Bruno Mars"
+            }]
         }
-        
-+ Response 201 (application/json)
 
-        {"id" : 1}
+# Group The Franchises
 
-## A Specific Game [/api/games/{id}]
-
-### List info about a single game [GET]
+## NFL Franchises [/api/franchises]
+### List all NFL franchises. [GET]
 + Response 200 (application/json)
 
         {
-            "winning_team" : "Seattle Seahawks",
-            "losing_team" : "Denver Broncos",
-            "mvp" : "Malcom Smith",
-            "winning_score" : 48,
-            "losing_score" : 3,
-            "venue" : "MetLife Stadium",
-            "game_day" : "2014-02-14",
-            "game_number" : "XLVIII"
+            "success": true,
+            "data":
+            [{
+                "id": 0,
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
+                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises",
+                "mvps":
+                [{
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                }],
+                "superbowls":
+                [{
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
+                }],
+                "team_name": "Seahawks",
+                "team_city": "Seattle",
+                "team_state": "WA",
+                "current_owner": "Paul Allen",
+                "current_gm": "John Schneider",
+                "current_head_coach": "Pete Carroll",
+                "year_founded": 1974,
+                "active": true,
+                "home_stadium": "CenturyLink Field",
+                "division": "NFCW"
+            }]
         }
 
-### Update info about a single game [PUT]
-+ Request (application/json)
+# Group The MVPs
 
-        {
-            "winning_team" : "Seattle Seahawks",
-            "losing_team" : "Denver Broncos",
-            "mvp" : "Malcom Smith",
-            "winning_score" : 48,
-            "losing_score" : 3,
-            "venue" : "MetLife Stadium",
-            "game_day" : "2014-02-14",
-            "game_number" : "XLVIII"
-        }
-+ Response 204
-
-### Remove info about a single game [DELETE]
-+ Response 204
-
-## A Specific Team [/api/teams/{id}]
-
-### List info about a single team [GET]
+## Super Bowl MVPs [/api/mvps]
+### List all the MVPs [GET]
 + Response 200 (application/json)
 
         {
-            "team_name" : "Seahawks",
-            "team_city" : "Seattle",
-            "owner" : "Paul Allen",
-            "sb_appearances" : [40, 48],
-            "mvp_list" : ["Malcom Smith"]
+            "success": true,
+            "data":
+            [{
+                "id": 0,
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
+                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps",
+                "superbowls":
+                [{
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
+                }],
+                "franchises":
+                [{
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                }],
+                "first_name": "Malcolm",
+                "last_name": "Smith",
+                "position": "LB",
+                "birth_date": "1989-07-05",
+                "birth_town": "Woodland Hills, CA",
+                "high_school": "Woodland Hills (CA) Taft",
+                "college": "Southern California",
+                "draft_year": 2011, 
+                "active": true, 
+                "salary": 465000,
+            }]
         }
-
-### Update info about a single team [PUT]
-+ Request (application/json)
-
-        {
-            "team_name" : "Seahawks",
-            "team_city" : "Seattle",
-            "owner" : "Paul Allen",
-            "sb_appearances" : [40, 48],
-            "mvp_list" : ["Malcom Smith"]
-        }
-+ Response 204
-
-### Remove info about a single team [DELETE]
-+ Response 204
-
-## A Specific Player [/api/players/{id}]
-
-### List info about a single player [GET]
-+ Response 200 (application/json)
-
-        {
-            "first_name" : "Peyton",
-            "last_name" : "Manning",
-            "teams" : ["Indianapolis Colts", "Denver Broncos"],
-            "sb_appearances" : [41, 44, 48],
-            "birth_date" : "1976-03-24",
-            "birth_town" : "New Orleans, LA",
-            "high_school" : "New Orleans Newman",
-            "college" : "University of Tennessee",
-            "draft_year" : 1998,
-            "retired" : false
-        }
-
-### Update info about a single player [PUT]
-+ Request (application/json)
-    
-        {
-            "first_name" : "Peyton",
-            "last_name" : "Manning",
-            "teams" : ["Indianapolis Colts", "Denver Broncos"],
-            "sb_appearances" : [41, 44, 48],
-            "birth_date" : "1976-03-24",
-            "birth_town" : "New Orleans, LA",
-            "high_school" : "New Orleans Newman",
-            "college" : "University of Tennessee",
-            "draft_year" : 1998,
-            "retired" : false
-        }
-
-+ Response 204
-
-### Remove info about a single player [DELETE]
-+ Response 204
-

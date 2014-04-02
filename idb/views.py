@@ -17,14 +17,12 @@ def games(request, id = None) :
 	if id.isdigit():
 		url = 'idb/superbowl.html'
 	else :
-		url = 'idb/superbowls.html'
+		url = 'idb/superbowls-template.html'
 
-	if id.isdigit():
-		game_id = id
-	else :
-		game_list = SuperBowl.objects.order_by('game_number')
+	game_id = id
+	game_list = SuperBowl.objects.order_by('-game_day')
 
-	context = RequestContext(request)
+	context = RequestContext(request, {'game_list':game_list})
 	t = loader.get_template(url)
 
 	return HttpResponse(t.render(context))
