@@ -1,4 +1,4 @@
-{% extends "idb/superbowls.html" %}
+{% extends "idb/template.html" %}
 
 {% block content %}
 
@@ -18,7 +18,8 @@
           </ul>
     </div>
     {% if not forloop.counter0|divisibleby:2 %}
-		</div>
+	</div>
 	{% endif %}
 {% endfor %}
+</div>
 {% endblock %}

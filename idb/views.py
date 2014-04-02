@@ -15,14 +15,16 @@ def index(request) :
 def games(request, id = None) :
 
 	if id.isdigit():
-		url = 'idb/superbowl.html'
+		url = 'idb/superbowl-template.html'
+		game_id = int(id)
+		game = SuperBowl.objects.get(id = game_id)
+		mvp = MVP.objects.get(id = game.mvp.id)
+		context = RequestContext(request, {'game':game, 'mvp':mvp})
 	else :
 		url = 'idb/superbowls-template.html'
-
-	game_id = id
-	game_list = SuperBowl.objects.order_by('-game_day')
-
-	context = RequestContext(request, {'game_list':game_list})
+		game_list = SuperBowl.objects.order_by('-game_day')
+		context = RequestContext(request, {'game_list':game_list})
+	
 	t = loader.get_template(url)
 
 	return HttpResponse(t.render(context))
@@ -30,11 +32,16 @@ def games(request, id = None) :
 def teams(request, id = None) :
 
 	if id.isdigit():
-		url = 'idb/franchise.html'
+		url = 'idb/franchise-template.html'
+		team_id = int(id)
+		team = Franchise.objects.get(id = team_id)
+		context = RequestContext(request, {'team':team})
 	else :
-		url = 'idb/franchises.html'
+		url = 'idb/franchises-template.html'
+		team_list = Franchise.objects.order_by('-year_founded')
+		context = RequestContext(request, {'team_list':team_list})
 
-	context = RequestContext(request)
+	
 	t = loader.get_template(url)
 
 	return HttpResponse(t.render(context))
@@ -42,11 +49,16 @@ def teams(request, id = None) :
 def players(request, id = None) :
 
 	if id.isdigit():
-		url = 'idb/player' + str(id) + '.html'
+		url = 'idb/mvp-template.html'
+		mvp_id = int(id)
+		mvp = MVP.objects.get(id=mvp_id)
+		context = RequestContext(request, {'mvp':mvp})
 	else :
-		url = 'idb/players.html'
+		url = 'idb/mvps-template.html'
+		mvp_list = MVP.objects.order_by('-draft_year')
+		context = RequestContext(request, {'mvp_list':mvp_list})
 
-	context = RequestContext(request)
+
 	t = loader.get_template(url)
 
 	return HttpResponse(t.render(context))
@@ -59,7 +71,7 @@ def sitemap(request) :
 
 def contact(request) :
 	context = RequestContext(request)
-	t = loader.get_template('idb/contact.html')
+	t = loader.get_template('idb/template.html')
 
 	return HttpResponse(t.render(context))
 	
