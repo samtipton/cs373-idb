@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.template import RequestContext, loader
 from django.shortcuts import get_object_or_404, render, render_to_response
 from django.views import generic
+from django.db.models import Q
 from idb.models import MVP, Franchise, SuperBowl
 
 # Create your views here.
@@ -42,7 +43,10 @@ def franchises(request, id = None) :
 		url = 'idb/franchise-template.html'
 		team_id = int(id)
 		team = Franchise.objects.get(id = team_id)
-		context = RequestContext(request, {'team':team})
+		game_history = SuperBowl.objects.filter(Q(winning_franchise=team) | Q(losing_franchise=team)).all()
+		mvp_history = team.mvps.all()
+		context = RequestContext(request, {'team':team, 'game_history':game_history
+			,'mvp_history':mvp_history})
 	else :
 		url = 'idb/franchises-template.html'
 		team_list = Franchise.objects.order_by('-year_founded')
@@ -59,7 +63,9 @@ def mvps(request, id = None) :
 		url = 'idb/mvp-template.html'
 		mvp_id = int(id)
 		mvp = MVP.objects.get(id=mvp_id)
-		context = RequestContext(request, {'mvp':mvp})
+		game_history = SuperBowl.objects.filter(mvp=mvp).all()
+		teams = Franchise.objects.filter(mvps__in=[mvp]).all()
+		context = RequestContext(request, {'mvp':mvp, 'game_history':game_history, 'teams':teams})
 	else :
 		url = 'idb/mvps-template.html'
 		mvp_list = MVP.objects.order_by('-draft_year')
@@ -70,28 +76,9 @@ def mvps(request, id = None) :
 
 	return HttpResponse(t.render(context))
 
-def sitemap(request) :
-	context = RequestContext(request)
-	t = loader.get_template('idb/sitemap.html')
-
-	return HttpResponse(t.render(context))
-
 def contact(request) :
 	context = RequestContext(request)
-	t = loader.get_template('idb/template.html')
+	t = loader.get_template('idb/contact.html')
 
 	return HttpResponse(t.render(context))
 	
-# Example of a view to inflate with a Django template in an .html file
-# Possible implementation from tutorial example shown in index.html comment
-
-# from idb_main.models import Game
-# 
-# class IndexView(generic.ListView):
-#     template_name = 'index.html'
-#     context_object_name = 'latest_game_list'
-# 
-#     def get_queryset(self):
-# 	"""Return the last five published games."""
-# 
-# 	return Game.objects.order_by('-game_day')[:3]
