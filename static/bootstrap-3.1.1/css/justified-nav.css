@@ -43,11 +43,11 @@ body {
   width: 350px;
 }
 
-#scoreboard .container-fluid:nth-child(1) {
+#scoreboard .container-fluid:nth-child(0) {
   float:left;
 }
 
-#scoreboard .container-fluid:nth-child(3) {
+#scoreboard .container-fluid:nth-child(2) {
   float:right;
 }
 
