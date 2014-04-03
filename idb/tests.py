@@ -1,6 +1,7 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 from urllib.request import urlopen, Request
 from json import dumps, loads
+from idb.models import MVP, Franchise, SuperBowl
 import types
 
 # ----------------------
@@ -8,19 +9,22 @@ import types
 # Inglorious Bashers
 # ----------------------
 
+def merge(*dicts):
+	result = {}
+	for d in *dicts:
+		result.update(d)
+	return result
 
 class test_API(TestCase) :
 
-	def assert_successful_response(self, api_response, expected_response):
-
+	def assert_successful_response(self, api_response):
 		self.assertTrue(type(api_response) is dict)
 		self.assertTrue("success" in api_response)
 		self.assertTrue(api_response["success"])
 		self.assertTrue("data" in api_response)
-		self.assertEqual(api_response["data"], expected_response)
+		return api_response["data"]
 
 	def assert_failure_response(self, api_response, error_type, error_message):
-
 		self.assertTrue(type(api_response) is dict)
 		self.assertTrue("success" in api_response)
 		self.assertFalse(api_response["success"])
@@ -31,44 +35,70 @@ class test_API(TestCase) :
 		self.assertTrue("message" in api_response["error"])
 		self.assertEqual(api_response["error"]["message"], error_message)
 
+	def path(self, _type = "", id = None):
+		p = "/api/v2/" + str(_type)
+		if id is not None:
+		p += "/" + str(id)
+		return p
 
+	def ref(self, model):
+		_type = str(model.__name__).lower() + "s"
+		return {
+			"id": model.id,
+			"self": self.path(_type, model.id),
+			"collection": self.path(_type)
+		}
+
+	def get(self, _type = "", id = None):
+		url = path(_type, id)
+		response = self.client.get(url)
+		api_response = loads(response.content)
+		return (response.status_code, api_response)
+
+	def post(self, _type, request):
+		url = path(_type)
+		response = self.client.post(url, request, 'application/json');
+		api_response = loads(response.content)
+		return (response.status_code, api_response)
+
+	def put(self, _type, id, request):
+		url = path(_type, id)
+		response = self.client.put(url, request, 'application/json');
+		api_response = loads(response.content)
+		return (response.status_code, api_response)
+
+	def delete(self, _type):
+		url = path(_type, id)
+		response = self.client.get(url)
+		api_response = loads(response.content)
+		return (response.status_code, api_response)
+
+	
 	# -----------------------------------------
 	# get
 	# -----------------------------------------
 	# check status codes and content is correct
 	# ----------------------------------------- 
-		
-	def test_API_get_superbowls_content(self) :
-		response = urlopen("http://idb.apiary-mock.com/api/v2/superbowls")
+	
+	def setUp(self) :
+		self.malcolm_smith = MVP.objects.create(first_name='Malcolm', last_name='Smith', position='OLB', birth_date='1989-07-05', birth_town='Woodland Hills, CA', high_school='Woodland Hills (CA) Taft', college='Southern California', draft_year=2011, active=True, salary=465000, facebook_id='MalcSmitty', twitter_id='MalcSmitty', youtube_id='zfB8hCsHwLE', latitude=34.1683, longitude=-118.6050)
+		self.seahawks = Franchise.objects.create(team_name='Seahawks', team_city='Seattle', team_state='WA', current_owner='Paul Allen', current_gm='John Schneider', current_head_coach='Pete Carroll', year_founded=1974, active=True, home_stadium='CenturyLink Field', division='NFC West', facebook_id='Seahawks', twitter_id='Seahawks', youtube_id='l9-NicPH-58', latitude=47.5953, longitude=-122.3317)
+		self.broncos = Franchise.objects.create(team_name='Broncos', team_city='Denver', team_state='CO', current_owner='Pat Bowlen', current_gm='John Elway', current_head_coach='John Fox', year_founded=1960, active=True, home_stadium='Sports Authority Field', division='AFC West', facebook_id='DenverBroncos', twitter_id='Broncos', youtube_id='HGMbmbnu2Oc', latitude=39.7439, longitude=-105.0200)
+		self.seahawks.mvps.add(self.malcolm_smith)
+		self.sb_48 = SuperBowl.objects.create(winning_franchise=self.seahawks, losing_franchise=self.broncos, mvp=self.malcolm_smith, mvp_stats='1 INT 1 FR 1 TD 9 T', mvp_blurb='Malcolm Smith was the de-facto SB MVP for a legendary Seattle defense.\n\nWhile he was a relative unknown at the start of the season, a game-sealing interception in the NFC Championship as well as two takeaways in the Super Bowl served as a coming out party for the young linebacker.', winning_score=43, losing_score=8, venue_name='MetLife Stadium', venue_city='East Rutherford', venue_state='NJ', game_day='2014-02-02', attendance=82529, game_number='XLVIII', halftime_performer='Bruno Mars', twitter_id='SuperBowlXLVIII', youtube_id='NbcA1UISfG0', latitude=40.8136, longitude=-74.0744)
+		self.client = Client()
 
-		self.assertEqual(response.getcode(), 200)
+	def test_get_superbowls(self) :
+		response = self.client.get('/api/v2/superbowls')
+		self.assertEqual(response.status_code, 200)
+		api_response = loads(response.content)
 
-		str_response = response.readall().decode("utf-8")
-		
-		response_content_list = loads(str_response)
-		actual_response_list =     [
+		expected_response = [
+			merge(ref(self.sb_48),
 			{
-		        "id": 0,
-		        "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
-		        "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
-		        "winning_franchise":
-		        {
-		            "id": 0,
-		            "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
-		            "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
-		        },
-		        "losing_franchise":
-		        {
-		            "id": 1,
-		            "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/1",
-		            "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
-		        },
-		        "mvp": 
-		        {
-		            "id": 0,
-		            "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
-		            "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
-		        },
+				"winning_franchise": ref(self.seahawks),
+		        "losing_franchise": ref(self.broncos),
+		        "mvp": ref(self.malcolm_smith),
 		        "winning_score": 43,
 		        "losing_score": 8,
 		        "venue_name": "MetLife Stadium",
@@ -78,9 +108,22 @@ class test_API(TestCase) :
 		        "attendance": 82529,
 		        "game_number": "XLVIII",
 		        "halftime_performer": "Bruno Mars"
-    		}
-    	]	
-		self.assert_successful_response(response_content_list, actual_response_list)
+			})
+		]
+
+		self.assert_successful_response(api_response, expected_response)
+
+	def test_post_superbowls(self) :
+
+		response = self.client.post('/api/v2/superbowls',content_type='application/json', data=dumps(request));
+		self.assertEqual(response.status_code, 201)
+		api_response = loads(response.content)
+
+		expected_response = ref(self.sb_48)
+
+		self.assert_successful_response(api_response, expected_response)
+
+
 
 
 	# def test_API_get_teams_content(self) :
