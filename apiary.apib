@@ -149,6 +149,8 @@ The URL is built based on information provided by the client when the API reques
                     "self": "/api/v2/mvps/0",
                     "collection": "/api/v2/mvps"
                 },
+                "mvp_stats": "3 TDs",
+                "mvp_blurd": "Superior performance from this guy.",
                 "winning_score": 43,
                 "losing_score": 8,
                 "venue_name": "MetLife Stadium",
@@ -157,7 +159,11 @@ The URL is built based on information provided by the client when the API reques
                 "game_day": "2014-02-02",
                 "attendance": 82529,
                 "game_number": "XLVIII",
-                "halftime_performer": "Bruno Mars"
+                "halftime_performer": "Bruno Mars",
+                "twitter_id": "9905544",
+                "youtube_id": "superbowl34",
+                "latitude": 315.22,
+                "longitude": 98.33
             }]
         }
 
@@ -177,6 +183,8 @@ The URL is built based on information provided by the client when the API reques
             {
                 "id": 0
             },
+            "mvp_stats": "3 TDs",
+            "mvp_blurd": "Superior performance from this guy.",
             "winning_score": 43,
             "losing_score": 8,
             "venue_name": "MetLife Stadium",
@@ -185,7 +193,11 @@ The URL is built based on information provided by the client when the API reques
             "game_day": "2014-02-02",
             "attendance": 82529,
             "game_number": "XLVIII",
-            "halftime_performer": "Bruno Mars"
+            "halftime_performer": "Bruno Mars",
+            "twitter_id": "9905544",
+            "youtube_id": "superbowl34",
+            "latitude": 315.22,
+            "longitude": 98.33
         }
 
 + Response 201 (application/json)
@@ -229,6 +241,8 @@ The URL is built based on information provided by the client when the API reques
                     "self": "/api/v2/mvps/0",
                     "collection": "/api/v2/mvps"
                 },
+                "mvp_stats": "3 TDs",
+                "mvp_blurd": "Superior performance from this guy.",
                 "winning_score": 43,
                 "losing_score": 8,
                 "venue_name": "MetLife Stadium",
@@ -237,7 +251,11 @@ The URL is built based on information provided by the client when the API reques
                 "game_day": "2014-02-02",
                 "attendance": 82529,
                 "game_number": "XLVIII",
-                "halftime_performer": "Bruno Mars"
+                "halftime_performer": "Bruno Mars",
+                "twitter_id": "9905544",
+                "youtube_id": "superbowl34",
+                "latitude": 315.22,
+                "longitude": 98.33
             }
         }
 
@@ -257,6 +275,8 @@ The URL is built based on information provided by the client when the API reques
             {
                 "id": 0
             },
+            "mvp_stats": "3 TDs",
+            "mvp_blurd": "Superior performance from this guy.",
             "winning_score": 43,
             "losing_score": 8,
             "venue_name": "MetLife Stadium",
@@ -265,7 +285,11 @@ The URL is built based on information provided by the client when the API reques
             "game_day": "2014-02-02",
             "attendance": 82529,
             "game_number": "XLVIII",
-            "halftime_performer": "Bruno Mars"
+            "halftime_performer": "Bruno Mars",
+            "twitter_id": "9905544",
+            "youtube_id": "superbowl34",
+            "latitude": 315.22,
+            "longitude": 98.33
         }
 
 + Response 200 (application/json)
@@ -295,6 +319,8 @@ The URL is built based on information provided by the client when the API reques
                     "self": "/api/v2/mvps/0",
                     "collection": "/api/v2/mvps"
                 },
+                "mvp_stats": "3 TDs",
+                "mvp_blurd": "Superior performance from this guy.",
                 "winning_score": 43,
                 "losing_score": 8,
                 "venue_name": "MetLife Stadium",
@@ -303,11 +329,21 @@ The URL is built based on information provided by the client when the API reques
                 "game_day": "2014-02-02",
                 "attendance": 82529,
                 "game_number": "XLVIII",
-                "halftime_performer": "Bruno Mars"
+                "halftime_performer": "Bruno Mars",
+                "twitter_id": "9905544",
+                "youtube_id": "superbowl34",
+                "latitude": 315.22,
+                "longitude": 98.33
             }
         }
 
 ### Remove a specific Super Bowl game entry. [DELETE]
++ Request (application/json)
+
+        {
+            "id": 0
+        }
+
 + Response 200 (application/json)
 
         {
@@ -347,7 +383,12 @@ The URL is built based on information provided by the client when the API reques
                 "year_founded": 1974,
                 "active": true,
                 "home_stadium": "CenturyLink Field",
-                "division": "NFC West"
+                "division": "NFC West",
+                "facebook_id": "seahawks",
+                "twitter_id": "GoHawks",
+                "youtube_id": "vh500h",
+                "latitude" = 334.6,
+                "longitude" = 44.1
             }]
         }
 
@@ -372,7 +413,12 @@ The URL is built based on information provided by the client when the API reques
             "year_founded": 1974,
             "active": true,
             "home_stadium": "CenturyLink Field",
-            "division": "NFC West"
+            "division": "NFC West",
+            "facebook_id": "seahawks",
+            "twitter_id": "GoHawks",
+            "youtube_id": "vh500h",
+            "latitude" = 334.6,
+            "longitude" = 44.1
         }
 
 + Response 201 (application/json)
@@ -419,7 +465,12 @@ The URL is built based on information provided by the client when the API reques
                 "year_founded": 1974,
                 "active": true,
                 "home_stadium": "CenturyLink Field",
-                "division": "NFC West"
+                "division": "NFC West",
+                "facebook_id": "seahawks",
+                "twitter_id": "GoHawks",
+                "youtube_id": "vh500h",
+                "latitude" = 334.6,
+                "longitude" = 44.1
             }
         }
 
@@ -444,7 +495,12 @@ The URL is built based on information provided by the client when the API reques
             "year_founded": 1974,
             "active": true,
             "home_stadium": "CenturyLink Field",
-            "division": "NFC West"
+            "division": "NFC West",
+            "facebook_id": "seahawks",
+            "twitter_id": "GoHawks",
+            "youtube_id": "vh500h",
+            "latitude" = 334.6,
+            "longitude" = 44.1
         }
 
 + Response 200 (application/json)
@@ -482,6 +538,12 @@ The URL is built based on information provided by the client when the API reques
         }
 
 ### Remove a specific franchise entry. [DELETE]
++ Request (application/json)
+
+        {
+            "id": 0
+        }
+
 + Response 200 (application/json)
 
         {
@@ -656,6 +718,12 @@ The URL is built based on information provided by the client when the API reques
         }
 
 ### Remove a specific Super Bowl MVP entry. [DELETE]
++ Request (application/json)
+
+        {
+            "id": 0
+        }
+
 + Response 200 (application/json)
 
         {
