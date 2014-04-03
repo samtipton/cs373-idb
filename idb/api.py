@@ -373,3 +373,11 @@ def franchises_id_delete(_id) :
 
 def api_mvps(request) :
 	pass
+
+def api_mvps_id(request) :
+	pass
+
+
+
+
+
