@@ -1,12 +1,7 @@
 {% extends "idb/template.html" %}
 
 {% block content %}
-
-
-
     <br/>
-
-
     <div class="row">
     	<div style="padding:0px"class="col-md-3">
     		<img style="width:250px" src="../../static/res/SBIcons/{{game.game_number}}.png">
@@ -21,9 +16,9 @@
 	    	</div>
     	</div>
 
-    	<div style="padding:0px" class="col-md-3">
-    		<img src="http://placehold.it/275x250">
-    	</div>
+      <div id="map-canvas" style="padding:0px" class="col-md-3">
+
+      </div>
     </div>
     <br/>
 
@@ -42,19 +37,13 @@
     <div class="row" id="mvpbar">
       <h3><b>MVP: </b>  {{mvp.first_name}} {{mvp.last_name}}</h3>
       <div style="padding:0px" class="col-md-5">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-Aliquam in felis sit amet augue.</p>
+        <p>{{game.mvp_stats}}</p>
       </div>
       <div style="padding:0px" class="col-md-2">
         <a href="/mvps/{{mvp.id}}"><img src="../../static/res/MVPs/{{game.mvp.first_name}} {{game.mvp.last_name}}.png"></a>
       </div>
       <div style="padding:0px" class="col-md-5">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-Aliquam in felis sit amet augue.</p>
+        <p>{{game.mvp_blurb}}</p>
       </div>
     </div>
 
@@ -62,13 +51,15 @@ Aliquam in felis sit amet augue.</p>
 
     <!-- social media -->
     <div class="row">
+      <!-- youtube -->
       <div class="flex-video widescreen">
         <div style="padding:0px" class="col-md-7">  
-        <iframe width="650" height="500" src="//www.youtube.com/embed/{{game.youtube_id}}" frameborder="0" allowfullscreen></iframe>
+          <iframe width="650" height="500" src="//www.youtube.com/embed/{{game.youtube_id}}" frameborder="0" allowfullscreen></iframe>
+        </div>
       </div>
-      </div>
+      <!-- twitter -->
       <div style="padding:0px" class="col-md-5">
-        <a class="twitter-timeline" href="" data-widget-id="446419923376418818">Tweets about "#SuperBowlXLVIII"</a>
+        <a class="twitter-timeline" href="" data-widget-id={{game.twitter_id}}></a>
 		
 
 		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -78,6 +69,8 @@ Aliquam in felis sit amet augue.</p>
     <script type="text/javascript"
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSXRVKo3e9gwZ8L2zmA5EJ5VGD2y654dU&amp;sensor=false">
     </script>
+
+    <!-- lat long call -->
     <script type="text/javascript">
     function initialize() {
      var myLatlng = new google.maps.LatLng({{game.latitude}},{{game.longitude}});
