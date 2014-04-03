@@ -24,7 +24,7 @@ class MVP(models.Model) :
         return self.first_name + " " + self.last_name
 
 class Franchise(models.Model) :
-    mvp = models.ManyToManyField(MVP, verbose_name ="Most Valuable Player")
+    mvps = models.ManyToManyField(MVP, verbose_name ="Most Valuable Players")
     #information
     team_name = models.CharField(max_length = 500)
     team_city = models.CharField(max_length = 500)
@@ -32,7 +32,7 @@ class Franchise(models.Model) :
     current_owner = models.CharField(max_length = 500)
     current_gm = models.CharField(max_length = 500)
     current_head_coach =  models.CharField(max_length = 500)
-    year_founded = models.CharField(max_length = 500)
+    year_founded = models.IntegerField()
     active = models.BooleanField()
     home_stadium = models.CharField(max_length = 500)
     division = models.CharField(max_length = 500)
@@ -63,4 +63,3 @@ class SuperBowl(models.Model) :
 
     def __str__ (self) :
         return "SuperBowl " + self.game_number
-

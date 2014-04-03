@@ -43,6 +43,7 @@ h1, p {
   border: solid rgba(0, 0, 0, 0) 5px;
   border-radius: 5px;
   margin: 0px 2px;
+  text-align: center;
 }
 
 #row-container {
@@ -148,13 +149,16 @@ h1, p {
   text-align: center;
 }
 
+li {
+  list-style-type: none;
+}
+
 /* Customize the nav-justified links to be fill the entire space of the .navbar */
 
 .nav-justified {
   background-color: #eee;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin-bottom: 45px;
 }
 .nav-justified > li > a {
   padding-top: 15px;

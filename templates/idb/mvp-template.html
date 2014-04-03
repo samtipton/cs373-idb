@@ -1,0 +1,63 @@
+{% extends "idb/template.html" %}
+
+{% block content %}
+	
+ <div class="row">
+        <div style="padding:0px"class="col-md-3">
+          <img src="../../static/res/logos/{{team.team_name}}.png">
+        </div>
+        <div style="padding:0px" class="col-md-6">
+    		<h1><strong style="color:black; font-family: Awesome; font-size:1.5em">{{mvp.first_name}} {{mvp.last_name}}</strong></h1>
+    		<div>
+	    		<h4 style="color: black">Born on {{mvp.birth_date}} in {{mvp.birth_town}}</h4>
+	    		<h4 style="color: black">High School: {{mvp.high_school}}</h4>
+	    		<h4 style="color: black">College: {{mvp.college}}</h4>
+	    		<h4 style="color: black">Draft year: {{mvp.draft_year}}</h4>
+	    		<h4 style="color: black">Salary: {{mvp.salary}}</h4>
+	    	</div>
+    	</div>
+        <div style="padding:0px" class="col-md-3">
+          <img src="http://placehold.it/282x200">
+        </div>
+      </div>
+      
+      <br/>
+      <br/>
+
+      <!-- history tables --> 
+      <div class="row">
+        <h1>SuperBowl History</h1>
+        <div class="row">
+        	<img src="http://placehold.it/100x100" />
+        	<img src="http://placehold.it/100x100" />
+    	</div>
+      </div>
+
+      <br/>
+      <br/>
+
+      <div class="row">
+        <h1>Team History</h1>
+        <div class="row">
+          <img src="http://placehold.it/100x100" />
+        </div>
+      </div>
+
+      <br/>
+      <br/>
+
+      <!-- social media -->
+      <div class="row">
+        <div style="padding:0px"class="col-md-3">
+          <img src="http://placehold.it/250x600">
+        </div>
+        <div style="padding:0px" class="col-md-6">
+          <img src="http://placehold.it/550x400">
+        </div>
+        <div style="padding:0px" class="col-md-3">
+          <img src="http://placehold.it/250x600">
+        </div>
+      </div>
+{% endblock %}
+
+

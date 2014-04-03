@@ -43,8 +43,8 @@ an appropriate HTTP Status Code and HTTP headers.
             }
         }
 
-Where `success` is a boolean value indicating that the operation (as an atomic action) succeeded. And `data` 
-is result of the operation (in this case a reference to a Super Bowl resouce). If the operation does not 
+Where `success` is a boolean value indicating that the operation (as an atomic action) succeeded. And `data`
+is result of the operation (in this case a reference to a Super Bowl resouce). If the operation does not
 return a result, the value of `data` is `null`.
 
 ## Failed Operations
@@ -56,9 +56,9 @@ return a result, the value of `data` is `null`.
                 "message": "The HTTP method 'POST' is not allowed on the resource '/api/v2/superbowls/0'."
             }
         }
-        
+
 Where `success` is a boolean value indicating that the operation (as an atomic action) failed. And `error` is
-an object describing the type of error (`type`, a string) and why it failed (`message`, a string). 
+an object describing the type of error (`type`, a string) and why it failed (`message`, a string).
 
 # API Patterns
 The API tries to provide some features for auto-discovery and easy navigation. Appart from common REST
@@ -70,71 +70,612 @@ patterns, we provide: unique identifiers, direct resource links, and collection 
         }
 
 Every resource has a unique positive integer identifier. Whenever that resource is referenced, its `id` field
-is provided. This identifier is used for many things including identifying the resource in a resource 
+is provided. This identifier is used for many things including identifying the resource in a resource
 collection. (e.g. /superbowls/0)
 
 ## Direct Resource Link
         {
             "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0"
         }
-        
+
 Every resource has a `self` property with the URL that represents that specific resource. This can be used to
-navigate to that resource and perform operations on it (such as `GET`, `PUT`, `DELETE`). The URL is built 
-based on information provided by the client when the API request is made (such as the `Referer` and `Host` 
+navigate to that resource and perform operations on it (such as `GET`, `PUT`, `DELETE`). The URL is built
+based on information provided by the client when the API request is made (such as the `Referer` and `Host`
 HTTP headers.)
 
 ## Collection Link
         {
             "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
         }
-        
+
 Every resource has a `collection` property with the URL that represents its resource collection. This can be
 used to navigate to that resurce collection and perform additional operations on it (such as `GET`, `POST`).
-The URL is built based on information provided by the client when the API request is made (such as the 
+The URL is built based on information provided by the client when the API request is made (such as the
 `Referer` and `Host` HTTP headers.)
 
-# The REST API (TODO: Finish everything bellow here.)
+# The REST API
 
-# Group The Roots
-
-## The Gateway [/api]
-### List all API versions [GET]
-+ Response 200 (application/json)
-
-        [
-        ]
+# Group SBIDB Version 2 API
 
 ## The Version 2 API [/api/v2]
 ### List all resource collections [GET]
 + Response 200 (application/json)
 
-        [
-        ]
-        
+        {
+            "success": true,
+            "data":
+            [{
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
+                "name": "The Super Bowls",
+                "description": "This is the collection endpoint for the Super Bowl resource."
+            },{
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises",
+                "name": "The Franchise",
+                "description": "This is the collection endpoint for the franchise resource."
+            },{
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps",
+                "name": "The MVPs",
+                "description": "This is the collection endpoint for the MVP resource."
+            }]
+        }
 
-# Group The Super Bowls
-
-## Superbowl Games [/api/superbowls]
-### List all Games [GET]
+## The Super Bowls [/api/v2/superbowls]
+### List all Super Bowl games. [GET]
 + Response 200 (application/json)
 
-        [
-        ]
+        {
+            "success": true,
+            "data":
+            [{
+                "id": 0,
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
+                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
+                "winning_franchise":
+                {
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                },
+                "losing_franchise":
+                {
+                    "id": 1,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/1",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                },
+                "mvp":
+                {
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                },
+                "winning_score": 43,
+                "losing_score": 8,
+                "venue_name": "MetLife Stadium",
+                "venue_city": "East Rutherford",
+                "venue_state": "NJ",
+                "game_day": "2014-02-02",
+                "attendance": 82529,
+                "game_number": "XLVIII",
+                "halftime_performer": "Bruno Mars"
+            }]
+        }
 
-# Group The Franchises
+### Create a Super Bowl game entry. [POST]
++ Request (application/json)
 
-## Superbowl Teams [/api/franchises]
-### List all Teams [GET]
+        {
+            "winning_franchise":
+            {
+                "id": 0
+            },
+            "losing_franchise":
+            {
+                "id": 1
+            },
+            "mvp":
+            {
+                "id": 0
+            },
+            "winning_score": 43,
+            "losing_score": 8,
+            "venue_name": "MetLife Stadium",
+            "venue_city": "East Rutherford",
+            "venue_state": "NJ",
+            "game_day": "2014-02-02",
+            "attendance": 82529,
+            "game_number": "XLVIII",
+            "halftime_performer": "Bruno Mars"
+        }
+
 + Response 200 (application/json)
 
-        [
-        ]
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
+                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+            }
+        }
 
-# Group The MVPs
-
-## Superbowl Players [/api/players]
-### List all Players [GET]
+## A Super Bowl [/api/v2/superbowls/{id}]
+### Get information about a specific Super Bowl game. [GET]
 + Response 200 (application/json)
 
-        [
-        ]
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
+                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
+                "winning_franchise":
+                {
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                },
+                "losing_franchise":
+                {
+                    "id": 1,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/1",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                },
+                "mvp":
+                {
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                },
+                "winning_score": 43,
+                "losing_score": 8,
+                "venue_name": "MetLife Stadium",
+                "venue_city": "East Rutherford",
+                "venue_state": "NJ",
+                "game_day": "2014-02-02",
+                "attendance": 82529,
+                "game_number": "XLVIII",
+                "halftime_performer": "Bruno Mars"
+            }
+        }
+
+### Update information about a specific Super Bowl game. [PUT]
++ Request (application/json)
+
+        {
+            "winning_franchise":
+            {
+                "id": 0
+            },
+            "losing_franchise":
+            {
+                "id": 1
+            },
+            "mvp":
+            {
+                "id": 0
+            },
+            "winning_score": 43,
+            "losing_score": 8,
+            "venue_name": "MetLife Stadium",
+            "venue_city": "East Rutherford",
+            "venue_state": "NJ",
+            "game_day": "2014-02-02",
+            "attendance": 82529,
+            "game_number": "XLVIII",
+            "halftime_performer": "Bruno Mars"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
+                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
+                "winning_franchise":
+                {
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                },
+                "losing_franchise":
+                {
+                    "id": 1,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/1",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                },
+                "mvp":
+                {
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                },
+                "winning_score": 43,
+                "losing_score": 8,
+                "venue_name": "MetLife Stadium",
+                "venue_city": "East Rutherford",
+                "venue_state": "NJ",
+                "game_day": "2014-02-02",
+                "attendance": 82529,
+                "game_number": "XLVIII",
+                "halftime_performer": "Bruno Mars"
+            }
+        }
+
+### Remove a specific Super Bowl game entry. [DELETE]
++ Request (application/json)
+
+        {
+            "id": 0
+        }
+
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data": null
+        }
+
+## The NFL Franchises [/api/v2/franchises]
+### List all NFL franchises. [GET]
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            [{
+                "id": 0,
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
+                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises",
+                "mvps":
+                [{
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                }],
+                "superbowls":
+                [{
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+                }],
+                "team_name": "Seahawks",
+                "team_city": "Seattle",
+                "team_state": "WA",
+                "current_owner": "Paul Allen",
+                "current_gm": "John Schneider",
+                "current_head_coach": "Pete Carroll",
+                "year_founded": 1974,
+                "active": true,
+                "home_stadium": "CenturyLink Field",
+                "division": "NFC West"
+            }]
+        }
+
+### Create an NFL franchise entry. [POST]
++ Request (application/json)
+
+        {
+            "mvps":
+            [{
+                "id": 0
+            }],
+            "superbowls":
+            [{
+                "id": 0
+            }],
+            "team_name": "Seahawks",
+            "team_city": "Seattle",
+            "team_state": "WA",
+            "current_owner": "Paul Allen",
+            "current_gm": "John Schneider",
+            "current_head_coach": "Pete Carroll",
+            "year_founded": 1974,
+            "active": true,
+            "home_stadium": "CenturyLink Field",
+            "division": "NFC West"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
+                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+            }
+        }
+
+## An NFL Franchise [/api/v2/franchises/{id}]
+### Get information about a specific NFL franchise. [GET]
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
+                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises",
+                "mvps":
+                [{
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                }],
+                "superbowls":
+                [{
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+                }],
+                "team_name": "Seahawks",
+                "team_city": "Seattle",
+                "team_state": "WA",
+                "current_owner": "Paul Allen",
+                "current_gm": "John Schneider",
+                "current_head_coach": "Pete Carroll",
+                "year_founded": 1974,
+                "active": true,
+                "home_stadium": "CenturyLink Field",
+                "division": "NFC West"
+            }
+        }
+
+### Update information about a specific NFL franchise. [PUT]
++ Request (application/json)
+
+        {
+            "mvps":
+            [{
+                "id": 0,
+            }],
+            "superbowls":
+            [{
+                "id": 0,
+            }],
+            "team_name": "Seahawks",
+            "team_city": "Seattle",
+            "team_state": "WA",
+            "current_owner": "Paul Allen",
+            "current_gm": "John Schneider",
+            "current_head_coach": "Pete Carroll",
+            "year_founded": 1974,
+            "active": true,
+            "home_stadium": "CenturyLink Field",
+            "division": "NFC West"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
+                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises",
+                "mvps":
+                [{
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                }],
+                "superbowls":
+                [{
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+                }],
+                "team_name": "Seahawks",
+                "team_city": "Seattle",
+                "team_state": "WA",
+                "current_owner": "Paul Allen",
+                "current_gm": "John Schneider",
+                "current_head_coach": "Pete Carroll",
+                "year_founded": 1974,
+                "active": true,
+                "home_stadium": "CenturyLink Field",
+                "division": "NFC West"
+            }
+        }
+
+### Remove a specific franchise entry. [DELETE]
++ Request (application/json)
+
+        {
+            "id": 0
+        }
+
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data": null
+        }
+
+## The Super Bowl MVPs [/api/v2/mvps]
+### List all the MVPs [GET]
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            [{
+                "id": 0,
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
+                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps",
+                "superbowls":
+                [{
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+                }],
+                "franchises":
+                [{
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                }],
+                "first_name": "Malcolm",
+                "last_name": "Smith",
+                "position": "LB",
+                "birth_date": "1989-07-05",
+                "birth_town": "Woodland Hills, CA",
+                "high_school": "Woodland Hills (CA) Taft",
+                "college": "Southern California",
+                "draft_year": 2011,
+                "active": true,
+                "salary": 465000
+            }]
+        }
+
+### Create an MVP entry. [POST]
++ Request (application/json)
+
+        {
+            "superbowls":
+            [{
+                "id": 0
+            }],
+            "franchises":
+            [{
+                "id": 0
+            }],
+            "first_name": "Malcolm",
+            "last_name": "Smith",
+            "position": "LB",
+            "birth_date": "1989-07-05",
+            "birth_town": "Woodland Hills, CA",
+            "high_school": "Woodland Hills (CA) Taft",
+            "college": "Southern California",
+            "draft_year": 2011,
+            "active": true,
+            "salary": 465000
+        }
+
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
+                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+            }
+        }
+
+## A SuperBowl MVP [/api/v2/mvps/{id}]
+### Get information about a specific Super Bowl MVP. [GET]
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
+                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps",
+                "superbowls":
+                [{
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+                }],
+                "franchises":
+                [{
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                }],
+                "first_name": "Malcolm",
+                "last_name": "Smith",
+                "position": "LB",
+                "birth_date": "1989-07-05",
+                "birth_town": "Woodland Hills, CA",
+                "high_school": "Woodland Hills (CA) Taft",
+                "college": "Southern California",
+                "draft_year": 2011,
+                "active": true,
+                "salary": 465000
+            }
+        }
+
+### Update information about a specific Super Bowl MVP. [PUT]
++ Request (application/json)
+
+        {
+            "superbowls":
+            [{
+                "id": 0
+            }],
+            "franchises":
+            [{
+                "id": 0
+            }],
+            "first_name": "Malcolm",
+            "last_name": "Smith",
+            "position": "LB",
+            "birth_date": "1989-07-05",
+            "birth_town": "Woodland Hills, CA",
+            "high_school": "Woodland Hills (CA) Taft",
+            "college": "Southern California",
+            "draft_year": 2011,
+            "active": true,
+            "salary": 465000
+        }
+
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
+                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises",
+                "mvps":
+                [{
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                }],
+                "superbowls":
+                [{
+                    "id": 0,
+                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
+                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+                }],
+                "team_name": "Seahawks",
+                "team_city": "Seattle",
+                "team_state": "WA",
+                "current_owner": "Paul Allen",
+                "current_gm": "John Schneider",
+                "current_head_coach": "Pete Carroll",
+                "year_founded": 1974,
+                "active": true,
+                "home_stadium": "CenturyLink Field",
+                "division": "NFC West"
+            }
+        }
+
+### Remove a specific Super Bowl MVP entry. [DELETE]
++ Request (application/json)
+
+        {
+            "id": 0
+        }
+
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data": null
+        }
