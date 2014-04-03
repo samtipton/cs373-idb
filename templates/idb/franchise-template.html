@@ -7,15 +7,15 @@
           <img style="width:250px" src="../../static/res/Logos/{{team.team_name}}.png">
         </div>
         <div style="padding:0px" class="col-md-6">
-    		<h1><strong style="color:black; font-family: Awesome; font-size:1.5em">The {{team.team_city}} {{team.team_name}}</strong></h1>
+    		<h1><strong style="color:black; font-size:1.5em">The {{team.team_city}} {{team.team_name}}</strong></h1>
     		<div>
 	    		<h4 style="color: black">Founded in {{team.year_founded}}</h4>
 	    		<h4 style="color: black">Home Stadium: {{team.home_stadium}}</h4>
 	    		<h4 style="color: black">Division: {{team.division}}</h4>
 	    	</div>
     	</div>
-        <div style="padding:0px" class="col-md-3">
-          <img src="http://placehold.it/282x200">
+        <div id="map-canvas" class="col-md-3">
+
         </div>
       </div>
       
@@ -88,12 +88,17 @@
       <!-- social media -->
       <div class="row">
         <div style="padding:0px; background-color: white" class="col-md-3"> 
-    
-          <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2F{{team.facebook_id}}&amp;width&amp;height=400&amp;colorscheme=light&amp;show_faces=true&amp;header=true&amp;stream=false&amp;show_border=true" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:410px;" allowTransparency="true"></iframe>
+
+          <!-- facebook -->
+          <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2F{{team.facebook_id}}&amp;width&amp;height=400&amp;colorscheme=light&amp;show_faces=true&amp;header=true&amp;stream=false&amp;show_border=true" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:395px;" allowTransparency="true"></iframe>
         </div>
+
+        <!-- youtube -->
         <div style="padding:0px" class="col-md-6">  
           <div class="flex-video widescreen"><iframe width="550" height="400" src="//www.youtube.com/embed/{{team.youtube_id}}" frameborder="0" allowfullscreen></iframe></div>
         </div>
+
+        <!-- twitter -->
         <div style="padding:0px" class="col-md-3">
           <a class="twitter-timeline" href="" data-widget-id="{{team.twitter_id}}"></a>
       
