@@ -54,6 +54,7 @@ def ref(model, body = {}):
 	temp.update(body)
 	return temp
 
+
 def create_sb_response_object(model) :
 	return ref(model, {
 		"winning_franchise": ref(model.winning_franchise),
@@ -99,8 +100,8 @@ def create_franchise_response_object(model) :
 
 def create_mvp_response_object(model) :
 	return ref(model, {
-		"superbowls" : [ref(sb) for sb in SuperBowl.objects.filter(mvp = model)]
-		"franchises" : [ref(f) for f in Franchise.objects.filter(mvps__in = [model])]
+		"superbowls" : [ref(sb) for sb in SuperBowl.objects.filter(mvp = model)],
+		"franchises" : [ref(f) for f in Franchise.objects.filter(mvps__in = [model])],
 		"first_name" : model.first_name,
 		"last_name" : model.last_name,
 		"position" : model.position,
@@ -300,9 +301,6 @@ def franchises_post(request) :
 		latitude = json_content["latitude"],
 		longitude = json_content["longitude"])
 	franchise.save()
-
-	winning
-	losing
 	
 
 	return create_successful_response(201, ref(franchise))
@@ -374,3 +372,4 @@ def franchises_id_delete(_id) :
 # -------------
 
 def api_mvps(request) :
+	pass
