@@ -6,13 +6,20 @@ from django.views import generic
 from idb.models import MVP, Franchise, SuperBowl
 
 # Create your views here.
-def index(request) :
+def splash(request) :
 	context = RequestContext(request)
 	t = loader.get_template('idb/splash.html')
 
+	game_list = SuperBowl.objects.order_by('-game_day')
+	team_list = Franchise.objects.order_by('-year_founded')
+	mvp_list = MVP.objects.order_by('-draft_year')
+
+	context = RequestContext(request, {'game_list':game_list, 
+		'team_list':team_list, 'mvp_list':mvp_list})
+
 	return HttpResponse(t.render(context))
 
-def games(request, id = None) :
+def superbowls(request, id = None) :
 
 	if id.isdigit():
 		url = 'idb/superbowl-template.html'
@@ -29,7 +36,7 @@ def games(request, id = None) :
 
 	return HttpResponse(t.render(context))
 
-def teams(request, id = None) :
+def franchises(request, id = None) :
 
 	if id.isdigit():
 		url = 'idb/franchise-template.html'
@@ -46,7 +53,7 @@ def teams(request, id = None) :
 
 	return HttpResponse(t.render(context))
 
-def players(request, id = None) :
+def mvps(request, id = None) :
 
 	if id.isdigit():
 		url = 'idb/mvp-template.html'
