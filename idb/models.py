@@ -16,9 +16,11 @@ class MVP(models.Model) :
     draft_year = models.IntegerField()
     active = models.BooleanField()
     salary = models.IntegerField()
-
     facebook_id = models.CharField(max_length = 500)
     twitter_id = models.CharField(max_length = 500)
+    youtube_id = models.CharField(max_length = 500)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
 
     def __str__ (self) :
         return self.first_name + " " + self.last_name
@@ -36,9 +38,11 @@ class Franchise(models.Model) :
     active = models.BooleanField()
     home_stadium = models.CharField(max_length = 500)
     division = models.CharField(max_length = 500)
-
     facebook_id = models.CharField(max_length = 500)
     twitter_id = models.CharField(max_length = 500)
+    youtube_id = models.CharField(max_length = 500)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
 
     def __str__ (self) :
         return self.team_name
@@ -47,6 +51,8 @@ class SuperBowl(models.Model) :
     winning_franchise = models.ForeignKey(Franchise, related_name = "winner")
     losing_franchise = models.ForeignKey(Franchise, related_name = "loser")
     mvp = models.ForeignKey(MVP)
+    mvp_stats = models.CharField(max_length = 500)
+    mvp_blurb = models.CharField(max_length = 500)
     #information
     winning_score = models.IntegerField(default = 0)
     losing_score = models.IntegerField(default = 0)
@@ -57,9 +63,11 @@ class SuperBowl(models.Model) :
     attendance = models.IntegerField(default = 0)
     game_number = models.CharField(max_length = 500)
     halftime_performer = models.CharField(max_length = 500)
-
-    facebook_id = models.CharField(max_length = 500)
     twitter_id = models.CharField(max_length = 500)
+    youtube_id = models.CharField(max_length = 500)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+
 
     def __str__ (self) :
         return "SuperBowl " + self.game_number

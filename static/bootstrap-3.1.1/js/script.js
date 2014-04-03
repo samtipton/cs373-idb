@@ -6,9 +6,9 @@ $(document).ready(function() {
 
 	switch(page) {
 		case "" : 		  bindex = 1; break;
-		case "games/" :   bindex = 2; break;
-		case "teams/" :   bindex = 3; break;
-		case "players/" : bindex = 4; break;
+		case "superbowls/" :   bindex = 2; break;
+		case "franchises/" :   bindex = 3; break;
+		case "mvps/" : bindex = 4; break;
 		case "contact/" : bindex = 5; break;
 		default : break;
 	}
