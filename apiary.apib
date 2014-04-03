@@ -38,8 +38,9 @@ an appropriate HTTP Status Code and HTTP headers.
             "success": true,
             "data":
             {
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
                 "id": 0
+                "self": "/api/v2/superbowls/0",
+                "collection": "/api/v2/superbowls",
             }
         }
 
@@ -75,7 +76,7 @@ collection. (e.g. /superbowls/0)
 
 ## Direct Resource Link
         {
-            "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0"
+            "self": "/api/v2/superbowls/0"
         }
 
 Every resource has a `self` property with the URL that represents that specific resource. This can be used to
@@ -85,7 +86,7 @@ HTTP headers.)
 
 ## Collection Link
         {
-            "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+            "collection": "/api/v2/superbowls"
         }
 
 Every resource has a `collection` property with the URL that represents its resource collection. This can be
@@ -105,15 +106,15 @@ The URL is built based on information provided by the client when the API reques
             "success": true,
             "data":
             [{
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
+                "self": "/api/v2/superbowls",
                 "name": "The Super Bowls",
                 "description": "This is the collection endpoint for the Super Bowl resource."
             },{
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises",
+                "self": "/api/v2/franchises",
                 "name": "The Franchise",
                 "description": "This is the collection endpoint for the franchise resource."
             },{
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps",
+                "self": "/api/v2/mvps",
                 "name": "The MVPs",
                 "description": "This is the collection endpoint for the MVP resource."
             }]
@@ -128,25 +129,25 @@ The URL is built based on information provided by the client when the API reques
             "data":
             [{
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
+                "self": "/api/v2/superbowls/0",
+                "collection": "/api/v2/superbowls",
                 "winning_franchise":
                 {
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                    "self": "/api/v2/franchises/0",
+                    "collection": "/api/v2/franchises"
                 },
                 "losing_franchise":
                 {
                     "id": 1,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/1",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                    "self": "/api/v2/franchises/1",
+                    "collection": "/api/v2/franchises"
                 },
                 "mvp":
                 {
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                    "self": "/api/v2/mvps/0",
+                    "collection": "/api/v2/mvps"
                 },
                 "winning_score": 43,
                 "losing_score": 8,
@@ -187,15 +188,15 @@ The URL is built based on information provided by the client when the API reques
             "halftime_performer": "Bruno Mars"
         }
 
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
         {
             "success": true,
             "data":
             {
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+                "self": "/api/v2/superbowls/0",
+                "collection": "/api/v2/superbowls"
             }
         }
 
@@ -208,25 +209,25 @@ The URL is built based on information provided by the client when the API reques
             "data":
             {
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
+                "self": "/api/v2/superbowls/0",
+                "collection": "/api/v2/superbowls",
                 "winning_franchise":
                 {
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                    "self": "/api/v2/franchises/0",
+                    "collection": "/api/v2/franchises"
                 },
                 "losing_franchise":
                 {
                     "id": 1,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/1",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                    "self": "/api/v2/franchises/1",
+                    "collection": "/api/v2/franchises"
                 },
                 "mvp":
                 {
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                    "self": "/api/v2/mvps/0",
+                    "collection": "/api/v2/mvps"
                 },
                 "winning_score": 43,
                 "losing_score": 8,
@@ -274,25 +275,25 @@ The URL is built based on information provided by the client when the API reques
             "data":
             {
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
+                "self": "/api/v2/superbowls/0",
+                "collection": "/api/v2/superbowls",
                 "winning_franchise":
                 {
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                    "self": "/api/v2/franchises/0",
+                    "collection": "/api/v2/franchises"
                 },
                 "losing_franchise":
                 {
                     "id": 1,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/1",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                    "self": "/api/v2/franchises/1",
+                    "collection": "/api/v2/franchises"
                 },
                 "mvp":
                 {
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                    "self": "/api/v2/mvps/0",
+                    "collection": "/api/v2/mvps"
                 },
                 "winning_score": 43,
                 "losing_score": 8,
@@ -329,19 +330,19 @@ The URL is built based on information provided by the client when the API reques
             "data":
             [{
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises",
+                "self": "/api/v2/franchises/0",
+                "collection": "/api/v2/franchises",
                 "mvps":
                 [{
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                    "self": "/api/v2/mvps/0",
+                    "collection": "/api/v2/mvps"
                 }],
                 "superbowls":
                 [{
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+                    "self": "/api/v2/superbowls/0",
+                    "collection": "/api/v2/superbowls"
                 }],
                 "team_name": "Seahawks",
                 "team_city": "Seattle",
@@ -380,15 +381,15 @@ The URL is built based on information provided by the client when the API reques
             "division": "NFC West"
         }
 
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
         {
             "success": true,
             "data":
             {
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                "self": "/api/v2/franchises/0",
+                "collection": "/api/v2/franchises"
             }
         }
 
@@ -401,19 +402,19 @@ The URL is built based on information provided by the client when the API reques
             "data":
             {
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises",
+                "self": "/api/v2/franchises/0",
+                "collection": "/api/v2/franchises",
                 "mvps":
                 [{
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                    "self": "/api/v2/mvps/0",
+                    "collection": "/api/v2/mvps"
                 }],
                 "superbowls":
                 [{
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+                    "self": "/api/v2/superbowls/0",
+                    "collection": "/api/v2/superbowls"
                 }],
                 "team_name": "Seahawks",
                 "team_city": "Seattle",
@@ -459,19 +460,19 @@ The URL is built based on information provided by the client when the API reques
             "data":
             {
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises",
+                "self": "/api/v2/franchises/0",
+                "collection": "/api/v2/franchises",
                 "mvps":
                 [{
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                    "self": "/api/v2/mvps/0",
+                    "collection": "/api/v2/mvps"
                 }],
                 "superbowls":
                 [{
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+                    "self": "/api/v2/superbowls/0",
+                    "collection": "/api/v2/superbowls"
                 }],
                 "team_name": "Seahawks",
                 "team_city": "Seattle",
@@ -509,19 +510,19 @@ The URL is built based on information provided by the client when the API reques
             "data":
             [{
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps",
+                "self": "/api/v2/mvps/0",
+                "collection": "/api/v2/mvps",
                 "superbowls":
                 [{
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+                    "self": "/api/v2/superbowls/0",
+                    "collection": "/api/v2/superbowls"
                 }],
                 "franchises":
                 [{
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                    "self": "/api/v2/franchises/0",
+                    "collection": "/api/v2/franchises"
                 }],
                 "first_name": "Malcolm",
                 "last_name": "Smith",
@@ -560,15 +561,15 @@ The URL is built based on information provided by the client when the API reques
             "salary": 465000
         }
 
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
         {
             "success": true,
             "data":
             {
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                "self": "/api/v2/mvps/0",
+                "collection": "/api/v2/mvps"
             }
         }
 
@@ -581,19 +582,19 @@ The URL is built based on information provided by the client when the API reques
             "data":
             {
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps",
+                "self": "/api/v2/mvps/0",
+                "collection": "/api/v2/mvps",
                 "superbowls":
                 [{
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+                    "self": "/api/v2/superbowls/0",
+                    "collection": "/api/v2/superbowls"
                 }],
                 "franchises":
                 [{
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                    "self": "/api/v2/franchises/0",
+                    "collection": "/api/v2/franchises"
                 }],
                 "first_name": "Malcolm",
                 "last_name": "Smith",
@@ -639,19 +640,19 @@ The URL is built based on information provided by the client when the API reques
             "data":
             {
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises",
+                "self": "/api/v2/franchises/0",
+                "collection": "/api/v2/franchises",
                 "mvps":
                 [{
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                    "self": "/api/v2/mvps/0",
+                    "collection": "/api/v2/mvps"
                 }],
                 "superbowls":
                 [{
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+                    "self": "/api/v2/superbowls/0",
+                    "collection": "/api/v2/superbowls"
                 }],
                 "team_name": "Seahawks",
                 "team_city": "Seattle",
