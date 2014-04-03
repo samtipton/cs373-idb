@@ -12,9 +12,9 @@
 	</div>
 	<div class="col-md-3">
           <ul>
-          	<li><p>{{mvp.first_name}} {{mvp.last_name}}</p></li>
-          	<li><p>Draft year: {{mvp.draft_year}}</p></li>
-          	<li><p>College: {{mvp.college}}</p></li>
+          	<li><a href="/mvps/{{mvp.id}}"><h3>{{mvp.first_name}} {{mvp.last_name}}</h3></a></li>
+          	<li><h4>Draft year: {{mvp.draft_year}}</h4></li>
+          	<li><h4>College: {{mvp.college}}</h4></li>
           </ul>
     </div>
     {% if not forloop.counter0|divisibleby:2 %}
