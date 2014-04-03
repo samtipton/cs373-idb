@@ -21,8 +21,6 @@ class MVP(models.Model) :
     youtube_id = models.CharField(max_length = 500)
     latitude = models.FloatField()
     longitude = models.FloatField()
-    stats = models.CharField(max_length = 500)
-    blurb = models.CharField(max_length = 500)
 
     def __str__ (self) :
         return self.first_name + " " + self.last_name
@@ -45,7 +43,6 @@ class Franchise(models.Model) :
     youtube_id = models.CharField(max_length = 500)
     latitude = models.FloatField()
     longitude = models.FloatField()
-
 
     def __str__ (self) :
         return self.team_name
