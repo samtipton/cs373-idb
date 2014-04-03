@@ -87,16 +87,40 @@
 
       <!-- social media -->
       <div class="row">
-        <div style="padding:0px"class="col-md-3">
-          <img src="http://placehold.it/250x600">
+        <div style="padding:0px; background-color: white" class="col-md-3"> 
+    
+          <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2F{{team.facebook_id}}&amp;width&amp;height=400&amp;colorscheme=light&amp;show_faces=true&amp;header=true&amp;stream=false&amp;show_border=true" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:410px;" allowTransparency="true"></iframe>
         </div>
-        <div style="padding:0px" class="col-md-6">
-          <img src="http://placehold.it/550x400">
+        <div style="padding:0px" class="col-md-6">  
+          <div class="flex-video widescreen"><iframe width="550" height="400" src="//www.youtube.com/embed/{{team.youtube_id}}" frameborder="0" allowfullscreen></iframe></div>
         </div>
         <div style="padding:0px" class="col-md-3">
-          <img src="http://placehold.it/250x600">
+          <a class="twitter-timeline" href="" data-widget-id="446419923376418818"></a>
+      
+
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
         </div>
       </div>
+
+      <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSXRVKo3e9gwZ8L2zmA5EJ5VGD2y654dU&amp;sensor=false">
+      </script>
+      <script type="text/javascript">
+      function initialize() {
+       var myLatlng = new google.maps.LatLng({{team.latitude}},{{team.longitude}});
+       var mapOptions = {
+         center: myLatlng,
+         zoom: 8
+       };
+       var map = new google.maps.Map(document.getElementById("map-canvas"),
+         mapOptions);
+       var marker = new google.maps.Marker({
+         position: myLatlng,
+         map: map
+       });
+     }
+     google.maps.event.addDomListener(window, 'load', initialize);
+     </script>
 {% endblock %}
 
 

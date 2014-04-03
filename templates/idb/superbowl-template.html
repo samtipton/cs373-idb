@@ -48,7 +48,7 @@ dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis eleme
 Aliquam in felis sit amet augue.</p>
       </div>
       <div style="padding:0px" class="col-md-2">
-        <a href="/mvps/{{mvp.id}}"><img src="../../static/res/MVPs/{{game.mvp.first_name}}_{{game.mvp.last_name}}.png"></a>
+        <a href="/mvps/{{mvp.id}}"><img src="../../static/res/MVPs/{{game.mvp.first_name}} {{game.mvp.last_name}}.png"></a>
       </div>
       <div style="padding:0px" class="col-md-5">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
@@ -62,8 +62,10 @@ Aliquam in felis sit amet augue.</p>
 
     <!-- social media -->
     <div class="row">
-      <div style="padding:0px" class="col-md-7">  
-        <iframe width="650" height="500" src="//www.youtube.com/embed/NbcA1UISfG0" frameborder="0" allowfullscreen></iframe>
+      <div class="flex-video widescreen">
+        <div style="padding:0px" class="col-md-7">  
+        <iframe width="650" height="500" src="//www.youtube.com/embed/{{game.youtube_id}}" frameborder="0" allowfullscreen></iframe>
+      </div>
       </div>
       <div style="padding:0px" class="col-md-5">
         <a class="twitter-timeline" href="" data-widget-id="446419923376418818">Tweets about "#SuperBowlXLVIII"</a>
