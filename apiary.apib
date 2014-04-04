@@ -237,6 +237,18 @@ The URL is built based on information provided by the client when the API reques
             }
         }
 
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/superbowls/0' does not exist."
+            }
+        }
+
+
 ### Update information about a specific Super Bowl game. [PUT]
 + Request (application/json)
 
@@ -462,6 +474,17 @@ The URL is built based on information provided by the client when the API reques
             }
         }
 
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/franchises/0' does not exist."
+            }
+        }
+
 ### Update information about a specific NFL franchise. [PUT]
 + Request (application/json)
 
@@ -671,6 +694,17 @@ The URL is built based on information provided by the client when the API reques
             }
         }
 
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/mvps/0' does not exist."
+            }
+        }
+        
 ### Update information about a specific Super Bowl MVP. [PUT]
 + Request (application/json)
 
