@@ -81,7 +81,7 @@ def superbowls_post(request) :
      longitude = json_content["longitude"])
     sb.save()
 
-    return make_response(200, make_successful_response_object(make_ref(sb)))
+    return make_response(201, make_successful_response_object(make_ref(sb)))
 
 
 def api_superbowls_id(request, _id) :
@@ -180,11 +180,15 @@ def franchises_post(request) :
 
     mvp_list = [MVP.objects.get(pk=entry['id']) for entry in mvp_id_list]
 
-    sb_id_list = json_content["superbowls"]
+    sbw_id_list = json_content["superbowls_won"]
 
-    sb_list = [SuperBowl.objects.get(pk=entry['id']) for entry in sb_id_list]
+    sbw_list = [SuperBowl.objects.get(pk=entry['id']) for entry in sbw_id_list]
 
-    franchise = Franchise(mvps = mvp_list,
+    sbl_id_list = json_content["superbowls_lost"]
+
+    sbl_list = [SuperBowl.objects.get(pk=entry['id']) for entry in sbl_id_list]
+
+    franchise = Franchise(
         team_name = json_content["team_name"],
         team_city = json_content["team_city"],
         team_state = json_content["team_state"],
@@ -202,8 +206,18 @@ def franchises_post(request) :
         longitude = json_content["longitude"])
     franchise.save()
 
+    for m in mvp_list :
+        franchise.mvps.add(m)
 
-    return make_response(200, make_successful_response_object(make_ref(franchise)))
+    for sb in sbw_list:
+        sb.winning_franchise = franchise
+        sb.save()
+
+    for sb in sbl_list:
+        sb.losing_franchise = franchise
+        sb.save()
+
+    return make_response(201, make_successful_response_object(make_ref(franchise)))
 
 
 def api_franchises_id(request, _id) :
@@ -233,12 +247,15 @@ def franchises_id_put(_id, request) :
 
     mvp_list = [MVP.objects.get(pk=entry['id']) for entry in mvp_id_list]
 
-    sb_id_list = json_content["superbowls"]
+    sbw_id_list = json_content["superbowls_won"]
 
-    sb_list = [SuperBowl.objects.get(pk=entry['id']) for entry in sb_id_list]
+    sbw_list = [SuperBowl.objects.get(pk=entry['id']) for entry in sbw_id_list]
+
+    sbl_id_list = json_content["superbowls_lost"]
+
+    sbl_list = [SuperBowl.objects.get(pk=entry['id']) for entry in sbl_id_list]
 
     f.mvps = mvp_list
-    f.superbowls = sb_list
     f.team_name = json_content["team_name"]
     f.team_city = json_content["team_city"]
     f.team_state = json_content["team_state"]
@@ -256,6 +273,14 @@ def franchises_id_put(_id, request) :
     f.longitude = json_content["longitude"]
     f.save()
 
+    for sb in sbw_list:
+        sb.winning_franchise = f
+        sb.save()
+
+    for sb in sbl_list:
+        sb.losing_franchise = f
+        sb.save()
+
     body = serialize_franchise_model(f)
 
     return make_response(200, make_successful_response_object(body))
@@ -270,8 +295,126 @@ def franchises_id_delete(_id) :
 # MVP API Calls
 # -------------
 
-def api_mvps(request) :
-    return respond_with_method_not_allowed_error(request)
 
-def api_mvps_id(request) :
-    return respond_with_method_not_allowed_error(request)
+def api_mvps(request) :
+    # check context to determine what kind of req
+    if (request.method == 'GET'):
+        return mvps_get()
+    elif (request.method == 'POST'):
+        return mvps_post(request)
+    else:
+        return respond_with_method_not_allowed_error(request)
+
+
+def mvps_get() :
+    mvps = MVP.objects.all()
+    body = []
+
+    for p in mvps:
+        body.append(serialize_mvp_model(p))
+
+    return make_response(200, make_successful_response_object(body))
+
+def mvps_post(request):
+    json_content = loads(request.body.decode('utf-8'))
+
+    # get specific model content
+    superbowl_id_list = json_content["superbowls"]
+
+    sb_list = [SuperBowl.objects.get(pk=entry['id']) for entry in superbowl_id_list]
+
+    f_id_list = json_content["franchises"]
+
+    f_list = [Franchise.objects.get(pk=entry['id']) for entry in f_id_list]
+
+    mvp = MVP(
+        first_name =  json_content["first_name"],
+        last_name =  json_content["last_name"],
+        position =  json_content["position"],
+        birth_date =  json_content["birth_date"], 
+        birth_town =  json_content["birth_town"],
+        high_school =  json_content["high_school"],
+        college =  json_content["college"],
+        draft_year =  json_content["draft_year"], 
+        active =  json_content["active"],
+        salary =  json_content["salary"],
+        facebook_id =  json_content["facebook_id"], 
+        twitter_id =  json_content["twitter_id"],
+        youtube_id =  json_content["youtube_id"],
+        latitude =  json_content["latitude"],
+        longitude =  json_content["longitude"])
+    mvp.save()
+
+    for sb in sb_list:
+        sb.mvp = mvp
+        sb.save()
+
+    for franchise in f_list:
+        franchise.mvps.append(mvp)
+        franchise.save()
+
+    return make_response(201, make_successful_response_object(make_ref(mvp)))
+
+
+def api_mvps_id(request, _id) :
+    if (request.method == 'GET'):
+        return mvps_id_get(_id)
+    elif (request.method == 'PUT'):
+        return mvps_id_put(_id, request)
+    elif (request.method == 'DELETE'):
+        return mvps_id_delete(_id)
+    else:
+        return respond_with_method_not_allowed_error(request)
+
+def mvps_id_get(_id):
+    p = MVP.objects.get(pk=_id)
+    body = serialize_mvp_model(p)
+
+    return make_response(200, make_successful_response_object(body))
+
+def mvps_id_put(_id, request):
+    mvp = MVP.objects.get(pk=_id)
+    json_content = loads(request.body.decode('utf-8'))
+
+    # get specific model content
+    superbowl_id_list = json_content["superbowls"]
+
+    sb_list = [SuperBowl.objects.get(pk=entry['id']) for entry in superbowl_id_list]
+
+    f_id_list = json_content["franchises"]
+
+    f_list = [Franchise.objects.get(pk=entry['id']) for entry in f_id_list]
+
+    mvp.first_name =  json_content["first_name"],
+    mvp.last_name =  json_content["last_name"],
+    mvp.position =  json_content["position"],
+    mvp.birth_date =  json_content["birth_date"], 
+    mvp.birth_town =  json_content["birth_town"],
+    mvp.high_school =  json_content["high_school"],
+    mvp.college =  json_content["college"],
+    mvp.draft_year =  json_content["draft_year"], 
+    mvp.active =  json_content["active"],
+    mvp.salary =  json_content["salary"],
+    mvp.facebook_id =  json_content["facebook_id"], 
+    mvp.twitter_id =  json_content["twitter_id"],
+    mvp.youtube_id =  json_content["youtube_id"],
+    mvp.latitude =  json_content["latitude"],
+    mvp.longitude =  json_content["longitude"]
+    mvp.save() 
+
+    for sb in sb_list:
+        sb.mvp = mvp
+        sb.save()
+
+    for franchise in f_list:
+        franchise.mvps.append(mvp)
+        franchise.save()
+
+    return make_response(200, make_successful_response_object(make_ref(mvp)))
+    
+
+def mvps_id_delete(_id):
+    p = MVP.objects.get(pk=_id)
+    p.delete()
+
+    return make_response(200, make_successful_response_object(None))
