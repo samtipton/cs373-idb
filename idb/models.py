@@ -30,9 +30,9 @@ class MVP(models.Model) :
     @type salary: L{int}
     @ivar facebook_id: The unique value that is needed to embed a facebook like box for that MVP into a page. (e.g. DB9NFL)
     @type facebook_id: L{str}
-    @ivar twitter_id: the unique value that is needed to embed a twitter feed relating to the MVP into a page. (e.g 934578475)
+    @ivar twitter_id: the unique value that is needed to embed a twitter feed relating to the MVP into a page. (e.g. 934578475)
     @type twitter_id: L{str}
-    @ivar youtube_id: The unique value that is needed to embed a youtube video relating to the MVP into a page. (e.g 6ivghds)
+    @ivar youtube_id: The unique value that is needed to embed a youtube video relating to the MVP into a page. (e.g. 6ivghds)
     @type youtube_id: L{str}
     @ivar latitude: The latitude of the home town of the MVP. (e.g. 204.333)
     @type latitude: L{float}
