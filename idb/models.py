@@ -7,9 +7,10 @@ from datetime import date
 class MVP(models.Model) :
     """
     This model represents the information about an MVP of a Super Bowl
-    @ivar first_name: The first name of the MVP (e.g. Drew)
+    U{NFL<http://nfl.com>}.
+    @ivar first_name: The first name of the MVP. (e.g. Drew)
     @type first_name: L{str}
-    @ivar last_name: The last name of the MVP (e.g. Brees)
+    @ivar last_name: The last name of the MVP. (e.g. Brees)
     @type last_name: L{str}
     @ivar position: The position the MVP played that year. (e.g. QB)
     @type position: L{str}
@@ -27,16 +28,16 @@ class MVP(models.Model) :
     @type active: L{bool}
     @ivar salary: The yearly salary for the MVP. (e.g. 2000000)
     @type salary: L{int}
-    @ivar facebook_id : The unique value that is needed to embed a facebook like box for that MVP into a page. (e.g. DB9NFL)
-    @type facebook_id : L{str}
-    @ivar twitter_id : the unique value that is needed to embed a twitter feed relating to the MVP into a page. (e.g 934578475)
-    @type twitter_id : L{str}
-    @ivar youtube_id : the unique value that is needed to embed a youtube video relating to the MVP into a page. (e.g 6ivghds)
-    @type youtube_id : L{str}
-    @ivar latitude : the latitude of the home town of the MVP. (e.g. 204.333)
-    @type latitude : L{float}
-    @ivar longitude : the latitude of the home town of the MVP. (e.g. 122.678)
-    @type longitude : L{float}
+    @ivar facebook_id: The unique value that is needed to embed a facebook like box for that MVP into a page. (e.g. DB9NFL)
+    @type facebook_id: L{str}
+    @ivar twitter_id: the unique value that is needed to embed a twitter feed relating to the MVP into a page. (e.g 934578475)
+    @type twitter_id: L{str}
+    @ivar youtube_id: The unique value that is needed to embed a youtube video relating to the MVP into a page. (e.g 6ivghds)
+    @type youtube_id: L{str}
+    @ivar latitude: The latitude of the home town of the MVP. (e.g. 204.333)
+    @type latitude: L{float}
+    @ivar longitude: The latitude of the home town of the MVP. (e.g. 122.678)
+    @type longitude: L{float}
     """
 
     #information
@@ -75,23 +76,23 @@ class Franchise(models.Model) :
     @type current_gm: L{str}
     @ivar current_head_coach: The name of the current head coach of the team. (e.g. Pete Carroll) 
     @type current_head_coach: L{str}
-    @ivar year_founded: The year the franchise was founded (e.g. 1974) 
+    @ivar year_founded: The year the franchise was founded. (e.g. 1974) 
     @type year_founded: L{int}
-    @ivar active: Boolean indicating whether the franchise is active (e.g. True)
+    @ivar active: Boolean indicating whether the franchise is active. (e.g. True)
     @type active: L{bool}
-    @ivar home_stadium: The home stadium of the team (e.g. CenturyLink Field)
+    @ivar home_stadium: The home stadium of the team. (e.g. CenturyLink Field)
     @type home_stadium: L{str}
-    @ivar division: The division the team plays in (e.g. NFC West)
+    @ivar division: The division the team plays in. (e.g. NFC West)
     @type division: L{str}
-    @ivar facebook_id: the unique value that is needed to embed a facebook like box relating to the team into a page
+    @ivar facebook_id: The unique value that is needed to embed a facebook like box relating to the team into a page. (e.g. Hawks)
     @type facebook_id: L{str}
-    @ivar twitter_id: the unique value that is needed to embed a twitter feed relating to the team into a page
+    @ivar twitter_id: The unique value that is needed to embed a twitter feed relating to the team into a page. (e.g. 347858)
     @type twitter_id: L{str}
-    @ivar youtube_id: the unique value that is needed to embed a youtube video relating to the team into a page
+    @ivar youtube_id: The unique value that is needed to embed a youtube video relating to the team into a page. (e.g. v6k=e9)
     @type youtube_id: L{str}
-    @ivar latitude: the latitude of the stadium the team plays at. (e.g. 145.70)
+    @ivar latitude: The latitude of the stadium the team plays at. (e.g. 145.70)
     @type latitude: L{float}
-    @ivar longitude: the latitude of the stadium the team plays at. (e.g. 200.00)
+    @ivar longitude: The latitude of the stadium the team plays at. (e.g. 200.00)
     @type longitude: L{float}
     """
 
@@ -121,13 +122,13 @@ class SuperBowl(models.Model) :
     This model represents a U{superbowl<http://en.wikipedia.org/wiki/Superbowl>}. Each
     instance uniquely represents a superbowl game in the history of the
     U{NFL<http://nfl.com>}.
-    @ivar winning_franchise: The team that won the game.
+    @ivar winning_franchise: The team that won the game. (e.g. Broncos)
     @type winning_franchise: L{Franchise}
-    @ivar losing_franchise: The team that lost the game.
+    @ivar losing_franchise: The team that lost the game. (e.g. Panthers)
     @type losing_franchise: L{Franchise}
-    @ivar mvp: The MVP for that particular superbowl
+    @ivar mvp: The MVP for that particular superbowl. (e.g. Eli Manning)
     @type mvp: L{MVP}
-    @ivar mvp_stats: The relevant statistics for MVP for that particular Super Bowl (e.g. 5 TD)
+    @ivar mvp_stats: The relevant statistics for MVP for that particular Super Bowl. (e.g. 5 TD)
     @type mvp_stats: L{str}
     @ivar mvp_blurb: A summary of notable accomplishments for the MVP for that particular Super Bowl. (e.g. Superior perfomance...)
     @type mvp_blurb : L{str}
@@ -143,19 +144,19 @@ class SuperBowl(models.Model) :
     @type venue_state: L{str}
     @ivar game_day: The day the was was played. (e.g. 2014-02-02)
     @type game_day: L{date}
-    @ivar attendance: The amount of people attended that particular game.(e.g. 30,000)
+    @ivar attendance: The amount of people attended that particular game. (e.g. 30,000)
     @type attendance: L{int}
     @ivar game_number: The roman numeral symbol for the game. (e.g. XLVIII)
     @type game_number: L{str}
-    @ivar halftime_performer: The halftime performer from that Super Bowl
+    @ivar halftime_performer: The halftime performer from that Super Bowl. (e.g. Madonna)
     @type halftime_performer: L{str}
-    @ivar twitter_id: the unique value that is needed to embed a twitter feed relating to the Supper Bowl onto a page
+    @ivar twitter_id: The unique value that is needed to embed a twitter feed relating to the Supper Bowl onto a page. (e.g. 57693)
     @type twitter_id: L{str}
-    @ivar youtube_id: the unique value that is needed to embed a youtube video relating to the Super Bowl onto a page
+    @ivar youtube_id: The unique value that is needed to embed a youtube video relating to the Super Bowl onto a page. (e.g. gjrk6)
     @type youtube_id: L{str}
-    @ivar latitude: the latitude of the stadium the game was played at. (e.g. 45.7)
+    @ivar latitude: The latitude of the stadium the game was played at. (e.g. 45.7)
     @type latitude: L{float}
-    @ivar longitude: the latitude of the stadium the game was played. (e.g. 120.5)
+    @ivar longitude: The latitude of the stadium the game was played. (e.g. 120.5)
     @type longitude: L{float}
    """
     winning_franchise = models.ForeignKey(Franchise, related_name = "winner")
