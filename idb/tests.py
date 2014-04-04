@@ -38,6 +38,39 @@ class test_API(TestCase) :
 		self.assertEqual(api_response["error"]["type"], error_type)
 		self.assertTrue("message" in api_response["error"])
 		self.assertEqual(api_response["error"]["message"], error_message)
+
+	def assert_404_not_found_response(self, _type, _id, method):
+		message_format = "The resource '{0}' does not exist."
+		error_message = message_format.format(make_path(_type, _id))
+		if method == 'GET':
+			(code, response) = self.get(_type, _id)
+			self.assertEqual(code, 404)
+			self.assert_failure_response(response, 'HTTP_NOT_FOUND', error_message)
+		elif method == 'PUT':
+			(code, response) = self.put(_type, _id, {})
+			self.assertEqual(code, 404)
+			self.assert_failure_response(response, 'HTTP_NOT_FOUND', error_message)
+		elif method == 'DELETE':
+			(code, response) = self.delete(_type, _id)
+			self.assertEqual(code, 404)
+			self.assert_failure_response(response, 'HTTP_NOT_FOUND', error_message)
+
+	def assert_405_method_not_allowed_response(self, _type, _id, method) :
+		message_format = "The HTTP method '{0}' is not allowed on the resouce '{1}'."
+		error_message = message_format.format(method, make_path(_type, _id))
+		if method == 'GET':
+			(code, response) = self.get(_type, _id)
+			self.assertEqual(code, 405)
+			self.assert_failure_response(response, 'HTTP_METHOD_NOT_ALLOWED', error_message)
+		elif method == 'PUT':
+			(code, response) = self.put(_type, _id, {})
+			self.assertEqual(code, 405)
+			self.assert_failure_response(response, 'HTTP_METHOD_NOT_ALLOWED', error_message)
+		elif method == 'DELETE':
+			(code, response) = self.delete(_type, _id)
+			self.assertEqual(code, 405)
+			self.assert_failure_response(response, 'HTTP_METHOD_NOT_ALLOWED', error_message)
+
 	
 	# ----------------------------------------------------
 	# Helper functions to make REST calls against the API.
@@ -527,6 +560,68 @@ class test_API(TestCase) :
 		body = None
 		expected_response = make_successful_response_object(body)
 		self.assertEqual(response, expected_response)
+
+	# -----------------
+	# 404 FAILURE TESTS
+	# -----------------
+
+	def test_API_get_superbowls_404(self) :
+		self.assert_404_not_found_response("superbowls", 999, "GET")
+
+	def test_API_put_superbowls_404(self) :
+		self.assert_404_not_found_response("superbowls", 999, "PUT")
+
+	def test_API_delete_superbowls_404(self) :
+		self.assert_404_not_found_response("superbowls", 999, "DELETE")
+
+	def test_API_get_franchises_404(self) :
+		self.assert_404_not_found_response("franchises", 999, "GET")
+
+	def test_API_put_franchises_404(self) :
+		self.assert_404_not_found_response("franchises", 999, "PUT")
+
+	def test_API_delete_franchises_404(self) :
+		self.assert_404_not_found_response("franchises", 999, "DELETE")
+
+	def test_API_get_mvps_404(self) :
+		self.assert_404_not_found_response("mvps", 999, "GET")
+
+	def test_API_put_mvps_404(self) :
+		self.assert_404_not_found_response("mvps", 999, "PUT")
+
+	def test_API_delete_mvps_404(self) :
+		self.assert_404_not_found_response("mvps", 999, "DELETE")
+
+	# -----------------
+	# 405 FAILURE TESTS
+	# -----------------
+
+	def test_API_get_superbowls_405(self) :
+		self.assert_405_method_not_allowed_response("superbowls", 999, "GET")
+
+	def test_API_put_superbowls_405(self) :
+		self.assert_405_method_not_allowed_response("superbowls", 999, "PUT")
+
+	def test_API_delete_superbowls_405(self) :
+		self.assert_405_method_not_allowed_response("superbowls", 999, "DELETE")
+
+	def test_API_get_franchises_405(self) :
+		self.assert_405_method_not_allowed_response("franchises", 999, "GET")
+
+	def test_API_put_franchises_405(self) :
+		self.assert_405_method_not_allowed_response("franchises", 999, "PUT")
+
+	def test_API_delete_franchises_405(self) :
+		self.assert_405_method_not_allowed_response("franchises", 999, "DELETE")
+
+	def test_API_get_mvps_405(self) :
+		self.assert_405_method_not_allowed_response("mvps", 999, "GET")
+
+	def test_API_put_mvps_405(self) :
+		self.assert_405_method_not_allowed_response("mvps", 999, "PUT")
+
+	def test_API_delete_mvps_405(self) :
+		self.assert_405_method_not_allowed_response("mvps", 999, "DELETE")
 
 # ---------
 # EXECUTION
