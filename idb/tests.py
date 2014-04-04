@@ -378,6 +378,72 @@ class test_API(TestCase) :
 		self.assertEqual(response, expected_response)
 
 
+	# --------------------
+	# API FRANCHISES TESTS
+	# --------------------
+
+	def test_API_get_mvps(self) :
+		(code, response) = self.get("mvps")
+		self.assertEqual(code, 200)
+		body = [serialize_mvp_model(self.malcolm_smith)]
+		expected_response = make_successful_response_object(body)
+		self.assertEqual(response, expected_response)
+	
+	def test_API_get_mvps_id(self) :
+		p_id = self.malcolm_smith.id
+		(code, response) = self.get("mvps", p_id)
+		self.assertEqual(code, 200)
+		body = serialize_mvp_model(self.malcolm_smith)
+		expected_response = make_successful_response_object(body)
+		self.assertEqual(response, expected_response)
+
+	def test_API_post_mvps(self) :
+		request = {
+		  "superbowls": [{
+		  	"id" : self.sb_48.id
+		  }, {
+		  	"id" : self.sb_49.id
+		  }],
+		  "franchises" :
+		  [{
+		  	"id" : self.seahawks.id
+		  }],
+		  "first_name": "Malcolm",
+	    "last_name": "Jones",
+	    "position": "LB",
+	    "birth_date": "1989-07-05",
+	    "birth_town": "Woodland Hills, CA",
+	    "high_school": "Woodland Hills (CA) Taft",
+	    "college": "Southern California",
+	    "draft_year": 2011,
+	    "active": True,
+	    "salary": 465000,
+	    "facebook_id": "MalcomFanPage",
+	    "twitter_id": "MalcomTweets",
+	    "youtube_id": "ghwhh09",
+	    "latitude": 100.5,
+	    "longitude": 37.6
+		}
+		(code, response) = self.post("mvps", request)
+		self.assertEqual(code, 201)
+		body = {
+		"id" : 2,
+		"self" : make_path("mvps", 2),
+		"collection" : make_path("mvps")
+		}
+		expected_response = make_successful_response_object(body)
+		self.assertEqual(response, expected_response)
+		p_id = response['data']['id']
+		p = MVP.objects.get(pk=p_id)
+
+		self.assertEqual(p.last_name, 'Jones')
+		self.assertNotEqual(p.last_name, 'Smith')
+
+	def test_API_put_mvps(self) :
+		pass
+	def test_API_delete_mvps(self) :
+		pass
+
 print("IngloriousBashers-tests.py")
 
 print("Done.")
