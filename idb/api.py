@@ -81,7 +81,7 @@ def superbowls_post(request) :
      longitude = json_content["longitude"])
     sb.save()
 
-    return make_response(200, make_successful_response_object(make_ref(sb)))
+    return make_response(201, make_successful_response_object(make_ref(sb)))
 
 
 def api_superbowls_id(request, _id) :
@@ -180,11 +180,15 @@ def franchises_post(request) :
 
     mvp_list = [MVP.objects.get(pk=entry['id']) for entry in mvp_id_list]
 
-    sb_id_list = json_content["superbowls"]
+    sbw_id_list = json_content["superbowls_won"]
 
-    sb_list = [SuperBowl.objects.get(pk=entry['id']) for entry in sb_id_list]
+    sbw_list = [SuperBowl.objects.get(pk=entry['id']) for entry in sbw_id_list]
 
-    franchise = Franchise(mvps = mvp_list,
+    sbl_id_list = json_content["superbowls_lost"]
+
+    sbl_list = [SuperBowl.objects.get(pk=entry['id']) for entry in sbl_id_list]
+
+    franchise = Franchise(
         team_name = json_content["team_name"],
         team_city = json_content["team_city"],
         team_state = json_content["team_state"],
@@ -202,8 +206,18 @@ def franchises_post(request) :
         longitude = json_content["longitude"])
     franchise.save()
 
+    for m in mvp_list :
+        franchise.mvps.add(m)
 
-    return make_response(200, make_successful_response_object(make_ref(franchise)))
+    for sb in sbw_list:
+        sb.winning_franchise = franchise
+        sb.save()
+
+    for sb in sbl_list:
+        sb.losing_franchise = franchise
+        sb.save()
+
+    return make_response(201, make_successful_response_object(make_ref(franchise)))
 
 
 def api_franchises_id(request, _id) :
@@ -233,12 +247,15 @@ def franchises_id_put(_id, request) :
 
     mvp_list = [MVP.objects.get(pk=entry['id']) for entry in mvp_id_list]
 
-    sb_id_list = json_content["superbowls"]
+    sbw_id_list = json_content["superbowls_won"]
 
-    sb_list = [SuperBowl.objects.get(pk=entry['id']) for entry in sb_id_list]
+    sbw_list = [SuperBowl.objects.get(pk=entry['id']) for entry in sbw_id_list]
+
+    sbl_id_list = json_content["superbowls_lost"]
+
+    sbl_list = [SuperBowl.objects.get(pk=entry['id']) for entry in sbl_id_list]
 
     f.mvps = mvp_list
-    f.superbowls = sb_list
     f.team_name = json_content["team_name"]
     f.team_city = json_content["team_city"]
     f.team_state = json_content["team_state"]
@@ -255,6 +272,14 @@ def franchises_id_put(_id, request) :
     f.latitude = json_content["latitude"]
     f.longitude = json_content["longitude"]
     f.save()
+
+    for sb in sbw_list:
+        sb.winning_franchise = f
+        sb.save()
+
+    for sb in sbl_list:
+        sb.losing_franchise = f
+        sb.save()
 
     body = serialize_franchise_model(f)
 

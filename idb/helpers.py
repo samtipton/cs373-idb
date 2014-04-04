@@ -67,7 +67,8 @@ def serialize_superbowl_model(model) :
 def serialize_franchise_model(model) :
     return merge(make_ref(model), {
         "mvps" : [make_ref(m) for m in model.mvps.all()],
-        "superbowls" : [make_ref(sb) for sb in SuperBowl.objects.filter(Q(winning_franchise = model) | Q(losing_franchise = model))],
+        "superbowls_won" : [make_ref(sb) for sb in SuperBowl.objects.filter(Q(winning_franchise = model))],
+        "superbowls_lost" : [make_ref(sb) for sb in SuperBowl.objects.filter(Q(losing_franchise = model))],
         "team_name" : model.team_name,
         "team_city" : model.team_city,
         "team_state" : model.team_state,
