@@ -350,7 +350,7 @@ def mvps_post(request):
         sb.save()
 
     for franchise in f_list:
-        franchise.mvps.append(mvp)
+        franchise.mvps.add(mvp)
         franchise.save()
 
     return make_response(201, make_successful_response_object(make_ref(mvp)))
@@ -407,7 +407,7 @@ def mvps_id_put(_id, request):
         sb.save()
 
     for franchise in f_list:
-        franchise.mvps.append(mvp)
+        franchise.mvps.add(mvp)
         franchise.save()
 
     return make_response(200, make_successful_response_object(make_ref(mvp)))
