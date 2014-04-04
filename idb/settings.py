@@ -29,7 +29,7 @@ DATABASE_PATH = os.path.join(PROJECT_PATH, 'db.sqlite3')
 SECRET_KEY = 'h#tb420ho@#ob%u&a=rc&t2e6*m!4s-e-m538zzywi9k^8xcz@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 
@@ -66,8 +66,17 @@ WSGI_APPLICATION = 'idb.wsgi.application'
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3'))
+    'default': {
+        "ENGINE": 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd32vi54g8ai6jj',
+        'USER': 'ixxtrtkrutggss',
+        'PASSWORD': '9-pxBrjhH81zuzhpBvc_XDeC47',
+        'HOST': 'ec2-54-204-36-244.compute-1.amazonaws.com',
+        'PORT': '5432',
+    }
 }
+
+# dj_database_url.config(default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3'))
 
 TEMPLATE_DIRS = (
     TEMPLATE_PATH,

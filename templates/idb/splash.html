@@ -2,79 +2,14 @@
 
 {% block content %}
 
+</br>
+</br>
+</br>
+
 <div class="jumbotron">
   <h1>Internet Super Bowl Database</h1>
   <a href="http://www.nfl.com"><img style="width:600px" src="../../static/res/NFL1.png"></a>
 </div>
-
-<div class="container" id="carousel-container">
-  <div class="col-md-4">
-    <div id="SBCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
-      <!-- carousel indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#SBCarousel" data-slide-to="0" class="active"></li>
-        {% for team in team_list %}
-          <li data-target="#SBCarousel" data-slide-to="{{forloop.counter}}"></li>
-        {% endfor %}
-      </ol>  
-
-      <!-- Carousel items -->  
-      <div class="carousel-inner">
-
-        <div class="item active"><a href="/teams/0/"><img style=" width:350px" src="" /></a></div>  
-
-        <!-- Carousel nav -->  
-        <a class="carousel-control left" href="#SBCarousel" data-slide="prev">‹</a>  
-        <a class="carousel-control right" href="#SBCarousel" data-slide="next">›</a>  
-      </div>
-    </div>    
-  </div>  
-
-  <div class="col-md-4">
-    <div id="FranchiseCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
-      <!-- carousel indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#FranchiseCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#FranchiseCarousel" data-slide-to="1"></li>
-        <li data-target="#FranchiseCarousel" data-slide-to="2"></li>
-      </ol>  
-
-      <!-- Carousel items -->  
-      <div class="carousel-inner">
-
-        <div class="item active"><a href="/teams/0/"><img style="width:350px" src="" /></a>
-
-        </div>  
-        <!-- Carousel nav -->  
-        <a class="carousel-control left" href="#FranchiseCarousel" data-slide="prev">‹</a>  
-        <a class="carousel-control right" href="#FranchiseCarousel" data-slide="next">›</a>  
-      </div>
-    </div>    
-  </div>  
-
-  <div class="col-md-4">
-    <div id="MVPCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
-      <!-- carousel indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#MVPCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#MVPCarousel" data-slide-to="1"></li>
-        <li data-target="#MVPCarousel" data-slide-to="2"></li>
-      </ol>  
-
-      <!-- Carousel items -->  
-      <div class="carousel-inner">
-
-        <div class="item active"><a href="/teams/0/"><img style="width:350px" src="" /></a>
-
-        </div>  
-        <!-- Carousel nav -->  
-        <a class="carousel-control left" href="#MVPCarousel" data-slide="prev">‹</a>  
-        <a class="carousel-control right" href="#MVPCarousel" data-slide="next">›</a>  
-      </div>
-    </div>    
-  </div>    
-</div>
-
 
 {% endblock %}
 
