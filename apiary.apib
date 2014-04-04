@@ -189,6 +189,17 @@ The URL is built based on information provided by the client when the API reques
                 "collection": "/api/v2/superbowls"
             }
         }
+        
++ Response 400 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_BAD_REQUEST",
+                "message": "The resource '/api/v2/franchise/0' can not be referenced because it does not exist."
+            }
+        }
 
 ## A Super Bowl [/api/v2/superbowls/{id}]
 ### Get information about a specific Super Bowl game. [GET]
