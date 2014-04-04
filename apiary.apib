@@ -9,7 +9,8 @@ players that were declared the Super Bowl's Most-Valueable-Player (MVP).
 # HTTP Compliance and API
 The API is exposed as a RESTful webservice over HTTP with JSON as the only payload format. Deviation from
 the API by using undocumented HTTP verbs, HTTP headers, and/or URIs, CAN and WILL cause undefined behavior
-and/or errors.
+and/or errors. Addionally, providing incorrect, inconsistent, insuficient, illegal, undefined, and/or unknown
+data IS a violation of using this API and the result of the operations will be `400 Bad Request`.
 
 ## Supported HTTP Status Codes
 * 200 `OK` - The request was successful.
