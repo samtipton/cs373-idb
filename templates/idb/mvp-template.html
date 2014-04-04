@@ -24,27 +24,35 @@
       <br/>
       <br/>
 
-      <!-- history tables --> 
-      <div class="row">
-        <h1>SuperBowl History</h1>
+      <!-- history table -->
+      {% if game_history|length != 0 %} 
         <div class="row">
-        	<img src="http://placehold.it/100x100" />
-        	<img src="http://placehold.it/100x100" />
-    	</div>
-      </div>
-
-      <br/>
-      <br/>
-
-      <div class="row">
-        <h1>Team History</h1>
-        <div class="row">
-          <img src="http://placehold.it/100x100" />
+          <h1>Super Bowl MVP Titles</h1>
+          <div class="row">
+            {% for game in game_history %}
+              <a href="/superbowls/{{game.id}}"><img id="game_history" src="../../static/res/SBIcons/{{game.game_number}}.png"></a>
+            {% endfor %}
+      	 </div>
         </div>
-      </div>
 
-      <br/>
-      <br/>
+        <br/>
+        <br/>
+      {% endif %}
+
+      <!-- history table -->
+      {% if teams|length != 0 %} 
+        <div class="row">
+          <h1>Team</h1>
+          <div class="row">
+            {% for team in teams %}
+              <a href="/franchises/{{team.id}}"><img id="team_history" src="../../static/res/Logos/{{team.team_name}}.png"></a>
+            {% endfor %}
+         </div>
+        </div>
+
+        <br/>
+        <br/>
+      {% endif %}
 
     <!-- social media -->
     <div class="row">

@@ -36,14 +36,19 @@
     <!-- MVP bar -->
     <div class="row" id="mvpbar">
       <h3><b>MVP: </b>  {{mvp.first_name}} {{mvp.last_name}}</h3>
-      <div style="padding:0px" class="col-md-5">
-        <p>{{game.mvp_stats}}</p>
-      </div>
-      <div style="padding:0px" class="col-md-2">
-        <a href="/mvps/{{mvp.id}}"><img src="../../static/res/MVPs/{{game.mvp.first_name}} {{game.mvp.last_name}}.png"></a>
-      </div>
-      <div style="padding:0px" class="col-md-5">
-        <p>{{game.mvp_blurb}}</p>
+      <div style="padding: 15px auto;" class="row">
+        <div style="padding:0px" class="col-md-5">
+          <br/>
+          <br/>
+          <br/>
+          <h4><b>{{game.mvp_stats}}</b></h4>
+        </div>
+        <div style="padding:0px" class="col-md-2">
+          <a href="/mvps/{{mvp.id}}"><img src="../../static/res/MVPs/{{game.mvp.first_name}} {{game.mvp.last_name}}.png"></a>
+        </div>
+        <div style="padding:0px" class="col-md-5">
+          <p><b>{{game.mvp_blurb}}</b></p>
+        </div>
       </div>
     </div>
 
@@ -57,6 +62,7 @@
           <iframe width="650" height="500" src="//www.youtube.com/embed/{{game.youtube_id}}" frameborder="0" allowfullscreen></iframe>
         </div>
       </div>
+
       <!-- twitter -->
       <div style="padding:0px" class="col-md-5">
         <a class="twitter-timeline" href="" data-widget-id={{game.twitter_id}}></a>

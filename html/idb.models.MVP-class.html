@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>idb.models.Player</title>
+  <title>idb.models.MVP</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -39,7 +39,7 @@
       <span class="breadcrumbs">
         Package&nbsp;idb ::
         <a href="idb.models-module.html">Module&nbsp;models</a> ::
-        Class&nbsp;Player
+        Class&nbsp;MVP
       </span>
     </td>
     <td>
@@ -49,59 +49,24 @@
     onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
         <tr><td align="right"><span class="options"
             >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="idb.models.Player-class.html"
+            >]&nbsp;|&nbsp;<a href="idb.models.MVP-class.html"
             target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class Player</h1><p class="nomargin-top"><span class="codelink"><a href="idb.models-pysrc.html#Player">source&nbsp;code</a></span></p>
+<h1 class="epydoc">Class MVP</h1><p class="nomargin-top"><span class="codelink"><a href="idb.models-pysrc.html#MVP">source&nbsp;code</a></span></p>
 <pre class="base-tree">
 django.db.models.Model --+
                          |
-                        <strong class="uidshort">Player</strong>
+                        <strong class="uidshort">MVP</strong>
 </pre>
 
 <hr />
-<p>This model represents information about a player that played in a 
-  superbowl. Each player instance uniquely represents that player in the 
-  history of the <a href="http://nfl.com" target="_top">NFL</a>.</p>
+<p>This model represents the information about the Most-Valuable-Player 
+  (MVP) of a Super Bowl <a href="http://nfl.com" target="_top">NFL</a>.</p>
 
-<!-- ==================== INSTANCE METHODS ==================== -->
-<a name="section-InstanceMethods"></a>
-<table class="summary" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr bgcolor="#70b0f0" class="table-header">
-  <td colspan="2" class="table-header">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-      <tr valign="top">
-        <td align="left"><span class="table-header">Instance Methods</span></td>
-        <td align="right" valign="top"
-         ><span class="options">[<a href="#section-InstanceMethods"
-         class="privatelink" onclick="toggle_private();"
-         >hide private</a>]</span></td>
-      </tr>
-    </table>
-  </td>
-</tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="__str__"></a><span class="summary-sig-name">__str__</span>(<span class="summary-sig-arg">self</span>)</span></td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="idb.models-pysrc.html#Player.__str__">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-</table>
 <!-- ==================== INSTANCE VARIABLES ==================== -->
 <a name="section-InstanceVariables"></a>
 <table class="summary" border="1" cellpadding="3"
@@ -123,64 +88,123 @@ django.db.models.Model --+
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type"><code class="link">str</code></span>
     </td><td class="summary">
-        <a href="idb.models.Player-class.html#first_name" class="summary-name">first_name</a> = <code title="models.CharField(max_length= 500)">models.CharField(max_length= 500)</code><br />
-      (e.g.
+        <a href="idb.models.MVP-class.html#first_name" class="summary-name">first_name</a> = <code title="models.CharField(max_length= 500)">models.CharField(max_length= 500)</code><br />
+      The first name of the MVP.
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type"><code class="link">str</code></span>
     </td><td class="summary">
-        <a href="idb.models.Player-class.html#last_name" class="summary-name">last_name</a> = <code title="models.CharField(max_length= 500)">models.CharField(max_length= 500)</code><br />
-      (e.g.
+        <a href="idb.models.MVP-class.html#last_name" class="summary-name">last_name</a> = <code title="models.CharField(max_length= 500)">models.CharField(max_length= 500)</code><br />
+      The last name of the MVP.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><code class="link">str</code></span>
+    </td><td class="summary">
+        <a href="idb.models.MVP-class.html#position" class="summary-name">position</a> = <code title="models.CharField(max_length= 4)">models.CharField(max_length= 4)</code><br />
+      The position the MVP played that year.
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">date</span>
     </td><td class="summary">
-        <a href="idb.models.Player-class.html#birth_date" class="summary-name">birth_date</a> = <code title="models.DateField()">models.DateField()</code><br />
-      The date when the player was born.
+        <a href="idb.models.MVP-class.html#birth_date" class="summary-name">birth_date</a> = <code title="models.DateField()">models.DateField()</code><br />
+      The birth date of the MVP.
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type"><code class="link">str</code></span>
     </td><td class="summary">
-        <a href="idb.models.Player-class.html#birth_town" class="summary-name">birth_town</a> = <code title="models.CharField(max_length= 500)">models.CharField(max_length= 500)</code><br />
-      The town the player was born in.
+        <a href="idb.models.MVP-class.html#birth_town" class="summary-name">birth_town</a> = <code title="models.CharField(max_length= 500)">models.CharField(max_length= 500)</code><br />
+      The town the MVP was born in.
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type"><code class="link">str</code></span>
     </td><td class="summary">
-        <a href="idb.models.Player-class.html#high_school" class="summary-name">high_school</a> = <code title="models.CharField(max_length= 500)">models.CharField(max_length= 500)</code><br />
-      The high school the player went to.
+        <a href="idb.models.MVP-class.html#high_school" class="summary-name">high_school</a> = <code title="models.CharField(max_length= 500)">models.CharField(max_length= 500)</code><br />
+      The high school the MVP attended.
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type"><code class="link">str</code></span>
     </td><td class="summary">
-        <a href="idb.models.Player-class.html#college" class="summary-name">college</a> = <code title="models.CharField(max_length= 500)">models.CharField(max_length= 500)</code><br />
-      The college the player went to.
+        <a href="idb.models.MVP-class.html#college" class="summary-name">college</a> = <code title="models.CharField(max_length= 500)">models.CharField(max_length= 500)</code><br />
+      The college the MVP attended.
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type"><code class="link">int</code></span>
     </td><td class="summary">
-        <a href="idb.models.Player-class.html#draft_year" class="summary-name">draft_year</a> = <code title="models.IntegerField()">models.IntegerField()</code><br />
-      The year the player was drafted.
+        <a href="idb.models.MVP-class.html#draft_year" class="summary-name">draft_year</a> = <code title="models.IntegerField()">models.IntegerField()</code><br />
+      The year the MVP was drafted in.
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type"><code class="link">bool</code></span>
     </td><td class="summary">
-        <a href="idb.models.Player-class.html#retired" class="summary-name">retired</a> = <code title="models.BooleanField()">models.BooleanField()</code><br />
-      Is the player retired?.
+        <a href="idb.models.MVP-class.html#active" class="summary-name">active</a> = <code title="models.BooleanField()">models.BooleanField()</code><br />
+      Boolean value indicating whether the MVP is still active.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><code class="link">int</code></span>
+    </td><td class="summary">
+        <a href="idb.models.MVP-class.html#salary" class="summary-name">salary</a> = <code title="models.IntegerField()">models.IntegerField()</code><br />
+      The yearly salary for the MVP.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><code class="link">str</code></span>
+    </td><td class="summary">
+        <a href="idb.models.MVP-class.html#facebook_id" class="summary-name">facebook_id</a> = <code title="models.CharField(max_length= 500)">models.CharField(max_length= 500)</code><br />
+      The unique value that is needed to embed a facebook like box for that
+      MVP into a page.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><code class="link">str</code></span>
+    </td><td class="summary">
+        <a href="idb.models.MVP-class.html#twitter_id" class="summary-name">twitter_id</a> = <code title="models.CharField(max_length= 500)">models.CharField(max_length= 500)</code><br />
+      the unique value that is needed to embed a twitter feed relating to 
+      the MVP into a page.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><code class="link">str</code></span>
+    </td><td class="summary">
+        <a href="idb.models.MVP-class.html#youtube_id" class="summary-name">youtube_id</a> = <code title="models.CharField(max_length= 500)">models.CharField(max_length= 500)</code><br />
+      The unique value that is needed to embed a youtube video relating to 
+      the MVP into a page.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><code class="link">float</code></span>
+    </td><td class="summary">
+        <a href="idb.models.MVP-class.html#latitude" class="summary-name">latitude</a> = <code title="models.FloatField()">models.FloatField()</code><br />
+      The latitude coordinate of the home town of the MVP.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><code class="link">float</code></span>
+    </td><td class="summary">
+        <a href="idb.models.MVP-class.html#longitude" class="summary-name">longitude</a> = <code title="models.FloatField()">models.FloatField()</code><br />
+      The longitude coordinate of the home town of the MVP.
     </td>
   </tr>
 </table>
@@ -208,7 +232,7 @@ django.db.models.Model --+
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <h3 class="epydoc">first_name</h3>
-  (e.g. Peyton)
+  The first name of the MVP. (e.g. Drew)
   <dl class="fields">
     <dt>Type:</dt>
       <dd><code class="link">str</code></dd>
@@ -228,7 +252,7 @@ models.CharField(max_length= 500)
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <h3 class="epydoc">last_name</h3>
-  (e.g. Manning)
+  The last name of the MVP. (e.g. Brees)
   <dl class="fields">
     <dt>Type:</dt>
       <dd><code class="link">str</code></dd>
@@ -242,13 +266,33 @@ models.CharField(max_length= 500)
   </dl>
 </td></tr></table>
 </div>
+<a name="position"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">position</h3>
+  The position the MVP played that year. (e.g. QB)
+  <dl class="fields">
+    <dt>Type:</dt>
+      <dd><code class="link">str</code></dd>
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+models.CharField(max_length= 4)
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
 <a name="birth_date"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <h3 class="epydoc">birth_date</h3>
-  The date when the player was born. (e.g. 1976-03-24)
+  The birth date of the MVP. (e.g. 1982-12-29)
   <dl class="fields">
     <dt>Type:</dt>
       <dd>date</dd>
@@ -268,7 +312,7 @@ models.DateField()
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <h3 class="epydoc">birth_town</h3>
-  The town the player was born in. (e.g. New Orleans, LA)
+  The town the MVP was born in. (e.g. Austin)
   <dl class="fields">
     <dt>Type:</dt>
       <dd><code class="link">str</code></dd>
@@ -288,7 +332,7 @@ models.CharField(max_length= 500)
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <h3 class="epydoc">high_school</h3>
-  The high school the player went to. (e.g. New Orleans Newman)
+  The high school the MVP attended. (e.g. Westlake High School)
   <dl class="fields">
     <dt>Type:</dt>
       <dd><code class="link">str</code></dd>
@@ -308,7 +352,7 @@ models.CharField(max_length= 500)
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <h3 class="epydoc">college</h3>
-  The college the player went to. (e.g. University of Tennessee)
+  The college the MVP attended. (e.g. Purdue)
   <dl class="fields">
     <dt>Type:</dt>
       <dd><code class="link">str</code></dd>
@@ -328,7 +372,7 @@ models.CharField(max_length= 500)
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <h3 class="epydoc">draft_year</h3>
-  The year the player was drafted. (e.g. 1998)
+  The year the MVP was drafted in. (e.g. 2002)
   <dl class="fields">
     <dt>Type:</dt>
       <dd><code class="link">int</code></dd>
@@ -342,13 +386,13 @@ models.IntegerField()
   </dl>
 </td></tr></table>
 </div>
-<a name="retired"></a>
+<a name="active"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
-  <h3 class="epydoc">retired</h3>
-  Is the player retired?. (e.g. False)
+  <h3 class="epydoc">active</h3>
+  Boolean value indicating whether the MVP is still active. (e.g. True)
   <dl class="fields">
     <dt>Type:</dt>
       <dd><code class="link">bool</code></dd>
@@ -357,6 +401,129 @@ models.IntegerField()
     <dt>Value:</dt>
       <dd><table><tr><td><pre class="variable">
 models.BooleanField()
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="salary"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">salary</h3>
+  The yearly salary for the MVP. (e.g. 2000000)
+  <dl class="fields">
+    <dt>Type:</dt>
+      <dd><code class="link">int</code></dd>
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+models.IntegerField()
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="facebook_id"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">facebook_id</h3>
+  The unique value that is needed to embed a facebook like box for that MVP
+  into a page. (e.g. DB9NFL)
+  <dl class="fields">
+    <dt>Type:</dt>
+      <dd><code class="link">str</code></dd>
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+models.CharField(max_length= 500)
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="twitter_id"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">twitter_id</h3>
+  the unique value that is needed to embed a twitter feed relating to the 
+  MVP into a page. (e.g. 934578475)
+  <dl class="fields">
+    <dt>Type:</dt>
+      <dd><code class="link">str</code></dd>
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+models.CharField(max_length= 500)
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="youtube_id"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">youtube_id</h3>
+  The unique value that is needed to embed a youtube video relating to the 
+  MVP into a page. (e.g. 6ivghds)
+  <dl class="fields">
+    <dt>Type:</dt>
+      <dd><code class="link">str</code></dd>
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+models.CharField(max_length= 500)
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="latitude"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">latitude</h3>
+  The latitude coordinate of the home town of the MVP. (e.g. 204.333)
+  <dl class="fields">
+    <dt>Type:</dt>
+      <dd><code class="link">float</code></dd>
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+models.FloatField()
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="longitude"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">longitude</h3>
+  The longitude coordinate of the home town of the MVP. (e.g. 122.678)
+  <dl class="fields">
+    <dt>Type:</dt>
+      <dd><code class="link">float</code></dd>
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+models.FloatField()
 </pre></td></tr></table>
 </dd>
   </dl>
@@ -389,7 +556,7 @@ models.BooleanField()
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Thu Mar 20 16:32:03 2014
+    Generated by Epydoc 3.0.1 on Thu Apr  3 22:20:47 2014
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
