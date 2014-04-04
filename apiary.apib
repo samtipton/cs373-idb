@@ -327,12 +327,34 @@ The URL is built based on information provided by the client when the API reques
             }
         }
 
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/superbowls/0' does not exist."
+            }
+        }
+        
 ### Remove a specific Super Bowl game entry. [DELETE]
 + Response 200 (application/json)
 
         {
             "success": true,
             "data": null
+        }
+        
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/superbowls/0' does not exist."
+            }
         }
 
 ## The NFL Franchises [/api/v2/franchises]
@@ -518,6 +540,17 @@ The URL is built based on information provided by the client when the API reques
             "longitude": 44.1
         }
 
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/franchises/0' does not exist."
+            }
+        }
+        
 + Response 200 (application/json)
 
         {
@@ -569,6 +602,17 @@ The URL is built based on information provided by the client when the API reques
         {
             "success": true,
             "data": null
+        }
+        
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/franchises/0' does not exist."
+            }
         }
 
 ## The Super Bowl MVPs [/api/v2/mvps]
@@ -773,6 +817,17 @@ The URL is built based on information provided by the client when the API reques
             }
         }
 
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/mvps/0' does not exist."
+            }
+        }
+
 ### Remove a specific Super Bowl MVP entry. [DELETE]
 + Response 200 (application/json)
 
@@ -780,3 +835,15 @@ The URL is built based on information provided by the client when the API reques
             "success": true,
             "data": null
         }
+
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/mvps/0' does not exist."
+            }
+        }
+        
