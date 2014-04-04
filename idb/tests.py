@@ -67,9 +67,9 @@ class test_API(TestCase) :
 		api_response = loads(response.content.decode('utf-8'))
 		return (response.status_code, api_response)
 	
-	# ----------
-	# Unit Tests
-	# ----------
+	# ----------------
+	# Unit Tests Start
+	# ----------------
 	
 	def setUp(self) :
 		# Initialize the database for testing.
@@ -378,9 +378,9 @@ class test_API(TestCase) :
 		self.assertEqual(response, expected_response)
 
 
-	# --------------------
-	# API FRANCHISES TESTS
-	# --------------------
+	# -------------
+	# API MVP TESTS
+	# -------------
 
 	def test_API_get_mvps(self) :
 		(code, response) = self.get("mvps")
@@ -440,9 +440,97 @@ class test_API(TestCase) :
 		self.assertNotEqual(p.last_name, 'Smith')
 
 	def test_API_put_mvps(self) :
-		pass
+		p_id = self.malcolm_smith.id
+		request = {
+		"superbowls" : [{
+			"id" : self.sb_48.id
+		}, {
+			"id" : self.sb_to_delete.id
+		}, {
+			"id" : self.sb_49.id
+		}], 
+		"franchises" : [{
+			"id" : self.seahawks.id
+		}], 
+		"first_name": "Malcolm",
+	    "last_name": "Smith",
+	    "position": "QB",
+	    "birth_date": "1989-07-05",
+	    "birth_town": "Los Angeles, CA",
+	    "high_school": "Woodland Hills (CA) Taft",
+	    "college": "Southern California",
+	    "draft_year": 2011,
+	    "active": True,
+	    "salary": 465000,
+	    "facebook_id": "MalcomFanPage",
+	    "twitter_id": "MalcomTweets",
+	    "youtube_id": "ghwhh09",
+	    "latitude": 100.5,
+	    "longitude": 37.6
+		}
+		(code, response) = self.put("mvps", p_id, request)
+		self.assertEqual(code, 200)
+
+		body = {
+			"id" : p_id,
+			"self" : "/api/v2/mvps/1",
+			"collection" : "/api/v2/mvps",
+			"superbowls" :
+			[{
+				"id" : self.sb_48.id,
+				"self" : "/api/v2/superbowls/1",
+				"collection" : "/api/v2/superbowls"
+			}, {
+				"id" : self.sb_to_delete.id,
+				"self" : "/api/v2/superbowls/2",
+				"collection" : "/api/v2/superbowls"
+			}, {
+				"id" : self.sb_49.id,
+				"self" : "/api/v2/superbowls/3",
+				"collection" : "/api/v2/superbowls"
+			}], 
+			"franchises" : [{
+				"id" : self.seahawks.id,
+				"self" : "/api/v2/franchises/1",
+				"collection" : "/api/v2/franchises"
+			}],
+			"first_name": "Malcolm",
+		    "last_name": "Smith",
+		    "position": "QB",
+		    "birth_date": "1989-07-05",
+		    "birth_town": "Los Angeles, CA",
+		    "high_school": "Woodland Hills (CA) Taft",
+		    "college": "Southern California",
+		    "draft_year": 2011,
+		    "active": True,
+		    "salary": 465000,
+		    "facebook_id": "MalcomFanPage",
+		    "twitter_id": "MalcomTweets",
+		    "youtube_id": "ghwhh09",
+		    "latitude": 100.5,
+		    "longitude": 37.6
+		}
+		expected_response = make_successful_response_object(body)
+
+		self.assertEqual(response, expected_response)
+
+		p_id = response['data']['id']
+		p = MVP.objects.get(pk=p_id)
+		self.assertEqual(p.position, 'QB')
+		self.assertEqual(p.birth_town, 'Los Angeles, CA')
+		self.assertEqual(p.first_name, 'Malcolm')
+
 	def test_API_delete_mvps(self) :
-		pass
+		p_id = self.malcolm_smith.id
+		(code, response) = self.delete("mvps", p_id)
+		self.assertEqual(code, 200)
+		body = None
+		expected_response = make_successful_response_object(body)
+		self.assertEqual(response, expected_response)
+
+# ---------
+# EXECUTION
+# ---------
 
 print("IngloriousBashers-tests.py")
 

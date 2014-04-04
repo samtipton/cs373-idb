@@ -305,7 +305,6 @@ def api_mvps(request) :
     else:
         return respond_with_method_not_allowed_error(request)
 
-
 def mvps_get() :
     mvps = MVP.objects.all()
     body = []
@@ -385,20 +384,20 @@ def mvps_id_put(_id, request):
 
     f_list = [Franchise.objects.get(pk=entry['id']) for entry in f_id_list]
 
-    mvp.first_name =  json_content["first_name"],
-    mvp.last_name =  json_content["last_name"],
-    mvp.position =  json_content["position"],
-    mvp.birth_date =  json_content["birth_date"], 
-    mvp.birth_town =  json_content["birth_town"],
-    mvp.high_school =  json_content["high_school"],
-    mvp.college =  json_content["college"],
-    mvp.draft_year =  json_content["draft_year"], 
-    mvp.active =  json_content["active"],
-    mvp.salary =  json_content["salary"],
-    mvp.facebook_id =  json_content["facebook_id"], 
-    mvp.twitter_id =  json_content["twitter_id"],
-    mvp.youtube_id =  json_content["youtube_id"],
-    mvp.latitude =  json_content["latitude"],
+    mvp.first_name =  json_content["first_name"]
+    mvp.last_name =  json_content["last_name"]
+    mvp.position =  json_content["position"]
+    mvp.birth_date =  json_content["birth_date"]
+    mvp.birth_town =  json_content["birth_town"]
+    mvp.high_school =  json_content["high_school"]
+    mvp.college =  json_content["college"]
+    mvp.draft_year =  json_content["draft_year"]
+    mvp.active =  json_content["active"]
+    mvp.salary =  json_content["salary"]
+    mvp.facebook_id =  json_content["facebook_id"]
+    mvp.twitter_id =  json_content["twitter_id"]
+    mvp.youtube_id =  json_content["youtube_id"]
+    mvp.latitude =  json_content["latitude"]
     mvp.longitude =  json_content["longitude"]
     mvp.save() 
 
@@ -410,7 +409,9 @@ def mvps_id_put(_id, request):
         franchise.mvps.add(mvp)
         franchise.save()
 
-    return make_response(200, make_successful_response_object(make_ref(mvp)))
+    body = serialize_mvp_model(mvp)
+
+    return make_response(200, make_successful_response_object(body))
     
 
 def mvps_id_delete(_id):
