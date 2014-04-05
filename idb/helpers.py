@@ -24,7 +24,7 @@ def make_failure_response_object(error_type, error_message):
         "success": False,
         "error": {
             "type": str(error_type),
-            "message": str(error_msg)
+            "message": str(error_message)
         }
     }
 
