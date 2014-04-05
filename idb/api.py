@@ -28,7 +28,7 @@ def respond_with_method_not_allowed_error(request):
 def respond_with_bad_request_error(request):
     error_type = 'HTTP_BAD_REQUEST'
     message = "This request has violated the API contract. To help you, this is the input you provided. HTTP method '{0}'. Endpoint url '{1}'. Request content '{2}'."
-    error_message = message.format(request.body.decode('utf-8'), request.method, request.path,)
+    error_message = message.format(request.method, request.path, request.body.decode('utf-8'))
     obj = make_failure_response_object(error_type, error_message)
     return make_response(400, obj)
 
@@ -43,13 +43,16 @@ def respond_with_not_found_error(request):
 # API SuperBowl Calls
 # -------------------
 def api_superbowls(request) :
-    # check context to determine what kind of req
-    if (request.method == 'GET'):
-        return superbowls_get()
-    elif (request.method == 'POST'):
-        return superbowls_post(request)
-    else:
-        return respond_with_method_not_allowed_error(request)
+    try:
+        # check context to determine what kind of req
+        if (request.method == 'GET'):
+            return superbowls_get()
+        elif (request.method == 'POST'):
+            return superbowls_post(request)
+        else:
+            return respond_with_method_not_allowed_error(request)
+    except Exception:
+        return respond_with_bad_request_error(request)
 
 def superbowls_get() :
     superbowls = SuperBowl.objects.all()
@@ -172,14 +175,16 @@ def superbowls_id_delete(_id) :
 # -------------------
 
 def api_franchises(request) :
-
-    # check context to determine what kind of req
-    if (request.method == 'GET'):
-        return franchises_get()
-    elif (request.method == 'POST'):
-        return franchises_post(request)
-    else:
-        return respond_with_method_not_allowed_error(request)
+    try:
+        # check context to determine what kind of req
+        if (request.method == 'GET'):
+            return franchises_get()
+        elif (request.method == 'POST'):
+            return franchises_post(request)
+        else:
+            return respond_with_method_not_allowed_error(request)
+    except Exception:
+            return respond_with_bad_request_error(request)
 
 def franchises_get() :
     franchises = Franchise.objects.all()
@@ -240,16 +245,19 @@ def franchises_post(request) :
 
 def api_franchises_id(request, _id) :
     try:
-        if (request.method == 'GET'):
-            return franchises_id_get(_id)
-        elif (request.method == 'PUT'):
-            return franchises_id_put(_id, request)
-        elif (request.method == 'DELETE'):
-            return franchises_id_delete(_id)
-        else:
-            return respond_with_method_not_allowed_error(request)
-    except ObjectDoesNotExist:
-        return respond_with_not_found_error(request)
+        try:
+            if (request.method == 'GET'):
+                return franchises_id_get(_id)
+            elif (request.method == 'PUT'):
+                return franchises_id_put(_id, request)
+            elif (request.method == 'DELETE'):
+                return franchises_id_delete(_id)
+            else:
+                return respond_with_method_not_allowed_error(request)
+        except ObjectDoesNotExist:
+            return respond_with_not_found_error(request)
+    except Exception:
+        return respond_with_bad_request_error(request)
 
 def franchises_id_get(_id) :
     # context = RequestContext(request)
@@ -318,13 +326,16 @@ def franchises_id_delete(_id) :
 
 
 def api_mvps(request) :
-    # check context to determine what kind of req
-    if (request.method == 'GET'):
-        return mvps_get()
-    elif (request.method == 'POST'):
-        return mvps_post(request)
-    else:
-        return respond_with_method_not_allowed_error(request)
+    try:
+        # check context to determine what kind of req
+        if (request.method == 'GET'):
+            return mvps_get()
+        elif (request.method == 'POST'):
+            return mvps_post(request)
+        else:
+            return respond_with_method_not_allowed_error(request)
+    except Exception:
+        return respond_with_bad_request_error(request)
 
 def mvps_get() :
     mvps = MVP.objects.all()
@@ -378,16 +389,19 @@ def mvps_post(request):
 
 def api_mvps_id(request, _id) :
     try:
-        if (request.method == 'GET'):
-            return mvps_id_get(_id)
-        elif (request.method == 'PUT'):
-            return mvps_id_put(_id, request)
-        elif (request.method == 'DELETE'):
-            return mvps_id_delete(_id)
-        else:
-            return respond_with_method_not_allowed_error(request)
-    except ObjectDoesNotExist:
-        return respond_with_not_found_error(request)
+        try:
+            if (request.method == 'GET'):
+                return mvps_id_get(_id)
+            elif (request.method == 'PUT'):
+                return mvps_id_put(_id, request)
+            elif (request.method == 'DELETE'):
+                return mvps_id_delete(_id)
+            else:
+                return respond_with_method_not_allowed_error(request)
+        except ObjectDoesNotExist:
+            return respond_with_not_found_error(request)
+    except Exception:
+            return respond_with_bad_request_error(request)
 
 def mvps_id_get(_id):
     p = MVP.objects.get(pk=_id)
