@@ -9,6 +9,7 @@ urlpatterns = patterns('',
 	url(r'^api/v2/franchises', api.api_franchises),
 	url(r'^api/v2/mvps/(\d+)', api.api_mvps_id),
 	url(r'^api/v2/mvps', api.api_mvps),
+	url(r'^reset-database', api.api_reset_database),
 
 	# Website routes
 	url(r'^superbowls/(\d*)', views.superbowls),

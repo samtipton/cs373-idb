@@ -8,6 +8,7 @@ from django.db.models import Q
 from json import dumps, loads
 from idb.helpers import *
 from django.core.exceptions import ObjectDoesNotExist
+from django.db import connection
 
 # ----------------
 # helper functions
@@ -38,6 +39,12 @@ def respond_with_not_found_error(request):
     error_message = message.format(request.path)
     obj = make_failure_response_object(error_type, error_message)
     return make_response(404, obj)
+
+# custom internal API to reset the database
+def api_reset_database(request):
+    cursor = connection.cursor()
+    cursor.execute("SELECT reset_db()")
+    return make_response(200, str(cursor.fetchone()[0]))
 
 # -------------------
 # API SuperBowl Calls
