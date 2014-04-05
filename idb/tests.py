@@ -71,11 +71,11 @@ class test_API(TestCase) :
 			self.assertEqual(code, 405)
 			self.assert_failure_response(response, 'HTTP_METHOD_NOT_ALLOWED', error_message)
 
-	
+
 	# ----------------------------------------------------
 	# Helper functions to make REST calls against the API.
 	# ----------------------------------------------------
-	
+
 	def get(self, _type = "", id = None):
 		url = make_path(_type, id)
 		response = self.client.get(url)
@@ -99,11 +99,11 @@ class test_API(TestCase) :
 		response = self.client.delete(url)
 		api_response = loads(response.content.decode('utf-8'))
 		return (response.status_code, api_response)
-	
+
 	# ----------------
 	# Unit Tests Start
 	# ----------------
-	
+
 	def setUp(self) :
 		# Initialize the database for testing.
 		self.malcolm_smith = MVP.objects.create(first_name='Malcolm', last_name='Smith', position='OLB', birth_date='1989-07-05', birth_town='Woodland Hills, CA', high_school='Woodland Hills (CA) Taft', college='Southern California', draft_year=2011, active=True, salary=465000, facebook_id='MalcSmitty', twitter_id='MalcSmitty', youtube_id='zfB8hCsHwLE', latitude=34.1683, longitude=-118.6050)
@@ -137,7 +137,7 @@ class test_API(TestCase) :
 	def test_API_post_superbowls(self):
 		request = {
 		 "winning_franchise": {
-			"id": self.broncos.id 
+			"id": self.broncos.id
 		  },
 		  "losing_franchise": {
 			"id" : self.seahawks.id
@@ -145,20 +145,20 @@ class test_API(TestCase) :
 		  "mvp": {
 		    "id": self.malcolm_smith.id
 		  },
-		  "mvp_stats":'1 INT 1 FR 1 TD 9 T', 
-		  "mvp_blurb":'Malcolm Smith was the de-facto SB MVP for a legendary Seattle defense.\n\nWhile he was a relative unknown at the start of the season, a game-sealing interception in the NFC Championship as well as two takeaways in the Super Bowl served as a coming out party for the young linebacker.', 
-		  "winning_score":43, 
-		  "losing_score":8, 
-		  "venue_name":'MetLife Stadium', 
-		  "venue_city":'East Rutherford', 
-		  "venue_state":'NJ', 
-		  "game_day":'2014-02-02', 
-		  "attendance":82529, 
-		  "game_number":'XLVIII', 
-		  "halftime_performer":'Bruno Mars', 
-		  "twitter_id":'SuperBowlXLVIII', 
-		  "youtube_id":'NbcA1UISfG0', 
-		  "latitude":40.8136, 
+		  "mvp_stats":'1 INT 1 FR 1 TD 9 T',
+		  "mvp_blurb":'Malcolm Smith was the de-facto SB MVP for a legendary Seattle defense.\n\nWhile he was a relative unknown at the start of the season, a game-sealing interception in the NFC Championship as well as two takeaways in the Super Bowl served as a coming out party for the young linebacker.',
+		  "winning_score":43,
+		  "losing_score":8,
+		  "venue_name":'MetLife Stadium',
+		  "venue_city":'East Rutherford',
+		  "venue_state":'NJ',
+		  "game_day":'2014-02-02',
+		  "attendance":82529,
+		  "game_number":'XLVIII',
+		  "halftime_performer":'Bruno Mars',
+		  "twitter_id":'SuperBowlXLVIII',
+		  "youtube_id":'NbcA1UISfG0',
+		  "latitude":40.8136,
 		  "longitude":-74.0744
 		}
 		(code, response) = self.post("superbowls", request)
@@ -180,7 +180,7 @@ class test_API(TestCase) :
 	def test_API_put_superbowls(self):
 		request = {
 		 "winning_franchise": {
-			"id": self.broncos.id 
+			"id": self.broncos.id
 		  },
 		  "losing_franchise": {
 			"id" : self.seahawks.id
@@ -188,20 +188,20 @@ class test_API(TestCase) :
 		  "mvp": {
 		    "id": self.malcolm_smith.id
 		  },
-		  "mvp_stats":'1 INT 1 FR 4 TD 9 T', 
-		  "mvp_blurb":'Malcolm Smith was the de-facto SB MVP for a legendary Seattle defense.\n\nWhile he was a relative unknown at the start of the season, a game-sealing interception in the NFC Championship as well as two takeaways in the Super Bowl served as a coming out party for the young linebacker.', 
-		  "winning_score":43, 
-		  "losing_score":8, 
-		  "venue_name":'MetLife Stadium', 
-		  "venue_city":'East Rutherford', 
-		  "venue_state":'NJ', 
-		  "game_day":'2014-02-02', 
-		  "attendance":82529, 
-		  "game_number":'XLVIII', 
-		  "halftime_performer":'Bruno Mars', 
-		  "twitter_id":'SuperBowlXLVIII', 
-		  "youtube_id":'NbcA1UISfG0', 
-		  "latitude":40.8136, 
+		  "mvp_stats":'1 INT 1 FR 4 TD 9 T',
+		  "mvp_blurb":'Malcolm Smith was the de-facto SB MVP for a legendary Seattle defense.\n\nWhile he was a relative unknown at the start of the season, a game-sealing interception in the NFC Championship as well as two takeaways in the Super Bowl served as a coming out party for the young linebacker.',
+		  "winning_score":43,
+		  "losing_score":8,
+		  "venue_name":'MetLife Stadium',
+		  "venue_city":'East Rutherford',
+		  "venue_state":'NJ',
+		  "game_day":'2014-02-02',
+		  "attendance":82529,
+		  "game_number":'XLVIII',
+		  "halftime_performer":'Bruno Mars',
+		  "twitter_id":'SuperBowlXLVIII',
+		  "youtube_id":'NbcA1UISfG0',
+		  "latitude":40.8136,
 		  "longitude":-74.0744
 		}
 		(code, response) = self.put("superbowls", 1, request)
@@ -228,20 +228,20 @@ class test_API(TestCase) :
             "self": "/api/v2/mvps/1",
             "collection": "/api/v2/mvps"
         },
-        "mvp_stats":'1 INT 1 FR 4 TD 9 T', 
-		  "mvp_blurb":'Malcolm Smith was the de-facto SB MVP for a legendary Seattle defense.\n\nWhile he was a relative unknown at the start of the season, a game-sealing interception in the NFC Championship as well as two takeaways in the Super Bowl served as a coming out party for the young linebacker.', 
-		  "winning_score":43, 
-		  "losing_score":8, 
-		  "venue_name":'MetLife Stadium', 
-		  "venue_city":'East Rutherford', 
-		  "venue_state":'NJ', 
-		  "game_day":'2014-02-02', 
-		  "attendance":82529, 
-		  "game_number":'XLVIII', 
-		  "halftime_performer":'Bruno Mars', 
-		  "twitter_id":'SuperBowlXLVIII', 
-		  "youtube_id":'NbcA1UISfG0', 
-		  "latitude":40.8136, 
+        "mvp_stats":'1 INT 1 FR 4 TD 9 T',
+		  "mvp_blurb":'Malcolm Smith was the de-facto SB MVP for a legendary Seattle defense.\n\nWhile he was a relative unknown at the start of the season, a game-sealing interception in the NFC Championship as well as two takeaways in the Super Bowl served as a coming out party for the young linebacker.',
+		  "winning_score":43,
+		  "losing_score":8,
+		  "venue_name":'MetLife Stadium',
+		  "venue_city":'East Rutherford',
+		  "venue_state":'NJ',
+		  "game_day":'2014-02-02',
+		  "attendance":82529,
+		  "game_number":'XLVIII',
+		  "halftime_performer":'Bruno Mars',
+		  "twitter_id":'SuperBowlXLVIII',
+		  "youtube_id":'NbcA1UISfG0',
+		  "latitude":40.8136,
 		  "longitude":-74.0744
 		}
 		expected_response = make_successful_response_object(body)
@@ -316,7 +316,7 @@ class test_API(TestCase) :
 		self.assertEqual(response, expected_response)
 		f_id = response['data']['id']
 		f = Franchise.objects.get(pk=f_id)
-		
+
 		self.assertEqual(f.team_city, 'Oklahoma')
 
 	def test_API_put_franchises(self):
@@ -370,7 +370,7 @@ class test_API(TestCase) :
         }, {
 			"id" : self.sb_to_delete.id,
 			"self": "/api/v2/superbowls/2",
-            "collection": "/api/v2/superbowls"       
+            "collection": "/api/v2/superbowls"
         }],
         "superbowls_lost":
         [{
@@ -395,7 +395,7 @@ class test_API(TestCase) :
         "longitude": 44.1
 		}
 		expected_response = make_successful_response_object(body)
-		
+
 		self.assertEqual(response, expected_response)
 
 		f_id = response['data']['id']
@@ -421,7 +421,7 @@ class test_API(TestCase) :
 		body = [serialize_mvp_model(self.malcolm_smith)]
 		expected_response = make_successful_response_object(body)
 		self.assertEqual(response, expected_response)
-	
+
 	def test_API_get_mvps_id(self) :
 		p_id = self.malcolm_smith.id
 		(code, response) = self.get("mvps", p_id)
@@ -481,10 +481,10 @@ class test_API(TestCase) :
 			"id" : self.sb_to_delete.id
 		}, {
 			"id" : self.sb_49.id
-		}], 
+		}],
 		"franchises" : [{
 			"id" : self.seahawks.id
-		}], 
+		}],
 		"first_name": "Malcolm",
 	    "last_name": "Smith",
 	    "position": "QB",
@@ -521,7 +521,7 @@ class test_API(TestCase) :
 				"id" : self.sb_49.id,
 				"self" : "/api/v2/superbowls/3",
 				"collection" : "/api/v2/superbowls"
-			}], 
+			}],
 			"franchises" : [{
 				"id" : self.seahawks.id,
 				"self" : "/api/v2/franchises/1",
@@ -597,31 +597,22 @@ class test_API(TestCase) :
 	# -----------------
 
 	def test_API_get_superbowls_405(self) :
-		self.assert_405_method_not_allowed_response("superbowls", 999, "GET")
+		self.assert_405_method_not_allowed_response("superbowls", None, "PATCH")
 
 	def test_API_put_superbowls_405(self) :
-		self.assert_405_method_not_allowed_response("superbowls", 999, "PUT")
-
-	def test_API_delete_superbowls_405(self) :
-		self.assert_405_method_not_allowed_response("superbowls", 999, "DELETE")
+		self.assert_405_method_not_allowed_response("superbowls", 999, "PATCH")
 
 	def test_API_get_franchises_405(self) :
-		self.assert_405_method_not_allowed_response("franchises", 999, "GET")
+		self.assert_405_method_not_allowed_response("franchises", None, "PATCH")
 
 	def test_API_put_franchises_405(self) :
-		self.assert_405_method_not_allowed_response("franchises", 999, "PUT")
-
-	def test_API_delete_franchises_405(self) :
-		self.assert_405_method_not_allowed_response("franchises", 999, "DELETE")
+		self.assert_405_method_not_allowed_response("franchises", 999, "PATCH")
 
 	def test_API_get_mvps_405(self) :
-		self.assert_405_method_not_allowed_response("mvps", 999, "GET")
+		self.assert_405_method_not_allowed_response("mvps", None, "PATCH")
 
 	def test_API_put_mvps_405(self) :
-		self.assert_405_method_not_allowed_response("mvps", 999, "PUT")
-
-	def test_API_delete_mvps_405(self) :
-		self.assert_405_method_not_allowed_response("mvps", 999, "DELETE")
+		self.assert_405_method_not_allowed_response("mvps", 999, "PATCH")
 
 # ---------
 # EXECUTION
