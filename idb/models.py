@@ -162,10 +162,10 @@ class SuperBowl(models.Model) :
     @ivar longitude: The longitude coordinate of the stadium the game was played. (e.g. 120.5)
     @type longitude: L{float}
    """
-    winning_franchise = models.ForeignKey(Franchise, related_name = "winner")
-    losing_franchise = models.ForeignKey(Franchise, related_name = "loser")
-    mvp = models.ForeignKey(MVP)
-    players = models.ManyToManyField(MVP)
+    winning_franchise = models.ForeignKey(Franchise, related_name = "superbowls_won")
+    losing_franchise = models.ForeignKey(Franchise, related_name = "superbowls_lost")
+    mvp = models.ForeignKey(MVP, related_name = "superbowls_awarded")
+    players = models.ManyToManyField(MVP, related_name = "superbowls_participated")
     mvp_stats = models.CharField(max_length = 500)
     mvp_blurb = models.CharField(max_length = 500)
     winning_score = models.IntegerField(default = 0)
