@@ -60,10 +60,10 @@ class MVP(models.Model) :
 
 class Franchise(models.Model) :
     """
-    This model represents information about an U{NFL<http://nfl.com>} franchise that 
+    This model represents information about an U{NFL<http://nfl.com>} franchise that
     has participated in a Super Bowl.
     @ivar mvps: The list of players who have won Super Bowl MVP for this franchise.
-    @type mvps: L{MVP}
+    @type mvps: L{list}
     @ivar team_name: The official name of the team. (e.g. Seattle Seahawks)
     @type team_name: L{str}
     @ivar team_city: The name of the home city for the team. (e.g. Seattle, WA)
@@ -74,9 +74,9 @@ class Franchise(models.Model) :
     @type current_owner: L{str}
     @ivar current_gm: The name of the current general manager of the team. (e.g. John Schneider)
     @type current_gm: L{str}
-    @ivar current_head_coach: The name of the current head coach of the team. (e.g. Pete Carroll) 
+    @ivar current_head_coach: The name of the current head coach of the team. (e.g. Pete Carroll)
     @type current_head_coach: L{str}
-    @ivar year_founded: The year the franchise was founded. (e.g. 1974) 
+    @ivar year_founded: The year the franchise was founded. (e.g. 1974)
     @type year_founded: L{int}
     @ivar active: Boolean indicating whether the franchise is active. (e.g. True)
     @type active: L{bool}
@@ -87,10 +87,10 @@ class Franchise(models.Model) :
     @ivar facebook_id: The unique value that is needed to embed a facebook like box relating
     to the team into a page. (e.g. Hawks)
     @type facebook_id: L{str}
-    @ivar twitter_id: The unique value that is needed to embed a twitter feed relating to 
+    @ivar twitter_id: The unique value that is needed to embed a twitter feed relating to
     the team into a page. (e.g. 347858)
     @type twitter_id: L{str}
-    @ivar youtube_id: The unique value that is needed to embed a youtube video relating to 
+    @ivar youtube_id: The unique value that is needed to embed a youtube video relating to
     the team into a page. (e.g. v6k=e9)
     @type youtube_id: L{str}
     @ivar latitude: The latitude coordinate of the stadium the team plays at. (e.g. 145.70)
@@ -125,6 +125,9 @@ class SuperBowl(models.Model) :
     @type losing_franchise: L{Franchise}
     @ivar mvp: The MVP for that particular Super Bowl. (e.g. Eli Manning)
     @type mvp: L{MVP}
+    @ivar players: The list of notable players that participated in this Super Bowl. These
+    are players that have won a Super Bowl MVP title at least once. (e.g. Eli Manning, Tom Brady)
+    @type players: L{list}
     @ivar mvp_stats: The relevant statistics for MVP for that particular Super Bowl. (e.g. 5 TD)
     @type mvp_stats: L{str}
     @ivar mvp_blurb: A summary of notable accomplishments for the MVP for that particular
@@ -151,7 +154,7 @@ class SuperBowl(models.Model) :
     @ivar twitter_id: The unique value that is needed to embed a twitter feed relating to the Super
     Bowl onto a page. (e.g. 57693)
     @type twitter_id: L{str}
-    @ivar youtube_id: The unique value that is needed to embed a youtube video relating to the Super 
+    @ivar youtube_id: The unique value that is needed to embed a youtube video relating to the Super
     Bowl onto a page. (e.g. gjrk6)
     @type youtube_id: L{str}
     @ivar latitude: The latitude coordinate of the stadium the game was played at. (e.g. 45.7)
@@ -162,6 +165,7 @@ class SuperBowl(models.Model) :
     winning_franchise = models.ForeignKey(Franchise, related_name = "winner")
     losing_franchise = models.ForeignKey(Franchise, related_name = "loser")
     mvp = models.ForeignKey(MVP)
+    players = models.ManyToManyField(MVP)
     mvp_stats = models.CharField(max_length = 500)
     mvp_blurb = models.CharField(max_length = 500)
     winning_score = models.IntegerField(default = 0)
