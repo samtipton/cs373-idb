@@ -9,6 +9,7 @@ from json import dumps, loads
 from idb.helpers import *
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import connection
+from idb.database import reset_database
 
 # ----------------
 # helper functions
@@ -42,9 +43,11 @@ def respond_with_not_found_error(request):
 
 # custom internal API to reset the database
 def api_reset_database(request):
-    cursor = connection.cursor()
-    cursor.execute("SELECT reset_db()")
-    return make_response(200, str(cursor.fetchone()[0]))
+    try:
+        reset_database()
+        return HttpResponse("These are not the datasets you are looking for.")
+    except Exception:
+        return HttpResponse("Uh Oh, something went wrong.")
 
 # -------------------
 # API SuperBowl Calls
