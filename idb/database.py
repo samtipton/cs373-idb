@@ -2,33 +2,34 @@
 
 from idb.models import MVP, Franchise, SuperBowl
 
-def m(*vals):
-    """ This is a helper function to build and save an MVP object. """
-    columns = ("first_name","last_name","position","birth_date","birth_town","high_school","college","draft_year","active","salary","facebook_id","twitter_id","youtube_id","latitude","longitude")
-    mvp = MVP(**dict(zip(columns, vals)))
-    mvp.save()
-    return mvp
-
-def f(mvps, *vals):
-    """ This is a helper function to build and save a Franchise object. """
-    columns = ("team_name","team_city","team_state","current_owner","current_gm","current_head_coach","year_founded","active","home_stadium","division","facebook_id","twitter_id","youtube_id","latitude","longitude")
-    franchise = Franchise(**dict(zip(columns, vals)))
-    franchise.save()
-    franchise.mvps.add(*mvps)
-    return franchise
-
-def s(winner, loser, mvp, *vals):
-    """ This is a helper function to build and save a Super Bowl object. """
-    columns = ("mvp_stats","winning_score","losing_score","venue_name","venue_city","venue_state","game_day","attendance","game_number","halftime_performer","twitter_id","youtube_id","latitude","longitude","mvp_blurb")
-    superbowl = SuperBowl(**dict(zip(columns, vals)))
-    superbowl.winning_franchise = winner
-    superbowl.losing_franchise = loser
-    superbowl.mvp = mvp
-    superbowl.save()
-    return superbowl
-
 def reset_database():
     """ This helper function drops the data and refills it. """
+    
+    def m(*vals):
+        """ This is a helper function to build and save an MVP object. """
+        columns = ("first_name","last_name","position","birth_date","birth_town","high_school","college","draft_year","active","salary","facebook_id","twitter_id","youtube_id","latitude","longitude")
+        mvp = MVP(**dict(zip(columns, vals)))
+        mvp.save()
+        return mvp
+
+    def f(mvps, *vals):
+        """ This is a helper function to build and save a Franchise object. """
+        columns = ("team_name","team_city","team_state","current_owner","current_gm","current_head_coach","year_founded","active","home_stadium","division","facebook_id","twitter_id","youtube_id","latitude","longitude")
+        franchise = Franchise(**dict(zip(columns, vals)))
+        franchise.save()
+        franchise.mvps.add(*mvps)
+        return franchise
+
+    def s(winner, loser, mvp, *vals):
+        """ This is a helper function to build and save a Super Bowl object. """
+        columns = ("mvp_stats","winning_score","losing_score","venue_name","venue_city","venue_state","game_day","attendance","game_number","halftime_performer","twitter_id","youtube_id","latitude","longitude","mvp_blurb")
+        superbowl = SuperBowl(**dict(zip(columns, vals)))
+        superbowl.winning_franchise = winner
+        superbowl.losing_franchise = loser
+        superbowl.mvp = mvp
+        superbowl.save()
+        return superbowl
+    
     MVP.objects.all().delete()
     Franchise.objects.all().delete()
     SuperBowl.objects.all().delete()
@@ -51,7 +52,7 @@ def reset_database():
     saints    = f([drew_brees],                  'Saints',    'New Orleans',  'LA', 'Tom Benson',              'Mickey Loomis',  'Sean Payton',    1967, True, 'Mercedes-Benz Superdome',       'NFC South', 'neworleanssaints',   '451544324249882624', 'z23NV3pvrvw', 29.9508, -90.0811)
     steelers  = f([santonio_holmes, hines_ward], 'Steelers',  'Pittsburgh',   'PA', 'Dan Rooney',              'Kevin Colbert',  'Mike Tomlin',    1933, True, 'Heinz Field',                   'NFC North', 'steelers',           '451544466084478976', '4R9PUh2JoHE', 40.4467, -80.0158)
     colts     = f([peyton_manning],              'Colts',     'Indianapolis', 'IN', 'Jim Irsay',               'Ryan Grigson',   'Chuck Pagano',   1953, True, 'Lucas Oil Stadium',             'AFC South', 'colts',              '451544637786697728', '0MLKaIexSeM', 39.7601, -86.1638)
-    patriots  = f([deion_branch, tom_brady],      'Patriots',  'New England',  'MA', 'Robert Kraft',            'Bill Belichick', 'Bill Belichick', 1959, True, 'Gillette Stadium',              'AFC East',  'newenglandpatriots', '451544728324939777', 'o8Bpa59pGnA', 42.0909, -71.2643)
+    patriots  = f([deion_branch, tom_brady],     'Patriots',  'New England',  'MA', 'Robert Kraft',            'Bill Belichick', 'Bill Belichick', 1959, True, 'Gillette Stadium',              'AFC East',  'newenglandpatriots', '451544728324939777', 'o8Bpa59pGnA', 42.0909, -71.2643)
     eagles    = f([],                            'Eagles',    'Philadelphia', 'PA', 'Jeffrey Lurie',           'Howie Roseman',  'Chip Kelly',     1933, True, 'Lincoln Financial Field',       'NFC East',  'philadelphiaeagles', '451544818934493184', '3uaF5FYGiis', 39.9008, -75.1675)
     bears     = f([],                            'Bears',     'Chicago',      'IL', 'Virginia Halas McCaskey', 'Phil Emery',     'Marc Trestman',  1919, True, 'Soldier Field',                 'NFC North', 'ChicagoBears',       '451544950295912448', 'yp6PSPu8qVg', 41.8625, -87.6167)
     cardinals = f([],                            'Cardinals', 'Arizona',      'AZ', 'Bill Bidwill',            'Steve Keim',     'Bruce Arians',   1898, True, 'University of Phoenix Stadium', 'NFC West',  'arizonacardinals',   '451545069774848000', 'WErrzXz6D7I', 33.5275, -112.2625)
@@ -66,7 +67,7 @@ def reset_database():
     sb43 = s(steelers, cardinals, santonio_holmes, '9 REC 131 YDS 1 TD 13 TGTS',              27, 23, 'Raymond James Stadium',         'Tampa',           'FL', '2009-02-01', 70774,  'XLIII',   'Bruce Springsteen and the E Street Band', '451549592362811392', 'PzDawiYEpFU', 27.9758, -82.5033,  'Santonio Holmes game winning 6 yd TD catch resulted in the Steelers\' sixth Super Bowl championship. The catch was one of the all time greats in SB history, and was one of his nine spectacular receptions that game.')
     sb44 = s(saints,   colts,     drew_brees,      '32/39 288 YDS 2 TD 0 INT 1 CAR -1 YDS',   31, 17, 'Sun Life Stadium',              'Miami Gardens',   'FL', '2010-02-07', 74059,  'XLIV',    'The Who',                                 '451549854502637568', 'M1OIISkx9Hk', 25.9581, -80.2389,  'Four years after Hurricane Katrina devastated New Orleans, Drew Brees led the Saints to their first Super Bowl championship. His 32 completions tied Tom Brady\'s record for the most in Super Bowl history.')
     sb45 = s(packers,  steelers,  aaron_rogers,    '24/39 304 YDS 3 TD 0 INT 2 CAR -2 YDS',   31, 25, 'Cowboys Stadium',               'Arlington',       'TX', '2011-02-06', 103219, 'XLV',     'The Black Eyed Peas',                     '451550049890074624', 'bKMVg7p5rto', 32.7478, -97.0928,  'In his third year as a starter for the Green Bay Packers, Rodgers calmly led the team its fourth Super Bowl championship. His 3 TDs reminded fans of the retired Brett Favre and ensured Packers fans of success in years to come.')
-    sb46 = s(giants,   patriots,  eli_manning,     '30/40 296 YDS 1 TD 0 INT 1 CAR -1 YDS',   21, 17, 'Lucas Oil Stadium',             'Indianapolis',    'IN', '2012-02-05', 68658,  'XLVI',    'Madonna',                                 '451550367377928192', '8eJapFSnICI', 39.7601, -861638.0, 'Once again, Eli Manning played spoiler to the New England Patriots and won his second SB MVP award. He started the game completing his first 9 attempts becoming the first quarterback to do so and put together a crucial drive with 3 1/2 minutes left that sealed the victory for the Giants.')
+    sb46 = s(giants,   patriots,  eli_manning,     '30/40 296 YDS 1 TD 0 INT 1 CAR -1 YDS',   21, 17, 'Lucas Oil Stadium',             'Indianapolis',    'IN', '2012-02-05', 68658,  'XLVI',    'Madonna',                                 '451550367377928192', '8eJapFSnICI', 39.7601, -86.1638, 'Once again, Eli Manning played spoiler to the New England Patriots and won his second SB MVP award. He started the game completing his first 9 attempts becoming the first quarterback to do so and put together a crucial drive with 3 1/2 minutes left that sealed the victory for the Giants.')
     sb47 = s(ravens,   niners,    joe_flacco,      '22/33 287 YDS 3 TD 0 INT 0 CAR 0 YDS',    34, 31, 'Mercedes-Benz Superdome',       'New Orleans',     'LA', '2013-02-03', 71024,  'XLVII',   'Beyonce',                                 '451550572752015360', 'ynQApEB4VXg', 29.9508, -90.0811,  'Joe Flacco capped his spectacular postseason with an impressive performance against a 49er defense that was considered one of the league\'s best. While all 3 TDs were in the first half, Flacco coolly converted third down after third down to hold off a late 49er surge.')
-    sb48 = s(seahawks, broncos,   malcolm_smith,    '1 INT 1 FR 1 TD 9 T',                     43, 8,  'MetLife Stadium',               'East Rutherford', 'NJ', '2014-02-02', 82529,  'XLVIII',  'Bruno Mars',                              '446419923376418818', 'NbcA1UISfG0', 40.8136, -74.0744,  'Malcolm Smith was the de-facto SB MVP for a legendary Seattle defense. While he was a relative unknown at the start of the season, a game-sealing interception in the NFC Championship as well as two takeaways in the Super Bowl served as a coming out party for the young linebacker.')
+    sb48 = s(seahawks, broncos,   malcolm_smith,   '1 INT 1 FR 1 TD 9 T',                     43, 8,  'MetLife Stadium',               'East Rutherford', 'NJ', '2014-02-02', 82529,  'XLVIII',  'Bruno Mars',                              '446419923376418818', 'NbcA1UISfG0', 40.8136, -74.0744,  'Malcolm Smith was the de-facto SB MVP for a legendary Seattle defense. While he was a relative unknown at the start of the season, a game-sealing interception in the NFC Championship as well as two takeaways in the Super Bowl served as a coming out party for the young linebacker.')
     sb38 = s(patriots, panthers,  tom_brady,       '32/48 354 YDS 3 TD 1 INT 2 CAR 12 YDS',   32, 29, 'Reliant Stadium',               'Houston',         'TX', '2004-02-01', 71525,  'XXXVIII', 'Janet Jackson',                           '451553657423527936', '7CCWCWOUf',   29.6847, -95.4108,  'Tom Brady led the Patriots to victory while winning his second Super Bowl MVP. His 32 completions are the most in SB history and his 354 yds are the 5th best total in SB history.')

@@ -1,7 +1,3 @@
 #!/bin/bash
 
-. venv/bin/activate
-cat idb/database.py > deleteme.txt
-echo -e "\nreset_database()" >> deleteme.txt
-python manage.py shell < deleteme.txt
-rm -f deleteme.txt
+echo -e 'from idb.database import reset_database\nreset_database()' | python manage.py shell
