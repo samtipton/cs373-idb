@@ -41,8 +41,8 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = (
-    'django.contrib.admin',
-    'django.contrib.auth',
+    #'django.contrib.admin',
+    #'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -54,7 +54,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     # 'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    #'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -69,18 +69,19 @@ WSGI_APPLICATION = 'idb.wsgi.application'
 if('test' in sys.argv):
     DATABASES = {
         'default' : dj_database_url.config(default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3'))
-        
+
     }
-else: 
+else:
     DATABASES = {
-        'default': {
-            "ENGINE": 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'd32vi54g8ai6jj',
-            'USER': 'ixxtrtkrutggss',
-            'PASSWORD': '9-pxBrjhH81zuzhpBvc_XDeC47',
-            'HOST': 'ec2-54-204-36-244.compute-1.amazonaws.com',
-            'PORT': '5432',
-        }
+#        'default': {
+#            "ENGINE": 'django.db.backends.postgresql_psycopg2',
+#            'NAME': 'd32vi54g8ai6jj',
+#            'USER': 'ixxtrtkrutggss',
+#            'PASSWORD': '9-pxBrjhH81zuzhpBvc_XDeC47',
+#            'HOST': 'ec2-54-204-36-244.compute-1.amazonaws.com',
+#            'PORT': '5432',
+#        }
+        'default' : dj_database_url.config(default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3'))
     }
 
 
@@ -110,4 +111,3 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     STATIC_PATH,
 )
-
