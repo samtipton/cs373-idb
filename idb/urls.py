@@ -12,9 +12,9 @@ urlpatterns = patterns('',
 	url(r'^reset-database', api.api_reset_database),
 
 	# Website routes
-	url(r'^superbowls/(\d*)', views.superbowls),
-	url(r'^franchises/(\d*)', views.franchises),
-	url(r'^mvps/(\d*)', views.mvps),
-	url(r'^contact/', views.contact),
+	url(r'^superbowls/(\d*)$', views.superbowls),
+	url(r'^franchises/(\d*)$', views.franchises),
+	url(r'^mvps/(\d*)$', views.mvps),
+	url(r'^contact/$', views.contact),
 	url(r'^$', views.splash)
 )
