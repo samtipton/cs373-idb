@@ -29,7 +29,7 @@ DATABASE_PATH = os.path.join(PROJECT_PATH, 'db.sqlite3')
 SECRET_KEY = 'h#tb420ho@#ob%u&a=rc&t2e6*m!4s-e-m538zzywi9k^8xcz@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_DEBUG = True
 
