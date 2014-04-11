@@ -75,12 +75,18 @@ body {
   padding: 0px 15px 0px 15px;
 }
 
+input {
+  border-radius: 5px;
+  width: 125px;
+} 
+
 
 .table-container {
   position: inherit;
   width: 750px;
   margin: 0px auto;
 }
+
 .row .row li {
   margin-left: -50px;
   margin-top: 25px;
