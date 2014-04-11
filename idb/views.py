@@ -23,7 +23,7 @@ def splash(request) :
 def superbowls(request, id = None) :
 
 	if id.isdigit():
-		if int(id) < len(SuperBowl.objects.all()) :
+		if int(id) <= len(SuperBowl.objects.all()) :
 			url = 'idb/superbowl-template.html'
 			game_id = int(id)
 			game = SuperBowl.objects.get(id = game_id)
@@ -45,7 +45,7 @@ def superbowls(request, id = None) :
 def franchises(request, id = None) :
 
 	if id.isdigit():
-		if int(id) < len(Franchise.objects.all()) :
+		if int(id) <= len(Franchise.objects.all()) :
 			url = 'idb/franchise-template.html'
 			team_id = int(id)
 			team = Franchise.objects.get(id = team_id)
@@ -69,7 +69,7 @@ def franchises(request, id = None) :
 def mvps(request, id = None) :
 
 	if id.isdigit():
-		if int(id) < len(MVP.objects.all()) :
+		if int(id) <= len(MVP.objects.all()) :
 			url = 'idb/mvp-template.html'
 			mvp_id = int(id)
 			mvp = MVP.objects.get(id=mvp_id)
