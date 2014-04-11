@@ -99,6 +99,33 @@ The URL is built based on information provided by the client when the API reques
 
 # Group SBIDB Version 2 API
 
+## The API Root [/api/v2]
+### List the resource collections provided by the API.
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            [{
+                "self": "/api/v2/superbowls",
+                "name": "The Super Bowls",
+                "description": "This is the collection endpoint for the Super Bowl resource."
+            },{
+                "self": "/api/v2/franchises",
+                "name": "The Franchise",
+                "description": "This is the collection endpoint for the Franchise resource."
+            },{
+                "self": "/api/v2/mvps",
+                "name": "The MVPs",
+                "description": "This is the collection endpoint for the MVP resource."
+            },{
+                "self": "/api/v2/analytics",
+                "name": "The Analytics List",
+                "description": "This is the collection endpoint for the Analytic resource."
+            }]
+        }
+
+
 ## The Super Bowls [/api/v2/superbowls]
 ### List all Super Bowl games. [GET]
 + Response 200 (application/json)
