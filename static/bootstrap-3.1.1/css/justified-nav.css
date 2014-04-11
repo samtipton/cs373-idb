@@ -7,10 +7,7 @@ body {
   background-attachment: fixed;
 }
 
-#map-canvas{ 
-  height: 250px; 
-  width: 280px;
-}
+
 
 .jumbotron {
   text-align: center;
@@ -100,6 +97,10 @@ body {
 }
 #row-container .row {
   margin-bottom: 5px;
+}
+
+#map-canvas { 
+  min-height: 229px;
 }
 
 .row:before {

@@ -1,98 +1,125 @@
 {% extends "idb/template.html" %}
 
 {% block content %}
-	
- <div class="row">
-        <div style="padding:0px"class="col-md-3">
-          <img src="../../static/res/MVPs/{{mvp.first_name}} {{mvp.last_name}}.png">
-        </div>
-        <div style="padding:0px" class="col-md-6">
-    		<h1><strong style="color:black; font-size:1.5em">{{mvp.first_name}} {{mvp.last_name}}</strong></h1>
-    		<div>
-	    		<h4 style="color: black">Born on {{mvp.birth_date}} in {{mvp.birth_town}}</h4>
-	    		<h4 style="color: black">High School: {{mvp.high_school}}</h4>
-	    		<h4 style="color: black">College: {{mvp.college}}</h4>
-	    		<h4 style="color: black">Draft year: {{mvp.draft_year}}</h4>
-	    		<h4 style="color: black">Salary: ${{mvp.salary}}</h4>
-	    	</div>
-    	</div>
-      <div id="map-canvas" style="padding:0px" class="col-md-3">
 
-      </div>
-      </div>
-      
-      <br/>
-      <br/>
+<div class="row">
+  <div style="padding:0px"class="col-md-3">
+    <img src="../../static/res/MVPs/{{mvp.first_name}} {{mvp.last_name}}.png" id="headshot">
+  </div>
+  <div style="padding:0px" class="col-md-6">
+    <h1><strong style="color:black; font-size:1.5em">{{mvp.first_name}} {{mvp.last_name}}</strong></h1>
+    <div>
+     <h4 style="color: black">Born on {{mvp.birth_date}} in {{mvp.birth_town}}</h4>
+     <h4 style="color: black">High School: {{mvp.high_school}}</h4>
+     <h4 style="color: black">College: {{mvp.college}}</h4>
+     <h4 style="color: black">Draft year: {{mvp.draft_year}}</h4>
+     <h4 style="color: black">Salary: ${{mvp.salary}}</h4>
+   </div>
+ </div>
+ <div id="map-canvas" style="padding:0px" class="col-md-3">
 
-      <!-- history table -->
-      {% if game_history|length != 0 %} 
-        <div class="row">
-          <h1>Super Bowl MVP Titles</h1>
-          <div class="row">
-            {% for game in game_history %}
-              <a href="/superbowls/{{game.id}}"><img id="game_history" src="../../static/res/SBIcons/{{game.game_number}}.png"></a>
-            {% endfor %}
-      	 </div>
-        </div>
+ </div>
+</div>
 
-        <br/>
-        <br/>
-      {% endif %}
+<br/>
+<br/>
 
-      <!-- history table -->
-      {% if teams|length != 0 %} 
-        <div class="row">
-          <h1>Team</h1>
-          <div class="row">
-            {% for team in teams %}
-              <a href="/franchises/{{team.id}}"><img id="team_history" src="../../static/res/Logos/{{team.team_name}}.png"></a>
-            {% endfor %}
-         </div>
-        </div>
+<!-- history table -->
+{% if game_history|length != 0 %} 
+<div class="row">
+  <h1>Super Bowl MVP Titles</h1>
+  <div class="row">
+    {% for game in game_history %}
+    <a href="/superbowls/{{game.id}}"><img id="game_history" src="../../static/res/SBIcons/{{game.game_number}}.png"></a>
+    {% endfor %}
+  </div>
+</div>
 
-        <br/>
-        <br/>
-      {% endif %}
+<br/>
+<br/>
+{% endif %}
 
-    <!-- social media -->
-    <div class="row">
-      <div style="padding:0px; background-color: white" class="col-md-3"> 
-        <!-- facebook -->
-        <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2F{{mvp.facebook_id}}&amp;width&amp;height=380&amp;colorscheme=light&amp;show_faces=true&amp;header=true&amp;stream=false&amp;show_border=false " scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:395px;" allowTransparency="true"></iframe>
-      </div>
-      <!-- youtube -->
-      <div style="padding:0px" class="col-md-6">  
-        <div class="flex-video widescreen"><iframe width="550" height="400" src="//www.youtube.com/embed/{{mvp.youtube_id}}" frameborder="0" allowfullscreen></iframe></div>
-      </div>
-      <div style="padding:0px" class="col-md-3">
-        <a class="twitter-timeline" href="" data-widget-id="{{mvp.twitter_id}}"></a>
+<!-- history table -->
+{% if teams|length != 0 %} 
+<div class="row">
+  <h1>Team</h1>
+  <div class="row">
+    {% for team in teams %}
+    <a href="/franchises/{{team.id}}"><img id="team_history" src="../../static/res/Logos/{{team.team_name}}.png"></a>
+    {% endfor %}
+  </div>
+</div>
+
+<br/>
+<br/>
+{% endif %}
+
+<!-- social media -->
+<div class="row">
+  <div style="padding:0px; background-color: #c0c0c0" class="col-md-3"> 
+    <!-- facebook -->
+    <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2F{{mvp.facebook_id}}&amp;width&amp;height=380&amp;colorscheme=light&amp;show_faces=true&amp;header=true&amp;stream=false&amp;show_border=false " scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:395px;" allowTransparency="true"></iframe>
+  </div>
+  <!-- youtube -->
+  <div style="padding:0px" class="col-md-6">  
+    <div class="flex-video widescreen"><iframe width="550" height="400" src="//www.youtube.com/embed/{{mvp.youtube_id}}" frameborder="0" allowfullscreen></iframe></div>
+  </div>
+  <div style="padding:0px;background-color: #c0c0c0 " class="col-md-3">
+    <a class="twitter-timeline" href="" data-widget-id="{{mvp.twitter_id}}"></a>
     
 
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-      </div>
-    </div>
+  </div>
+</div>
 
 
-    <script type="text/javascript"
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSXRVKo3e9gwZ8L2zmA5EJ5VGD2y654dU&amp;sensor=false">
-    </script>
+<script type="text/javascript"
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSXRVKo3e9gwZ8L2zmA5EJ5VGD2y654dU&amp;sensor=false">
+</script>
 
-    <script type="text/javascript">
-    function initialize() {
-     var myLatlng = new google.maps.LatLng({{mvp.latitude}},{{mvp.longitude}});
-     var mapOptions = {
-       center: myLatlng,
-       zoom: 8
-     };
-     var map = new google.maps.Map(document.getElementById("map-canvas"),
-       mapOptions);
-     var marker = new google.maps.Marker({
-       position: myLatlng,
-       map: map
-     });
-   }
-   google.maps.event.addDomListener(window, 'load', initialize);
-   </script>
+
+<script type="text/javascript">
+  function initialize() {
+
+   var styles = [
+    {  
+      featureType: 'road',  
+      elementType: 'geometry',  
+      stylers: [  
+      { color: '#c0c0c0' }
+      ]  
+    },
+    {
+      featureType: 'water',
+      elementType: 'geometry',
+      stylers: [
+      { color: '#0033f8' }
+      ]
+    }
+    ];
+  var myLatlng = new google.maps.LatLng({{mvp.latitude}},{{mvp.longitude}});
+  var mapOptions = {
+   center: myLatlng,
+   // width: 50%,
+   mapTypeControlOptions: {
+    mapTypeIds: ['Styled']
+  },
+   zoom: 8,
+   disableDefaultUI: true,  
+    mapTypeId: 'Styled'
+ };
+ var map = new google.maps.Map(document.getElementById("map-canvas"),
+   mapOptions);
+ var marker = new google.maps.Marker({
+   // icon: '../../static/res/marker.png',
+   position: myLatlng,
+   map: map
+ });
+ var styledMapType = new google.maps.StyledMapType(styles, { name: 'Styled' });
+  map.mapTypes.set('Styled', styledMapType);
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
 {% endblock %}
 
 
