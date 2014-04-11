@@ -9,7 +9,8 @@ players that were declared the Super Bowl's Most-Valueable-Player (MVP).
 # HTTP Compliance and API
 The API is exposed as a RESTful webservice over HTTP with JSON as the only payload format. Deviation from
 the API by using undocumented HTTP verbs, HTTP headers, and/or URIs, CAN and WILL cause undefined behavior
-and/or errors.
+and/or errors. Addionally, providing incorrect, inconsistent, insuficient, illegal, undefined, and/or unknown
+data IS a violation of using this API and the result of the operations will be `400 Bad Request`.
 
 ## Supported HTTP Status Codes
 * 200 `OK` - The request was successful.
@@ -27,7 +28,7 @@ and/or errors.
 * `DELETE` - Supported by most Resources.
 
 ## API Authentication and Authorization
-This functionality is currently not supported but security is still enforced.
+This functionality is currently not supported and not enforced.
 
 # Response Payload
 All API operations return a response payload (in JSON) with extra information. This is addition to returning
@@ -38,13 +39,14 @@ an appropriate HTTP Status Code and HTTP headers.
             "success": true,
             "data":
             {
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
                 "id": 0
+                "self": "/api/v2/superbowls/0",
+                "collection": "/api/v2/superbowls",
             }
         }
 
-Where `success` is a boolean value indicating that the operation (as an atomic action) succeeded. And `data` 
-is result of the operation (in this case a reference to a Super Bowl resouce). If the operation does not 
+Where `success` is a boolean value indicating that the operation (as an atomic action) succeeded. And `data`
+is result of the operation (in this case a reference to a Super Bowl resouce). If the operation does not
 return a result, the value of `data` is `null`.
 
 ## Failed Operations
@@ -56,9 +58,9 @@ return a result, the value of `data` is `null`.
                 "message": "The HTTP method 'POST' is not allowed on the resource '/api/v2/superbowls/0'."
             }
         }
-        
+
 Where `success` is a boolean value indicating that the operation (as an atomic action) failed. And `error` is
-an object describing the type of error (`type`, a string) and why it failed (`message`, a string). 
+an object describing the type of error (`type`, a string) and why it failed (`message`, a string).
 
 # API Patterns
 The API tries to provide some features for auto-discovery and easy navigation. Appart from common REST
@@ -70,73 +72,57 @@ patterns, we provide: unique identifiers, direct resource links, and collection 
         }
 
 Every resource has a unique positive integer identifier. Whenever that resource is referenced, its `id` field
-is provided. This identifier is used for many things including identifying the resource in a resource 
+is provided. This identifier is used for many things including identifying the resource in a resource
 collection. (e.g. /superbowls/0)
 
 ## Direct Resource Link
         {
-            "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0"
+            "self": "/api/v2/superbowls/0"
         }
-        
+
 Every resource has a `self` property with the URL that represents that specific resource. This can be used to
-navigate to that resource and perform operations on it (such as `GET`, `PUT`, `DELETE`). The URL is built 
-based on information provided by the client when the API request is made (such as the `Referer` and `Host` 
-HTTP headers.)
+navigate to that resource and perform operations on it (such as `GET`, `PUT`, `DELETE`).
 
 ## Collection Link
         {
-            "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+            "collection": "/api/v2/superbowls"
         }
-        
+
 Every resource has a `collection` property with the URL that represents its resource collection. This can be
 used to navigate to that resurce collection and perform additional operations on it (such as `GET`, `POST`).
-The URL is built based on information provided by the client when the API request is made (such as the 
-`Referer` and `Host` HTTP headers.)
 
-# The REST API (TODO: Finish everything bellow here.)
+# The REST API
 
-# Group The Roots
+# Group SBIDB Version 2 API
 
-## The Gateway [/api]
-### List all API versions [GET]
+## The API Root [/api/v2]
+### List the resource collections provided by the API.
 + Response 200 (application/json)
 
         {
             "success": true,
             "data":
             [{
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2",
-                "name": "SBIDB API Version 2",
-                "description": "This is the endpoint root for the version 2 API."
-            }]
-        }
-
-## The Version 2 API [/api/v2]
-### List all resource collections [GET]
-+ Response 200 (application/json)
-
-        {
-            "success": true,
-            "data":
-            [{
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
+                "self": "/api/v2/superbowls",
                 "name": "The Super Bowls",
                 "description": "This is the collection endpoint for the Super Bowl resource."
             },{
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises",
+                "self": "/api/v2/franchises",
                 "name": "The Franchise",
-                "description": "This is the collection endpoint for the franchise resource.",
+                "description": "This is the collection endpoint for the Franchise resource."
             },{
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps",
+                "self": "/api/v2/mvps",
                 "name": "The MVPs",
-                "description": "This is the collection endpoint for the MVP resource.",
+                "description": "This is the collection endpoint for the MVP resource."
+            },{
+                "self": "/api/v2/analytics",
+                "name": "The Analytics List",
+                "description": "This is the collection endpoint for the Analytic resource."
             }]
         }
-        
 
-# Group The Super Bowls
 
-## Super Bowls [/api/superbowls]
+## The Super Bowls [/api/v2/superbowls]
 ### List all Super Bowl games. [GET]
 + Response 200 (application/json)
 
@@ -145,26 +131,28 @@ The URL is built based on information provided by the client when the API reques
             "data":
             [{
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
+                "self": "/api/v2/superbowls/0",
+                "collection": "/api/v2/superbowls",
                 "winning_franchise":
                 {
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                    "self": "/api/v2/franchises/0",
+                    "collection": "/api/v2/franchises"
                 },
                 "losing_franchise":
                 {
                     "id": 1,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/1",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                    "self": "/api/v2/franchises/1",
+                    "collection": "/api/v2/franchises"
                 },
-                "mvp": 
+                "mvp":
                 {
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                    "self": "/api/v2/mvps/0",
+                    "collection": "/api/v2/mvps"
                 },
+                "mvp_stats": "3 TDs",
+                "mvp_blurb": "Superior performance from this guy.",
                 "winning_score": 43,
                 "losing_score": 8,
                 "venue_name": "MetLife Stadium",
@@ -173,13 +161,238 @@ The URL is built based on information provided by the client when the API reques
                 "game_day": "2014-02-02",
                 "attendance": 82529,
                 "game_number": "XLVIII",
-                "halftime_performer": "Bruno Mars"
+                "halftime_performer": "Bruno Mars",
+                "twitter_id": "9905544",
+                "youtube_id": "superbowl34",
+                "latitude": 315.22,
+                "longitude": 98.33
             }]
         }
 
-# Group The Franchises
+### Create a Super Bowl game entry. [POST]
++ Request (application/json)
 
-## NFL Franchises [/api/franchises]
+        {
+            "winning_franchise":
+            {
+                "id": 0
+            },
+            "losing_franchise":
+            {
+                "id": 1
+            },
+            "mvp":
+            {
+                "id": 0
+            },
+            "mvp_stats": "3 TDs",
+            "mvp_blurb": "Superior performance from this guy.",
+            "winning_score": 43,
+            "losing_score": 8,
+            "venue_name": "MetLife Stadium",
+            "venue_city": "East Rutherford",
+            "venue_state": "NJ",
+            "game_day": "2014-02-02",
+            "attendance": 82529,
+            "game_number": "XLVIII",
+            "halftime_performer": "Bruno Mars",
+            "twitter_id": "9905544",
+            "youtube_id": "superbowl34",
+            "latitude": 315.22,
+            "longitude": 98.33
+        }
+
++ Response 201 (application/json)
+
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "/api/v2/superbowls/0",
+                "collection": "/api/v2/superbowls"
+            }
+        }
+        
++ Response 400 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_BAD_REQUEST",
+                "message": "The resource '/api/v2/franchise/0' can not be referenced because it does not exist."
+            }
+        }
+
+## A Super Bowl [/api/v2/superbowls/{id}]
+### Get information about a specific Super Bowl game. [GET]
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "/api/v2/superbowls/0",
+                "collection": "/api/v2/superbowls",
+                "winning_franchise":
+                {
+                    "id": 0,
+                    "self": "/api/v2/franchises/0",
+                    "collection": "/api/v2/franchises"
+                },
+                "losing_franchise":
+                {
+                    "id": 1,
+                    "self": "/api/v2/franchises/1",
+                    "collection": "/api/v2/franchises"
+                },
+                "mvp":
+                {
+                    "id": 0,
+                    "self": "/api/v2/mvps/0",
+                    "collection": "/api/v2/mvps"
+                },
+                "mvp_stats": "3 TDs",
+                "mvp_blurb": "Superior performance from this guy.",
+                "winning_score": 43,
+                "losing_score": 8,
+                "venue_name": "MetLife Stadium",
+                "venue_city": "East Rutherford",
+                "venue_state": "NJ",
+                "game_day": "2014-02-02",
+                "attendance": 82529,
+                "game_number": "XLVIII",
+                "halftime_performer": "Bruno Mars",
+                "twitter_id": "9905544",
+                "youtube_id": "superbowl34",
+                "latitude": 315.22,
+                "longitude": 98.33
+            }
+        }
+
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/superbowls/0' does not exist."
+            }
+        }
+
+
+### Update information about a specific Super Bowl game. [PUT]
++ Request (application/json)
+
+        {
+            "winning_franchise":
+            {
+                "id": 0
+            },
+            "losing_franchise":
+            {
+                "id": 1
+            },
+            "mvp":
+            {
+                "id": 0
+            },
+            "mvp_stats": "3 TDs",
+            "mvp_blurb": "Superior performance from this guy.",
+            "winning_score": 43,
+            "losing_score": 8,
+            "venue_name": "MetLife Stadium",
+            "venue_city": "East Rutherford",
+            "venue_state": "NJ",
+            "game_day": "2014-02-02",
+            "attendance": 82529,
+            "game_number": "XLVIII",
+            "halftime_performer": "Bruno Mars",
+            "twitter_id": "9905544",
+            "youtube_id": "superbowl34",
+            "latitude": 315.22,
+            "longitude": 98.33
+        }
+
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "/api/v2/superbowls/0",
+                "collection": "/api/v2/superbowls",
+                "winning_franchise":
+                {
+                    "id": 0,
+                    "self": "/api/v2/franchises/0",
+                    "collection": "/api/v2/franchises"
+                },
+                "losing_franchise":
+                {
+                    "id": 1,
+                    "self": "/api/v2/franchises/1",
+                    "collection": "/api/v2/franchises"
+                },
+                "mvp":
+                {
+                    "id": 0,
+                    "self": "/api/v2/mvps/0",
+                    "collection": "/api/v2/mvps"
+                },
+                "mvp_stats": "3 TDs",
+                "mvp_blurb": "Superior performance from this guy.",
+                "winning_score": 43,
+                "losing_score": 8,
+                "venue_name": "MetLife Stadium",
+                "venue_city": "East Rutherford",
+                "venue_state": "NJ",
+                "game_day": "2014-02-02",
+                "attendance": 82529,
+                "game_number": "XLVIII",
+                "halftime_performer": "Bruno Mars",
+                "twitter_id": "9905544",
+                "youtube_id": "superbowl34",
+                "latitude": 315.22,
+                "longitude": 98.33
+            }
+        }
+
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/superbowls/0' does not exist."
+            }
+        }
+        
+### Remove a specific Super Bowl game entry. [DELETE]
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data": null
+        }
+        
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/superbowls/0' does not exist."
+            }
+        }
+
+## The NFL Franchises [/api/v2/franchises]
 ### List all NFL franchises. [GET]
 + Response 200 (application/json)
 
@@ -188,19 +401,25 @@ The URL is built based on information provided by the client when the API reques
             "data":
             [{
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises",
+                "self": "/api/v2/franchises/0",
+                "collection": "/api/v2/franchises",
                 "mvps":
                 [{
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                    "self": "/api/v2/mvps/0",
+                    "collection": "/api/v2/mvps"
                 }],
-                "superbowls":
+                "superbowls_won":
                 [{
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
+                    "self": "/api/v2/superbowls/0",
+                    "collection": "/api/v2/superbowls"
+                }],
+                "superbowls_lost":
+                [{
+                    "id": 1,
+                    "self": "/api/v2/superbowls/1",
+                    "collection": "/api/v2/superbowls"
                 }],
                 "team_name": "Seahawks",
                 "team_city": "Seattle",
@@ -211,13 +430,227 @@ The URL is built based on information provided by the client when the API reques
                 "year_founded": 1974,
                 "active": true,
                 "home_stadium": "CenturyLink Field",
-                "division": "NFCW"
+                "division": "NFC West",
+                "facebook_id": "seahawks",
+                "twitter_id": "GoHawks",
+                "youtube_id": "vh500h",
+                "latitude": 334.6,
+                "longitude": 44.1
             }]
         }
 
-# Group The MVPs
+### Create an NFL franchise entry. [POST]
++ Request (application/json)
 
-## Super Bowl MVPs [/api/mvps]
+        {
+            "mvps":
+            [{
+                "id": 0
+            }],
+            "superbowls_won":
+            [{
+                "id": 0
+            }],
+            "superbowls_lost":
+            [{
+                "id": 1,
+            }],
+            "team_name": "Seahawks",
+            "team_city": "Seattle",
+            "team_state": "WA",
+            "current_owner": "Paul Allen",
+            "current_gm": "John Schneider",
+            "current_head_coach": "Pete Carroll",
+            "year_founded": 1974,
+            "active": true,
+            "home_stadium": "CenturyLink Field",
+            "division": "NFC West",
+            "facebook_id": "seahawks",
+            "twitter_id": "GoHawks",
+            "youtube_id": "vh500h",
+            "latitude": 334.6,
+            "longitude": 44.1
+        }
+
++ Response 201 (application/json)
+
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "/api/v2/franchises/0",
+                "collection": "/api/v2/franchises"
+            }
+        }
+
+## An NFL Franchise [/api/v2/franchises/{id}]
+### Get information about a specific NFL franchise. [GET]
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "/api/v2/franchises/0",
+                "collection": "/api/v2/franchises",
+                "mvps":
+                [{
+                    "id": 0,
+                    "self": "/api/v2/mvps/0",
+                    "collection": "/api/v2/mvps"
+                }],
+                "superbowls_won":
+                [{
+                    "id": 0,
+                    "self": "/api/v2/superbowls/0",
+                    "collection": "/api/v2/superbowls"
+                }],
+                "superbowls_lost":
+                [{
+                    "id": 1,
+                    "self": "/api/v2/superbowls/1",
+                    "collection": "/api/v2/superbowls"
+                }],
+                "team_name": "Seahawks",
+                "team_city": "Seattle",
+                "team_state": "WA",
+                "current_owner": "Paul Allen",
+                "current_gm": "John Schneider",
+                "current_head_coach": "Pete Carroll",
+                "year_founded": 1974,
+                "active": true,
+                "home_stadium": "CenturyLink Field",
+                "division": "NFC West",
+                "facebook_id": "seahawks",
+                "twitter_id": "GoHawks",
+                "youtube_id": "vh500h",
+                "latitude": 334.6,
+                "longitude": 44.1
+            }
+        }
+
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/franchises/0' does not exist."
+            }
+        }
+
+### Update information about a specific NFL franchise. [PUT]
++ Request (application/json)
+
+        {
+            "mvps":
+            [{
+                "id": 0,
+            }],
+            "superbowls_won":
+            [{
+                "id": 0,
+            }],
+            "superbowls_lost":
+            [{
+                "id": 1,
+            }],
+            "team_name": "Seahawks",
+            "team_city": "Seattle",
+            "team_state": "WA",
+            "current_owner": "Paul Allen",
+            "current_gm": "John Schneider",
+            "current_head_coach": "Pete Carroll",
+            "year_founded": 1974,
+            "active": true,
+            "home_stadium": "CenturyLink Field",
+            "division": "NFC West",
+            "facebook_id": "seahawks",
+            "twitter_id": "GoHawks",
+            "youtube_id": "vh500h",
+            "latitude": 334.6,
+            "longitude": 44.1
+        }
+
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/franchises/0' does not exist."
+            }
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "/api/v2/franchises/0",
+                "collection": "/api/v2/franchises",
+                "mvps":
+                [{
+                    "id": 0,
+                    "self": "/api/v2/mvps/0",
+                    "collection": "/api/v2/mvps"
+                }],
+                "superbowls_won":
+                [{
+                    "id": 0,
+                    "self": "/api/v2/superbowls/0",
+                    "collection": "/api/v2/superbowls"
+                }],
+                "superbowls_lost":
+                [{
+                    "id": 1,
+                    "self": "/api/v2/superbowls/1",
+                    "collection": "/api/v2/superbowls"
+                }],
+                "team_name": "Seahawks",
+                "team_city": "Seattle",
+                "team_state": "WA",
+                "current_owner": "Paul Allen",
+                "current_gm": "John Schneider",
+                "current_head_coach": "Pete Carroll",
+                "year_founded": 1974,
+                "active": true,
+                "home_stadium": "CenturyLink Field",
+                "division": "NFC West",
+                "facebook_id": "seahawks",
+                "twitter_id": "GoHawks",
+                "youtube_id": "vh500h",
+                "latitude": 334.6,
+                "longitude": 44.1
+            }
+        }
+
+### Remove a specific franchise entry. [DELETE]
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data": null
+        }
+        
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/franchises/0' does not exist."
+            }
+        }
+
+## The Super Bowl MVPs [/api/v2/mvps]
 ### List all the MVPs [GET]
 + Response 200 (application/json)
 
@@ -226,19 +659,19 @@ The URL is built based on information provided by the client when the API reques
             "data":
             [{
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps",
+                "self": "/api/v2/mvps/0",
+                "collection": "/api/v2/mvps",
                 "superbowls":
                 [{
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
+                    "self": "/api/v2/superbowls/0",
+                    "collection": "/api/v2/superbowls"
                 }],
                 "franchises":
                 [{
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                    "self": "/api/v2/franchises/0",
+                    "collection": "/api/v2/franchises"
                 }],
                 "first_name": "Malcolm",
                 "last_name": "Smith",
@@ -247,8 +680,296 @@ The URL is built based on information provided by the client when the API reques
                 "birth_town": "Woodland Hills, CA",
                 "high_school": "Woodland Hills (CA) Taft",
                 "college": "Southern California",
-                "draft_year": 2011, 
-                "active": true, 
+                "draft_year": 2011,
+                "active": true,
                 "salary": 465000,
+                "facebook_id": "MalcomFanPage",
+                "twitter_id": "MalcomTweets",
+                "youtube_id": "ghwhh09",
+                "latitude": 100.5,
+                "longitude": 37.6
             }]
+        }
+
+### Create an MVP entry. [POST]
++ Request (application/json)
+
+        {
+            "superbowls":
+            [{
+                "id": 0
+            }],
+            "franchises":
+            [{
+                "id": 0
+            }],
+            "first_name": "Malcolm",
+            "last_name": "Smith",
+            "position": "LB",
+            "birth_date": "1989-07-05",
+            "birth_town": "Woodland Hills, CA",
+            "high_school": "Woodland Hills (CA) Taft",
+            "college": "Southern California",
+            "draft_year": 2011,
+            "active": true,
+            "salary": 465000,
+            "facebook_id": "MalcomFanPage",
+            "twitter_id": "MalcomTweets",
+            "youtube_id": "ghwhh09",
+            "latitude": 100.5,
+            "longitude": 37.6
+        }
+
++ Response 201 (application/json)
+
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "/api/v2/mvps/0",
+                "collection": "/api/v2/mvps"
+            }
+        }
+
+## A SuperBowl MVP [/api/v2/mvps/{id}]
+### Get information about a specific Super Bowl MVP. [GET]
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "/api/v2/mvps/0",
+                "collection": "/api/v2/mvps",
+                "superbowls":
+                [{
+                    "id": 0,
+                    "self": "/api/v2/superbowls/0",
+                    "collection": "/api/v2/superbowls"
+                }],
+                "franchises":
+                [{
+                    "id": 0,
+                    "self": "/api/v2/franchises/0",
+                    "collection": "/api/v2/franchises"
+                }],
+                "first_name": "Malcolm",
+                "last_name": "Smith",
+                "position": "LB",
+                "birth_date": "1989-07-05",
+                "birth_town": "Woodland Hills, CA",
+                "high_school": "Woodland Hills (CA) Taft",
+                "college": "Southern California",
+                "draft_year": 2011,
+                "active": true,
+                "salary": 465000,
+                "facebook_id": "MalcomFanPage",
+                "twitter_id": "MalcomTweets",
+                "youtube_id": "ghwhh09",
+                "latitude": 100.5,
+                "longitude": 37.6
+            }
+        }
+
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/mvps/0' does not exist."
+            }
+        }
+        
+### Update information about a specific Super Bowl MVP. [PUT]
++ Request (application/json)
+
+        {
+            "superbowls":
+            [{
+                "id": 0
+            }],
+            "franchises":
+            [{
+                "id": 0
+            }],
+            "first_name": "Malcolm",
+            "last_name": "Smith",
+            "position": "LB",
+            "birth_date": "1989-07-05",
+            "birth_town": "Woodland Hills, CA",
+            "high_school": "Woodland Hills (CA) Taft",
+            "college": "Southern California",
+            "draft_year": 2011,
+            "active": true,
+            "salary": 465000,
+            "facebook_id": "MalcomFanPage",
+            "twitter_id": "MalcomTweets",
+            "youtube_id": "ghwhh09",
+            "latitude": 100.5,
+            "longitude": 37.6
+        }
+
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "/api/v2/franchises/0",
+                "collection": "/api/v2/franchises",
+                "mvps":
+                [{
+                    "id": 0,
+                    "self": "/api/v2/mvps/0",
+                    "collection": "/api/v2/mvps"
+                }],
+                "superbowls":
+                [{
+                    "id": 0,
+                    "self": "/api/v2/superbowls/0",
+                    "collection": "/api/v2/superbowls"
+                }],
+                "first_name": "Malcolm",
+                "last_name": "Smith",
+                "position": "LB",
+                "birth_date": "1989-07-05",
+                "birth_town": "Woodland Hills, CA",
+                "high_school": "Woodland Hills (CA) Taft",
+                "college": "Southern California",
+                "draft_year": 2011,
+                "active": true,
+                "salary": 465000,
+                "facebook_id": "MalcomFanPage",
+                "twitter_id": "MalcomTweets",
+                "youtube_id": "ghwhh09",
+                "latitude": 100.5,
+                "longitude": 37.6
+            }
+        }
+
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/mvps/0' does not exist."
+            }
+        }
+
+### Remove a specific Super Bowl MVP entry. [DELETE]
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data": null
+        }
+
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/mvps/0' does not exist."
+            }
+        }
+
+## The Analytics List [/api/v2/analytics]
+### List all the analytical queries available. [GET]
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            [{
+                "id": 0,
+                "self": "/api/v2/analytics/0",
+                "collection": "/api/v2/analytics",
+                "results": "/api/v2/analytics/0/results",
+                "query": "SELECT team_name, year_founded FROM idb_franchise WHERE divsion = 'NFC West' AND active ORDER BY year_founded DESC",
+                "name": "Active franchises in the NFC West",
+                "description": "Show the name of the franchises and their founding year if they are still active and in the NFC west division."
+            }]
+        }
+        
+## An Analytic Query [/api/v2/analytics/{id}]
+### Get information about a specific analytical query. [GET]
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "/api/v2/analytics/0",
+                "collection": "/api/v2/analytics",
+                "results": "/api/v2/analytics/0/results",
+                "query": "SELECT team_name, year_founded FROM idb_franchise WHERE divsion = 'NFC West' AND active ORDER BY year_founded DESC",
+                "name": "Active franchises in the NFC West",
+                "description": "Show the name of the franchises and their founding year if they are still active and in the NFC west division."
+            }
+        }
+
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/analytics/0' does not exist."
+            }
+        }
+        
+## Analytic Query Results [/api/v2/analytics/{id}/results]
+### Get the results of running an analytical query. [GET]
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "/api/v2/analytics/0",
+                "collection": "/api/v2/analytics",
+                "results": "/api/v2/analytics/0/results",
+                "headers":
+                [
+                    "team_name",
+                    "year_founded"
+                ],
+                "values":
+                [[
+                    "Seahawks",
+                    1974
+                ],[
+                    "49ers",
+                    1946
+                ],[
+                    "Rams",
+                    1936
+                ],[
+                    "Cardinals",
+                    1898
+                ]]
+            }
+        }
+
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/analytics/0' does not exist."
+            }
         }

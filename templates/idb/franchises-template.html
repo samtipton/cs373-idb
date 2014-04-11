@@ -8,14 +8,13 @@
 		<div class="row">
 	{% endif %}
 	<div id="image" class="col-md-3">
-		<a href="/teams/{{team.id}}"><img style="width:200px" src="../../static/res/logos/{{team.team_name}}.png" /></a>
+		<a href="/franchises/{{team.id}}"><img style="width:200px" src="../../static/res/Logos/{{team.team_name}}.png" /></a>
 	</div>
 	<div class="col-md-3">
           <ul>
-          	<li><p>{{team.team_name}}</p></li>
-          	<li><p>Division: {{team.division}}</p></li>
-          	<li><p>{{team.team_city}}</p></li>
-          	<li><p>est: {{team.year_founded}}</p></li>
+          	<li><a href="/franchises/{{team.id}}"><h3>{{team.team_city}} {{team.team_name}}</h3></a></li>
+          	<li><h4>Division: {{team.division}}</h4></li>
+          	<li><h4>est:{{team.year_founded}}</h4></li>
           </ul>
     </div>
     {% if not forloop.counter0|divisibleby:2 %}
