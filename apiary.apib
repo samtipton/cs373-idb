@@ -28,7 +28,7 @@ data IS a violation of using this API and the result of the operations will be `
 * `DELETE` - Supported by most Resources.
 
 ## API Authentication and Authorization
-This functionality is currently not supported is not enforced.
+This functionality is currently not supported and not enforced.
 
 # Response Payload
 All API operations return a response payload (in JSON) with extra information. This is addition to returning
@@ -858,4 +858,95 @@ The URL is built based on information provided by the client when the API reques
                 "message": "The resource '/api/v2/mvps/0' does not exist."
             }
         }
+
+## The Analytics List [/api/v2/analytics]
+### List all the analytical queries available. [GET]
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            [{
+                "id": 0,
+                "self": "/api/v2/analytics/0",
+                "collection": "/api/v2/analytics",
+                "results": "/api/v2/analytics/0/results",
+                "query": "SELECT team_name, year_founded FROM idb_franchise WHERE divsion = 'NFC West' AND active ORDER BY year_founded DESC",
+                "name": "Active franchises in the NFC West",
+                "description": "Show the name of the franchises and their founding year if they are still active and in the NFC west division."
+            }]
+        }
         
+## An Analytic Query [/api/v2/analytics/{id}]
+### Get information about a specific analytical query. [GET]
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "/api/v2/analytics/0",
+                "collection": "/api/v2/analytics",
+                "results": "/api/v2/analytics/0/results",
+                "query": "SELECT team_name, year_founded FROM idb_franchise WHERE divsion = 'NFC West' AND active ORDER BY year_founded DESC",
+                "name": "Active franchises in the NFC West",
+                "description": "Show the name of the franchises and their founding year if they are still active and in the NFC west division."
+            }
+        }
+
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/analytics/0' does not exist."
+            }
+        }
+        
+## Analytic Query Results [/api/v2/analytics/{id}/results]
+### Get the results of running an analytical query. [GET]
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data":
+            {
+                "id": 0,
+                "self": "/api/v2/analytics/0",
+                "collection": "/api/v2/analytics",
+                "results": "/api/v2/analytics/0/results",
+                "headers":
+                [
+                    "team_name",
+                    "year_founded"
+                ],
+                "values":
+                [[
+                    "Seahawks",
+                    1974
+                ],[
+                    "49ers",
+                    1946
+                ],[
+                    "Rams",
+                    1936
+                ],[
+                    "Cardinals",
+                    1898
+                ]]
+            }
+        }
+
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/analytics/0' does not exist."
+            }
+        }
