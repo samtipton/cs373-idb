@@ -7,13 +7,12 @@ body {
   background-attachment: fixed;
 }
 
-h1, p {
-  color: white;
-}
 
-.content-mat {
-  background : url("../../res/mat.png");
-  padding: 10px 10px;
+
+.jumbotron {
+  text-align: center;
+  background-color: transparent;
+  margin: -50px 0px;  
 }
 
 .jumbotron h1 {
@@ -22,8 +21,55 @@ h1, p {
   text-shadow: 1px 0 black, 0 2px black, 2px 0 black, 0 1px black;
 }
 
-#myCarousel1, #myCarousel2, #myCarousel3 {
-  height: 300px;
+#SBCarousel, #FranchiseCarousel, #MVPCarousel {
+  height: 400px;
+  width: 400px;
+}
+
+#carousel-container {
+  border: 1px solid white;
+  display:none;
+}
+
+#scoreboard * {
+  display: inline;
+  padding: 0px 20px;
+}
+
+
+#scoreboard .container-fluid a img {
+  width: 350px;
+}
+
+#scoreboard .container-fluid:nth-child(0) {
+  float:left;
+}
+
+#scoreboard .container-fluid:nth-child(2) {
+  float:right;
+}
+
+#scoreboard h1 {
+  font-weight: bold;
+  font-size: 55px;
+  font-color: black;
+}
+
+#mvpbar .col-md-1 {
+  font-size: 15px;
+  font-color: black;
+  font-weight: bold;
+}
+
+#mvpbar img {
+
+  width:150px; 
+  border:1px black solid;
+}
+
+#game_history, #mvp_history, #team_history {
+  width: 200px;
+  padding: 0px 15px 0px 15px;
 }
 
 
@@ -53,6 +99,10 @@ h1, p {
   margin-bottom: 5px;
 }
 
+#map-canvas { 
+  min-height: 229px;
+}
+
 .row:before {
   margin: 0px;
 }
@@ -70,32 +120,6 @@ h1, p {
   font-size: 1em;
   font-weight: 900;
 }
-.twitter-container {
-  position : absolute;
-  left : 1000px;
-  top : 250px;
-  width : 25%;
-  height: 150%;
-}
-
-.googlemaps-container {
-  width: 600px;
-  margin: 0px auto;
-}
-
-.faceoff .mvp img {
-  margin: 0px auto;
-}
-
-.facebook-container {
-  position : absolute;
-  right: 1000px;
-  top : 250px;
-}
-
-.youtube-container {
-  margin-top: 80px;
-}
 
 .container {
   position: relative;
@@ -106,22 +130,13 @@ h1, p {
   padding-top: 40px;
   padding-bottom: 40px;
   margin-top: 40px;
-
+  float: bottom;
 
 }
 
 .footer p {
     color: #eadb1f; 
     font-weight: bold;
-}
-
-
-.faceoff * {
-  text-align: center;
-  display: inline;
-  padding : 0px 25px 0px 25px;
-  width : 100%;
-  height : 100%;
 }
 
 .btn.btn-primary {
@@ -131,11 +146,8 @@ h1, p {
 .panel-heading p {
   text-align: center;
 }
-/* Main marketing message and sign up button */
-.jumbotron {
-  text-align: center;
-  background-color: transparent;
-}
+
+
 .jumbotron .btn {
   padding: 14px 24px;
   font-size: 21px;
@@ -147,6 +159,22 @@ h1, p {
 
 .table * {
   text-align: center;
+}
+
+h3 a:link, h3 a:visited {
+  color: black;
+  font-weight: bold;
+}
+
+h4 a:link, h4 a:visited {
+  color: inherit;
+}  
+
+h3 a:hover, h4 a:hover {color: #217497;}  
+
+li h3 {
+  font-weight: bold;
+  color: black;
 }
 
 li {
@@ -184,6 +212,10 @@ li {
   background-image: none;
   box-shadow: inset 0 3px 7px rgba(0,0,0,.15);
 }
+
+a:hover {
+  text-decoration: none;
+}
 .nav-justified > li:first-child > a {
   border-radius: 5px 5px 0 0;
 }
@@ -209,6 +241,7 @@ li {
     border-radius: 0 5px 5px 0;
   }
 }
+
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {

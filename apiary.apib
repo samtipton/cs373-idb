@@ -9,7 +9,8 @@ players that were declared the Super Bowl's Most-Valueable-Player (MVP).
 # HTTP Compliance and API
 The API is exposed as a RESTful webservice over HTTP with JSON as the only payload format. Deviation from
 the API by using undocumented HTTP verbs, HTTP headers, and/or URIs, CAN and WILL cause undefined behavior
-and/or errors.
+and/or errors. Addionally, providing incorrect, inconsistent, insuficient, illegal, undefined, and/or unknown
+data IS a violation of using this API and the result of the operations will be `400 Bad Request`.
 
 ## Supported HTTP Status Codes
 * 200 `OK` - The request was successful.
@@ -27,7 +28,7 @@ and/or errors.
 * `DELETE` - Supported by most Resources.
 
 ## API Authentication and Authorization
-This functionality is currently not supported but security is still enforced.
+This functionality is currently not supported is not enforced.
 
 # Response Payload
 All API operations return a response payload (in JSON) with extra information. This is addition to returning
@@ -38,8 +39,9 @@ an appropriate HTTP Status Code and HTTP headers.
             "success": true,
             "data":
             {
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
                 "id": 0
+                "self": "/api/v2/superbowls/0",
+                "collection": "/api/v2/superbowls",
             }
         }
 
@@ -75,7 +77,7 @@ collection. (e.g. /superbowls/0)
 
 ## Direct Resource Link
         {
-            "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0"
+            "self": "/api/v2/superbowls/0"
         }
 
 Every resource has a `self` property with the URL that represents that specific resource. This can be used to
@@ -85,7 +87,7 @@ HTTP headers.)
 
 ## Collection Link
         {
-            "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+            "collection": "/api/v2/superbowls"
         }
 
 Every resource has a `collection` property with the URL that represents its resource collection. This can be
@@ -97,28 +99,6 @@ The URL is built based on information provided by the client when the API reques
 
 # Group SBIDB Version 2 API
 
-## The Version 2 API [/api/v2]
-### List all resource collections [GET]
-+ Response 200 (application/json)
-
-        {
-            "success": true,
-            "data":
-            [{
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
-                "name": "The Super Bowls",
-                "description": "This is the collection endpoint for the Super Bowl resource."
-            },{
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises",
-                "name": "The Franchise",
-                "description": "This is the collection endpoint for the franchise resource."
-            },{
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps",
-                "name": "The MVPs",
-                "description": "This is the collection endpoint for the MVP resource."
-            }]
-        }
-
 ## The Super Bowls [/api/v2/superbowls]
 ### List all Super Bowl games. [GET]
 + Response 200 (application/json)
@@ -128,26 +108,28 @@ The URL is built based on information provided by the client when the API reques
             "data":
             [{
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
+                "self": "/api/v2/superbowls/0",
+                "collection": "/api/v2/superbowls",
                 "winning_franchise":
                 {
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                    "self": "/api/v2/franchises/0",
+                    "collection": "/api/v2/franchises"
                 },
                 "losing_franchise":
                 {
                     "id": 1,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/1",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                    "self": "/api/v2/franchises/1",
+                    "collection": "/api/v2/franchises"
                 },
                 "mvp":
                 {
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                    "self": "/api/v2/mvps/0",
+                    "collection": "/api/v2/mvps"
                 },
+                "mvp_stats": "3 TDs",
+                "mvp_blurb": "Superior performance from this guy.",
                 "winning_score": 43,
                 "losing_score": 8,
                 "venue_name": "MetLife Stadium",
@@ -156,7 +138,11 @@ The URL is built based on information provided by the client when the API reques
                 "game_day": "2014-02-02",
                 "attendance": 82529,
                 "game_number": "XLVIII",
-                "halftime_performer": "Bruno Mars"
+                "halftime_performer": "Bruno Mars",
+                "twitter_id": "9905544",
+                "youtube_id": "superbowl34",
+                "latitude": 315.22,
+                "longitude": 98.33
             }]
         }
 
@@ -176,6 +162,8 @@ The URL is built based on information provided by the client when the API reques
             {
                 "id": 0
             },
+            "mvp_stats": "3 TDs",
+            "mvp_blurb": "Superior performance from this guy.",
             "winning_score": 43,
             "losing_score": 8,
             "venue_name": "MetLife Stadium",
@@ -184,18 +172,33 @@ The URL is built based on information provided by the client when the API reques
             "game_day": "2014-02-02",
             "attendance": 82529,
             "game_number": "XLVIII",
-            "halftime_performer": "Bruno Mars"
+            "halftime_performer": "Bruno Mars",
+            "twitter_id": "9905544",
+            "youtube_id": "superbowl34",
+            "latitude": 315.22,
+            "longitude": 98.33
         }
 
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
         {
             "success": true,
             "data":
             {
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+                "self": "/api/v2/superbowls/0",
+                "collection": "/api/v2/superbowls"
+            }
+        }
+        
++ Response 400 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_BAD_REQUEST",
+                "message": "The resource '/api/v2/franchise/0' can not be referenced because it does not exist."
             }
         }
 
@@ -208,26 +211,28 @@ The URL is built based on information provided by the client when the API reques
             "data":
             {
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
+                "self": "/api/v2/superbowls/0",
+                "collection": "/api/v2/superbowls",
                 "winning_franchise":
                 {
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                    "self": "/api/v2/franchises/0",
+                    "collection": "/api/v2/franchises"
                 },
                 "losing_franchise":
                 {
                     "id": 1,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/1",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                    "self": "/api/v2/franchises/1",
+                    "collection": "/api/v2/franchises"
                 },
                 "mvp":
                 {
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                    "self": "/api/v2/mvps/0",
+                    "collection": "/api/v2/mvps"
                 },
+                "mvp_stats": "3 TDs",
+                "mvp_blurb": "Superior performance from this guy.",
                 "winning_score": 43,
                 "losing_score": 8,
                 "venue_name": "MetLife Stadium",
@@ -236,9 +241,25 @@ The URL is built based on information provided by the client when the API reques
                 "game_day": "2014-02-02",
                 "attendance": 82529,
                 "game_number": "XLVIII",
-                "halftime_performer": "Bruno Mars"
+                "halftime_performer": "Bruno Mars",
+                "twitter_id": "9905544",
+                "youtube_id": "superbowl34",
+                "latitude": 315.22,
+                "longitude": 98.33
             }
         }
+
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/superbowls/0' does not exist."
+            }
+        }
+
 
 ### Update information about a specific Super Bowl game. [PUT]
 + Request (application/json)
@@ -256,6 +277,8 @@ The URL is built based on information provided by the client when the API reques
             {
                 "id": 0
             },
+            "mvp_stats": "3 TDs",
+            "mvp_blurb": "Superior performance from this guy.",
             "winning_score": 43,
             "losing_score": 8,
             "venue_name": "MetLife Stadium",
@@ -264,7 +287,11 @@ The URL is built based on information provided by the client when the API reques
             "game_day": "2014-02-02",
             "attendance": 82529,
             "game_number": "XLVIII",
-            "halftime_performer": "Bruno Mars"
+            "halftime_performer": "Bruno Mars",
+            "twitter_id": "9905544",
+            "youtube_id": "superbowl34",
+            "latitude": 315.22,
+            "longitude": 98.33
         }
 
 + Response 200 (application/json)
@@ -274,26 +301,28 @@ The URL is built based on information provided by the client when the API reques
             "data":
             {
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls",
+                "self": "/api/v2/superbowls/0",
+                "collection": "/api/v2/superbowls",
                 "winning_franchise":
                 {
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                    "self": "/api/v2/franchises/0",
+                    "collection": "/api/v2/franchises"
                 },
                 "losing_franchise":
                 {
                     "id": 1,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/1",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                    "self": "/api/v2/franchises/1",
+                    "collection": "/api/v2/franchises"
                 },
                 "mvp":
                 {
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                    "self": "/api/v2/mvps/0",
+                    "collection": "/api/v2/mvps"
                 },
+                "mvp_stats": "3 TDs",
+                "mvp_blurb": "Superior performance from this guy.",
                 "winning_score": 43,
                 "losing_score": 8,
                 "venue_name": "MetLife Stadium",
@@ -302,22 +331,42 @@ The URL is built based on information provided by the client when the API reques
                 "game_day": "2014-02-02",
                 "attendance": 82529,
                 "game_number": "XLVIII",
-                "halftime_performer": "Bruno Mars"
+                "halftime_performer": "Bruno Mars",
+                "twitter_id": "9905544",
+                "youtube_id": "superbowl34",
+                "latitude": 315.22,
+                "longitude": 98.33
             }
         }
 
-### Remove a specific Super Bowl game entry. [DELETE]
-+ Request (application/json)
++ Response 404 (application/json)
 
         {
-            "id": 0
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/superbowls/0' does not exist."
+            }
         }
-
+        
+### Remove a specific Super Bowl game entry. [DELETE]
 + Response 200 (application/json)
 
         {
             "success": true,
             "data": null
+        }
+        
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/superbowls/0' does not exist."
+            }
         }
 
 ## The NFL Franchises [/api/v2/franchises]
@@ -329,19 +378,25 @@ The URL is built based on information provided by the client when the API reques
             "data":
             [{
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises",
+                "self": "/api/v2/franchises/0",
+                "collection": "/api/v2/franchises",
                 "mvps":
                 [{
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                    "self": "/api/v2/mvps/0",
+                    "collection": "/api/v2/mvps"
                 }],
-                "superbowls":
+                "superbowls_won":
                 [{
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+                    "self": "/api/v2/superbowls/0",
+                    "collection": "/api/v2/superbowls"
+                }],
+                "superbowls_lost":
+                [{
+                    "id": 1,
+                    "self": "/api/v2/superbowls/1",
+                    "collection": "/api/v2/superbowls"
                 }],
                 "team_name": "Seahawks",
                 "team_city": "Seattle",
@@ -352,7 +407,12 @@ The URL is built based on information provided by the client when the API reques
                 "year_founded": 1974,
                 "active": true,
                 "home_stadium": "CenturyLink Field",
-                "division": "NFC West"
+                "division": "NFC West",
+                "facebook_id": "seahawks",
+                "twitter_id": "GoHawks",
+                "youtube_id": "vh500h",
+                "latitude": 334.6,
+                "longitude": 44.1
             }]
         }
 
@@ -364,9 +424,13 @@ The URL is built based on information provided by the client when the API reques
             [{
                 "id": 0
             }],
-            "superbowls":
+            "superbowls_won":
             [{
                 "id": 0
+            }],
+            "superbowls_lost":
+            [{
+                "id": 1,
             }],
             "team_name": "Seahawks",
             "team_city": "Seattle",
@@ -377,18 +441,23 @@ The URL is built based on information provided by the client when the API reques
             "year_founded": 1974,
             "active": true,
             "home_stadium": "CenturyLink Field",
-            "division": "NFC West"
+            "division": "NFC West",
+            "facebook_id": "seahawks",
+            "twitter_id": "GoHawks",
+            "youtube_id": "vh500h",
+            "latitude": 334.6,
+            "longitude": 44.1
         }
 
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
         {
             "success": true,
             "data":
             {
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                "self": "/api/v2/franchises/0",
+                "collection": "/api/v2/franchises"
             }
         }
 
@@ -401,19 +470,25 @@ The URL is built based on information provided by the client when the API reques
             "data":
             {
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises",
+                "self": "/api/v2/franchises/0",
+                "collection": "/api/v2/franchises",
                 "mvps":
                 [{
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                    "self": "/api/v2/mvps/0",
+                    "collection": "/api/v2/mvps"
                 }],
-                "superbowls":
+                "superbowls_won":
                 [{
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+                    "self": "/api/v2/superbowls/0",
+                    "collection": "/api/v2/superbowls"
+                }],
+                "superbowls_lost":
+                [{
+                    "id": 1,
+                    "self": "/api/v2/superbowls/1",
+                    "collection": "/api/v2/superbowls"
                 }],
                 "team_name": "Seahawks",
                 "team_city": "Seattle",
@@ -424,7 +499,23 @@ The URL is built based on information provided by the client when the API reques
                 "year_founded": 1974,
                 "active": true,
                 "home_stadium": "CenturyLink Field",
-                "division": "NFC West"
+                "division": "NFC West",
+                "facebook_id": "seahawks",
+                "twitter_id": "GoHawks",
+                "youtube_id": "vh500h",
+                "latitude": 334.6,
+                "longitude": 44.1
+            }
+        }
+
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/franchises/0' does not exist."
             }
         }
 
@@ -436,9 +527,13 @@ The URL is built based on information provided by the client when the API reques
             [{
                 "id": 0,
             }],
-            "superbowls":
+            "superbowls_won":
             [{
                 "id": 0,
+            }],
+            "superbowls_lost":
+            [{
+                "id": 1,
             }],
             "team_name": "Seahawks",
             "team_city": "Seattle",
@@ -449,9 +544,25 @@ The URL is built based on information provided by the client when the API reques
             "year_founded": 1974,
             "active": true,
             "home_stadium": "CenturyLink Field",
-            "division": "NFC West"
+            "division": "NFC West",
+            "facebook_id": "seahawks",
+            "twitter_id": "GoHawks",
+            "youtube_id": "vh500h",
+            "latitude": 334.6,
+            "longitude": 44.1
         }
 
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/franchises/0' does not exist."
+            }
+        }
+        
 + Response 200 (application/json)
 
         {
@@ -459,19 +570,25 @@ The URL is built based on information provided by the client when the API reques
             "data":
             {
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises",
+                "self": "/api/v2/franchises/0",
+                "collection": "/api/v2/franchises",
                 "mvps":
                 [{
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                    "self": "/api/v2/mvps/0",
+                    "collection": "/api/v2/mvps"
                 }],
-                "superbowls":
+                "superbowls_won":
                 [{
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+                    "self": "/api/v2/superbowls/0",
+                    "collection": "/api/v2/superbowls"
+                }],
+                "superbowls_lost":
+                [{
+                    "id": 1,
+                    "self": "/api/v2/superbowls/1",
+                    "collection": "/api/v2/superbowls"
                 }],
                 "team_name": "Seahawks",
                 "team_city": "Seattle",
@@ -482,22 +599,32 @@ The URL is built based on information provided by the client when the API reques
                 "year_founded": 1974,
                 "active": true,
                 "home_stadium": "CenturyLink Field",
-                "division": "NFC West"
+                "division": "NFC West",
+                "facebook_id": "seahawks",
+                "twitter_id": "GoHawks",
+                "youtube_id": "vh500h",
+                "latitude": 334.6,
+                "longitude": 44.1
             }
         }
 
 ### Remove a specific franchise entry. [DELETE]
-+ Request (application/json)
-
-        {
-            "id": 0
-        }
-
 + Response 200 (application/json)
 
         {
             "success": true,
             "data": null
+        }
+        
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/franchises/0' does not exist."
+            }
         }
 
 ## The Super Bowl MVPs [/api/v2/mvps]
@@ -509,19 +636,19 @@ The URL is built based on information provided by the client when the API reques
             "data":
             [{
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps",
+                "self": "/api/v2/mvps/0",
+                "collection": "/api/v2/mvps",
                 "superbowls":
                 [{
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+                    "self": "/api/v2/superbowls/0",
+                    "collection": "/api/v2/superbowls"
                 }],
                 "franchises":
                 [{
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                    "self": "/api/v2/franchises/0",
+                    "collection": "/api/v2/franchises"
                 }],
                 "first_name": "Malcolm",
                 "last_name": "Smith",
@@ -532,7 +659,12 @@ The URL is built based on information provided by the client when the API reques
                 "college": "Southern California",
                 "draft_year": 2011,
                 "active": true,
-                "salary": 465000
+                "salary": 465000,
+                "facebook_id": "MalcomFanPage",
+                "twitter_id": "MalcomTweets",
+                "youtube_id": "ghwhh09",
+                "latitude": 100.5,
+                "longitude": 37.6
             }]
         }
 
@@ -557,18 +689,23 @@ The URL is built based on information provided by the client when the API reques
             "college": "Southern California",
             "draft_year": 2011,
             "active": true,
-            "salary": 465000
+            "salary": 465000,
+            "facebook_id": "MalcomFanPage",
+            "twitter_id": "MalcomTweets",
+            "youtube_id": "ghwhh09",
+            "latitude": 100.5,
+            "longitude": 37.6
         }
 
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
         {
             "success": true,
             "data":
             {
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                "self": "/api/v2/mvps/0",
+                "collection": "/api/v2/mvps"
             }
         }
 
@@ -581,19 +718,19 @@ The URL is built based on information provided by the client when the API reques
             "data":
             {
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps",
+                "self": "/api/v2/mvps/0",
+                "collection": "/api/v2/mvps",
                 "superbowls":
                 [{
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+                    "self": "/api/v2/superbowls/0",
+                    "collection": "/api/v2/superbowls"
                 }],
                 "franchises":
                 [{
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises"
+                    "self": "/api/v2/franchises/0",
+                    "collection": "/api/v2/franchises"
                 }],
                 "first_name": "Malcolm",
                 "last_name": "Smith",
@@ -604,10 +741,26 @@ The URL is built based on information provided by the client when the API reques
                 "college": "Southern California",
                 "draft_year": 2011,
                 "active": true,
-                "salary": 465000
+                "salary": 465000,
+                "facebook_id": "MalcomFanPage",
+                "twitter_id": "MalcomTweets",
+                "youtube_id": "ghwhh09",
+                "latitude": 100.5,
+                "longitude": 37.6
             }
         }
 
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/mvps/0' does not exist."
+            }
+        }
+        
 ### Update information about a specific Super Bowl MVP. [PUT]
 + Request (application/json)
 
@@ -629,7 +782,12 @@ The URL is built based on information provided by the client when the API reques
             "college": "Southern California",
             "draft_year": 2011,
             "active": true,
-            "salary": 465000
+            "salary": 465000,
+            "facebook_id": "MalcomFanPage",
+            "twitter_id": "MalcomTweets",
+            "youtube_id": "ghwhh09",
+            "latitude": 100.5,
+            "longitude": 37.6
         }
 
 + Response 200 (application/json)
@@ -639,43 +797,65 @@ The URL is built based on information provided by the client when the API reques
             "data":
             {
                 "id": 0,
-                "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises/0",
-                "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/franchises",
+                "self": "/api/v2/franchises/0",
+                "collection": "/api/v2/franchises",
                 "mvps":
                 [{
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/mvps"
+                    "self": "/api/v2/mvps/0",
+                    "collection": "/api/v2/mvps"
                 }],
                 "superbowls":
                 [{
                     "id": 0,
-                    "self": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls/0",
-                    "collection": "http://blooming-shelf-7492.herokuapp.com/api/v2/superbowls"
+                    "self": "/api/v2/superbowls/0",
+                    "collection": "/api/v2/superbowls"
                 }],
-                "team_name": "Seahawks",
-                "team_city": "Seattle",
-                "team_state": "WA",
-                "current_owner": "Paul Allen",
-                "current_gm": "John Schneider",
-                "current_head_coach": "Pete Carroll",
-                "year_founded": 1974,
+                "first_name": "Malcolm",
+                "last_name": "Smith",
+                "position": "LB",
+                "birth_date": "1989-07-05",
+                "birth_town": "Woodland Hills, CA",
+                "high_school": "Woodland Hills (CA) Taft",
+                "college": "Southern California",
+                "draft_year": 2011,
                 "active": true,
-                "home_stadium": "CenturyLink Field",
-                "division": "NFC West"
+                "salary": 465000,
+                "facebook_id": "MalcomFanPage",
+                "twitter_id": "MalcomTweets",
+                "youtube_id": "ghwhh09",
+                "latitude": 100.5,
+                "longitude": 37.6
+            }
+        }
+
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/mvps/0' does not exist."
             }
         }
 
 ### Remove a specific Super Bowl MVP entry. [DELETE]
-+ Request (application/json)
-
-        {
-            "id": 0
-        }
-
 + Response 200 (application/json)
 
         {
             "success": true,
             "data": null
         }
+
++ Response 404 (application/json)
+
+        {
+            "success": false,
+            "error":
+            {
+                "type": "HTTP_NOT_FOUND",
+                "message": "The resource '/api/v2/mvps/0' does not exist."
+            }
+        }
+        

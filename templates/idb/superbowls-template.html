@@ -8,14 +8,14 @@
 		<div class="row">
 	{% endif %}
 	<div id="image" class="col-md-3">
-		<a href="/games/{{game.id}}"><img style="width:200px" src="../../static/res/gamebadges/{{game.game_number}}.png" /></a>
+		<a href="/superbowls/{{game.id}}"><img style="width:200px" src="../../static/res/SBIcons/{{game.game_number}}.png" /></a>
 	</div>
 	<div class="col-md-3">
-          <ul>
-          	<li><p>{{game.game_day}}</p></li>
-          	<li><a href="/teams/{{game.winning_franchise.id}}">{{game.winning_franchise}}</a> vs <a href="/teams/{{game.losing_franchise.id}}">{{game.losing_franchise}}</a></li>
-          	<li>MVP: <a href="/players/{{game.mvp.id}}">{{game.mvp }}</a></li>
-          </ul>
+      <ul>
+      	<li><h3><a href="/franchises/{{game.winning_franchise.id}}">{{game.winning_franchise.team_name}}</a> vs <a href="/franchises/{{game.losing_franchise.id}}">{{game.losing_franchise.team_name}}</a></h3></li>
+      	<li><h4>{{game.game_day}}</h4></li>
+      	<li><h4>MVP: <a href="/mvps/{{game.mvp.id}}">{{game.mvp.first_name}} {{game.mvp.last_name}}</a></h4></li>
+      </ul>
     </div>
     {% if not forloop.counter0|divisibleby:2 %}
 	</div>

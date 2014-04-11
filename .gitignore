@@ -53,3 +53,6 @@ staticfiles
 
 # Sphinx documentation
 docs/_build/
+
+# editor backup files
+*~
