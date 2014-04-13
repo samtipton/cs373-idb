@@ -144,7 +144,7 @@ class SuperBowl(models.Model) :
     @ivar venue_state: The name of the US state that the Super Bowl was played in. (e.g. TX)
     @type venue_state: L{str}
     @ivar game_day: The day the game was played. (e.g. 2014-02-02)
-    @type game_day: L{date}
+    @type game_day: L{date} 
     @ivar attendance: The amount of people attended that particular game. (e.g. 30,000)
     @type attendance: L{int}
     @ivar game_number: The roman numeral symbol for the game. (e.g. XLVIII)
