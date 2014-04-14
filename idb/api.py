@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.template import RequestContext, loader
 from django.shortcuts import get_object_or_404, render, render_to_response
 from django.views import generic
-from idb.models import MVP, Franchise, SuperBowl
+from idb.models import MVP, Franchise, SuperBowl, Analytic
 from django.db.models import Q
 from json import dumps, loads
 from idb.helpers import *
@@ -48,6 +48,63 @@ def api_reset_database(request):
         return HttpResponse("These are not the datasets you are looking for.")
     except Exception:
         return HttpResponse("Uh Oh, something went wrong.")
+
+# -------------------
+# API Analytic Calls
+# -------------------
+
+def api_analytics(request):
+    try:
+        # check context to determine what kind of req
+        if (request.method == 'GET'):
+            return analytics_get()
+        else:
+            return respond_with_method_not_allowed_error(request)
+    except Exception:
+        return respond_with_bad_request_error(request)
+
+def analytics_get():
+    analytics = Analytic.objects.all()
+    body = [serialize_analytic_model(a) for a in analytics]
+    return make_response(200, make_successful_response_object(body))
+
+def api_analytics_id(request, _id):
+    try:
+        if (request.method == 'GET'):
+            return analytics_id_get(_id)
+        else:
+            return respond_with_method_not_allowed_error(request)
+    except ObjectDoesNotExist:
+        return respond_with_not_found_error(request)
+
+def analytics_id_get(_id) :
+    a = Analytic.objects.get(pk=_id)
+    body = serialize_analytic_model(a)
+    return make_response(200, make_successful_response_object(body))
+
+def api_analytics_id_results(request, _id):
+    try:
+        if (request.method == 'GET'):
+            return analytics_id_results_get(_id)
+        else:
+            return respond_with_method_not_allowed_error(request)
+    except ObjectDoesNotExist:
+        return respond_with_not_found_error(request)
+
+def analytics_id_results_get(_id) :
+    a = Analytic.objects.get(pk=_id)
+    cursor = connection.cursor()
+    cursor.execute(a.query)
+    body = {
+        "id" : int(_id),
+        "self": make_path("analytics", _id),
+        "collection": make_path("analytics"),
+        "results": make_path("analytics", _id) + "/results",
+        "headers": [col[0] for col in cursor.description],
+        "values": cursor.fetchall()
+    }
+    cursor.close()
+    return make_response(200, make_successful_response_object(body))
 
 # -------------------
 # API SuperBowl Calls
