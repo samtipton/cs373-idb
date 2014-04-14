@@ -39,31 +39,36 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]-->
 
-</head>
+    </head>
 
-<body>
-  <div class="container">
+    <body>
+      <div class="container">
 
-    <!-- navbar -->
-    <div class="masthead">
-      <ul class="nav nav-justified">
-        <li><a href="/">Home</a></li>
-        <li><a href="/superbowls">Super Bowls</a></li>
-        <li><a href="/franchises/">Franchises</a></li>
-        <li><a href="/mvps/">MVPs</a></li>
-        <li><a href="/contact/">Contact</a></li>
-        <li> 
-        <form action="{%url 'watson:search' %}">
-         <input placeholder="Search" name="q" value="{{request.GET.q}}"></input> <i class="glyphicon glyphicon-search"type="submit"></i>
-        </form>
+        <!-- navbar -->
+        <div class="masthead">
+          <ul class="nav nav-justified">
+            <li><a href="/">Home</a></li>
+            <li><a href="/superbowls">Super Bowls</a></li>
+            <li><a href="/franchises/">Franchises</a></li>
+            <li><a href="/mvps/">MVPs</a></li>
+            <li><a href="/contact/">Contact</a></li>
+            <li> 
+              <form action="{%url 'watson:search' %}">
+               <input placeholder="Search" name="q" value="{{request.GET.q}}"></input> <i class="glyphicon glyphicon-search"type="submit"></i>
+             </form></li>
+           </div>
+           <br/>
+           <!-- end navbar -->
 
+           {% block content %}
+           {% endblock %}
 
-  </div> <!-- big container -->
+         </div> <!-- big container -->
 
-  <!-- Site footer -->
-    <div class="footer">
-      <p><b>&copy;Trent Kan, Sam Tipton, Sophia Hernandez, Richard Salazar, John Schindler, Yoan Chinique 2014</b></p>      
-    </div>
+         <!-- Site footer -->
+         <div class="footer">
+          <p><b>&copy;Trent Kan, Sam Tipton, Sophia Hernandez, Richard Salazar, John Schindler, Yoan Chinique 2014</b></p>      
+        </div>
 
-</body>
-</html>
+      </body>
+      </html>
