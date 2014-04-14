@@ -52,14 +52,11 @@
         <li><a href="/franchises/">Franchises</a></li>
         <li><a href="/mvps/">MVPs</a></li>
         <li><a href="/contact/">Contact</a></li>
-        <li><i class="glyphicon glyphicon-search"></i>  <input placeholder=" search"></input></li>
-      </ul>
-    </div>
-    <br/>
-    <!-- end navbar -->
+        <li> 
+        <form action="{%url 'watson:search' %}">
+         <input placeholder="Search" name="q" value="{{request.GET.q}}"></input> <i class="glyphicon glyphicon-search"type="submit"></i>
+        </form>
 
-      {% block content %}
-      {% endblock %}
 
   </div> <!-- big container -->
 

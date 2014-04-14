@@ -95,4 +95,3 @@ def contact(request) :
 	t = loader.get_template('idb/contact.html')
 
 	return HttpResponse(t.render(context))
-	

@@ -1,0 +1,20 @@
+{% extends "idb/template.html" %}
+
+{% block content %}
+<ul>
+    {% for result in search_results %}
+        <li>
+            <article>
+                <h1>
+                    {% if result.url %}<a href="{{result.url}}">{% endif %}
+                    {{result.title}}
+                    {% if result.url %}</a>{% endif %}
+                </h1>
+                {% if result.description %}
+                    <p>{{result.description}}</p>
+                {% endif %}
+            </article>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
