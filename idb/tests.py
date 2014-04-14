@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from urllib.request import urlopen, Request
 from json import dumps, loads
-from idb.models import MVP, Franchise, SuperBowl
+from idb.models import MVP, Franchise, SuperBowl, Analytic
 import types
 from django.db.models import Q
 from idb.helpers import *
@@ -76,8 +76,8 @@ class test_API(TestCase) :
 	# Helper functions to make REST calls against the API.
 	# ----------------------------------------------------
 
-	def get(self, _type = "", id = None):
-		url = make_path(_type, id)
+	def get(self, _type = "", id = None, extra_path = ""):
+		url = make_path(_type, id) + extra_path
 		response = self.client.get(url)
 		api_response = loads(response.content.decode('utf-8'))
 		return (response.status_code, api_response)
@@ -113,8 +113,57 @@ class test_API(TestCase) :
 		self.sb_48 = SuperBowl.objects.create(winning_franchise=self.seahawks, losing_franchise=self.broncos, mvp=self.malcolm_smith, mvp_stats='1 INT 1 FR 1 TD 9 T', mvp_blurb='Malcolm Smith was the de-facto SB MVP for a legendary Seattle defense.\n\nWhile he was a relative unknown at the start of the season, a game-sealing interception in the NFC Championship as well as two takeaways in the Super Bowl served as a coming out party for the young linebacker.', winning_score=43, losing_score=8, venue_name='MetLife Stadium', venue_city='East Rutherford', venue_state='NJ', game_day='2014-02-02', attendance=82529, game_number='XLVIII', halftime_performer='Bruno Mars', twitter_id='SuperBowlXLVIII', youtube_id='NbcA1UISfG0', latitude=40.8136, longitude=-74.0744)
 		self.sb_to_delete = SuperBowl.objects.create(winning_franchise=self.seahawks, losing_franchise=self.broncos, mvp=self.malcolm_smith, mvp_stats='1 INT 3 FR 1 TD 9 T', mvp_blurb='Malcolm Smith was the de-facto SB MVP for a legendary Seattle defense.\n\nWhile he was a relative unknown at the start of the season, a game-sealing interception in the NFC Championship as well as two takeaways in the Super Bowl served as a coming out party for the young linebacker.', winning_score=43, losing_score=8, venue_name='MetLife Stadium', venue_city='East Rutherford', venue_state='NJ', game_day='2014-02-02', attendance=82529, game_number='XLVIII', halftime_performer='Bruno Mars', twitter_id='SuperBowlXLVIII', youtube_id='NbcA1UISfG0', latitude=40.8136, longitude=-74.0744)
 		self.sb_49 = SuperBowl.objects.create(winning_franchise=self.broncos, losing_franchise=self.seahawks, mvp=self.malcolm_smith, mvp_stats='1 INT 1 FR 1 TD 9 T', mvp_blurb='Malcolm Smith was the de-facto SB MVP for a legendary Seattle defense.\n\nWhile he was a relative unknown at the start of the season, a game-sealing interception in the NFC Championship as well as two takeaways in the Super Bowl served as a coming out party for the young linebacker.', winning_score=43, losing_score=8, venue_name='MetLife Stadium', venue_city='East Rutherford', venue_state='NJ', game_day='2014-02-02', attendance=82529, game_number='XLVIII', halftime_performer='Bruno Mars', twitter_id='SuperBowlXLVIII', youtube_id='NbcA1UISfG0', latitude=40.8136, longitude=-74.0744)
+		self.simple_analytic = Analytic.objects.create(name = "simple", query = "select 1 as a, 2 as b", description = "simple")
+		self.complex_analytic = Analytic.objects.create(name = "complex", query = "select 1 as a, 2 as b union select 3 as a, 4 as b", description = "complex")
+		
 		self.client = Client()
 
+	# --------------------
+	# API ANALYTICS TESTS
+	# --------------------
+
+	def test_API_get_analytics(self) :
+		(code, response) = self.get("analytics")
+		self.assertEqual(code, 200)
+		body = [serialize_analytic_model(self.simple_analytic), serialize_analytic_model(self.complex_analytic)]
+		expected_response = make_successful_response_object(body)
+		self.assertEqual(response, expected_response)
+
+	def test_API_get_analytics_id(self):
+		(code, response) = self.get("analytics", self.simple_analytic.id)
+		self.assertEqual(code, 200)
+		body = serialize_analytic_model(self.simple_analytic)
+		expected_response = make_successful_response_object(body)
+		self.assertEqual(response, expected_response)
+		
+	def test_API_get_analytics_id_results(self):
+		(code, response) = self.get("analytics", self.simple_analytic.id, "/results")
+		self.assertEqual(code, 200)
+		body = {
+			"id" : self.simple_analytic.id,
+			"self": make_path("analytics", self.simple_analytic.id),
+			"collection": make_path("analytics"),
+			"results": make_path("analytics", self.simple_analytic.id) + "/results",
+			"headers": ["a", "b"],
+			"values": [[1, 2]]
+		}
+		expected_response = make_successful_response_object(body)
+		self.assertEqual(response, expected_response)
+	
+	def test_API_get_analytics_id_results2(self):
+		(code, response) = self.get("analytics", self.complex_analytic.id, "/results")
+		self.assertEqual(code, 200)
+		body = {
+			"id" : self.complex_analytic.id,
+			"self": make_path("analytics", self.complex_analytic.id),
+			"collection": make_path("analytics"),
+			"results": make_path("analytics", self.complex_analytic.id) + "/results",
+			"headers": ["a", "b"],
+			"values": [[1, 2], [3, 4]]
+		}
+		expected_response = make_successful_response_object(body)
+		self.assertEqual(response, expected_response)
+	
 	# --------------------
 	# API SUPERBOWLS TESTS
 	# --------------------

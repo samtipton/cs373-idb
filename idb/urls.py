@@ -9,6 +9,10 @@ urlpatterns = patterns('',
 	url(r'^api/v2/franchises', api.api_franchises),
 	url(r'^api/v2/mvps/(\d+)', api.api_mvps_id),
 	url(r'^api/v2/mvps', api.api_mvps),
+	url(r'^api/v2/analytics/(\d+)/results', api.api_analytics_id_results),
+	url(r'^api/v2/analytics/(\d+)', api.api_analytics_id),
+	url(r'^api/v2/analytics', api.api_analytics),
+	#url(r'^api/v2', api.api_root),
 	url(r'^reset-database', api.api_reset_database),
 
 	# Website routes
