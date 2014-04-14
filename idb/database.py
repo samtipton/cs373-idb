@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from idb.models import MVP, Franchise, SuperBowl
+from idb.models import MVP, Franchise, SuperBowl, Analytic
 
 def reset_database():
     """ This helper function drops the data and refills it. """
@@ -21,7 +21,7 @@ def reset_database():
         return franchise
 
     def s(winner, loser, mvp, players, *vals):
-        """ This is a helper function to build and save a Super Bowl object. """
+        """ This is a helper function to build and save a SuperBowl object. """
         columns = ("mvp_stats","winning_score","losing_score","venue_name","venue_city","venue_state","game_day","attendance","game_number","halftime_performer","twitter_id","youtube_id","latitude","longitude","mvp_blurb")
         superbowl = SuperBowl(**dict(zip(columns, vals)))
         superbowl.winning_franchise = winner
@@ -30,10 +30,20 @@ def reset_database():
         superbowl.save()
         superbowl.players.add(*players)
         return superbowl
+
+    def a(name, query, desc):
+        """ This is a helper function to build and save an Analytic object. """
+        analytic = Analytic(name = name, query = query, description = desc)
+        analytic.save()
+        return analytic
     
     MVP.objects.all().delete()
     Franchise.objects.all().delete()
     SuperBowl.objects.all().delete()
+    Analytic.objects.all().delete()
+
+    a('Test', 'SELECT 1, 2', "------")
+    a('Super Bowl MVP Awards by Position', 'SELECT s.*, p.* FROM idb_superbowl AS s INNER JOIN idb_mvp AS p ON s.mvp_id = p.id ORDER BY s.game_day DESC', "------")
     
     malcolm_smith   = m('Malcolm',  'Smith',   'OLB', '1989-07-05', 'Woodland Hills, CA', 'Woodland Hills (CA) Taft',        'Southern California', 2011, True,  465000,   'MalcSmitty',                           '446422781169651712', 'zfB8hCsHwLE', 34.1683, -118.605)
     joe_flacco      = m('Joe',      'Flacco',  'QB',  '1985-01-16', 'Audubon, NJ',        'Audubon (NJ) Audubon',            'Delaware',            2008, True,  20100000, 'JoeFlacco',                            '446422363865755648', 'fod3tDCNZ80', 39.8901, -75.0724)
