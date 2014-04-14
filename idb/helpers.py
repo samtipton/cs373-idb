@@ -29,7 +29,7 @@ def make_failure_response_object(error_type, error_message):
     }
 
 def make_path(_type = "", _id = None):
-    p = "/api/v2/" + str(_type)
+    p = "http://blooming-shelf-7492.herokuapp.com//api/v2/" + str(_type)
     if _id is not None:
         p += "/" + str(_id)
     return p
