@@ -42,6 +42,14 @@ def make_ref(model):
         "collection": make_path(_type)
     }
 
+def serialize_analytic_model(model) :
+    return merge(make_ref(model), {
+        "results": make_path("analytics", model.id) + "/results",
+        "query": model.query,
+        "name": model.name,
+        "description": model.description
+    })
+
 def serialize_superbowl_model(model) :
     return merge(make_ref(model), {
         "winning_franchise": make_ref(model.winning_franchise),
