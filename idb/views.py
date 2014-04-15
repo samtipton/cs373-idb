@@ -6,6 +6,8 @@ from django.views import generic
 from django.db.models import Q
 from idb.models import MVP, Franchise, SuperBowl
 from django.views.generic.list import BaseListView #search 
+from django.utils import six
+import watson
 
 # Create your views here.
 def splash(request) :

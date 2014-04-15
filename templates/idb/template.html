@@ -53,8 +53,7 @@
             <li><a href="/mvps/">MVPs</a></li>
             <li><a href="/contact/">Contact</a></li>
             <li> 
-               <form action="{%url 'watson:search' %}">
-          
+               <form action="/search/">
                <input placeholder="Search" name="q" value="{{request.GET.q}}"></input> <i class="glyphicon glyphicon-search"type="submit"></i>
              </form></li>
            </div>
