@@ -1,40 +1,42 @@
 {% extends "idb/template.html" %}
-<!DOCTYPE html>{% load watson %}
+{% load watson %}
 
-    <body>
-        {% block content %}
-        <h1>Search results{% if query %} for &ldquo;{{query}}&rdquo;{% endif %}</h1>
-        {% if search_results %}
-        <ul>
-        {% for result in search_results %}
-        <li>
-            <div class="row">
-                <h1>
-                    {% if result|truncatewords:"1"|slice:"-4" == "SuperBowl" %}
-                        <a href="/superbowls/{{result.object.id}}">
-                            {{ result|truncatewords:"1"|slice:"-4"}} {{result.object.game_number}} {{result.object.winning_franchise.team_name}} </a>
-                      {% endif %}
+{% block content %}
+<div class ="row"> Search results{% if query %} for &ldquo;{{query}}&rdquo;{% endif %}</div>
+{% if search_results %}
+<div class="row">
+<ul>
+    {% for result in search_results %}
+    <li>
+            <h1>
+                {% if result|truncatewords:"1"|slice:"-4" == "SuperBowl" %}
+                <a href="/superbowls/{{result.object.id}}">
+                    {{ result|truncatewords:"1"|slice:"-4"}} {{result.object.game_number}}</a>
+                    {% endif %}
+                    <br/>
                     {% if result|truncatewords:"1"|slice:"-4" == "Franchise" %}
-                       <a href="/franchises/{{result.object.id}}">{{result.object.team_name}} {{result.object.mvps}}</a>
-                      {% endif %}
+                    <a href="/franchises/{{result.object.id}}">{{result.object.team_name}} </a>
+                    {% endif %}
+                    <br/>
                     {% if result|truncatewords:"1"|slice:"-4" == "MVP" %}
-                       <a href="/mvps/{{result.object.id}}">{{result.object.first_name}} {{result.object.last_name}} Player Page </a>
-                        {% endif %}
+                    <a href="/mvps/{{result.object.id}}">{{result.object.first_name}} {{result.object.last_name}} Player Page </a>
+                    {% endif %}
+                    <br/>
                 </h1>
-            </div>
+            
         </li>
         {% endfor %}
-</ul>
+    </ul>
+    </div>
 
-            <!-- {% search_results search_results %} -->
-        {% else %}
-            {% if query %}
-                <p><em>There are no results to display.</em></p>
-                <p><em>Try entering a less specific search term.</em></p>
-            {% else %}
-                <p><em>Please enter a query in the search form.</em></p>
-            {% endif %}
-        {% endif %}
-         {% endblock content %}
-    </body>
-</html>
+    <!-- {% search_results search_results %} -->
+    {% else %}
+    {% if query %}
+    <div class ="row"> There are no results to display.</div>
+   <div class ="row"> Try entering a less specific search term.</div>
+    {% else %}
+    <div class ="row"> Please enter a query in the search form.</div>
+    {% endif %}
+    {% endif %}
+    {% endblock content %}
+
