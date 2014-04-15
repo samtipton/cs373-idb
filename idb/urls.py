@@ -19,6 +19,7 @@ urlpatterns = patterns('',
 	url(r'^superbowls/(\d*)$', views.superbowls),
 	url(r'^franchises/(\d*)$', views.franchises),
 	url(r'^mvps/(\d*)$', views.mvps),
+	url(r'^analytics/(\d*)$', views.analytics),
 	url(r'^contact/$', views.contact),
 	url(r'^$', views.splash)
 )
