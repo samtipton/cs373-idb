@@ -22,7 +22,7 @@ def splash(request) :
 
 def analytics(request, id = ""):
 	if id.isdigit():
-		analytics = Analytic.objects.get_object_or_404(pk = int(id))
+		analytics = [get_object_or_404(Analytic, pk = int(id))]
 	else:
 		analytics = Analytic.objects.all()
 

@@ -3,17 +3,58 @@
 {% block content %}
 
 <script type="text/javascript">
+
+	function showTable(id, headers, values) {
+		var container = $('#analytics-' + id + '-result');
+		var head = $('#analytics-' + id + '-head');
+		var body = $('#analytics-' + id + '-body');
+		head.empty();
+		body.empty();
+		$.each(headers, function(i, item) {
+			var th = $('<th>');
+			th.text(item);
+			head.append(th);
+		});
+		$.each(values, function(i, entry) {
+			var tr = $('<tr>');
+			$.each(entry, function(j, data) {
+				var td = $('<td>');
+				td.text(data);
+				tr.append(td);
+			});
+			body.append(tr);
+		});
+		container.show();
+	}
+
+	function showError(id, httpCode, apiError, apiMessage) {
+		var headers = [];
+		var values = [
+			[
+				"HTTP Status Code",
+				httpCode
+			],
+			[
+				"API Error Code",
+				apiError
+			],
+			[
+				"API Error Message",
+				apiMessage
+			],
+		];
+		showTable(id, headers, values);
+	}
 	
 	function runsql(id) {
 		var url = document.location.origin + '/api/v2/analytics/' + id + '/results';
-		var resultArea = $('#analytic-result-' + id);
 		$.ajax(url, {
 			dataType: 'json',
-			success: function(data, textStatus, jqXHR) {
-				resultArea.text(JSON.stringify(data));
+			success: function(response, textStatus, jqXHR) {
+				showTable(id, response.data.headers, response.data.values);
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
-				resultArea.text(jqXHR.status + ' :::: ' + jqXHR.responseText + ' :::: ' + textStatus + ' :::: ' + errorThrown);
+				showError(id, jqXHR.status, jqXHR.responseJSON.error.type, jqXHR.responseJSON.error.message);
 			}
 		});
 	}
@@ -21,8 +62,7 @@
 </script>
 
 {% for analytic in analytic_list %}
-	<div class="row">
-	<div class="container-fluid">
+	<div class="row container-fluid">
 		<div class="row">
 			<div class="col-xs-12">
 				<h3>{{analytic.name}}</h3>
@@ -41,10 +81,15 @@
 				<pre>{{analytic.query}}</pre>
 			</div>
 		</div>
-		<div class="row" id="analytic-result-{{analytic.id}}">
+		<div class="row table-responsive" id="analytics-{{analytic.id}}-result" style="display:none">
+			<table class="table table-striped table-condensed">
+				<thead>
+					<tr id="analytics-{{analytic.id}}-head" />
+				</thead>
+				<tbody id="analytics-{{analytic.id}}-body" />
+			</table>
 		</div>
 	</div>
-    </div>
 {% endfor %}
 
 {% endblock %}
