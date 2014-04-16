@@ -1,12 +1,18 @@
 {% extends "idb/template.html" %}
-{% load watson %}
+<!-- {% load watson %} -->
 
 {% block content %}
-<div class ="row"><h2> Search results </h2>{% if query %} for &ldquo;{{query}}&rdquo;{% endif %}
-{% if search_results %}
+<div class ="row"> Search results{% if query %} for &ldquo;{{query}}&rdquo;{% endif %}</div>
+{% for item in list %}
+{% for inner_item in item %}
+<div class ="row"> {{inner_item.object.first_name}} </div>
+{% endfor %}
+{% endfor %}
+{% if results %}
+
 <div class="row">
 <ul>
-    {% for result in search_results %}
+    {% for result in results %}
     <li>
             <h1>
                 {% if result|truncatewords:"1"|slice:"-4" == "SuperBowl" %}
@@ -22,9 +28,9 @@
                     
                     {% if result|truncatewords:"1"|slice:"-4" == "MVP" %}
                     <a href="/mvps/{{result.object.id}}">{{result.object.first_name}} {{result.object.last_name}} Player Page </a>
-                    <br/>
+                      <br/>
                     {% endif %}
-                    
+                  
                 </h1>
             
         </li>
@@ -32,16 +38,14 @@
     </ul>
     </div>
 
-    <!-- {% search_results search_results %} -->
+   
     {% else %}
     {% if query %}
-    <div class ="row"> There are no results to display.
-    Try entering a less specific search term.
+    <div class ="row"> There are no results to display.</div>
+   <div class ="row"> Try entering a less specific search term.</div>
     {% else %}
-    Please enter a query in the search form.</div>
+    <div class ="row"> Please enter a query in the search form.</div>
     {% endif %}
     {% endif %}
-    </div>
     {% endblock content %}
-
 

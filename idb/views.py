@@ -101,12 +101,40 @@ def contact(request) :
 
 
 
-"""def search_idb(request,q=None):
-	results = watson.search(q)
-	context = RequestContext(request, {'results': results})
+def search_idb(request):
+	the_list = request.GET.get('q', '')
+	#q_list = set()
+	q_list = []
+
+	search_results = watson.search(the_list)
+	#q_list.update(search_results)
+	q_list.append(search_results)
+
+	for term in the_list:
+		more_results = (watson.search(term))
+		#search_results = search_results | more_results
+		#q_list.update(more_results)
+		q_list.append(more_results)
+
+
+	q_list = set(q_list)
+
+
+
+
+
+
+	"""context = RequestContext(request, {'results': request.GET.get('q', '') })
+	t = loader.get_template('watson/dum.html')
+	return HttpResponse(t.render(context))"""
+
+
+
+	context = RequestContext(request, {'results': search_results, 'list': q_list})
 
 	t = loader.get_template('watson/search.html')
-	return HttpResponse(t.render(context))"""
+	#t = loader.get_template('watson/dum.html')
+	return HttpResponse(t.render(context))
 
 
 
@@ -191,9 +219,9 @@ class SearchView_IDB(SearchMixin, generic.ListView):
 	template_name = "watson/search.html"
 
 
-def search_idb(request,**kwargs):
+"""def search_idb(request,**kwargs):
 	print(kwargs)
-	return SearchView_IDB.as_view(**kwargs)(request)
+	return SearchView_IDB.as_view(**kwargs)(request)"""
 
 
 

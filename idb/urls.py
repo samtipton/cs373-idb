@@ -22,8 +22,8 @@ urlpatterns = patterns('',
 	url(r'^mvps/(\d*)$', views.mvps),
 	url(r'^contact/$', views.contact),
 	url(r'^$', views.splash),
-	url("^search/", views.search_idb)
-	#url(r"^search/(.*)", views.search_idb)
+	url("^search/", views.search_idb) #for default
+	#url(r"^search/(.*)", views.search_idb) #for custom
 
 	# Default views from Watson, should include a view for our output
 	#url("^search/", include("watson.urls",namespace="watson")),
