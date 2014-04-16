@@ -63,6 +63,34 @@ def api_reset_database(request):
         return HttpResponse("These are not the datasets you are looking for.")
     except Exception:
         return HttpResponse("Uh Oh, something went wrong.")
+        
+
+def api_root(request):
+    # we only support the GET method
+    if (request.method != 'GET'):
+        return respond_with_method_not_allowed_error(request)
+    
+    # the response is hard coded because you can't really generate this
+    body = [
+        {
+            "self": "/api/v2/superbowls",
+            "name": "The Super Bowls",
+            "description": "This is the collection endpoint for the Super Bowl resource."
+        },{
+            "self": "/api/v2/franchises",
+            "name": "The Franchise",
+            "description": "This is the collection endpoint for the Franchise resource."
+        },{
+            "self": "/api/v2/mvps",
+            "name": "The MVPs",
+            "description": "This is the collection endpoint for the MVP resource."
+        },{
+            "self": "/api/v2/analytics",
+            "name": "The Analytics List",
+            "description": "This is the collection endpoint for the Analytic resource."
+        }
+    ]
+    return make_response(200, make_successful_response_object(body))
 
 # -------------------
 # API Analytic Calls

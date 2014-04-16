@@ -117,7 +117,33 @@ class test_API(TestCase) :
 		self.complex_analytic = Analytic.objects.create(name = "complex", query = "select 1 as a, 2 as b union select 3 as a, 4 as b", description = "complex")
 		
 		self.client = Client()
-
+	
+	def test_API_get_root(self) :
+		(code, response) = self.get()
+		self.assertEqual(code, 200)
+		# the response is hard coded because you can't really generate this
+		body = [
+			{
+				"self": "/api/v2/superbowls",
+				"name": "The Super Bowls",
+				"description": "This is the collection endpoint for the Super Bowl resource."
+			},{
+				"self": "/api/v2/franchises",
+				"name": "The Franchise",
+				"description": "This is the collection endpoint for the Franchise resource."
+			},{
+				"self": "/api/v2/mvps",
+				"name": "The MVPs",
+				"description": "This is the collection endpoint for the MVP resource."
+			},{
+				"self": "/api/v2/analytics",
+				"name": "The Analytics List",
+				"description": "This is the collection endpoint for the Analytic resource."
+			}
+		]
+		expected_response = make_successful_response_object(body)
+		self.assertEqual(response, expected_response)
+	
 	# --------------------
 	# API ANALYTICS TESTS
 	# --------------------

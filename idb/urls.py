@@ -12,7 +12,7 @@ urlpatterns = patterns('',
 	url(r'^api/v2/analytics/(\d+)/results', api.api_analytics_id_results),
 	url(r'^api/v2/analytics/(\d+)', api.api_analytics_id),
 	url(r'^api/v2/analytics', api.api_analytics),
-	#url(r'^api/v2', api.api_root),
+	url(r'^api/v2', api.api_root),
 	url(r'^reset-database', api.api_reset_database),
 
 	# Website routes
