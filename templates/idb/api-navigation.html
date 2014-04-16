@@ -1,0 +1,206 @@
+{% extends "idb/template.html" %}
+
+{% block content %}
+
+<script type="text/javascript">
+
+    function goToApiUrl(url) {
+        url = document.location.origin + url;
+        
+        // update the url area
+        $('#url-area').text(url)
+        
+        // get the area and clear it for the next set of results
+        var domParent = $('#results-area');
+        domParent.empty();
+        
+        // make the request
+        $.ajax(url, {
+            dataType: 'json',
+            success: function(response, textStatus, jqXHR) {
+                displayCollection(domParent, response.data);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                displayError(domParent, url, jqXHR.status, jqXHR.responseJSON.error.type, jqXHR.responseJSON.error.message);
+            }
+        });
+    }
+    
+    function displayError(domParent, url, httpStatusCode, apiErrorType, apiErrorMessage) {
+        var table = $('<table>');
+        var dataObject = {
+            "API URL": url,
+            "HTTP Status Code": httpStatusCode,
+            "API Error Type": apiErrorType,
+            "API Error Message": apiErrorMessage
+        }
+        fillTable(table, dataObject, "An Error Has Occured!");
+        domParent.append(table);
+    }
+    
+    function displayEntity(domParent, dataObject) {
+        var table = $('<table>');
+        fillTable(table, dataObject, dataObject.self);
+        domParent.append(table);
+    }
+    
+    function displayCollection(domParent, dataList) {
+        // if the data is not a list (therefore, a singular entity),
+        // we just display it
+        if (!_.isArray(dataList)) {
+            displayEntity(domParent, dataList);
+            return;
+        }
+        
+        // otherwise, we build a container element and display them all
+        var container = $('<div>');
+        _.each(dataList, function (dataObject) {
+            displayEntity(container, dataObject);
+        });
+        domParent.append(container);
+    }
+    
+    
+    function fillTable(domTable, dataObject, title) {
+        var tr;
+        var td;
+        
+        // create the table title
+        if (title) {
+            tr = $('<tr>');
+                td = $('<th>');
+                td.attr('colspan', 2);
+                td.text(title);
+                tr.append(td);
+            domTable.append(tr);
+        }
+        
+        // create the table headers
+        tr = $('<tr>');
+        tr.html('<th>Property</th><th>Value</th>');
+        domTable.append(tr);
+        
+        // to make this function reusable, check for this special case
+        // only entities will have these two values.
+        if (dataObject.self && dataObject.collection) {
+            // we want to list these properties before the others,
+            // therefore, we handle them separately
+            var self = dataObject.self;
+            var collection = dataObject.collection;
+            delete dataObject.self;
+            delete dataObject.collection;
+            
+            // create the 'self' property
+            tr = $('<tr>');
+                td = $('<td>self</td>');
+                tr.append(td);
+                
+                td = $('<td>');
+                    td.append(createApiUrlTag(self))
+                tr.append(td);
+            domTable.append(tr);
+            
+            // create the 'collection' property
+            tr = $('<tr>');
+                td = $('<td>collection</td>');
+                tr.append(td);
+                
+                td = $('<td>');
+                    td.append(createApiUrlTag(collection))
+                tr.append(td);
+            domTable.append(tr);
+        }
+        
+        // create the other properties
+        _.each(dataObject, function(value, key) {
+            tr = $('<tr>');
+                td = $('<td>');
+                    td.text(key);
+                tr.append(td);
+                
+                td = $('<td>');
+                    fillValue(td, value);
+                tr.append(td);
+            domTable.append(tr);
+        });
+    }
+    
+    // This is a helper function to determine how to render different type of data.
+    function fillValue(domCell, dataValue) {
+        if (_.isString(dataValue) || _.isNumber(dataValue) || _.isBoolean(dataValue)) {
+            // these are the easy cases, just display it as text
+            domCell.text(dataValue);
+            
+        } else {
+            // get the list of urls
+            var urls = getApiUrls(dataValue);
+            
+            // if it's empty, we want to indicate that some how
+            if (_.isEmpty(urls)) {
+                domCell.text("(empty list)");
+                return;
+            }
+            
+            // create <a> tags for thems
+            var tags = _.map(urls, createApiUrlTag);
+            
+            // we need to separate the <a> tags with <br/> tags inbetween
+            var needsBrTag = false;
+            _.each(tags, function (tag) {
+                
+                if (needsBrTag) {
+                    domCell.append($('<br>'));
+                }
+                domCell.append(tag);
+                needsBrTag = true;
+                
+            });
+        }
+    }
+    
+    // This is a helper function to extract the urls from api 'ref' objects
+    function getApiUrls(data) {
+        if (_.isObject(data)) {
+            // it is an object, so put it in a list for easy processing
+            data = [ data ];
+        }
+        
+        return _(data)          // indicate that we are operating over 'data' (which is a list)
+            .filter(_.isObject) // we only want the object elements of the list
+            .pluck('self')      // extract the 'self' property of the objects
+            .value();           // give us back a list
+    }
+    
+    // This helper function creates a link that when clicked triggers the api navigation
+    function createApiUrlTag(url) {
+        var tag = $('a');
+        tag.text(url);
+        tag.click(function() {
+            goToApiUrl(url);
+        });
+        return tag;
+    }
+    
+</script>
+
+    <div class="row container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <span>Go to the root of the api: </span>
+                <a href="#" onclick="goToApiUrl('/api/v2')"><code>/api/v2</code></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-1">
+                    <code>GET</code>
+            </div>
+            <div class="col-xs-11">
+                    <span id="url-area" />
+            </div>
+        </div>
+        <div class="row container-fluid">
+            <div class="col-xs-12" id="results-area" />
+        </div>
+    </div>
+
+{% endblock %}
