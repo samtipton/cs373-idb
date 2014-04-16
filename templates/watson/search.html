@@ -1,52 +1,85 @@
 {% extends "idb/template.html" %}
+
+
+
 <!-- {% load watson %} -->
 
 {% block content %}
-<!-- stats for checking validity of search -->
- <!-- <div class ="row"> {{my_length}}</div>
-        <div class ="row"> {{args}}</div>
-        <div class ="row"> {{my_count}}</div>  -->
 
 
-        <div class ="row"> Search results{% if query %} for &ldquo;{{query}}&rdquo;{% endif %}</div>
-        {% if list %}
+
+<div class ="row"> Search results{% if query %} for &ldquo;{{query}}&rdquo;{% endif %}</div>
+{% if list %}
+<div class="row">
+    {% for result in list%}
+    {% if result|truncatewords:"1"|slice:"-4" == "SuperBowl" %}
+    <div class ="row">
+        <ul>
+            <li>
+                <div class="col-md-4">
+                    <b><a href="/superbowls/{{result.object.id}}">
+                        {{ result|truncatewords:"1"|slice:"-4"}} {{result.object.game_number}} </a></b>
+                    </div>
+                    <div class="col-md-4">
+                        {{result.object.winning_franchise.team_city}} {{result.object.winning_franchise.team_name}} 
+                        vs. 
+                        {{result.object.losing_franchise.team_city}} {{result.object.losing_franchise.team_name}}
+                    </div>
+                    <div class="col-md-4">
+                        MVP: {{result.object.mvp.first_name}} {{result.object.mvp.last_name}}
+                    </div>
+                </li>
+            </ul>
+        </div>
+        {% endif %}
+
+        {% if result|truncatewords:"1"|slice:"-4" == "Franchise" %}
         <div class="row">
             <ul>
-
-                {% for result in list%}
                 <li>
-                    <h1>
-                        {% if result|truncatewords:"1"|slice:"-4" == "SuperBowl" %}
-                        <a href="/superbowls/{{result.object.id}}">
-                            {{ result|truncatewords:"1"|slice:"-4"}} {{result.object.game_number}} </a>
-                            <br/>
-                            {% endif %}
+                    <div class="col-md-4">
+                        <b><a href="/franchises/{{result.object.id}}">{{result.object.team_city}} {{result.object.team_name}}</a></b>
+                    </div>
+                    <div class="col-md-4">
+                        Founded in: {{result.object.year_founded}}
+                    </div>
+                    <div class="col-md-4">
+                        Division: {{result.object.division}}
+                    </div>
+                </li>
+            </ul>
+        </div>
+        {% endif %}
 
-                            {% if result|truncatewords:"1"|slice:"-4" == "Franchise" %}
-                            <a href="/franchises/{{result.object.id}}">{{result.object.team_name}} </a>
-                            <br/>
-                            {% endif %}
+        {% if result|truncatewords:"1"|slice:"-4" == "MVP" %}
+        <div class="row">
+            <ul>
+                <li>
+                    <div class="col-md-4">
+                        <b><a href="/mvps/{{result.object.id}}">{{result.object.first_name}} {{result.object.last_name}}</a></b>
+                    </div>
+                    <div class="col-md-4">
+                        Position: {{result.object.position}}
+                    </div>
+                    <div class="col-md-4">
 
-                            {% if result|truncatewords:"1"|slice:"-4" == "MVP" %}
-                            <a href="/mvps/{{result.object.id}}">{{result.object.first_name}} {{result.object.last_name}} Player Page </a>
-                            <br/>
-                            {% endif %}
+                    </div>
+                </li>
+            </ul>
+        </div>
+        {% endif %}
 
-                        </h1>
+        {% endfor %}
 
-                    </li>
-                    {% endfor %}
-                  
-                </ul>
-            </div>
+    </div>
+</div>
 
-
-            {% else %}
-            {% if query %}
-            <div class ="row"> There are no results to display.</div>
-            <div class ="row"> Try entering a less specific search term.</div>
-            {% else %}
-            <div class ="row"> Please enter a query in the search form.</div>
-            {% endif %}
-            {% endif %}
-            {% endblock content %}
+{% else %}
+{% if query %}
+<div class ="row"> There are no results to display.</div>
+<div class ="row"> Try entering a less specific search term.</div>
+{% else %}
+<div class ="row"> Please enter a query in the search form.</div>
+{% endif %}
+{% endif %}
+{% endblock content %}
