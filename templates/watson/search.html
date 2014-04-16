@@ -3,16 +3,11 @@
 
 {% block content %}
 <div class ="row"> Search results{% if query %} for &ldquo;{{query}}&rdquo;{% endif %}</div>
-{% for item in list %}
-{% for inner_item in item %}
-<div class ="row"> {{inner_item.object.first_name}} </div>
-{% endfor %}
-{% endfor %}
-{% if results %}
-
+{% if list %}
 <div class="row">
 <ul>
-    {% for result in results %}
+    {% for queries in list %}
+    {% for result in queries %}
     <li>
             <h1>
                 {% if result|truncatewords:"1"|slice:"-4" == "SuperBowl" %}
@@ -34,6 +29,7 @@
                 </h1>
             
         </li>
+        {% endfor %}
         {% endfor %}
     </ul>
     </div>
