@@ -1,10 +1,10 @@
 {% extends "idb/template.html" %}
 
 {% block content %}
-	
+
  <div class="row">
         <div style="padding:0px"class="col-md-3">
-          <img style="width:250px" src="../../static/res/Logos/{{team.team_name}}.png">
+          <img id="headshot" src="../../static/res/Logos/{{team.team_name}}.png">
         </div>
         <div style="padding:0px" class="col-md-6">
     		<h1><strong style="color:black; font-size:1.5em">The {{team.team_city}} {{team.team_name}}</strong></h1>
@@ -15,50 +15,40 @@
 	    	</div>
     	</div>
         <div id="map-canvas" class="col-md-3">
-
         </div>
       </div>
       
       <br/>
       <br/>
 
-      <div class="container-fluid">
+{#      <div class="container-fluid">#}
         <!-- team staff row -->
         <div class="row">
-	        <div id="image" class="col-md-2">
-	            <img style="width:150px" src="../../static/res/Owners/{{team.current_owner}}.png" />
-	        </div>
-	        <div class="col-md-2">
-	          <ul style="float:left; padding: 0px">
-	            <br/>
+	        <div  class="col-md-4">
+	            <img style='width: 150px; margin-top:10px'
+                     src="../../static/res/Owners/{{team.current_owner}}.png"/>
+
 	            <li><h3><b>Team Owner</b></h3></li>
 	            <li><p>{{team.current_owner}}</p></li>
-	          </ul>
 	        </div>
 
-	        <div  id="image" class="col-md-2">
-	          <img style="width:150px" src="../../static/res/GManagers/{{team.current_gm}}.png" />
-	        </div>
-	        <div class="col-md-2">
-	          <ul style="float:left; padding: 0px">
-	            <br/>
+	        <div class="col-md-4">
+	          <img style="width:150px; margin-top:10px" src="../../static/res/GManagers/{{team.current_gm}}.png" />
+	        <br>
+
 	            <li><h3><b>General Manager</b></h3></li>
 	            <li><p>{{team.current_gm}}</p></li>
-	          </ul>
+
 	        </div>
 
-	        <div id="image" class="col-md-2">
-	          <img style="width:150px" src="../../static/res/HCoaches/{{team.current_head_coach}}.png" />
-	        </div>
-	        <div class="col-md-2">
-	          <ul style="float:left; padding: 0px">
-	            <br/>
-	            <li><h3><b>Head Coach</b><h3></li>
+	        <div class="col-md-4">
+	          <img style="width:150px; margin-top:10px" src="../../static/res/HCoaches/{{team.current_head_coach}}.png" />
+	       <br>
+	            <li><h3><b>Head Coach</b></h3></li>
 	            <li><p>{{team.current_head_coach}}</p></li>
-	          </ul>
 	        </div>
 	      </div>
-      </div>
+{#      </div>#}
       <br/>
       <br/>
 
@@ -79,7 +69,6 @@
 
       {% endif %}
 
-
       {% if mvp_history|length != 0 %}
         <div class="row">
           <h1>MVP History</h1>
@@ -99,23 +88,33 @@
 
       <!-- social media -->
       <div class="row">
-        <div style="padding:0px; background-color: white" class="col-md-3"> 
+        <div style="padding:0px; background-color: #9b9b9b;"class="col-md-3">
 
           <!-- facebook -->
-          <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2F{{team.facebook_id}}&amp;width&amp;height=400&amp;colorscheme=light&amp;show_faces=true&amp;header=true&amp;stream=false&amp;show_border=true" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:395px;" allowTransparency="true"></iframe>
+          <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2F{{team.facebook_id}}&amp;width=292&amp;height=300&amp;colorscheme=light&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=false" scrolling="no" frameborder="0" style="overflow:hidden; height:300px;" allowTransparency="true"></iframe>
         </div>
 
         <!-- youtube -->
-        <div style="padding:0px" class="col-md-6">  
-          <div class="flex-video widescreen"><iframe width="550" height="400" src="//www.youtube.com/embed/{{team.youtube_id}}" frameborder="0" allowfullscreen></iframe></div>
+        <div style="padding-top:10px" class="col-md-6 col-md-push-2">
+          <div class="flex-video widescreen"><iframe width="512" height="288" src="//www.youtube.com/embed/{{team.youtube_id}}" frameborder="0" allowfullscreen></iframe></div>
         </div>
 
         <!-- twitter -->
-        <div style="padding:0px" class="col-md-3">
-          <a class="twitter-timeline" href="" data-widget-id="{{team.twitter_id}}"></a>
-      
+        <div style="background-color: #9b9b9b" class="col-md-2 col-md-pull-6">
+          <a class="twitter-timeline" href="" data-widget-id="{{team.twitter_id}}"data-chrome="transparent"height="300"></a>
 
-      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          <script>
+              !function(d,s,id){
+              var js,fjs=
+                      d.getElementsByTagName(s)[0],
+                      p=/^http:/.test(d.location)?'http':'https';
+              if(!d.getElementById(id)){js=d.createElement(s);
+                  js.id=id;
+                  js.src=p+"://platform.twitter.com/widgets.js";
+                  fjs.parentNode.insertBefore(js,fjs);
+              }
+          }(document,"script","twitter-wjs");
+          </script>
         </div>
       </div>
 
