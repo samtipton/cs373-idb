@@ -2,7 +2,7 @@
 {% load watson %}
 
 {% block content %}
-<div class ="row"> Search results{% if query %} for &ldquo;{{query}}&rdquo;{% endif %}</div>
+<div class ="row"><h2> Search results </h2>{% if query %} for &ldquo;{{query}}&rdquo;{% endif %}
 {% if search_results %}
 <div class="row">
 <ul>
@@ -12,16 +12,19 @@
                 {% if result|truncatewords:"1"|slice:"-4" == "SuperBowl" %}
                 <a href="/superbowls/{{result.object.id}}">
                     {{ result|truncatewords:"1"|slice:"-4"}} {{result.object.game_number}}</a>
-                    {% endif %}
                     <br/>
+                    {% endif %}
+                    
                     {% if result|truncatewords:"1"|slice:"-4" == "Franchise" %}
                     <a href="/franchises/{{result.object.id}}">{{result.object.team_name}} </a>
-                    {% endif %}
                     <br/>
+                    {% endif %}
+                    
                     {% if result|truncatewords:"1"|slice:"-4" == "MVP" %}
                     <a href="/mvps/{{result.object.id}}">{{result.object.first_name}} {{result.object.last_name}} Player Page </a>
-                    {% endif %}
                     <br/>
+                    {% endif %}
+                    
                 </h1>
             
         </li>
@@ -32,11 +35,13 @@
     <!-- {% search_results search_results %} -->
     {% else %}
     {% if query %}
-    <div class ="row"> There are no results to display.</div>
-   <div class ="row"> Try entering a less specific search term.</div>
+    <div class ="row"> There are no results to display.
+    Try entering a less specific search term.
     {% else %}
-    <div class ="row"> Please enter a query in the search form.</div>
+    Please enter a query in the search form.</div>
     {% endif %}
     {% endif %}
+    </div>
     {% endblock content %}
+
 

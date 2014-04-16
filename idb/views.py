@@ -101,6 +101,19 @@ def contact(request) :
 
 
 
+"""def search_idb(request,q=None):
+	results = watson.search(q)
+	context = RequestContext(request, {'results': results})
+
+	t = loader.get_template('watson/search.html')
+	return HttpResponse(t.render(context))"""
+
+
+
+
+
+
+
 
 
 class SearchMixin(object):
@@ -179,7 +192,11 @@ class SearchView_IDB(SearchMixin, generic.ListView):
 
 
 def search_idb(request,**kwargs):
+	print(kwargs)
 	return SearchView_IDB.as_view(**kwargs)(request)
+
+
+
 
 
 
