@@ -20,6 +20,7 @@ urlpatterns = patterns('',
 	url(r'^franchises/(\d*)$', views.franchises),
 	url(r'^mvps/(\d*)$', views.mvps),
 	url(r'^analytics/(\d*)$', views.analytics),
+	url(r'^apinav$', views.api_navigation),
 	url(r'^contact/$', views.contact),
 	url(r'^$', views.splash)
 )
