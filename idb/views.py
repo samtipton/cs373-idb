@@ -119,23 +119,14 @@ def search_idb(request):
 
 
 	count = 0 #for debugging
+
+
 	
-
 	list_of_models = []
-	for item in q_list: #removing duplicate results
-		count += 1
-		for the_result in item:
-			if the_result.title[:-7] == 'SuperBowl':
-				if the_result not in list_of_models:
-					list_of_models.append(the_result)
-			elif the_result.title[:-7] =='MVP':
-				if the_result not in list_of_models:
-					list_of_models.append(the_result)
-			elif the_result.title[:-7] =='Franchise':
-				if the_result not in list_of_models:
-					list_of_models.append(the_result)
-
-
+	for item in q_list:
+		for result in item:
+			if result not in list_of_models:
+				list_of_models.append(result)
 
 	context = RequestContext(request, {'my_count': count, 'args': arg_list,'results': search_results, 'list': list_of_models, 'my_length': length})
 	t = loader.get_template('watson/search.html')

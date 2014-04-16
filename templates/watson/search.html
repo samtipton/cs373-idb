@@ -3,48 +3,50 @@
 
 {% block content %}
 <!-- stats for checking validity of search -->
- <!--   <div class ="row"> {{my_length}}</div>
+ <!-- <div class ="row"> {{my_length}}</div>
         <div class ="row"> {{args}}</div>
-        <div class ="row"> {{my_count}}</div> -->
+        <div class ="row"> {{my_count}}</div>  -->
 
 
-<div class ="row"> Search results{% if query %} for &ldquo;{{query}}&rdquo;{% endif %}</div>
-{% if list %}
-<div class="row">
-<ul>
-    {% for result in list %}
-    <li>
-            <h1>
-                {% if result|truncatewords:"1"|slice:"-4" == "SuperBowl" %}
-                <a href="/superbowls/{{result.object.id}}">
-                    {{ result|truncatewords:"1"|slice:"-4"}} {{result.object.game_number}} {{result}}</a>
-                    <br/>
-                    {% endif %}
-                    
-                    {% if result|truncatewords:"1"|slice:"-4" == "Franchise" %}
-                    <a href="/franchises/{{result.object.id}}">{{result.object.team_name}} {{result}}</a>
-                    <br/>
-                    {% endif %}
-                    
-                    {% if result|truncatewords:"1"|slice:"-4" == "MVP" %}
-                    <a href="/mvps/{{result.object.id}}">{{result.object.first_name}} {{result.object.last_name}} Player Page {{result}}</a>
-                      <br/>
-                    {% endif %}
+        <div class ="row"> Search results{% if query %} for &ldquo;{{query}}&rdquo;{% endif %}</div>
+        {% if list %}
+        <div class="row">
+            <ul>
+
+                {% for result in list%}
+                <li>
+                    <h1>
+                        {% if result|truncatewords:"1"|slice:"-4" == "SuperBowl" %}
+                        <a href="/superbowls/{{result.object.id}}">
+                            {{ result|truncatewords:"1"|slice:"-4"}} {{result.object.game_number}} </a>
+                            <br/>
+                            {% endif %}
+
+                            {% if result|truncatewords:"1"|slice:"-4" == "Franchise" %}
+                            <a href="/franchises/{{result.object.id}}">{{result.object.team_name}} </a>
+                            <br/>
+                            {% endif %}
+
+                            {% if result|truncatewords:"1"|slice:"-4" == "MVP" %}
+                            <a href="/mvps/{{result.object.id}}">{{result.object.first_name}} {{result.object.last_name}} Player Page </a>
+                            <br/>
+                            {% endif %}
+
+                        </h1>
+
+                    </li>
+                    {% endfor %}
                   
-                </h1>
-            
-        </li>
-        {% endfor %}
-    </ul>
-    </div>
+                </ul>
+            </div>
 
-   
-    {% else %}
-    {% if query %}
-    <div class ="row"> There are no results to display.</div>
-   <div class ="row"> Try entering a less specific search term.</div>
-    {% else %}
-    <div class ="row"> Please enter a query in the search form.</div>
-    {% endif %}
-    {% endif %}
-    {% endblock content %}
+
+            {% else %}
+            {% if query %}
+            <div class ="row"> There are no results to display.</div>
+            <div class ="row"> Try entering a less specific search term.</div>
+            {% else %}
+            <div class ="row"> Please enter a query in the search form.</div>
+            {% endif %}
+            {% endif %}
+            {% endblock content %}
