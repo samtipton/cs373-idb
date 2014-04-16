@@ -4,7 +4,7 @@ from django.template import RequestContext, loader
 from django.shortcuts import get_object_or_404, render, render_to_response
 from django.views import generic
 from django.db.models import Q
-from idb.models import MVP, Franchise, SuperBowl
+from idb.models import MVP, Franchise, SuperBowl, Analytic
 
 # Create your views here.
 def splash(request) :
@@ -15,9 +15,25 @@ def splash(request) :
 	team_list = Franchise.objects.order_by('-year_founded')
 	mvp_list = MVP.objects.order_by('-draft_year')
 
-	context = RequestContext(request, {'game_list':game_list, 
+	context = RequestContext(request, {'game_list':game_list,
 		'team_list':team_list, 'mvp_list':mvp_list})
 
+	return HttpResponse(t.render(context))
+
+def api_navigation(request):
+	context = RequestContext(request, {})
+	t = loader.get_template('idb/api-navigation.html')
+	return HttpResponse(t.render(context))
+
+def analytics(request, id = ""):
+	if id.isdigit():
+		analytics = [get_object_or_404(Analytic, pk = int(id))]
+	else:
+		analytics = Analytic.objects.all()
+
+	url = 'idb/analytics.html'
+	context = RequestContext(request, { 'analytic_list': analytics })
+	t = loader.get_template(url)
 	return HttpResponse(t.render(context))
 
 def superbowls(request, id = None) :
