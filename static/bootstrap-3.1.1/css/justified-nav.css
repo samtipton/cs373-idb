@@ -75,9 +75,10 @@ body {
   padding: 0px 15px 0px 15px;
 }
 
-input {
+input[type= "text"] {
   border-radius: 5px;
   width: 125px;
+  height: 80%;
 } 
 
 
