@@ -101,46 +101,45 @@ def contact(request) :
 
 
 
-def search_idb(request):
-	the_list = request.GET.get('q', '')
-	#q_list = set()
+def search_idb(request): 
+	arg_list = request.GET.get('q', '') #returns string of args from search
 	q_list = []
 
-	search_results = watson.search(the_list)
-	#q_list.update(search_results)
+	search_results = watson.search(arg_list) #AND search
 	q_list.append(search_results)
 
-	for term in the_list:
-		more_results = (watson.search(term))
-		#search_results = search_results | more_results
-		#q_list.update(more_results)
-		q_list.append(more_results)
+
+	arg_list = arg_list.split() #split on whitespace to get search terms
+
+	length = len(arg_list) #for debugging
+	if len(arg_list) > 1: #OR search for each individual term
+		for search_term in arg_list:
+			more_results = (watson.search(search_term))
+			q_list.append(more_results)
 
 
-	q_list = set(q_list)
+	count = 0 #for debugging
+	
+
+	list_of_models = []
+	for item in q_list: #removing duplicate results
+		count += 1
+		for the_result in item:
+			if the_result.title[:-7] == 'SuperBowl':
+				if the_result not in list_of_models:
+					list_of_models.append(the_result)
+			elif the_result.title[:-7] =='MVP':
+				if the_result not in list_of_models:
+					list_of_models.append(the_result)
+			elif the_result.title[:-7] =='Franchise':
+				if the_result not in list_of_models:
+					list_of_models.append(the_result)
 
 
 
-
-
-
-	"""context = RequestContext(request, {'results': request.GET.get('q', '') })
-	t = loader.get_template('watson/dum.html')
-	return HttpResponse(t.render(context))"""
-
-
-
-	context = RequestContext(request, {'results': search_results, 'list': q_list})
-
+	context = RequestContext(request, {'my_count': count, 'args': arg_list,'results': search_results, 'list': list_of_models, 'my_length': length})
 	t = loader.get_template('watson/search.html')
-	#t = loader.get_template('watson/dum.html')
 	return HttpResponse(t.render(context))
-
-
-
-
-
-
 
 
 

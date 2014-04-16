@@ -2,34 +2,38 @@
 <!-- {% load watson %} -->
 
 {% block content %}
+<!-- stats for checking validity of search -->
+ <!--   <div class ="row"> {{my_length}}</div>
+        <div class ="row"> {{args}}</div>
+        <div class ="row"> {{my_count}}</div> -->
+
+
 <div class ="row"> Search results{% if query %} for &ldquo;{{query}}&rdquo;{% endif %}</div>
 {% if list %}
 <div class="row">
 <ul>
-    {% for queries in list %}
-    {% for result in queries %}
+    {% for result in list %}
     <li>
             <h1>
                 {% if result|truncatewords:"1"|slice:"-4" == "SuperBowl" %}
                 <a href="/superbowls/{{result.object.id}}">
-                    {{ result|truncatewords:"1"|slice:"-4"}} {{result.object.game_number}}</a>
+                    {{ result|truncatewords:"1"|slice:"-4"}} {{result.object.game_number}} {{result}}</a>
                     <br/>
                     {% endif %}
                     
                     {% if result|truncatewords:"1"|slice:"-4" == "Franchise" %}
-                    <a href="/franchises/{{result.object.id}}">{{result.object.team_name}} </a>
+                    <a href="/franchises/{{result.object.id}}">{{result.object.team_name}} {{result}}</a>
                     <br/>
                     {% endif %}
                     
                     {% if result|truncatewords:"1"|slice:"-4" == "MVP" %}
-                    <a href="/mvps/{{result.object.id}}">{{result.object.first_name}} {{result.object.last_name}} Player Page </a>
+                    <a href="/mvps/{{result.object.id}}">{{result.object.first_name}} {{result.object.last_name}} Player Page {{result}}</a>
                       <br/>
                     {% endif %}
                   
                 </h1>
             
         </li>
-        {% endfor %}
         {% endfor %}
     </ul>
     </div>
@@ -44,4 +48,3 @@
     {% endif %}
     {% endif %}
     {% endblock content %}
-
