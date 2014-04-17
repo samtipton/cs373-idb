@@ -1,5 +1,6 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import patterns, url, include
 from idb import views, api
+import watson
 
 urlpatterns = patterns('',
 	# API routes
@@ -22,5 +23,10 @@ urlpatterns = patterns('',
 	url(r'^analytics/(\d*)$', views.analytics),
 	url(r'^apinav/$', views.api_navigation),
 	url(r'^contact/$', views.contact),
-	url(r'^$', views.splash)
+	url(r'^$', views.splash),
+	url("^search/", views.search_idb) #for default
+	#url(r"^search/(.*)", views.search_idb) #for custom
+
+	# Default views from Watson, should include a view for our output
+	#url("^search/", include("watson.urls",namespace="watson")),
 )

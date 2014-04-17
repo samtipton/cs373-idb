@@ -4,6 +4,9 @@ from django.template import RequestContext, loader
 from django.shortcuts import get_object_or_404, render, render_to_response
 from django.views import generic
 from django.db.models import Q
+from django.views.generic.list import BaseListView #search 
+from django.utils import six
+import watson
 from idb.models import MVP, Franchise, SuperBowl, Analytic
 
 # Create your views here.
@@ -111,4 +114,114 @@ def contact(request) :
 	t = loader.get_template('idb/contact.html')
 
 	return HttpResponse(t.render(context))
-	
+
+def search_idb(request): 
+
+	query = request.GET.get('q', '') #returns string of args from search
+	q_list = []
+
+	search_results = watson.search(query) #AND search
+	q_list.append(search_results)
+
+	arg_list = query.split() #split on whitespace to get search terms
+
+	length = len(arg_list) #for debugging
+	if len(arg_list) > 1: #OR search for each individual term
+		for search_term in arg_list:
+			more_results = (watson.search(search_term))
+			q_list.append(more_results)
+	count = 0 #for debugging
+
+	list_of_models = []
+	for item in q_list:
+		for result in item:
+			if result not in list_of_models:
+				list_of_models.append(result)
+
+	count = len(list_of_models)
+	context = RequestContext(request, {'query': query, 'count': count, 'args': arg_list,'results': search_results, 'list': list_of_models, 'my_length': length})
+
+	t = loader.get_template('watson/search.html')
+	return HttpResponse(t.render(context))
+
+
+class SearchMixin(object):
+    
+    """Base mixin for search views."""
+    
+    context_object_name = "search_results"
+    
+    query_param = "q"
+    
+    def get_query_param(self):
+        """Returns the query parameter to use in the request GET dictionary."""
+        return self.query_param
+    
+    models = ()
+    
+    def get_models(self):
+        """Returns the models to use in the query."""
+        return self.models 
+    
+    exclude = ()
+    
+    def get_exclude(self):
+        """Returns the models to exclude from the query."""
+        return self.exclude
+    
+    def get_queryset(self):
+        """Returns the initial queryset."""
+        return watson.search(self.query, models=self.get_models(), exclude=self.get_exclude())
+    
+    def get_query(self, request):
+        """Parses the query from the request."""
+        return request.GET.get(self.get_query_param(), "").strip()
+    
+    empty_query_redirect = None
+    
+    def get_empty_query_redirect(self):
+        """Returns the URL to redirect an empty query to, or None."""
+        return self.empty_query_redirect
+    
+    extra_context = {}
+    
+    def get_extra_context(self):
+        """
+        Returns any extra context variables.
+        
+        Required for backwards compatibility with old function-based views.
+        """
+        return self.extra_context
+    
+    def get_context_data(self, **kwargs):
+        """Generates context variables."""
+        context = super(SearchMixin, self).get_context_data(**kwargs)
+        context["query"] = self.query
+        # Process extra context.
+        for key, value in six.iteritems(self.get_extra_context()):
+            if callable(value):
+                value = value()
+            context[key] = value
+        return context
+    
+    def get(self, request):
+        """Performs a GET request."""
+        self.query = self.get_query(request)
+        if not self.query:
+            empty_query_redirect = self.get_empty_query_redirect()
+            if empty_query_redirect:
+                return redirect(empty_query_redirect)
+        return super(SearchMixin, self).get(request)
+
+
+"""SEARCH"""
+class SearchView_IDB(SearchMixin, generic.ListView):
+	"""View that performs a search and returns the search results."""
+	template_name = "watson/search.html"
+
+
+"""def search_idb(request,**kwargs):
+	print(kwargs)
+	return SearchView_IDB.as_view(**kwargs)(request)"""
+
+
