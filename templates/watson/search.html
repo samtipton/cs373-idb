@@ -2,51 +2,85 @@
 <!-- {% load watson %} -->
 
 {% block content %}
-<!-- stats for checking validity of search -->
- <!-- <div class ="row"> {{my_length}}</div>
-        <div class ="row"> {{args}}</div>
-        <div class ="row"> {{my_count}}</div>  -->
 
 
-        <div class ="row"> Search results{% if query %} for &ldquo;{{query}}&rdquo;{% endif %}</div>
+    <div class="row" id="search">
+        <div class ="row" id="search-header"> 
+            <h2>Searching for: "<b>{{query}}</b>" {% if query %} Found <b>{{ count }}</b> results {% endif %}</h2>
+        </div>
         {% if list %}
-        <div class="row">
-            <ul>
 
-                {% for result in list%}
-                <li>
-                    <h1>
-                        {% if result|truncatewords:"1"|slice:"-4" == "SuperBowl" %}
-                        <a href="/superbowls/{{result.object.id}}">
-                            {{ result|truncatewords:"1"|slice:"-4"}} {{result.object.game_number}} </a>
-                            <br/>
-                            {% endif %}
+        {% for result in list%}
+        <div class="row" id="search-result">
 
-                            {% if result|truncatewords:"1"|slice:"-4" == "Franchise" %}
-                            <a href="/franchises/{{result.object.id}}">{{result.object.team_name}} </a>
-                            <br/>
-                            {% endif %}
+            <!-- franchise object results -->
+            {% if result.object.team_name %}
+                <div class="col-md-4" id="search-result-header">
+                    <img style="width: 75px" src="../../static/res/Logos/{{result.object.team_name}}.png" />
+                    <a href="/franchises/{{result.object.id}}"><b>{{result.object.team_city}} {{result.object.team_name}}</b></a>
+                </div>
+                <div class="col-md-4" id="search-result-context">
+                    <br/>
+                    <p>{{result.object.team_city}}, {{result.object.team_state}} </p>
+                    <p>Division: {{result.object.division}}</p>
+                    <p>Since {{result.object.year_founded}}</p>
 
-                            {% if result|truncatewords:"1"|slice:"-4" == "MVP" %}
-                            <a href="/mvps/{{result.object.id}}">{{result.object.first_name}} {{result.object.last_name}} Player Page </a>
-                            <br/>
-                            {% endif %}
-
-                        </h1>
-
-                    </li>
-                    {% endfor %}
-                  
-                </ul>
-            </div>
-
-
-            {% else %}
-            {% if query %}
-            <div class ="row"> There are no results to display.</div>
-            <div class ="row"> Try entering a less specific search term.</div>
-            {% else %}
-            <div class ="row"> Please enter a query in the search form.</div>
+                </div>
+                <div class="col-md-4" id="search-result-context">
+                    <br/>
+                    <p>Current Owner: {{result.object.current_owner}}</p>
+                    <p>Current General Manager: {{result.object.current_gm}}</p>
+                    <p>Current Head Coach: {{result.object.current_head_coach}}</p>
+                </div>    
             {% endif %}
+
+            <!-- mvp results -->
+            {% if result.object.first_name %}
+                <div class ="col-md-4" id="search-result-header">
+                    <img style="width: 75px" src="../../static/res/MVPs/{{result.object.first_name}} {{result.object.last_name}}.png" />
+                    <a href="/mvps/{{result.object.id}}"><b>{{result.object.first_name}} {{result.object.last_name}}</b></a>
+                </div>
+    
+                <div class="col-md-4" id="search-result-context">
+                    <br/>
+                    <p>Position: {{result.object.position}}</p>
+                    <p>Drafted in: {{result.object.draft_year}}</p>
+                    <p>Attended: {{result.object.college}}</p>
+                </div>
+                <div class="col-md-4" id="search-result-context">
+                </div>
+
             {% endif %}
-            {% endblock content %}
+
+            <!-- super bowl results -->
+            {% if result.object.game_number %}
+                <div class ="col-md-4" id="search-result-header">
+                     <a href="/superbowls/{{result.object.id}}"><img style="width: 125px" src="../../static/res/SBIcons/{{result.object.game_number}}.png" /></a>
+                    <a href="/superbowls/{{result.object.id}}"><h3><b>Super Bowl {{result.object.game_number}}</b></h3></a>
+                </div>
+                <div class ="col-md-4" id="search-result-context">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <b><a href="/franchises/{{result.object.winning_franchise.id}}">{{result.object.winning_franchise.team_name}}</a> vs. <a href="/franchises/{{result.object.losing_franchise.id}}">{{result.object.losing_franchise.team_name}}</a></b>
+                </div>
+                    
+                   
+                <div class="col-md-4" id="search-result-context">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <p>Played at {{result.object.venue_name}} in {{result.object.venue_city}}, {{result.object.venue_state}} on {{result.object.game_day}} </p>
+                </div>
+            {% endif %}
+        </div>
+
+        {% endfor %}
+        {% else %}
+        <div class ="row"> There are no results to display.</div>
+        {% endif %}
+    </div>
+
+{% endblock %}
