@@ -7,6 +7,10 @@ body {
   background-attachment: fixed;
 }
 
+.highlight{
+  background-color: white;
+}
+
 #map-canvas{ 
   height: 250px; 
   width: 280px;
