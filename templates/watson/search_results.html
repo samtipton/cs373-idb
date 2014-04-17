@@ -1,0 +1,50 @@
+{% extends "idb/template.html" %}
+<!DOCTYPE html>{% load watson %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Search results{% if query %} for &ldquo;{{query}}&rdquo;{% endif %}</title>
+    </head>
+    <body>
+        {% block content %}
+        <h1>Search results{% if query %} for &ldquo;{{query}}&rdquo;{% endif %}</h1>
+        {% if search_results %}
+        <ul>
+        {% for result in search_results %}
+        <li>
+            <article>
+                <h1>
+                    {% if result|truncatewords:"1"|slice:"-4" == "SuperBowl" %}
+                        <a href="/superbowls/{{result.object.id}}">
+                            {{ result|truncatewords:"1"|slice:"-4"}}</a>
+                             <a href="/superbowls/{{result.object.id}}">
+                            {{ result.object.game_number}}</a>
+                    {% elif result|truncatewords:"1"|slice:"-4" == "MVP" %}
+                       <a href="/mvps/{{result.object.id}}">{{result|truncatewords:"1"|slice:"-4"}}</a>
+                    {% elif result|truncatewords:"1"|slice:"-4" == "Franchise" %}
+                       <a href="/franchises/{{result.object.id}}">{{result|truncatewords:"1"|slice:"-4"}}</a>
+                      {% endif %}
+                </h1>
+            </article>
+        </li>
+        {% endfor %}
+</ul>
+
+            <!-- {% search_results search_results %} -->
+        {% else %}
+            {% if query %}
+                <p><em>There are no results to display.</em></p>
+                <p><em>Try entering a less specific search term.</em></p>
+            {% else %}
+                <p><em>Please enter a query in the search form.</em></p>
+            {% endif %}
+        {% endif %}
+         {% endblock content %}
+    </body>
+</html>
+
+
+
+
+

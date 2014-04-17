@@ -1,4 +1,5 @@
 from django.db import models
+import watson
 
 # This import is not used but it is required for
 # epydoc to be able to know about the 'date' type.
@@ -196,3 +197,7 @@ class Analytic(models.Model) :
     name = models.CharField(max_length = 500)
     query = models.CharField(max_length = 500)
     description = models.CharField(max_length = 500)
+
+watson.register(MVP)
+watson.register(SuperBowl)
+watson.register(Franchise)

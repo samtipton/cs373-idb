@@ -7,9 +7,47 @@ body {
   background-attachment: fixed;
 }
 
+.highlight{
+  background-color: white;
+}
+
 #map-canvas{ 
   height: 250px; 
   width: 280px;
+}
+
+#search-header {
+  border: 1px solid black;
+  text-align: center;
+}
+
+#search-header {
+  font-size: 55px;
+}
+
+#search a {
+  color: black;
+}
+
+#search-result-header {
+  display: inline;
+  padding: -30px;
+}
+
+#search-result-header img {
+  margin-left: 20px;
+}
+
+#search-result {
+  padding: 5px;
+  border: 1px solid black;
+  text-align: left;
+}
+
+#search-bar > * {
+  margin-left: -15px;
+  padding: 12px;
+  display: inline;
 }
 
 .jumbotron {
