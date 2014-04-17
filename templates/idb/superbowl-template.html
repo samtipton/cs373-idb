@@ -25,9 +25,18 @@
     <!-- scoreboard -->
     <div class="row" id="scoreboard">
     	<div class = "container-fluid">
-	    	<a href="/franchises/{{game.winning_franchise.id}}"><img src="../../static/res/Logos/{{game.winning_franchise.team_name}}.png" /></a>
-	    	<h1 >{{game.winning_score}} - {{game.losing_score}}</h1>
-	    	<a href="/franchises/{{game.losing_franchise.id}}"><img src="../../static/res/Logos/{{game.losing_franchise.team_name}}.png" /></a>
+        <div class="col-lg-4" style="background-color:transparent">
+	    	  <a href="/franchises/{{game.winning_franchise.id}}"><img src="../../static/res/Logos/{{game.winning_franchise.team_name}}.png" /></a>
+        </div>
+        <div class="col-lg-4" style="background-color:transparent">
+	    	  <br><br><br><br><br><br>
+          <h1>{{game.winning_score}} - {{game.losing_score}}</h1>
+          <br><br><br><br>
+        </div>
+        <div class="col-lg-4" style="background-color:transparent">
+	    	  <a href="/franchises/{{game.losing_franchise.id}}">
+          <img src="../../static/res/Logos/{{game.losing_franchise.team_name}}.png" /></a>
+        </div>
 	    </div>
     </div>
 
