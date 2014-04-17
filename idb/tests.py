@@ -698,7 +698,7 @@ class test_API(TestCase) :
 # ---------
 
 	def test_search_1(self):
-		query = "Tom"
+		query = "Malcolm Smith"
 		search_results = watson.search(query)
 		for result in search_results:
 			if result.title[:-7] == "MVP":
