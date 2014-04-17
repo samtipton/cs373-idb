@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from idb.models import MVP, Franchise, SuperBowl, Analytic
 
@@ -40,12 +40,24 @@ def reset_database():
     MVP.objects.all().delete()
     Franchise.objects.all().delete()
     SuperBowl.objects.all().delete()
-
     Analytic.objects.all().delete()
 
-    a('Test', 'SELECT 1, 2', "------")
-    a('Super Bowl MVP Awards by Position', 'SELECT s.*, p.* FROM idb_superbowl AS s INNER JOIN idb_mvp AS p ON s.mvp_id = p.id ORDER BY s.game_day DESC', "------")
+    # Super Bowl Queries
+    a('Super Bowls with attendance better than the average', 'SELECT s.game_number, s.venue_name, s.venue_city, s.venue_state, s.attendance, s.game_day FROM idb_superbowl AS s WHERE (s.attendance > (SELECT avg(s1.attendance) FROM idb_superbowl AS s1)) ORDER BY s.attendance', "Fun Text")
+    a('Super Bowl Venue Selection', 'SELECT count(*) AS "# of Super Bowls", venue_name AS Venue, venue_city AS City, venue_state AS State FROM idb_superbowl GROUP BY venue_state, venue_city, venue_name ORDER BY "# of Super Bowls" DESC','---')
+    a('Super Bowl Score Statistics', 'SELECT max(t.s) AS Max, min(t.s) AS Min, avg(t.s) AS Average FROM (SELECT winning_score AS s FROM idb_superbowl UNION SELECT losing_score AS s FROM idb_superbowl) AS t','---')
     
+    # Franchise Queries
+    a('Franchises with most MVPs', 'SELECT (f.team_city || \' \' || f.team_name) AS Team, count(f.id) AS Count FROM idb_franchise AS f INNER JOIN idb_franchise_mvps AS j ON j.franchise_id = f.id GROUP BY f.id ORDER BY Count DESC','---')
+    a('Franchises by Super Bowl wins and losses', 'SELECT (f.team_city || \' \' || f.team_name) AS Team, (select count(*) from idb_superbowl AS s where s.winning_franchise_id = f.id) AS Wins, (select count(*) from idb_superbowl as s where s.losing_franchise_id = f.id) AS Losses FROM idb_franchise AS f ORDER BY Wins DESC, Losses DESC, Team','---')
+    
+    # MVP Queries
+    a('Super Bowl MVP Awards by Position', 'SELECT p.position, p.first_name, p.last_name FROM idb_superbowl AS s INNER JOIN idb_mvp AS p ON s.mvp_id = p.id ORDER BY p.position DESC', "------")
+    a('Super Bowl MVP Awards by Position', 'SELECT position, count(*) FROM idb_mvp AS p GROUP BY position ORDER BY count(*) DESC', "---")
+    a('Position with most Super Bowl MVP Awards', 'SELECT position, count(*) AS count FROM idb_mvp GROUP BY position ORDER BY count DESC LIMIT 1', '---')
+    a('Position with least Super Bowl MVP Awards', 'SELECT position, count(*) AS count FROM idb_mvp GROUP BY position ORDER BY count ASC LIMIT 1', '---')
+    a('Average years in the NFL by active Super Bowl MVP winners', 'SELECT avg(2014 - draft_year) AS years FROM idb_mvp WHERE active','---')
+
     malcolm_smith   = m('Malcolm',  'Smith',    'OLB',  '1989-07-05',   'Woodland Hills, CA',   'Woodland Hills (CA) Taft',         'Southern California',      2011, True,  465000,    'MalcSmitty',                                   '446422781169651712', 'zfB8hCsHwLE', 34.1683, -118.605)
     joe_flacco      = m('Joe',      'Flacco',   'QB',   '1985-01-16',   'Audubon, NJ',          'Audubon (NJ) Audubon',             'Delaware',                 2008, True,  20100000,  'JoeFlacco',                                    '446422363865755648', 'fod3tDCNZ80', 39.8901, -75.0724)
     eli_manning     = m('Eli',      'Manning',  'QB',   '1981-01-03',   'New Orleans, LA',      'New Orleans (LA) Newman',          'Mississippi',              2004, True,  13000000,  'EliManning',                                   '455503803396014080', 'I7vZ1dVSe6I', 29.9667, -90.05)
@@ -117,7 +129,6 @@ def reset_database():
     vikings     = f([],                                                                         'Vikings',      'Minnesota',    'MN', 'Zygi Wilf',                  'Rick Spielman',    'Mike Zimmer',      1961, True, 'TCF Bank Stadium',                 'NFC North', 'minnesotavikings',    '456635573206126592', '0I3-nsUDtVI', 44.9764, -93.2244)
     jets        = f([joe_namath],                                                               'Jets',         'New York',     'NJ', 'Woody Johnson',              'John Idzik',       'Rex Ryan',         1963, True, 'MetLife Stadium',                  'AFC East',  'jets',                '456635661882122241', 'Vuvz15OjCVc', 40.8136, -74.0744)
     chiefs      = f([len_dawson],                                                               'Chiefs',       'Kansas City',  'MO', 'Clark Hunt',                 'John Dorsey',      'Andy Reid',        1963, True, 'Arrowhead Stadium',                'AFC West',  'KansasCityChiefs',    '456635985632059394', 'h3-6ixzvNY0', 39.0489, -94.4839)
-
 
     sb39 = s(patriots,      eagles,     deion_branch,    [tom_brady], '11 REC 122 YDS 0 TD 12 TGTS',                 24, 21, 'Alltel Stadium',                'Jacksonville',    'FL', '2005-02-06', 78125,  'XXXIX',   'Paul McCartney',                                    '455506322247536640', 'b6XIln9M2CY', 30.3239, -81.6375,  'Deion Branch became the third offensive player to win the SB MVP without accounting for a touchdown. His 11 receptions tied a Super Bowl record.')
     sb40 = s(steelers,      seahawks,   hines_ward,      [], '5 REC 123 YDS 1 TD 11 TGTS 1 CAR 18 YDS',     21, 10, 'Ford Field',                    'Detroit',         'MI', '2006-02-05', 68206,  'XL',      'The Rolling Stones',                                '455506536152850432', 'p5YA9Ah2Z1Y', 42.34,   -83.0456,  'Legendary Steeler Hines Ward lifted the Steelers to their 5th Super Bowl victory while winning his only Super Bowl MVP. Known as a ferocious blocker, Ward led the Steelers in receptions and yards, acting as a security blanket for second-year QB Ben Roethlisberger.')
