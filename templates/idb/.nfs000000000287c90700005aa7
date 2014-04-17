@@ -16,7 +16,7 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-1">
-				<button type="button" class="btn btn-primary" onclick="runsql({{analytic.id}})">RUN</button>
+				<button type="button" class="btn btn-primary" onclick="$('#analytics-{{analytic.id}}-result').toggle()">DISPLAY</button>
 			</div>
 			<div class="col-xs-11">
 				<pre>{{analytic.query}}</pre>
@@ -31,8 +31,12 @@
 			</table>
 		</div>
 	</div>
+
+
 {% endfor %}
+
 <script type="text/javascript">
+
 
 	function showTable(id, headers, values) {
 		var container = $('#analytics-' + id + '-result');
@@ -54,7 +58,6 @@
 			});
 			body.append(tr);
 		});
-		container.show();
 	}
 
 	function showError(id, httpCode, apiError, apiMessage) {
@@ -89,5 +92,16 @@
 		});
 	}
 
-</script>
+
+	$(document).ready(function() {
+
+    {% for analytic in analytic_list %}
+
+    	runsql({{analytic.id}});
+    	console.log( "ready!" );
+
+    {% endfor %}
+
+	});
+	</script>
 {% endblock %}

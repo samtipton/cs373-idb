@@ -60,10 +60,13 @@
             <li><a href="/contact/">Contact</a></li>
             <li > 
               <div id="search-bar">
-                 <i class="glyphicon glyphicon-search" type="submit"></i>  
-                 <form action="/search/">
-                    <input placeholder="Search" id="search-bar" name="q" value="{{request.GET.q}}"></input>
-                 </form> 
+                <form action="/search/">
+                <input placeholder="Search" name="q" value="{{request.GET.q}}"> 
+                <button class="btn btn-default btn-mini" type="submit">
+                  <span class="glyphicon glyphicon-search"></span>
+                </button>
+                </input>
+               </form>
               </div>
              </li>
            </div>
