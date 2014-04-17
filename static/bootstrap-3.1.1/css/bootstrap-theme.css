@@ -53,6 +53,19 @@
   background-color: #e0e0e0;
   border-color: #dbdbdb;
 }
+.btn-small {
+  padding: 5px 9px;
+  font-size: @baseFontSize - 2px;
+  line-height: @baseLineHeight - 2px;
+}
+.btn-small [class^="icon-"] {
+  margin-top: -1px;
+}
+.btn-mini {
+  padding: 2px 6px;
+  font-size: @baseFontSize - 2px;
+  line-height: @baseLineHeight - 4px;
+}
 .btn-primary {
   background-image: -webkit-linear-gradient(top, #428bca 0%, #2d6ca2 100%);
   background-image:         linear-gradient(to bottom, #428bca 0%, #2d6ca2 100%);

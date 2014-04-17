@@ -15,10 +15,10 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-1">
-				<button type="button" class="btn btn-primary" onclick="runsql({{analytic.id}})">RUN</button>
+			<div class="col-lg-1">
+				<button type="button" class="btn btn-small btn-primary" onclick="$('#analytics-{{analytic.id}}-result').toggle()">DISPLAY</button>
 			</div>
-			<div class="col-xs-11">
+			<div class="col-lg-11">
 				<pre>{{analytic.query}}</pre>
 			</div>
 		</div>
@@ -32,8 +32,8 @@
 		</div>
 	</div>
 {% endfor %}
-<script type="text/javascript">
 
+<script type="text/javascript">
 	function showTable(id, headers, values) {
 		var container = $('#analytics-' + id + '-result');
 		var head = $('#analytics-' + id + '-head');
@@ -54,7 +54,6 @@
 			});
 			body.append(tr);
 		});
-		container.show();
 	}
 
 	function showError(id, httpCode, apiError, apiMessage) {
@@ -88,6 +87,12 @@
 			}
 		});
 	}
-
+	
+	$(document).ready(function() {
+    {% for analytic in analytic_list %}
+    	runsql({{analytic.id}});
+    {% endfor %}
+	});
+	
 </script>
 {% endblock %}

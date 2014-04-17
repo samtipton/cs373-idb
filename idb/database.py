@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from idb.models import MVP, Franchise, SuperBowl, Analytic
 
@@ -40,11 +40,23 @@ def reset_database():
     MVP.objects.all().delete()
     Franchise.objects.all().delete()
     SuperBowl.objects.all().delete()
-
     Analytic.objects.all().delete()
 
-    a('Test', 'SELECT 1, 2', "------")
-    a('Super Bowl MVP Awards by Position', 'SELECT s.*, p.* FROM idb_superbowl AS s INNER JOIN idb_mvp AS p ON s.mvp_id = p.id ORDER BY s.game_day DESC', "------")
+    # Super Bowl Queries
+    a('Super Bowl Query', 'SELECT s.game_number AS "Game Number", s.venue_name AS "Venue", s.venue_city AS "City", s.venue_state AS "State", s.attendance AS "Attendance", s.game_day AS "Game Day" FROM idb_superbowl AS s WHERE (s.attendance > (SELECT avg(s1.attendance) FROM idb_superbowl AS s1)) ORDER BY s.attendance', "A query that returns Super Bowl games that had a higher attendance than the average attendance.")
+    a('Super Bowl Query', 'SELECT count(*) AS "# of Super Bowls", venue_name AS Venue, venue_city AS City, venue_state AS State FROM idb_superbowl GROUP BY venue_state, venue_city, venue_name ORDER BY "# of Super Bowls" DESC','A query that counts the number of super bowls for each venue.')
+    a('Super Bowl Query', 'SELECT max(t.s) AS "Max Points Scored", min(t.s) AS "Min Points Scored", avg(t.s) AS "Average Points Scored" FROM (SELECT winning_score AS s FROM idb_superbowl UNION SELECT losing_score AS s FROM idb_superbowl) AS t','A query that returns the highest points scored, the lowest points scored, and the average points scored across all Super Bowls.')
+    a('Super Bowl Query', 'SELECT s.game_number AS "Game Number", p.first_name AS "First Name", p.last_name as "Last Name" FROM idb_superbowl AS s INNER JOIN idb_mvp AS p ON s.mvp_id = p.id ORDER BY s.game_number DESC', "A query that returns the MVP recipient for each Super Bowl.")
+    # Franchise Queries
+    a('Franchises Query', 'SELECT (f.team_city || \' \' || f.team_name) AS Franchise, count(f.id) AS "Number of MVPs" FROM idb_franchise AS f INNER JOIN idb_franchise_mvps AS j ON j.franchise_id = f.id GROUP BY f.id ORDER BY "Number of MVPs" DESC','A query that returns the number of MVPs per franchise (multiple winners excluded)')
+    a('Franchises Query', 'SELECT (f.team_city || \' \' || f.team_name) AS Franchise, (select count(*) FROM idb_superbowl AS s where s.winning_franchise_id = f.id) AS Wins, (select count(*) from idb_superbowl as s where s.losing_franchise_id = f.id) AS Losses FROM idb_franchise AS f ORDER BY Wins DESC, Losses DESC, Franchise','A query that returns the number of Super Bowl victories and losses for each franchise, sorted by victories.')
+    
+    # MVP Queries
+    a('Super Bowl MVP Query', 'SELECT position, count(*) AS "Number of MVPs" FROM idb_mvp AS p GROUP BY position ORDER BY "Number of MVPs" DESC', "A query that returns the list of MVP award winners sorted by position.")
+    a('Super Bowl MVP Query', 'SELECT position, count(*) AS "Number of MVPs" FROM idb_mvp GROUP BY position ORDER BY "Number of MVPs" DESC LIMIT 3', 'A query that returns the top three positions that have received the MVP award.')
+    a('Super Bowl MVP Query', 'SELECT position, count(*) AS "Number of MVPs" FROM idb_mvp GROUP BY position ORDER BY "Number of MVPs" ASC LIMIT 3', 'A query that returns the bottom three positions that have received the MVP award.')
+    a('Super Bowl MVP Query', 'SELECT avg(2014 - draft_year) AS "Average Years in NFL" FROM idb_mvp WHERE active','A query that returns the average number of years in the NFL across all active MVP award winners.')
+    a('Super Bowl MVP Query', 'SELECT first_name AS "First Name", last_name AS "Last Name", (2014 - draft_year) AS "Experience (Years)" FROM idb_mvp WHERE active ORDER BY (2014-draft_year) DESC LIMIT 3', "The three most tenured Super Bowl MVP winners that are currently active.")
     
     malcolm_smith   = m('Malcolm',  'Smith',    'OLB',  '1989-07-05',   'Woodland Hills, CA',   'Woodland Hills (CA) Taft',         'Southern California',      2011, True,  465000,    'MalcSmitty',                                   '446422781169651712', 'zfB8hCsHwLE', 34.1683, -118.605)
     joe_flacco      = m('Joe',      'Flacco',   'QB',   '1985-01-16',   'Audubon, NJ',          'Audubon (NJ) Audubon',             'Delaware',                 2008, True,  20100000,  'JoeFlacco',                                    '446422363865755648', 'fod3tDCNZ80', 39.8901, -75.0724)
@@ -118,8 +130,7 @@ def reset_database():
     jets        = f([joe_namath],                                                               'Jets',         'New York',     'NJ', 'Woody Johnson',              'John Idzik',       'Rex Ryan',         1963, True, 'MetLife Stadium',                  'AFC East',  'jets',                '456635661882122241', 'Vuvz15OjCVc', 40.8136, -74.0744)
     chiefs      = f([len_dawson],                                                               'Chiefs',       'Kansas City',  'MO', 'Clark Hunt',                 'John Dorsey',      'Andy Reid',        1963, True, 'Arrowhead Stadium',                'AFC West',  'KansasCityChiefs',    '456635985632059394', 'h3-6ixzvNY0', 39.0489, -94.4839)
 
-
-    sb39 = s(patriots,      eagles,     deion_branch,    [tom_brady], '11 REC 122 YDS 0 TD 12 TGTS',                 24, 21, 'Alltel Stadium',                'Jacksonville',    'FL', '2005-02-06', 78125,  'XXXIX',   'Paul McCartney',                                    '455506322247536640', 'b6XIln9M2CY', 30.3239, -81.6375,  'Deion Branch became the third offensive player to win the SB MVP without accounting for a touchdown. His 11 receptions tied a Super Bowl record.')
+    sb39 = s(patriots,      eagles,     deion_branch,    [tom_brady], '11 REC 122 YDS 0 TD 12 TGTS',                 24, 21, 'Alltel Stadium',                'Jacksonville',    'FL', '2005-02-06', 78125,  'XXXIX',   'Paul McCartney',                                    '455506322247536640', 'yo_IAOju128', 30.3239, -81.6375,  'Deion Branch became the third offensive player to win the SB MVP without accounting for a touchdown. His 11 receptions tied a Super Bowl record.')
     sb40 = s(steelers,      seahawks,   hines_ward,      [], '5 REC 123 YDS 1 TD 11 TGTS 1 CAR 18 YDS',     21, 10, 'Ford Field',                    'Detroit',         'MI', '2006-02-05', 68206,  'XL',      'The Rolling Stones',                                '455506536152850432', 'p5YA9Ah2Z1Y', 42.34,   -83.0456,  'Legendary Steeler Hines Ward lifted the Steelers to their 5th Super Bowl victory while winning his only Super Bowl MVP. Known as a ferocious blocker, Ward led the Steelers in receptions and yards, acting as a security blanket for second-year QB Ben Roethlisberger.')
     sb41 = s(colts,         bears,      peyton_manning,  [], '25/38 247 YDS 1 TD 1 INT 1 CAR 0 YDS',        29, 17, 'Dolphin Stadium',               'Miami Gardens',   'FL', '2007-02-04', 74512,  'XLI',     'Prince',                                            '455506774993301504', '8cVMzkCIV6E', 29.9581, -80.2389,  'Future Hall of Famer Peyton Manning led the Indianapolis Colts to their second Super Bowl championship. Manning capped off a season in which he threw 31 TD and only 9 INT by throwing for 1 TD and 1 INT')
     sb42 = s(giants,        patriots,   eli_manning,     [tom_brady], '19/34 255 YDS 2 TD 1 INT 3 CAR 4 YDS',        17, 14, 'University of Phoenix Stadium', 'Glendale',        'AZ', '2008-02-03', 71101,  'XLII',    'Tom Petty and the Heartbreakers',                   '455506854831874048', '0o8XmdQ7Zjo', 33.5275, -112.2625, 'Eli Manning and the Giants upset the heavily favored Patriots on a late game heave to WR David Tyree. His 2 fourth quarter TDs lifted the Giants over the Patriots, who had yet to lose a game that season.')
