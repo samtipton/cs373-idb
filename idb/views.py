@@ -95,7 +95,6 @@ def contact(request) :
 	return HttpResponse(t.render(context))
 
 
-
 def search_idb(request): 
 
 	query = request.GET.get('q', '') #returns string of args from search
@@ -104,7 +103,6 @@ def search_idb(request):
 	search_results = watson.search(query) #AND search
 	q_list.append(search_results)
 
-
 	arg_list = query.split() #split on whitespace to get search terms
 
 	length = len(arg_list) #for debugging
@@ -112,12 +110,8 @@ def search_idb(request):
 		for search_term in arg_list:
 			more_results = (watson.search(search_term))
 			q_list.append(more_results)
-
-
 	count = 0 #for debugging
 
-
-	
 	list_of_models = []
 	for item in q_list:
 		for result in item:
@@ -125,13 +119,10 @@ def search_idb(request):
 				list_of_models.append(result)
 
 	count = len(list_of_models)
-
-
 	context = RequestContext(request, {'query': query, 'count': count, 'args': arg_list,'results': search_results, 'list': list_of_models, 'my_length': length})
 
 	t = loader.get_template('watson/search.html')
 	return HttpResponse(t.render(context))
-
 
 
 class SearchMixin(object):

@@ -17,20 +17,20 @@
             {% if result.object.team_name %}
                 <div class="col-md-4" id="search-result-header">
                     <img style="width: 75px" src="../../static/res/Logos/{{result.object.team_name}}.png" />
-                    <a href="/franchises/{{result.object.id}}"><b>{{result.object.team_city}} {{result.object.team_name}}</b></a>
+                    <a href="/franchises/{{result.object.id}}"><b>{{result.object.team_city|highlight:query}} {{result.object.team_name|highlight:query}}</b></a>
                 </div>
                 <div class="col-md-4" id="search-result-context">
                     <br/>
-                    <p>{{result.object.team_city}}, {{result.object.team_state}} </p>
+                    <p>{{result.object.team_city|highlight:query}}, {{result.object.team_state|highlight:query}} </p>
                     <p>Division: {{result.object.division}}</p>
                     <p>Since {{result.object.year_founded}}</p>
 
                 </div>
                 <div class="col-md-4" id="search-result-context">
                     <br/>
-                    <p>Current Owner: {{result.object.current_owner}}</p>
-                    <p>Current General Manager: {{result.object.current_gm}}</p>
-                    <p>Current Head Coach: {{result.object.current_head_coach}}</p>
+                    <p>Current Owner: {{result.object.current_owner|highlight:query}}</p>
+                    <p>Current General Manager: {{result.object.current_gm|highlight:query}}</p>
+                    <p>Current Head Coach: {{result.object.current_head_coach|highlight:query}}</p>
                 </div>    
             {% endif %}
 
@@ -38,14 +38,14 @@
             {% if result.object.first_name %}
                 <div class ="col-md-4" id="search-result-header">
                     <img style="width: 75px" src="../../static/res/MVPs/{{result.object.first_name}} {{result.object.last_name}}.png" />
-                    <a href="/mvps/{{result.object.id}}"><b>{{result.object.first_name}} {{result.object.last_name}}</b></a>
+                    <a href="/mvps/{{result.object.id}}"><b>{{result.object.first_name|highlight:query}} {{result.object.last_name|highlight:query}}</b></a>
                 </div>
     
                 <div class="col-md-4" id="search-result-context">
                     <br/>
                     <p>Position: {{result.object.position}}</p>
                     <p>Drafted in: {{result.object.draft_year}}</p>
-                    <p>Attended: {{result.object.college}}</p>
+                    <p>Attended: {{result.object.college|highlight:query}}</p>
                 </div>
                 <div class="col-md-4" id="search-result-context">
                 </div>
@@ -63,7 +63,7 @@
                     <br/>
                     <br/>
                     <br/>
-                    <b><a href="/franchises/{{result.object.winning_franchise.id}}">{{result.object.winning_franchise.team_name}}</a> vs. <a href="/franchises/{{result.object.losing_franchise.id}}">{{result.object.losing_franchise.team_name}}</a></b>
+                    <b><a href="/franchises/{{result.object.winning_franchise.id}}">{{result.object.winning_franchise.team_name|highlight:query}}</a> vs. <a href="/franchises/{{result.object.losing_franchise.id}}">{{result.object.losing_franchise.team_name|highlight:query}}</a></b>
                 </div>
                     
                    
@@ -72,7 +72,7 @@
                     <br/>
                     <br/>
                     <br/>
-                    <p>Played at {{result.object.venue_name}} in {{result.object.venue_city}}, {{result.object.venue_state}} on {{result.object.game_day}} </p>
+                    <p>Played at {{result.object.venue_name|highlight:query}} in {{result.object.venue_city|highlight:query}}, {{result.object.venue_state|highlight:query}} on {{result.object.game_day}} </p>
                 </div>
             {% endif %}
         </div>
