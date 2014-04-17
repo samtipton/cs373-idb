@@ -7,7 +7,47 @@ body {
     background-attachment: fixed;
 }
 
+.highlight{
+  background-color: white;
+}
 
+#map-canvas {
+    min-height: 229px;
+}
+
+#search-header {
+  border: 1px solid black;
+  text-align: center;
+}
+
+#search-header {
+  font-size: 55px;
+}
+
+#search a {
+  color: black;
+}
+
+#search-result-header {
+  display: inline;
+  padding: -30px;
+}
+
+#search-result-header img {
+  margin-left: 20px;
+}
+
+#search-result {
+  padding: 5px;
+  border: 1px solid black;
+  text-align: left;
+}
+
+#search-bar > * {
+  margin-left: -15px;
+  padding: 12px;
+  display: inline;
+}
 
 .jumbotron {
     text-align: center;
@@ -39,10 +79,10 @@ body {
 
 #scoreboard .container-fluid a img {
     border:0px solid black;
-    border-radius: 30px;
-    -moz-border-radius: 30px;
-    -khtml-border-radius: 30px;
-    -webkit-border-radius: 30px;
+    border-radius: 7px;
+    -moz-border-radius: 70px;
+    -khtml-border-radius: 7px;
+    -webkit-border-radius: 7px;
     width: 350px;
 }
 
@@ -67,24 +107,29 @@ body {
 }
 
 #mvpbar img {
-    border-radius: 30px;
-    -moz-border-radius: 30px;
-    -khtml-border-radius: 30px;
-    -webkit-border-radius: 30px;
+    border-radius: 7px;
+    -moz-border-radius: 7px;
+    -khtml-border-radius: 7px;
+    -webkit-border-radius: 7px;
     width:150px;
     border:1px gray solid;
 }
 
 #game_history, #mvp_history, #team_history {
     width: 200px;
-     padding: 0px 15px 0px 15px
-    /*padding-right:5px;*/
-    /*border:0px solid black;*/
-    /*border-radius: 20px;*/
-    /*-moz-border-radius: 20px;*/
-    /*-khtml-border-radius: 20px;*/
-    /*-webkit-border-radius: 20px;*/
+    padding: 0px 15px 0px 15px;
+    padding-right:15px;
+    border:0px solid black;
+    border-radius: 30px;
+    -moz-border-radius: 3px;
+    -khtml-border-radius: 30px;
+    -webkit-border-radius: 30px;
 }
+
+input {
+  border-radius: 5px;
+  width: 125px;
+} 
 
 
 .table-container {
@@ -92,6 +137,7 @@ body {
     width: 750px;
     margin: 0px auto;
 }
+
 .row .row li {
     margin-left: -50px;
     margin-top: 25px;
@@ -113,9 +159,6 @@ body {
     margin-bottom: 5px;
 }
 
-#map-canvas {
-    min-height: 229px;
-}
 
 .row:before {
     margin: 0px;
@@ -203,12 +246,12 @@ li {
     border-radius: 5px;
 }
 .nav-justified > li > a {
-    padding-top: 15px;
     padding-bottom: 15px;
-    margin-bottom: 0px;
+    margin-bottom: 2px;
     font-weight: bold;
     color: #777;
     text-align: center;
+    height: 57px;
     background-color: #e5e5e5; /* Old browsers */
     background-image:    -moz-linear-gradient(top, #f5f5f5 0%, #e5e5e5 100%); /* FF3.6+ */
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5f5f5), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
@@ -245,6 +288,10 @@ a:hover {
     .nav-justified > li > a {
         border-right: 1px solid #d5d5d5;
         border-left: 1px solid #fff;
+        padding-top:9px;
+        padding-bottom:0px;
+        height: 52px;
+        vertical-align: middle;
     }
     .nav-justified > li:first-child > a {
         border-left: 0;
@@ -255,24 +302,29 @@ a:hover {
         border-radius: 0 5px 5px 0;
     }
 }
-
-
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-    /* Remove the padding we set earlier */
-    .masthead,
-    .marketing,
-    .footer {
-        padding-right: 0;
-        padding-left: 0;
-    }
-    .footer p {
-        text-align: center;
+@media (min-width: 1200px) {
+    .nav-justified > li > a {
+        border-right: 1px solid #d5d5d5;
+        border-left: 1px solid #fff;
+        padding-top:15px;
     }
 
-    .row .row li {
-        text-align: left;
+    /* Responsive: Portrait tablets and up */
+    @media screen and (min-width: 768px) {
+        /* Remove the padding we set earlier */
+        .masthead,
+        .marketing,
+        .footer {
+            padding-right: 0;
+            padding-left: 0;
+        }
+        .footer p {
+            text-align: center;
+        }
+
+        .row .row li {
+            text-align: left;
+        }
+
+
     }
-
-
-}

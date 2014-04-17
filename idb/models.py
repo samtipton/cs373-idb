@@ -1,4 +1,5 @@
 from django.db import models
+import watson
 
 # This import is not used but it is required for
 # epydoc to be able to know about the 'date' type.
@@ -144,7 +145,7 @@ class SuperBowl(models.Model) :
     @ivar venue_state: The name of the US state that the Super Bowl was played in. (e.g. TX)
     @type venue_state: L{str}
     @ivar game_day: The day the game was played. (e.g. 2014-02-02)
-    @type game_day: L{date} 
+    @type game_day: L{date}
     @ivar attendance: The amount of people attended that particular game. (e.g. 30,000)
     @type attendance: L{int}
     @ivar game_number: The roman numeral symbol for the game. (e.g. XLVIII)
@@ -181,3 +182,22 @@ class SuperBowl(models.Model) :
     youtube_id = models.CharField(max_length = 500)
     latitude = models.FloatField()
     longitude = models.FloatField()
+
+class Analytic(models.Model) :
+    """
+    This model is used to store information about the different analytical queries that can
+    be executed against the database.
+    @ivar name: A short name of the query.
+    @type name: L{str}
+    @ivar query: The SQL string that performs the analysis.
+    @type query: L{str}
+    @ivar description: A long english description of what the query does and why.
+    @type description: L{str}
+    """
+    name = models.CharField(max_length = 500)
+    query = models.CharField(max_length = 500)
+    description = models.CharField(max_length = 500)
+
+watson.register(MVP)
+watson.register(SuperBowl)
+watson.register(Franchise)

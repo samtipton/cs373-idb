@@ -56,15 +56,15 @@
 
 <!-- social media -->
 <div class="row">
-  <div style="padding:0px; background-color: #c0c0c0" class="col-md-3"> 
+  <div style="padding:0px" class="col-lg-3"> 
     <!-- facebook -->
-    <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2F{{mvp.facebook_id}}&amp;width&amp;height=380&amp;colorscheme=light&amp;show_faces=true&amp;header=true&amp;stream=false&amp;show_border=false " scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:395px;" allowTransparency="true"></iframe>
+    <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2F{{mvp.facebook_id}}&amp;width&amp;height=380&amp;colorscheme=light&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=false" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:395px;" allowTransparency="true"></iframe>
   </div>
   <!-- youtube -->
-  <div style="padding:0px" class="col-md-6">  
+  <div style="padding:0px" class="col-lg-6">  
     <div class="flex-video widescreen"><iframe width="550" height="400" src="//www.youtube.com/embed/{{mvp.youtube_id}}" frameborder="0" allowfullscreen></iframe></div>
   </div>
-  <div style="padding:0px;background-color: #c0c0c0 " class="col-md-3">
+  <div style="padding-left:0px;padding-right:20px"class="col-lg-3">
     <a class="twitter-timeline" href="" data-widget-id="{{mvp.twitter_id}}"></a>
     
 
@@ -89,13 +89,13 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSXRVKo3e9gwZ8L2zmA5EJ5VG
       { color: '#c0c0c0' }
       ]  
     },
-    {
-      featureType: 'water',
-      elementType: 'geometry',
-      stylers: [
-      { color: '#0033f8' }
-      ]
-    }
+    // {
+    //   featureType: 'water',
+    //   elementType: 'geometry',
+    //   stylers: [
+    //   { color: '#0033f8' }
+    //   ]
+    // }
     ];
   var myLatlng = new google.maps.LatLng({{mvp.latitude}},{{mvp.longitude}});
   var mapOptions = {

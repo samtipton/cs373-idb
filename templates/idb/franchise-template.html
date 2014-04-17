@@ -83,25 +83,22 @@
         <br/>
       {% endif %}
 
-
-
-
       <!-- social media -->
       <div class="row">
-        <div style="padding:0px; background-color: #9b9b9b;"class="col-md-3">
+        <div style="padding:0px"class="col-lg-3">
 
           <!-- facebook -->
-          <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2F{{team.facebook_id}}&amp;width=292&amp;height=300&amp;colorscheme=light&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=false" scrolling="no" frameborder="0" style="overflow:hidden; height:300px;" allowTransparency="true"></iframe>
+          <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2F{{team.facebook_id}}&amp;width=292&amp;height=300&amp;colorscheme=light&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=false" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:300px;" allowTransparency="true"></iframe>
         </div>
 
         <!-- youtube -->
-        <div style="padding-top:10px" class="col-md-6 col-md-push-2">
+        <div style="padding-top:0px" class="col-lg-6">
           <div class="flex-video widescreen"><iframe width="512" height="288" src="//www.youtube.com/embed/{{team.youtube_id}}" frameborder="0" allowfullscreen></iframe></div>
         </div>
 
         <!-- twitter -->
-        <div style="background-color: #9b9b9b" class="col-md-2 col-md-pull-6">
-          <a class="twitter-timeline" href="" data-widget-id="{{team.twitter_id}}"data-chrome="transparent"height="300"></a>
+        <div style="padding-left:0px;padding-right:20px"class="col-lg-3">
+          <a class="twitter-timeline" href="" data-widget-id="{{team.twitter_id}}"height="300"></a>
 
           <script>
               !function(d,s,id){
@@ -138,5 +135,3 @@
      google.maps.event.addDomListener(window, 'load', initialize);
      </script>
 {% endblock %}
-
-
