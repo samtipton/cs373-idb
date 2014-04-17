@@ -44,16 +44,21 @@ def reset_database():
 
     # Super Bowl Queries
     a('Super Bowls with attendance better than the average', 'SELECT s.game_number, s.venue_name, s.venue_city, s.venue_state, s.attendance, s.game_day FROM idb_superbowl AS s WHERE (s.attendance > (SELECT avg(s1.attendance) FROM idb_superbowl AS s1)) ORDER BY s.attendance', "Fun Text")
+    a('Super Bowl Venue Selection', 'SELECT count(*) AS "# of Super Bowls", venue_name AS Venue, venue_city AS City, venue_state AS State FROM idb_superbowl GROUP BY venue_state, venue_city, venue_name ORDER BY "# of Super Bowls" DESC','---')
+    a('Super Bowl Score Statistics', 'SELECT max(t.s) AS Max, min(t.s) AS Min, avg(t.s) AS Average FROM (SELECT winning_score AS s FROM idb_superbowl UNION SELECT losing_score AS s FROM idb_superbowl) AS t','---')
     
     # Franchise Queries
+    a('Franchises with most MVPs', 'SELECT (f.team_city || \' \' || f.team_name) AS Team, count(f.id) AS Count FROM idb_franchise AS f INNER JOIN idb_franchise_mvps AS j ON j.franchise_id = f.id GROUP BY f.id ORDER BY Count DESC','---')
+    a('Franchises by Super Bowl wins and losses', 'SELECT (f.team_city || \' \' || f.team_name) AS Team, (select count(*) from idb_superbowl AS s where s.winning_franchise_id = f.id) AS Wins, (select count(*) from idb_superbowl as s where s.losing_franchise_id = f.id) AS Losses FROM idb_franchise AS f ORDER BY Wins DESC, Losses DESC, Team','---')
+    
 
     # MVP Queries
     a('Super Bowl MVP Awards by Position', 'SELECT p.position, p.first_name, p.last_name FROM idb_superbowl AS s INNER JOIN idb_mvp AS p ON s.mvp_id = p.id ORDER BY p.position DESC', "------")
     a('Super Bowl MVP Awards by Position', 'SELECT position, count(*) FROM idb_mvp AS p GROUP BY position ORDER BY count(*) DESC', "---")
-    a('Position with most Super Bowl MVP Awards', 'SELECT position, count(*) FROM idb_mvp as p GROUP BY position ORDER BY count(*) DESC LIMIT 1', '---')
-    a('Position with least Super Bowl MVP Awards', 'SELECT position, count(*) FROM idb_mvp as p GROUP BY position ORDER BY count(*) LIMIT 1', '---')
-    a('Average years in the NFL by active Super Bowl MVP winners', 'SELECT "Years", avg(2014 - draft_year) from idb_mvp where active == 1','')
-   
+    a('Position with most Super Bowl MVP Awards', 'SELECT position, count(*) AS count FROM idb_mvp GROUP BY position ORDER BY count DESC LIMIT 1', '---')
+    a('Position with least Super Bowl MVP Awards', 'SELECT position, count(*) AS count FROM idb_mvp GROUP BY position ORDER BY count ASC LIMIT 1', '---')
+    a('Average years in the NFL by active Super Bowl MVP winners', 'SELECT avg(2014 - draft_year) AS years FROM idb_mvp WHERE active','---')
+    
 
 
     malcolm_smith   = m('Malcolm',  'Smith',   'OLB', '1989-07-05', 'Woodland Hills, CA', 'Woodland Hills (CA) Taft',        'Southern California', 2011, True,  465000,   'MalcSmitty',                           '446422781169651712', 'zfB8hCsHwLE', 34.1683, -118.605)
