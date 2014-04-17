@@ -4,18 +4,39 @@ from django.template import RequestContext, loader
 from django.shortcuts import get_object_or_404, render, render_to_response
 from django.views import generic
 from django.db.models import Q
-from idb.models import MVP, Franchise, SuperBowl
 from django.views.generic.list import BaseListView #search 
 from django.utils import six
 import watson
+from idb.models import MVP, Franchise, SuperBowl, Analytic
 
 # Create your views here.
 def splash(request) :
 	context = RequestContext(request)
 	t = loader.get_template('idb/splash.html')
 
-	context = RequestContext(request)
+	game_list = SuperBowl.objects.order_by('-game_day')
+	team_list = Franchise.objects.order_by('-year_founded')
+	mvp_list = MVP.objects.order_by('-draft_year')
 
+	context = RequestContext(request, {'game_list':game_list,
+		'team_list':team_list, 'mvp_list':mvp_list})
+
+	return HttpResponse(t.render(context))
+
+def api_navigation(request):
+	context = RequestContext(request, {})
+	t = loader.get_template('idb/api-navigation.html')
+	return HttpResponse(t.render(context))
+
+def analytics(request, id = ""):
+	if id.isdigit():
+		analytics = [get_object_or_404(Analytic, pk = int(id))]
+	else:
+		analytics = Analytic.objects.all()
+
+	url = 'idb/analytics.html'
+	context = RequestContext(request, { 'analytic_list': analytics })
+	t = loader.get_template(url)
 	return HttpResponse(t.render(context))
 
 def superbowls(request, id = None) :
@@ -93,7 +114,6 @@ def contact(request) :
 	t = loader.get_template('idb/contact.html')
 
 	return HttpResponse(t.render(context))
-
 
 def search_idb(request): 
 
@@ -203,9 +223,5 @@ class SearchView_IDB(SearchMixin, generic.ListView):
 """def search_idb(request,**kwargs):
 	print(kwargs)
 	return SearchView_IDB.as_view(**kwargs)(request)"""
-
-
-
-
 
 

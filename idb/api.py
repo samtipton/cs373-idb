@@ -6,14 +6,29 @@ from django.views import generic
 from idb.models import MVP, Franchise, SuperBowl, Analytic
 from django.db.models import Q
 from json import dumps, loads
+import json
 from idb.helpers import *
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import connection
 from idb.database import reset_database
+import datetime
 
 # ----------------
 # helper functions
 # ----------------
+
+class CustomJSONEncoder(json.JSONEncoder):
+    """ This is a class to serialize non-json objects like dates. """
+    def default(self, obj):
+        if isinstance(obj, datetime.datetime):
+            return str(obj)
+        if isinstance(obj, datetime.date):
+            return str(obj)
+        else:
+            return json.JSONEncoder.default(self, obj)
+
+# redefine the dumps function so that we don't have to change things everywhere
+dumps = lambda obj: json.dumps(obj, cls = CustomJSONEncoder)
 
 def make_response(code, body):
     response = HttpResponse(dumps(body), content_type='application/json')
@@ -48,6 +63,34 @@ def api_reset_database(request):
         return HttpResponse("These are not the datasets you are looking for.")
     except Exception:
         return HttpResponse("Uh Oh, something went wrong.")
+        
+
+def api_root(request):
+    # we only support the GET method
+    if (request.method != 'GET'):
+        return respond_with_method_not_allowed_error(request)
+    
+    # the response is hard coded because you can't really generate this
+    body = [
+        {
+            "self": "/api/v2/superbowls",
+            "name": "The Super Bowls",
+            "description": "This is the collection endpoint for the Super Bowl resource."
+        },{
+            "self": "/api/v2/franchises",
+            "name": "The Franchise",
+            "description": "This is the collection endpoint for the Franchise resource."
+        },{
+            "self": "/api/v2/mvps",
+            "name": "The MVPs",
+            "description": "This is the collection endpoint for the MVP resource."
+        },{
+            "self": "/api/v2/analytics",
+            "name": "The Analytics List",
+            "description": "This is the collection endpoint for the Analytic resource."
+        }
+    ]
+    return make_response(200, make_successful_response_object(body))
 
 # -------------------
 # API Analytic Calls
