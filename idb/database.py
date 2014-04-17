@@ -42,9 +42,20 @@ def reset_database():
     SuperBowl.objects.all().delete()
     Analytic.objects.all().delete()
 
-    a('Test', 'SELECT 1, 2', "------")
-    a('Super Bowl MVP Awards by Position', 'SELECT s.*, p.* FROM idb_superbowl AS s INNER JOIN idb_mvp AS p ON s.mvp_id = p.id ORDER BY s.game_day DESC', "------")
+    # Super Bowl Queries
+    a('Super Bowls with attendance better than the average', 'SELECT s.game_number, s.venue_name, s.venue_city, s.venue_state, s.attendance, s.game_day FROM idb_superbowl AS s WHERE (s.attendance > (SELECT avg(s1.attendance) FROM idb_superbowl AS s1)) ORDER BY s.attendance', "Fun Text")
     
+    # Franchise Queries
+
+    # MVP Queries
+    a('Super Bowl MVP Awards by Position', 'SELECT p.position, p.first_name, p.last_name FROM idb_superbowl AS s INNER JOIN idb_mvp AS p ON s.mvp_id = p.id ORDER BY p.position DESC', "------")
+    a('Super Bowl MVP Awards by Position', 'SELECT position, count(*) FROM idb_mvp AS p GROUP BY position ORDER BY count(*) DESC', "---")
+    a('Position with most Super Bowl MVP Awards', 'SELECT position, count(*) FROM idb_mvp as p GROUP BY position ORDER BY count(*) DESC LIMIT 1', '---')
+    a('Position with least Super Bowl MVP Awards', 'SELECT position, count(*) FROM idb_mvp as p GROUP BY position ORDER BY count(*) LIMIT 1', '---')
+    a('Average years in the NFL by active Super Bowl MVP winners', 'SELECT "Years", avg(2014 - draft_year) from idb_mvp where active == 1','')
+   
+
+
     malcolm_smith   = m('Malcolm',  'Smith',   'OLB', '1989-07-05', 'Woodland Hills, CA', 'Woodland Hills (CA) Taft',        'Southern California', 2011, True,  465000,   'MalcSmitty',                           '446422781169651712', 'zfB8hCsHwLE', 34.1683, -118.605)
     joe_flacco      = m('Joe',      'Flacco',  'QB',  '1985-01-16', 'Audubon, NJ',        'Audubon (NJ) Audubon',            'Delaware',            2008, True,  20100000, 'JoeFlacco',                            '446422363865755648', 'fod3tDCNZ80', 39.8901, -75.0724)
     eli_manning     = m('Eli',      'Manning', 'QB',  '1981-01-03', 'New Orleans, LA',    'New Orleans (LA) Newman',         'Mississippi',         2004, True,  13000000, 'EliManning',                           '446087270404075520', 'I7vZ1dVSe6I', 29.9667, -90.05)
@@ -82,3 +93,4 @@ def reset_database():
     sb47 = s(ravens,   niners,    joe_flacco,      [], '22/33 287 YDS 3 TD 0 INT 0 CAR 0 YDS',    34, 31, 'Mercedes-Benz Superdome',       'New Orleans',     'LA', '2013-02-03', 71024,  'XLVII',   'Beyonce',                                 '451550572752015360', 'ynQApEB4VXg', 29.9508, -90.0811,  'Joe Flacco capped his spectacular postseason with an impressive performance against a 49er defense that was considered one of the league\'s best. While all 3 TDs were in the first half, Flacco coolly converted third down after third down to hold off a late 49er surge.')
     sb48 = s(seahawks, broncos,   malcolm_smith,   [], '1 INT 1 FR 1 TD 9 T',                     43, 8,  'MetLife Stadium',               'East Rutherford', 'NJ', '2014-02-02', 82529,  'XLVIII',  'Bruno Mars',                              '446419923376418818', 'NbcA1UISfG0', 40.8136, -74.0744,  'Malcolm Smith was the de-facto SB MVP for a legendary Seattle defense. While he was a relative unknown at the start of the season, a game-sealing interception in the NFC Championship as well as two takeaways in the Super Bowl served as a coming out party for the young linebacker.')
     sb38 = s(patriots, panthers,  tom_brady,       [], '32/48 354 YDS 3 TD 1 INT 2 CAR 12 YDS',   32, 29, 'Reliant Stadium',               'Houston',         'TX', '2004-02-01', 71525,  'XXXVIII', 'Janet Jackson',                           '451553657423527936', '7CCWCWOUf',   29.6847, -95.4108,  'Tom Brady led the Patriots to victory while winning his second Super Bowl MVP. His 32 completions are the most in SB history and his 354 yds are the 5th best total in SB history.')
+
