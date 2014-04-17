@@ -125,12 +125,12 @@ def search_idb(request):
 
 	arg_list = query.split() #split on whitespace to get search terms
 
-	length = len(arg_list) #for debugging
+	
 	if len(arg_list) > 1: #OR search for each individual term
 		for search_term in arg_list:
 			more_results = (watson.search(search_term))
 			q_list.append(more_results)
-	count = 0 #for debugging
+	
 
 	list_of_models = []
 	for item in q_list:
@@ -139,7 +139,7 @@ def search_idb(request):
 				list_of_models.append(result)
 
 	count = len(list_of_models)
-	context = RequestContext(request, {'query': query, 'count': count, 'args': arg_list,'results': search_results, 'list': list_of_models, 'my_length': length})
+	context = RequestContext(request, {'query': query, 'count': count,'results': search_results, 'list': list_of_models})
 
 	t = loader.get_template('watson/search.html')
 	return HttpResponse(t.render(context))
