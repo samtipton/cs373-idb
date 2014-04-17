@@ -14,12 +14,7 @@ def splash(request) :
 	context = RequestContext(request)
 	t = loader.get_template('idb/splash.html')
 
-	game_list = SuperBowl.objects.order_by('-game_day')
-	team_list = Franchise.objects.order_by('-year_founded')
-	mvp_list = MVP.objects.order_by('-draft_year')
-
-	context = RequestContext(request, {'game_list':game_list, 
-		'team_list':team_list, 'mvp_list':mvp_list})
+	context = RequestContext(request)
 
 	return HttpResponse(t.render(context))
 
@@ -102,14 +97,15 @@ def contact(request) :
 
 
 def search_idb(request): 
-	arg_list = request.GET.get('q', '') #returns string of args from search
+
+	query = request.GET.get('q', '') #returns string of args from search
 	q_list = []
 
-	search_results = watson.search(arg_list) #AND search
+	search_results = watson.search(query) #AND search
 	q_list.append(search_results)
 
 
-	arg_list = arg_list.split() #split on whitespace to get search terms
+	arg_list = query.split() #split on whitespace to get search terms
 
 	length = len(arg_list) #for debugging
 	if len(arg_list) > 1: #OR search for each individual term
@@ -128,7 +124,11 @@ def search_idb(request):
 			if result not in list_of_models:
 				list_of_models.append(result)
 
-	context = RequestContext(request, {'my_count': count, 'args': arg_list,'results': search_results, 'list': list_of_models, 'my_length': length})
+	count = len(list_of_models)
+
+
+	context = RequestContext(request, {'query': query, 'count': count, 'args': arg_list,'results': search_results, 'list': list_of_models, 'my_length': length})
+
 	t = loader.get_template('watson/search.html')
 	return HttpResponse(t.render(context))
 
