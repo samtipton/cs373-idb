@@ -43,21 +43,21 @@ def reset_database():
     Analytic.objects.all().delete()
 
     # Super Bowl Queries
-    a('Super Bowls with attendance better than the average', 'SELECT s.game_number, s.venue_name, s.venue_city, s.venue_state, s.attendance, s.game_day FROM idb_superbowl AS s WHERE (s.attendance > (SELECT avg(s1.attendance) FROM idb_superbowl AS s1)) ORDER BY s.attendance', "Fun Text")
-    a('Super Bowl Venue Selection', 'SELECT count(*) AS "# of Super Bowls", venue_name AS Venue, venue_city AS City, venue_state AS State FROM idb_superbowl GROUP BY venue_state, venue_city, venue_name ORDER BY "# of Super Bowls" DESC','---')
-    a('Super Bowl Score Statistics', 'SELECT max(t.s) AS Max, min(t.s) AS Min, avg(t.s) AS Average FROM (SELECT winning_score AS s FROM idb_superbowl UNION SELECT losing_score AS s FROM idb_superbowl) AS t','---')
-    
+    a('Super Bowl Query', 'SELECT s.game_number AS "Game Number", s.venue_name AS "Venue", s.venue_city AS "City", s.venue_state AS "State", s.attendance AS "Attendance", s.game_day AS "Game Day" FROM idb_superbowl AS s WHERE (s.attendance > (SELECT avg(s1.attendance) FROM idb_superbowl AS s1)) ORDER BY s.attendance', "A query that returns Super Bowl games that had a higher attendance than the average attendance.")
+    a('Super Bowl Query', 'SELECT count(*) AS "# of Super Bowls", venue_name AS Venue, venue_city AS City, venue_state AS State FROM idb_superbowl GROUP BY venue_state, venue_city, venue_name ORDER BY "# of Super Bowls" DESC','A query that counts the number of super bowls for each venue.')
+    a('Super Bowl Query', 'SELECT max(t.s) AS "Max Points Scored", min(t.s) AS "Min Points Scored", avg(t.s) AS "Average Points Scored" FROM (SELECT winning_score AS s FROM idb_superbowl UNION SELECT losing_score AS s FROM idb_superbowl) AS t','A query that returns the highest points scored, the lowest points scored, and the average points scored across all Super Bowls.')
+    a('Super Bowl Query', 'SELECT s.game_number AS "Game Number", p.first_name AS "First Name", p.last_name as "Last Name" FROM idb_superbowl AS s INNER JOIN idb_mvp AS p ON s.mvp_id = p.id ORDER BY s.game_number DESC', "A query that returns the MVP recipient for each Super Bowl.")
     # Franchise Queries
-    a('Franchises with most MVPs', 'SELECT (f.team_city || \' \' || f.team_name) AS Team, count(f.id) AS Count FROM idb_franchise AS f INNER JOIN idb_franchise_mvps AS j ON j.franchise_id = f.id GROUP BY f.id ORDER BY Count DESC','---')
-    a('Franchises by Super Bowl wins and losses', 'SELECT (f.team_city || \' \' || f.team_name) AS Team, (select count(*) from idb_superbowl AS s where s.winning_franchise_id = f.id) AS Wins, (select count(*) from idb_superbowl as s where s.losing_franchise_id = f.id) AS Losses FROM idb_franchise AS f ORDER BY Wins DESC, Losses DESC, Team','---')
+    a('Franchises Query', 'SELECT (f.team_city || \' \' || f.team_name) AS Franchise, count(f.id) AS "Number of MVPs" FROM idb_franchise AS f INNER JOIN idb_franchise_mvps AS j ON j.franchise_id = f.id GROUP BY f.id ORDER BY "Number of MVPs" DESC','A query that returns the number of MVPs per franchise (multiple winners excluded)')
+    a('Franchises Query', 'SELECT (f.team_city || \' \' || f.team_name) AS Franchise, (select count(*) FROM idb_superbowl AS s where s.winning_franchise_id = f.id) AS Wins, (select count(*) from idb_superbowl as s where s.losing_franchise_id = f.id) AS Losses FROM idb_franchise AS f ORDER BY Wins DESC, Losses DESC, Franchise','A query that returns the number of Super Bowl victories and losses for each franchise, sorted by victories.')
     
     # MVP Queries
-    a('Super Bowl MVP Awards by Position', 'SELECT p.position, p.first_name, p.last_name FROM idb_superbowl AS s INNER JOIN idb_mvp AS p ON s.mvp_id = p.id ORDER BY p.position DESC', "------")
-    a('Super Bowl MVP Awards by Position', 'SELECT position, count(*) FROM idb_mvp AS p GROUP BY position ORDER BY count(*) DESC', "---")
-    a('Position with most Super Bowl MVP Awards', 'SELECT position, count(*) AS count FROM idb_mvp GROUP BY position ORDER BY count DESC LIMIT 1', '---')
-    a('Position with least Super Bowl MVP Awards', 'SELECT position, count(*) AS count FROM idb_mvp GROUP BY position ORDER BY count ASC LIMIT 1', '---')
-    a('Average years in the NFL by active Super Bowl MVP winners', 'SELECT avg(2014 - draft_year) AS years FROM idb_mvp WHERE active','---')
-
+    a('Super Bowl MVP Query', 'SELECT position, count(*) AS "Number of MVPs" FROM idb_mvp AS p GROUP BY position ORDER BY "Number of MVPs" DESC', "A query that returns the list of MVP award winners sorted by position.")
+    a('Super Bowl MVP Query', 'SELECT position, count(*) AS "Number of MVPs" FROM idb_mvp GROUP BY position ORDER BY "Number of MVPs" DESC LIMIT 3', 'A query that returns the top three positions that have received the MVP award.')
+    a('Super Bowl MVP Query', 'SELECT position, count(*) AS "Number of MVPs" FROM idb_mvp GROUP BY position ORDER BY "Number of MVPs" ASC LIMIT 3', 'A query that returns the bottom three positions that have received the MVP award.')
+    a('Super Bowl MVP Query', 'SELECT avg(2014 - draft_year) AS "Average Years in NFL" FROM idb_mvp WHERE active','A query that returns the average number of years in the NFL across all active MVP award winners.')
+    a('Super Bowl MVP Query', 'SELECT first_name AS "First Name", last_name AS "Last Name", (2014 - draft_year) AS "Experience (Years)" FROM idb_mvp WHERE active ORDER BY (2014-draft_year) DESC LIMIT 3', "The three most tenured Super Bowl MVP winners that are currently active.")
+    
     malcolm_smith   = m('Malcolm',  'Smith',    'OLB',  '1989-07-05',   'Woodland Hills, CA',   'Woodland Hills (CA) Taft',         'Southern California',      2011, True,  465000,    'MalcSmitty',                                   '446422781169651712', 'zfB8hCsHwLE', 34.1683, -118.605)
     joe_flacco      = m('Joe',      'Flacco',   'QB',   '1985-01-16',   'Audubon, NJ',          'Audubon (NJ) Audubon',             'Delaware',                 2008, True,  20100000,  'JoeFlacco',                                    '446422363865755648', 'fod3tDCNZ80', 39.8901, -75.0724)
     eli_manning     = m('Eli',      'Manning',  'QB',   '1981-01-03',   'New Orleans, LA',      'New Orleans (LA) Newman',          'Mississippi',              2004, True,  13000000,  'EliManning',                                   '455503803396014080', 'I7vZ1dVSe6I', 29.9667, -90.05)
