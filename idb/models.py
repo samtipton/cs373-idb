@@ -126,9 +126,6 @@ class SuperBowl(models.Model) :
     @type losing_franchise: L{Franchise}
     @ivar mvp: The MVP for that particular Super Bowl. (e.g. Eli Manning)
     @type mvp: L{MVP}
-    @ivar players: The list of notable players that participated in this Super Bowl. These
-    are players that have won a Super Bowl MVP title at least once. (e.g. Eli Manning, Tom Brady)
-    @type players: L{list}
     @ivar mvp_stats: The relevant statistics for MVP for that particular Super Bowl. (e.g. 5 TD)
     @type mvp_stats: L{str}
     @ivar mvp_blurb: A summary of notable accomplishments for the MVP for that particular
@@ -166,7 +163,6 @@ class SuperBowl(models.Model) :
     winning_franchise = models.ForeignKey(Franchise, related_name = "superbowls_won")
     losing_franchise = models.ForeignKey(Franchise, related_name = "superbowls_lost")
     mvp = models.ForeignKey(MVP, related_name = "superbowls_awarded")
-    players = models.ManyToManyField(MVP, related_name = "superbowls_participated")
     mvp_stats = models.CharField(max_length = 500)
     mvp_blurb = models.CharField(max_length = 500)
     winning_score = models.IntegerField(default = 0)
