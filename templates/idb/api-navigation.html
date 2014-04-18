@@ -16,11 +16,6 @@
     
     // This is a helper function to extract the urls from api 'ref' objects
     function getApiUrls(dataList) {
-        if (_.isObject(dataList)) {
-            // it is an object, so put it in a list for easy processing
-            dataList = [ dataList ];
-        }
-        
         return _.map(dataList, function (dataObject) {
             if (_.isObject(dataObject)) {
                 return dataObject.self;
@@ -35,29 +30,37 @@
             domCell.text(dataValue);
             
         } else {
-            // get the list of urls
-            var urls = getApiUrls(dataValue);
-            
-            // if it's empty, we want to indicate that some how
-            if (_.isEmpty(urls)) {
-                domCell.text("(empty list)");
-                return;
+            if (!_.isArray(dataValue) && _.isObject(dataValue)) {
+                // it is an object, so put it in a list for easy processing
+                dataValue = [ dataValue ];
             }
-            
-            // create <a> tags for thems
-            var tags = _.map(urls, createApiUrlTag);
-            
-            // we need to separate the <a> tags with <br/> tags inbetween
-            var needsBrTag = false;
-            _.each(tags, function (tag) {
+            if (_.isArray(dataValue)) {
+                // get the list of urls
+                var urls = getApiUrls(dataValue);
                 
-                if (needsBrTag) {
-                    domCell.append($('<br>'));
+                // if it's empty, we want to indicate that some how
+                if (_.isEmpty(urls)) {
+                    domCell.text("(empty list)");
+                    return;
                 }
-                domCell.append(tag);
-                needsBrTag = true;
                 
-            });
+                // create <a> tags for thems
+                var tags = _.map(urls, createApiUrlTag);
+                
+                // we need to separate the <a> tags with <br/> tags inbetween
+                var needsBrTag = false;
+                _.each(tags, function (tag) {
+                    
+                    if (needsBrTag) {
+                        domCell.append($('<br>'));
+                    }
+                    domCell.append(tag);
+                    needsBrTag = true;
+                    
+                });
+            } else {
+                domCell.text("(no data)");
+            }
         }
     }
     
@@ -65,20 +68,26 @@
         var tr;
         var td;
         
+        var thead = $('<thead>');
+        
         // create the table title
         if (title) {
             tr = $('<tr>');
                 td = $('<th>');
                 td.attr('colspan', 2);
                 td.text(title);
-                tr.append(td);
-            domTable.append(tr);
+            tr.append(td);
+            thead.append(tr);
         }
         
         // create the table headers
         tr = $('<tr>');
         tr.html('<th>Property</th><th>Value</th>');
-        domTable.append(tr);
+        thead.append(tr);
+        
+        domTable.append(thead);
+        
+        var tbody = $('<tbody>');
         
         // to make this function reusable, check for this special case
         if (dataObject.self) {
@@ -89,13 +98,13 @@
             
             // create the 'self' property
             tr = $('<tr>');
-                td = $('<td><code>self</code></td>');
+                td = $('<td>self</td>');
                 tr.append(td);
                 
                 td = $('<td>');
                     td.append(createApiUrlTag(self))
                 tr.append(td);
-            domTable.append(tr);
+            tbody.append(tr);
             
             // Check that we have a collection entry. For example: The api root
             // (/api/v2) does not have 'collection', but it does have 'self'.
@@ -105,13 +114,13 @@
                 
                 // create the 'collection' property
                 tr = $('<tr>');
-                    td = $('<td><code>collection</code></td>');
+                    td = $('<td>collection</td>');
                     tr.append(td);
                     
                     td = $('<td>');
                         td.append(createApiUrlTag(collection))
                     tr.append(td);
-                domTable.append(tr);
+                tbody.append(tr);
             }
         }
         
@@ -119,14 +128,16 @@
         _.each(dataObject, function(value, key) {
             tr = $('<tr>');
                 td = $('<td>');
-                    td.html('<code>'+key+'</code>');
+                    td.text(key);
                 tr.append(td);
                 
                 td = $('<td>');
                     fillValue(td, value);
                 tr.append(td);
-            domTable.append(tr);
+            tbody.append(tr);
         });
+        
+        domTable.append(tbody);
     }
     
     function displayEntity(domParent, dataObject) {
@@ -137,7 +148,6 @@
     }
     
     function displayCollection(domParent, dataList) {
-        console.log(dataList)
         // if the data is not a list (therefore, a singular entity),
         // we just display it
         if (!_.isArray(dataList)) {
@@ -147,8 +157,12 @@
         
         // otherwise, we build a container element and display them all
         var container = $('<div>');
+        container.addClass('container-fluid');
         _.each(dataList, function (dataObject) {
-            displayEntity(container, dataObject);
+            var row = $('<div>');
+            row.addClass('row');
+            displayEntity(row, dataObject);
+            container.append(row);
         });
         domParent.append(container);
     }
@@ -170,7 +184,8 @@
         url = document.location.origin + url;
         
         // update the url area
-        $('#url-area').text(url)
+        $('#url-area').text("GET " + url);
+        $('#url-area').parent().parent().show();
         
         // get the area and clear it for the next set of results
         var domParent = $('#results-area');
@@ -193,16 +208,30 @@
     <div class="row container-fluid">
         <div class="row">
             <div class="col-xs-12">
-                <span>Go to the root of the api: </span>
-                <a href="#" onclick="goToApiUrl('/api/v2')"><code>/api/v2</code></a>
+                <h3>API Navigation Demo</h3>
+                <p>
+                    SBIDB is provides a RESTful interface for accessing its data, but it also supports some
+                    <a href="http://en.wikipedia.org/wiki/HATEOAS">HATEOAS</a>-like functionality that really enriches
+                    the API (we think so). Most resources provide a link rescriptor that can be used to further navigate
+                    to that resource or the collection of that resource. (For details please see the API documentation
+                    <a href="http://docs.idb.apiary.io/">here</a>.)
+                    Using the magic of <a href="http://en.wikipedia.org/wiki/Ajax_(programming)">AJAX</a> we are able to
+                    create a small demo of how our API can be navigated. It all starts at the
+                    <a href="#" onclick="goToApiUrl('/api/v2')">root</a> and from there you can follow the links to
+                    the deeper parts of the API.
+                </p>
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-1">
-                    <code>GET</code>
+            <div class="col-xs-12">
+                <h3>Go to the root of the API:
+                    <a href="#" onclick="goToApiUrl('/api/v2')"><code>/api/v2</code></a>
+                </h3>
             </div>
-            <div class="col-xs-11">
-                    <span id="url-area" />
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <h4 style="display:none"><code><span disabled="true" id="url-area" /></code></h4>
             </div>
         </div>
         <div class="row container-fluid">

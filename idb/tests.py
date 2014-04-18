@@ -6,6 +6,9 @@ import types
 from django.db.models import Q
 from idb.helpers import *
 
+from django.utils import six
+import watson
+
 # ----------------------
 # RESTful API Unit Tests
 # Inglorious Bashers
@@ -688,6 +691,43 @@ class test_API(TestCase) :
 
 	def test_API_put_mvps_405(self) :
 		self.assert_405_method_not_allowed_response("mvps", 999, "PATCH")
+
+
+# ---------
+# SEARCH TESTS
+# ---------
+
+	def test_search_1(self):
+		query = "Malcolm Smith"
+		search_results = watson.search(query)
+		for result in search_results:
+			if result.title[:-7] == "MVP":
+				self.assertEqual("Malcolm", result.object.first_name)
+		
+	def test_search_2(self):
+		query = "XLVIII"
+		search_results = watson.search(query)
+		for result in search_results:
+			self.assertEqual("XLVIII", result.object.game_number)
+	
+
+	def test_search_3(self):
+		query = ""
+		search_results = watson.search(query)
+		self.assertEqual(0, len(search_results))
+
+	def test_search_4(self):
+		query = "denver"
+		search_results = watson.search(query)
+		for result in search_results:
+			self.assertEqual("Broncos", result.object.team_name)
+
+	def test_search_5(self):
+		query = "sea"
+		search_results = watson.search(query)
+		for result in search_results:
+			if result.title[:-7] == "Franchise":
+				self.assertEqual("Seahawks", result.object.team_name)
 
 # ---------
 # EXECUTION

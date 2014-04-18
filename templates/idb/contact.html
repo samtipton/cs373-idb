@@ -1,110 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+{% extends "idb/template.html" %}
+{% block content %}
 
-    <title>Superbowl Database</title>
+					<!-- Contact Table -->
+			<div id="datatable" class="panel panel-default">
+				<!-- Default panel contents -->
+			<div class="panel-heading"><p style="font-size:25px" class="text-primary">Group Members</p></div>
 
-    <!-- Bootstrap core CSS -->
-    <link type="text/css" href="../../static/bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet">
+				<!-- Table -->
+				<table class="table">
+					<thead>
+						<td ><b>Name</b></td>
+						<td ><b>email</b></td>
+						<td ><b>github</b></td>
+					</thead>
+					<tr>
+						<td>John Schindler</td>
+						<td>john.schindler@utexas.edu</td>
+						<td><a href="https://github.com/Schins02">Schins02</a></td>
+		
+					</tr>
+					<tr>
+						<td>Richard Salazar</td>
+						<td>RichardSalazar@live.com</td>
+						<td><a href="https://github.com/RichardSalazar">RichardSalazar</a></td>
 
-    <!-- Custom styles for this template -->
-    <link type="text/css" href="../../static/bootstrap-3.1.1/css/justified-nav.css" rel="stylesheet">
+					</tr>
+					<tr>
+						<td>Sam Tipton</td>
+						<td>sam.tipton@gmail.com</td>
+						<td><a href="http://www.github.com/samtipton">samtipton</a></td>
 
-  	<!-- JQuery and JavaScript for page animations -->
-	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+					</tr>
+					<tr>
+						<td>Sophie Hernandez</td>
+						<td>soph1her@cs.utexas.edu</td>
+						<td><a href="http://github.com/sophieher">sophieher</a></td>
 
-	<!-- Bootstrap core JS -->
-	<script type="text/javascript" src="../../static/bootstrap-3.1.1/js/bootstrap.min.js"></script>
+					</tr>
+					<tr>
+						<td>Trent Kan</td>
+						<td>trentkan@gmail.com</td>
+						<td><a href="http://www.github.com/trentkan">trentkan</a></td>
 
-	<!-- Custom scripts -->
-	<script type="text/javascript" src="../../static/bootstrap-3.1.1/js/script.js"></script>
+					</tr>
+					<tr>
+						<td>Yoan Chinique</td>
+						<td>ychinique@gmail.com</td>
+						<td><a href="http://www.github.com/yoday">yoday</a></td>
 
-	<link rel="shortcut icon" href="../../static/res/favicon.png">
+					</tr>
+				</table>
+			</div>
+{% endblock content %}
 
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
-<body>
-	<div class="container">
-
-		<div class="masthead">
-			<ul class="nav nav-justified">
-			  <li><a href="/">Home</a></li>
-			  <li><a href="/superbowls/">Super Bowls</a></li>
-			  <li><a href="/franchises/">Teams</a></li>
-			  <li><a href="/mvps/">Players</a></li>
-			  <li class="active"><a href="">Contact</a></li>
-			  <li><i class="glyphicon glyphicon-search"></i>  <input placeholder=" search"></input></li>
-			</ul>
-		</div>
-
-				<!-- Contact Table -->
-		<div id="datatable" class="panel panel-default">
-			<!-- Default panel contents -->
-		<div class="panel-heading"><p style="font-size:25px" class="text-primary">Group Members</p></div>
-
-			<!-- Table -->
-			<table class="table">
-				<thead>
-					<td ><b>Name</b></td>
-					<td ><b>email</b></td>
-					<td ><b>github</b></td>
-				</thead>
-				<tr>
-					<td>John Schindler</td>
-					<td>john.schindler@utexas.edu</td>
-					<td><a href="https://github.com/Schins02">Schins02</a></td>
-	
-				</tr>
-				<tr>
-					<td>Richard Salazar</td>
-					<td>RichardSalazar@live.com</td>
-					<td><a href="https://github.com/RichardSalazar">RichardSalazar</a></td>
-
-				</tr>
-				<tr>
-					<td>Sam Tipton</td>
-					<td>sam.tipton@gmail.com</td>
-					<td><a href="http://www.github.com/samtipton">samtipton</a></td>
-
-				</tr>
-				<tr>
-					<td>Sophie Hernandez</td>
-					<td>soph1her@cs.utexas.edu</td>
-					<td><a href="http://github.com/sophieher">sophieher</a></td>
-
-				</tr>
-				<tr>
-					<td>Trent Kan</td>
-					<td>trentkan@gmail.com</td>
-					<td><a href="http://www.github.com/trentkan">trentkan</a></td>
-
-				</tr>
-				<tr>
-					<td>Yoan Chinique</td>
-					<td>ychinique@gmail.com</td>
-					<td><a href="http://www.github.com/yoday">yoday</a></td>
-
-				</tr>
-			</table>
-		</div>
-
-	</div>
-
-	<!-- Site footer -->
-	<div class="footer">
-		<p>&copy;Trent Kan, Sam Tipton, Sophia Hernandez, Richard Salazar, John Schindler, Yoan Chinique 2014</p>
-	</div>
-</body>
-</html>
