@@ -87,16 +87,12 @@
 			}
 		});
 	}
-
-
+	
 	$(document).ready(function() {
     {% for analytic in analytic_list %}
-
     	runsql({{analytic.id}});
-    	console.log( "ready!" );
-
     {% endfor %}
-
 	});
+	
 </script>
 {% endblock %}
