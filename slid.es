@@ -45,10 +45,10 @@
 <br>
 </p>
 </section>
-<section data-id="653aa4c858f79ca93fbaea8286efec58">
+    <section data-id="653aa4c858f79ca93fbaea8286efec58">
     <h2>
-        <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/samtipton/images/365513/franchises.png" style="line-height: 1.2em; letter-spacing: -0.02em;">
-        <span style="font-family: 'League Gothic', Impact, sans-serif; font-size: 75.96px; letter-spacing: 0.02em; line-height: 0.9em;">Purpose</span>
+        <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/samtipton/images/365513/franchises.png">
+        <span style="font-size: 75.96px;">Purpose</span>
     </h2>
     <p>
     <br>
@@ -66,9 +66,9 @@
 <p>
 <br>
 </p>
-<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/samtipton/images/365515/franchises.png" style="">
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/samtipton/images/365515/franchises.png">
 </section>
-<section data-id="7b58492b0c5ae3db8e454fdf83557fc9">
+    <section data-id="7b58492b0c5ae3db8e454fdf83557fc9">
     <h2>Overview</h2>
     <p>1. set(Data)<br>
 </p>
@@ -82,7 +82,7 @@
 <br>
 </p>
 </section>
-<section data-id="145f6f725790c54dceddc21a7d8b7c12">
+    <section data-id="145f6f725790c54dceddc21a7d8b7c12">
     <section data-id="039d83d39be7837383086282656b4f5f">
         <h2>DATA</h2>
         <p>
@@ -102,7 +102,7 @@
     <h2>Title</h2>
 </section>
 </section>
-<section data-id="20bdf485a6265ee5a6090b959f5f9d4e">
+    <section data-id="20bdf485a6265ee5a6090b959f5f9d4e">
     <section data-id="c61f52453587bbdc116a6abc46114575">
     <h2>FRONT-END</h2>
     <p>
@@ -120,7 +120,7 @@
 </ol>
 </section>
     <section data-id="6213f0d69923581362d430eaac61ae6b">&nbsp;<h2 class="absolute-element" style="position: absolute; width: 364px; height: 68px; z-index: 4; left: 287px; top: 11px;">GRIDS ARE gOOD</h2>
-    <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/samtipton/images/365510/mvps.png" class="absolute-element visible" style="position: absolute; max-height: none; max-width: none; width: 341.4988399071926px; height: 481px; z-index: 4; left: 567px; top: 84px;" data-fragment-index="0">
+    <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/samtipton/images/365510/mvps.png" class="absolute-element visible" style="position: absolute; max-height: none; max-width: none; width: 341.499px; height: 481px; z-index: 4; left: 567px; top: 84px;" data-fragment-index="0">
     <h2>
         <br>
     </h2>
@@ -140,7 +140,7 @@
         <br>
     </h2>
     <p style="position: absolute; width: 541px; height: 68px; z-index: 4; left: -74px; top: 620px;" class="absolute-element fragment" data-fragment-index="0">So is Breathing Room&nbsp;</p>
-    <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/samtipton/images/365505/superbowls.png" style="width: 329.90222222222224px; height: 482px; max-height: none; max-width: none; position: absolute; z-index: 4; left: 18px; top: 87px;" class="absolute-element visible current-fragment" data-fragment-index="2">
+    <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/samtipton/images/365505/superbowls.png" style="width: 329.902px; height: 482px; max-height: none; max-width: none; position: absolute; z-index: 4; left: 18px; top: 87px;" class="absolute-element visible current-fragment" data-fragment-index="2">
 </section>
 <section data-id="20a7ff37cc8ff9face13acbda936801c">
     <h2>hIERARCHY</h2>
@@ -149,7 +149,7 @@
     </div>
 </section>
 </section>
-<section data-id="dbcd2757e981a46cbfec1ac65d61cff0">
+    <section data-id="dbcd2757e981a46cbfec1ac65d61cff0">
     <section data-id="8f508dea79ad391bbea0cb3c141aca16">
         <h2>BACK-END</h2>
         <p>
@@ -171,8 +171,25 @@
 <br>
 </p>
 </section>
+    <section data-id="53ffde9dcb2452b26b337729a9ae0780">
+        <h2>Analytics</h2>
+    </section>
+    <section data-id="5ebd91f2152d1fc012ef3514b8dc8e48">
+        <h2>Search</h2>
+        <div align="left">
+            <ul>
+                <li>Django-Watson</li>
+                <li>Register Models in Models.py -&gt; (watson.register(SuperBowl))</li>
+                <li>Take query from URL using request.GET.get('q', '') with request being the HTTP request object<br>
+                </li>
+                <li>If multi-word query Watson searchers returns results that include both words</li>
+                <li>Split query on whitespace and search each term individually if there happens to be more than one word, then append results to the AND results from the default search performed first<br>
+                </li>
+            </ul>
+        </div>
+    </section>
 </section>
-<section data-id="a2464fe6ec19a64231473af97adfc59f">
+    <section data-id="a2464fe6ec19a64231473af97adfc59f">
     <section data-id="66732f42d09d7decb7da8515f181a346">
         <h2> diff IngloriousBashers ITSAFEATURE</h2>
         <p>
@@ -200,7 +217,7 @@
 </p>
 </section>
 </section>
-<section data-id="54092c1c61eba09608c07124e3cccf97">
+    <section data-id="54092c1c61eba09608c07124e3cccf97">
     <section data-id="173dea72f6934716c02b84da3a37fe78">
         <h2>What did they do well?<br>
         </h2>
@@ -212,13 +229,13 @@
     </p>
 </section>
 </section>
-<section data-id="d6dc02979d91c907a29790f62732e780">
+    <section data-id="d6dc02979d91c907a29790f62732e780">
     <br>
 </section>
-<section data-id="f7a1a2e20a439f2ec5ab528580fd7aee">
+    <section data-id="f7a1a2e20a439f2ec5ab528580fd7aee">
     <h2>Title</h2>
 </section>
-<section data-id="d57a78fc521bc955cb6c5d97311d9e06">
+    <section data-id="d57a78fc521bc955cb6c5d97311d9e06">
     <h2>Title</h2>
 </section>
 </div>
