@@ -239,3 +239,97 @@
     <h2>Title</h2>
 </section>
 </div>
+<div class="slides">
+    <section data-id="a2462ca9c811f2e4a9845141584ed935">
+        <h1>SBIDB REST API</h1>
+<div>
+        <span>
+            <br>
+        </span>
+    </div>
+<div>
+    <span>
+        <br>
+    </span>
+</div>
+<div>
+<span>
+    <br>
+</span>
+</div>
+<div>
+<span>Stateless</span>
+<br>
+</div>
+<div>Resource-Oriented</div>
+<div>HTTP + JSON</div>
+<div>HATEOAS</div>
+</section>
+<section data-id="70e0c204c313958dd9a66f1aa3fcca9a">
+    <h1>USE HTTP METHODS</h1>
+<h2>To describe operations</h2>
+<div>
+    <br>
+</div>
+<div>GET - read</div>
+<div>POST - create</div>
+<div>PUT - replace</div>
+<div>DELETE - remove</div>
+<div>PATCH - update</div>
+<div>OPTIONS - metadata (HATEOAS)</div>
+<div>
+<br>
+</div>
+</section>
+<section data-id="26056d7b81f097b2d767d48ee35138f5">
+    <h1>Be DEscriptive</h1>
+<h2>wrap your payload with metadata</h2>
+<div>
+    <span style="background-color: rgb(63, 63, 63); color: rgb(220, 220, 220); font-family: monospace; text-align: left; white-space: pre-wrap;">
+        <br>
+    </span>
+</div>
+<div>
+<span style="background-color: rgb(63, 63, 63); color: rgb(220, 220, 220); font-family: monospace; text-align: left; white-space: pre-wrap;">
+    <br>
+</span>
+</div>
+<div>
+<span style="background-color: rgb(63, 63, 63); color: rgb(220, 220, 220); font-family: monospace; text-align: left; white-space: pre-wrap;">success</span>&nbsp;- quick indication of results</div>
+<div>
+<span style="background-color: rgb(63, 63, 63); color: rgb(220, 220, 220); font-family: monospace; text-align: left; white-space: pre-wrap;">error.message</span>&nbsp;- why the request failed</div>
+<div>
+<span style="background-color: rgb(63, 63, 63); color: rgb(220, 220, 220); font-family: monospace; text-align: left; white-space: pre-wrap;">error.type</span>&nbsp;- fine-grain category of error</div>
+<div>
+<span style="background-color: rgb(63, 63, 63); color: rgb(220, 220, 220); font-family: monospace; text-align: left; white-space: pre-wrap;">data</span>&nbsp;- results of the operation</div>
+</section>
+<section data-id="8ebe403da4f11719f8912bb8366bbfa6">
+    <h1>HATEOAS</h1>
+<h2>Hypermedia As The Engine Of Application State</h2>
+<div>
+    <br>
+    </div>
+<div>Descriptive - metadata about resources</div>
+<div>Navigable - resources are linked to other resources</div>
+<div>
+<span style="background-color: rgb(63, 63, 63); color: rgb(220, 220, 220); font-family: monospace; text-align: left; white-space: pre-wrap;">self</span>&nbsp;- link to the resource</div>
+<div>
+<span style="background-color: rgb(63, 63, 63); color: rgb(220, 220, 220); font-family: monospace; text-align: left; white-space: pre-wrap;">collection</span>&nbsp;- link to the group of resources</div>
+<div>Evolutionary - resource relationships can change</div>
+</section>
+<section data-id="93166d8c45e3013e134a18e57eadf03b">
+    <h1>analytics API</h1>
+<h2>The fun starts here</h2>
+<div>
+    <br>
+</div>
+<div>
+<br>
+</div>
+<div>Descriptive</div>
+<div>Raw SQL</div>
+<div>Dynamic Results</div>
+<div>Cross Analytics (joins)</div>
+</section>
+</div>
+
