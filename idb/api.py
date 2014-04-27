@@ -12,6 +12,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db import connection
 from idb.database import reset_database
 import datetime
+import decimal
 
 # ----------------
 # helper functions
@@ -20,12 +21,13 @@ import datetime
 class CustomJSONEncoder(json.JSONEncoder):
     """ This is a class to serialize non-json objects like dates. """
     def default(self, obj):
+        if isinstance(obj, decimal.Decimal):
+            return str(obj)
         if isinstance(obj, datetime.datetime):
             return str(obj)
         if isinstance(obj, datetime.date):
             return str(obj)
-        else:
-            return json.JSONEncoder.default(self, obj)
+        return json.JSONEncoder.default(self, obj)
 
 # redefine the dumps function so that we don't have to change things everywhere
 dumps = lambda obj: json.dumps(obj, cls = CustomJSONEncoder)
