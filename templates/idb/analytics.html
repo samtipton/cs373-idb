@@ -15,11 +15,16 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-lg-1">
-				<button type="button" class="btn btn-small btn-primary" onclick="$('#analytics-{{analytic.id}}-result').toggle()">DISPLAY</button>
+			<div class="col-lg-12">
+				<pre style="text-align: left"><code>{{analytic.query}}</code></pre>
 			</div>
-			<div class="col-lg-11">
-				<pre>{{analytic.query}}</pre>
+		</div>
+		<div class="row">
+			<div class="col-lg-6">
+				<button type="button" class="btn btn-small btn-primary form-control" onclick="$('#analytics-{{analytic.id}}-result').toggle()">Display Results</button>
+			</div>
+			<div class="col-lg-6">
+				<button type="button" class="btn btn-small btn-primary form-control" onclick="runsql({{analytic.id}})">Re-Execute Query</button>
 			</div>
 		</div>
 		<div class="row table-responsive" id="analytics-{{analytic.id}}-result" style="display:none">
@@ -92,6 +97,7 @@
     {% for analytic in analytic_list %}
     	runsql({{analytic.id}});
     {% endfor %}
+		//$('pre code').each(function(i, e) { hljs.highlightBlock(e) });
 	});
 	
 </script>
