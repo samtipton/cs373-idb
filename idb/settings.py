@@ -84,15 +84,15 @@ if('test' in sys.argv):
     }
 else:
     DATABASES = {
-#           'default': {
-#           "ENGINE": 'django.db.backends.postgresql_psycopg2',
-#           'NAME': 'd32vi54g8ai6jj',
-#           'USER': 'ixxtrtkrutggss',
-#           'PASSWORD': '9-pxBrjhH81zuzhpBvc_XDeC47',
-#           'HOST': 'ec2-54-204-36-244.compute-1.amazonaws.com',
-#           'PORT': '5432',
-# }
-        'default' : dj_database_url.config(default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3'))
+        'default': {
+            "ENGINE": 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'd5ta89b4ho00jr',
+            'USER': 'vdznnxjlquodvj',
+            'PASSWORD': 'P0NErOMhQO95DpOKdzB4PTlxWw',
+            'HOST': 'ec2-54-225-255-208.compute-1.amazonaws.com',
+            'PORT': '5432',
+        }
+#        'default' : dj_database_url.config(default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3'))
     }
 
 
