@@ -76,26 +76,26 @@
 <li>
         <p align="left">
             <font style="font-size: 54px;">The Data<br>
-            </font>
+    </font>
 </p>
         </li>
 <li>
         <p align="left">
             <font style="font-size: 54px;">The Front-End<br>
-            </font>
+</font>
 </p>
         </li>
 <li>
         <p align="left">
             <font style="font-size: 54px;">The Back-End<br>
-            </font>
+</font>
 </p>
         </li>
 <li>
         <p align="left">
             <font style="font-size: 54px;">The Critiques</font>
             <br>
-        </p>
+</p>
     </li>
 </ol>
 </blockquote>
@@ -207,11 +207,23 @@
 <p>
 <br>
 </p>
-<div class="absolute-element" style="position: absolute; width: 236.546px; height: 226px; z-index: 4; left: 362px; top: 224px; max-height: none; max-width: none;">
+<div class="absolute-element" style="position: absolute; width: 237px; height: 225px; z-index: 4; left: 351px; top: 202px; max-height: none; max-width: none;">
 <pre><code> &lt;!DOCTYPE html&gt;</code><code>&lt;html&gt;</code><code>&lt;head&gt;&lt;/head&gt;</code><code>&lt;body&gt;&lt;/body&gt;</code><p><code>&lt;/html&gt;</code></p>        </pre>
 </div>
 </section>
-        <section data-id="21b0377f735b40d942ad2d77b85857dd">&nbsp;<h1 class="absolute-element" style="position: absolute; width: 799px; height: 122px; z-index: 4; left: 80px; top: 267px;">BIG DESIGN CHOICES</h1>
+        <section data-id="21b0377f735b40d942ad2d77b85857dd">&nbsp;<ul class="absolute-element" style="position: absolute; width: 670px; height: 43px; z-index: 4; left: 163px; top: 256px; max-height: none; max-width: none;">
+            <li>
+                <span style="text-align: center;">Navigation&nbsp;</span>
+                <br>
+            </li>
+            <li>
+                <span style="text-align: center;">Organization</span>
+            </li>
+            <li>
+                <span style="text-align: center;">Display</span>
+            </li>
+        </ul>
+        <h1 class="absolute-element" style="position: absolute; width: 799px; height: 122px; z-index: 4; left: 81px; top: 71px;">BIG DESIGN CHOICES</h1>
 </section>
         <section data-id="20a7ff37cc8ff9face13acbda936801c">
             <h2>Navbars are nice</h2>
@@ -275,13 +287,13 @@
     </span>
 
 <br>
-<span>Stateless</span>
+    <span>Stateless</span>
 <br>Resource-Oriented
 <br>HTTP + JSON
 <br>HATEOAS<br>
 </section>
-    <section data-id="70e0c204c313958dd9a66f1aa3fcca9a">
-        <h1>USE HTTP METHODS</h1>
+<section data-id="70e0c204c313958dd9a66f1aa3fcca9a">
+    <h1>USE HTTP METHODS</h1>
 <h2>To describe operations</h2>
 <div>
     <br>
@@ -296,18 +308,18 @@
 <br>
 </div>
 </section>
-        <section data-id="26056d7b81f097b2d767d48ee35138f5">
-            <h1>BE DESCRIPTIVE</h1>
+    <section data-id="26056d7b81f097b2d767d48ee35138f5">
+        <h1>BE DESCRIPTIVE</h1>
 <h2>wrap your payload with metadata</h2>
 <div>
     <span style="background-color: rgb(63, 63, 63); color: rgb(220, 220, 220); font-family: monospace; text-align: left; white-space: pre-wrap;">
         <br>
-        </span>
+    </span>
 </div>
 <div>
 <span style="background-color: rgb(63, 63, 63); color: rgb(220, 220, 220); font-family: monospace; text-align: left; white-space: pre-wrap;">
     <br>
-    </span>
+</span>
 </div>
 <div>
 <span style="background-color: rgb(63, 63, 63); color: rgb(220, 220, 220); font-family: monospace; text-align: left; white-space: pre-wrap;">success</span>&nbsp;- quick indication of results</div>
@@ -318,8 +330,8 @@
 <div>
 <span style="background-color: rgb(63, 63, 63); color: rgb(220, 220, 220); font-family: monospace; text-align: left; white-space: pre-wrap;">data</span>&nbsp;- results of the operation</div>
 </section>
-    <section data-id="8ebe403da4f11719f8912bb8366bbfa6">
-        <h1>HATEOAS</h1>
+<section data-id="8ebe403da4f11719f8912bb8366bbfa6">
+    <h1>HATEOAS</h1>
 <h2>Hypermedia As The Engine Of Application State</h2>
 <div>
     <br>
@@ -332,8 +344,8 @@
 <span style="background-color: rgb(63, 63, 63); color: rgb(220, 220, 220); font-family: monospace; text-align: left; white-space: pre-wrap;">collection</span>&nbsp;- link to the group of resources</div>
 <div>Evolutionary - resource relationships can change</div>
 </section>
-        <section data-id="93166d8c45e3013e134a18e57eadf03b">
-            <h1>analytics API</h1>
+    <section data-id="93166d8c45e3013e134a18e57eadf03b">
+        <h1>analytics API</h1>
 <h2>The fun starts here</h2>
 <div>
     <br>
@@ -346,8 +358,8 @@
 <div>Dynamic Results</div>
 <div>Cross Analytics (joins)</div>
 </section>
-            <section data-id="5ebd91f2152d1fc012ef3514b8dc8e48">
-                <h2>Search</h2>
+        <section data-id="5ebd91f2152d1fc012ef3514b8dc8e48">
+            <h2>Search</h2>
         <div align="left">
             <ul>
 <li>Django-Watson</li>
@@ -360,31 +372,31 @@
             </ul>
 </div>
     </section>
-            </section>
-            <section data-id="b5d311712ce3b169766374d770f65b4e">
-                <section data-id="37b67fdeb47f1525862d7fa69efeafc3">
-                    <h2>Contextualization</h2>
+        </section>
+        <section data-id="b5d311712ce3b169766374d770f65b4e">
+            <section data-id="37b67fdeb47f1525862d7fa69efeafc3">
+                <h2>Contextualization</h2>
 <p>
 <br>
-</p>
+            </p>
 <p>
 <br>
-</p>
+        </p>
 <p data-fragment-index="0" class="fade-out">
                     <font style="font-size: 42px;">django-watson does not have built-in highlighting.</font>
                 </p>
                 <p data-fragment-index="0" class="fade-out">
                     <br>
-                </p>
+    </p>
 <p data-fragment-index="1" class="fade-in">
                 <br>
-            </p>
+</p>
             <p data-fragment-index="1" class="fade-in">
                 <br>
 </p>
 <p data-fragment-index="2">
                 <br>
-            </p>
+</p>
 <p>
 <br>
 </p>
@@ -397,8 +409,8 @@
 
 
 </section>
-            <section data-id="2ce648456657423937ed25f961701a2e">
-                <h2>Contextualization</h2>
+<section data-id="2ce648456657423937ed25f961701a2e">
+    <h2>Contextualization</h2>
 <p>
 <br>
 </p>
@@ -413,7 +425,7 @@
 </p>
 <p data-fragment-index="2">
                 <br>
-            </p>
+</p>
 <p>
 <br>
 </p>
@@ -426,8 +438,8 @@
 
 
 </section>
-            <section data-id="1fb4a606b08bf9693fb41417addf073f">
-                <h2>Contextualization</h2>
+<section data-id="1fb4a606b08bf9693fb41417addf073f">
+    <h2>Contextualization</h2>
 <p>
 <br>
 </p>
@@ -451,13 +463,13 @@
 
 
 </section>
-        </section>
-        <section data-id="6d19837c6f8ff5e123620a73c72bdc6e">
-            <section data-id="e4ee687feaaadadad12ee7273f47a594">
-                <h2>The Critiques</h2>
+</section>
+<section data-id="6d19837c6f8ff5e123620a73c72bdc6e">
+    <section data-id="e4ee687feaaadadad12ee7273f47a594">
+        <h2>The Critiques</h2>
 <p>
 <br>
-</p>
+    </p>
 <p>
 <font style="font-size: 54px;">Inglorious Bashers</font>
 </p>
@@ -489,32 +501,32 @@
 
 
 </section>
-                <section data-id="d124789e05d5ca4c23778d2042e621c8" data-background-color="rgba( 50, 200, 90, 0.4 )">
-                    <h2>What did we do well?</h2>
+<section data-id="d124789e05d5ca4c23778d2042e621c8" data-background-color="rgba( 50, 200, 90, 0.4 )">
+    <h2>What did we do well?</h2>
 <div style="text-align: left;">
 <ul>
 <li>
             <font style="font-size: 42px;">Extensive &nbsp;coverage of Super Bowl history<br>
-                </font>
+</font>
         </li>
     </ul>
 <div>
     <span style="font-size: 42.349727630615234px;">
         <br>
-            </span>
+</span>
 </div>
 <ul>
 <li>
     <font style="font-size: 42px;">
         <span>Consistent template design for our three main models with effective social media integration</span>
         <br>
-        </font>
+</font>
 </li>
 </ul>
 <div>
 <span style="font-size: 42.349727630615234px;">
     <br>
-    </span>
+</span>
 </div>
 <ul>
 <li>
@@ -528,7 +540,7 @@
 </div>
 <div style="text-align: left;">
     <br>
-    <ul>
+<ul>
 <li>
 <span>
     <font style="font-size: 42px;">Presentability</font>
@@ -602,22 +614,22 @@
         <ul>
 <li>Continuous integration</li>
         <ul>
-            <li>
+<li>
 <font style="font-size: 24px;">Establish a strict workflow</font>
 </li>
         </ul>
-    </ul>
-    <div>
+</ul>
+<div>
 <div>
                 <br>
 </div>
         </div>
         <div>
             <ul>
-    <li>Better coordination between members<br>
-    </li>
+<li>Better coordination between members<br>
+</li>
     <ul>
-        <li>
+<li>
 <font style="font-size: 24px;">Create subgroups within our team</font>
         <div>
                 <br>
@@ -630,11 +642,11 @@
             <ul>
 <li>Data collection</li>
 <br>
-    <li>
+        <li>
         <p>&nbsp;Create meaningful and static URLs that are reusable</p>
 </li>
 <ul>
-    <li>
+<li>
         <font style="font-size: 24px;">Keep internal state information from being revealed to the outside world. ({id})
     </font>
     </li>
@@ -643,8 +655,8 @@
 </div>
     </div>
 </section>
-<section data-id="8cdfadf646adba0c976bdf0ff5a40232" data-background-color="rgba( 50, 200, 90, 0.4 )">
-    <h2>What puzzles us?</h2>
+        <section data-id="8cdfadf646adba0c976bdf0ff5a40232" data-background-color="rgba( 50, 200, 90, 0.4 )">
+            <h2>What puzzles us?</h2>
     <div style="text-align: left;">
         <ul>
 <li>Search capability</li>
@@ -677,10 +689,10 @@
 </div>
     </div>
 </section>
-</section>
-<section data-id="6a31bb7da82fd141441d71c77a58168d">
-    <section data-id="8dae991dd3e2b724cba6f4a67efc0616" data-background-color="rgba( 50, 200, 90, 0.4 )">
-        <h2>what did itsafeature do well?</h2>
+        </section>
+        <section data-id="6a31bb7da82fd141441d71c77a58168d">
+            <section data-id="8dae991dd3e2b724cba6f4a67efc0616" data-background-color="rgba( 50, 200, 90, 0.4 )">
+                <h2>what did itsafeature do well?</h2>
     <div style="text-align: left;">
         <br>
 </div>
@@ -730,8 +742,8 @@
 </div>
     </div>
 </section>
-        <section data-id="177621ad4af59d59dc31747287ef0ad7" data-background-color="rgba( 50, 200, 90, 0.4 )">
-            <h2>what can itsafeature do better?</h2>
+                <section data-id="177621ad4af59d59dc31747287ef0ad7" data-background-color="rgba( 50, 200, 90, 0.4 )">
+                    <h2>what can itsafeature do better?</h2>
     <div style="text-align: left;">
         <ul>
 <li>Eliminate repetition of pictures (tiling)</li>
@@ -776,8 +788,8 @@
 </div>
     </div>
 </section>
-            <section data-id="49fbf52542a835bb822b1c8ae728a3da" data-background-color="rgba( 50, 200, 90, 0.4 )">
-                <h2>what did we learn from itsafeature?</h2>
+                    <section data-id="49fbf52542a835bb822b1c8ae728a3da" data-background-color="rgba( 50, 200, 90, 0.4 )">
+                        <h2>what did we learn from itsafeature?</h2>
     <div>
         <br>
 </div>
@@ -806,8 +818,8 @@
 </div>
     </div>
 </section>
-                <section data-id="87f513b2ef4b7074ba02fc0d25c2d622" data-background-color="rgba( 50, 200, 90, 0.4 )">
-                    <h2>what did itsafeature do to puzzle us?</h2>
+                        <section data-id="87f513b2ef4b7074ba02fc0d25c2d622" data-background-color="rgba( 50, 200, 90, 0.4 )">
+                            <h2>what did itsafeature do to puzzle us?</h2>
     <div style="text-align: left;">
         <ul>
 <li>Centering of text in SQL query page</li>
@@ -830,5 +842,5 @@
 </div>
     </div>
 </section>
-                </section>
-            </div>
+                        </section>
+                    </div>
