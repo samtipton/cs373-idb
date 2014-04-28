@@ -464,14 +464,37 @@
 
 </section>
 </section>
-<section data-id="23b227fac2d6eb5d2057a1f1d4122135">
-    <h2>Testing</h2>
+<section data-id="8cf3aeaa651f36d90dea7d59b7c8e9a5">
+    <section data-id="23b227fac2d6eb5d2057a1f1d4122135">
+        <h2>Testing</h2>
     <p>
     <br>
-</p>
+    </p>
 <p>
-<br>
-</p>
+What more can we say?</p>
+</section>
+    <section data-id="16f436359eedbf91d1479741d3d46a34">
+        <h2>Testing</h2>
+        <div>
+            <br>
+        </div>
+        <div>Unit Tests - Check!</div>
+        <div>
+            <br>
+        </div>
+        <div>Acceptance Tests - ?</div>
+    </section>
+    <section data-id="e2aec5af512553d8dc3eb35b8558cccc">
+        <h2>Testing</h2>
+        <div>
+            <br>
+        </div>
+        <div>Django TestCase and setUp()</div>
+        <div>
+            <br>
+        </div>
+        <div>Using create()</div>
+    </section>
 </section>
 
 <section data-id="6d19837c6f8ff5e123620a73c72bdc6e">
