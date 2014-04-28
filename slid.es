@@ -33,10 +33,11 @@
 <font style="font-size: 54px;" color="#f1c232">
     <b>&nbsp;Sam Tipton</b>
 </font>
-<br>
-    </p>
+</p>
 <p>
-<br>
+<font style="font-size: 54px;" color="#f1c232">
+    <b>Richard Salazar</b>
+</font>
 </p>
 <p>
 <br>
@@ -44,6 +45,43 @@
 <p>
 <br>
 </p>
+<p>
+<br>
+</p>
+</section>
+<section data-id="014fa76161af8dcb373f2894f8e98abc">
+    <h2>What IS&nbsp;<span style="font-size: 75.96px;">the superbowl?</span>
+</h2>
+<div class="absolute-element" style="position: absolute; width: 602px; height: 233px; z-index: 4; left: 69px; top: 193px;">
+    <ul>
+        <li style="font-size: 36px; font-style: normal; font-variant: normal;">The annual NFL Championship Game</li>
+        <li style="font-size: 36px; font-style: normal; font-variant: normal;">
+            <span>NFC/AFC</span>
+        </li>
+        <li style="font-size: 36px; font-style: normal; font-variant: normal;">
+            <span>1966</span>
+        </li>
+        <li style="font-size: 36px; font-style: normal; font-variant: normal;">
+            <span>Nationally Televised</span>
+        </li>
+        <li style="font-size: 36px; font-style: normal; font-variant: normal;">
+            <span style="text-align: left;">Commercials - 4 million</span>
+        </li>
+    </ul>
+</div>
+<div class="absolute-element" style="position: absolute; width: 161px; height: 224px; z-index: 4; left: 739px; top: 74px; max-height: none; max-width: none;">
+    <div style="text-align: left;">
+        <h2 style="font-style: normal; font-variant: normal; text-align: center;">
+            <br>
+        </h2>
+        <div>
+            <h2 style="font-style: normal; font-variant: normal; text-align: center;">
+                <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/rick9099/images/368861/sb.png">
+                <br>
+            </h2>
+        </div>
+    </div>
+</div>
 </section>
 <section data-id="653aa4c858f79ca93fbaea8286efec58">
     <h2>
@@ -99,7 +137,24 @@
 </ol>
 </section>
 <section data-id="a6cabbc3d44f4a4206e4d7b76cf3d518">
-    <h2>Title</h2>
+    <h2>The models<br>
+<br>
+</h2>
+<div>
+    <ol>
+        <li>Super Bowls</li>
+        <li>MVPs</li>
+        <li>Franchises</li>
+        <li>Analytic</li>
+    </ol>
+</div>
+</section>
+<section data-id="c09a01c94caf05fc06290c95e7b489c1">
+    <h2>Relationships</h2>
+    <div class="absolute-element" style="position: absolute; width: 779px; height: 620px; z-index: 4; left: 93px; top: 65px;">
+        <img src="https://raw.githubusercontent.com/samtipton/cs373-idb/master/Model_Relationships.png?token=6541978__eyJzY29wZSI6IlJhd0Jsb2I6c2FtdGlwdG9uL2NzMzczLWlkYi9tYXN0ZXIvTW9kZWxfUmVsYXRpb25zaGlwcy5wbmciLCJleHBpcmVzIjoxMzk5MjU1NjMwfQ%3D%3D--aa4b4bade171ebb1994b55a81d03cb4cd19192e0" style="width: 738.2039980012274px; height: 581.1674658884199px; max-height: none; max-width: none;">
+        <br>
+    </div>
 </section>
 </section>
 <section data-id="0515f21361107e15873d76f0a982ac10">
@@ -217,7 +272,7 @@
 </div>
     </section>
     </section>
-    <section data-id="a2464fe6ec19a64231473af97adfc59f">
+<section data-id="a2464fe6ec19a64231473af97adfc59f">
         <section data-id="66732f42d09d7decb7da8515f181a346">
             <h2> diff IngloriousBashers ITSAFEATURE</h2>
         <p>
@@ -245,7 +300,7 @@
         </p>
 </section>
     </section>
-    <section data-id="54092c1c61eba09608c07124e3cccf97">
+<section data-id="54092c1c61eba09608c07124e3cccf97">
         <section data-id="173dea72f6934716c02b84da3a37fe78">
             <h2>What did they do well?<br>
 </h2>
@@ -257,16 +312,16 @@
             </p>
 </section>
         </section>
-        <section data-id="d6dc02979d91c907a29790f62732e780">
+<section data-id="d6dc02979d91c907a29790f62732e780">
             <br>
         </section>
-        <section data-id="f7a1a2e20a439f2ec5ab528580fd7aee">
+<section data-id="f7a1a2e20a439f2ec5ab528580fd7aee">
             <h2>Title</h2>
 </section>
-            <section data-id="d57a78fc521bc955cb6c5d97311d9e06">
+<section data-id="d57a78fc521bc955cb6c5d97311d9e06">
                 <h2>Title</h2>
 </section>
-                <section data-id="a2462ca9c811f2e4a9845141584ed935">
+<section data-id="a2462ca9c811f2e4a9845141584ed935">
                     <h1>SBIDB REST API</h1>
 <div>
         <span>
@@ -291,7 +346,7 @@
 <div>HTTP + JSON</div>
 <div>HATEOAS</div>
 </section>
-        <section data-id="70e0c204c313958dd9a66f1aa3fcca9a">
+<section data-id="70e0c204c313958dd9a66f1aa3fcca9a">
             <h1>USE HTTP METHODS</h1>
 <h2>To describe operations</h2>
 <div>
@@ -307,7 +362,7 @@
 <br>
 </div>
 </section>
-            <section data-id="26056d7b81f097b2d767d48ee35138f5">
+<section data-id="26056d7b81f097b2d767d48ee35138f5">
                 <h1>Be DEscriptive</h1>
 <h2>wrap your payload with metadata</h2>
 <div>
@@ -329,7 +384,7 @@
 <div>
 <span style="background-color: rgb(63, 63, 63); color: rgb(220, 220, 220); font-family: monospace; text-align: left; white-space: pre-wrap;">data</span>&nbsp;- results of the operation</div>
 </section>
-        <section data-id="8ebe403da4f11719f8912bb8366bbfa6">
+<section data-id="8ebe403da4f11719f8912bb8366bbfa6">
             <h1>HATEOAS</h1>
 <h2>Hypermedia As The Engine Of Application State</h2>
 <div>
@@ -343,7 +398,7 @@
 <span style="background-color: rgb(63, 63, 63); color: rgb(220, 220, 220); font-family: monospace; text-align: left; white-space: pre-wrap;">collection</span>&nbsp;- link to the group of resources</div>
 <div>Evolutionary - resource relationships can change</div>
 </section>
-            <section data-id="93166d8c45e3013e134a18e57eadf03b">
+<section data-id="93166d8c45e3013e134a18e57eadf03b">
                 <h1>analytics API</h1>
 <h2>The fun starts here</h2>
 <div>
@@ -357,7 +412,7 @@
 <div>Dynamic Results</div>
 <div>Cross Analytics (joins)</div>
 </section>
-                <section data-background-size="initial" data-background-color="rgba( 50, 200, 90, 0.4 )" data-id="4e2823ca311db096c8aaff3bce84e409">
+<section data-background-size="initial" data-background-color="rgba( 50, 200, 90, 0.4 )" data-id="4e2823ca311db096c8aaff3bce84e409">
                     <h1>
 <font style="font-size: 112px;">THE SUPER BOWL INTERNET DATABASE</font>
         <br>
@@ -372,7 +427,7 @@
         </div>
 </div>
     </section>
-                    <section data-id="d124789e05d5ca4c23778d2042e621c8" data-background-color="rgba( 50, 200, 90, 0.4 )">
+<section data-id="d124789e05d5ca4c23778d2042e621c8" data-background-color="rgba( 50, 200, 90, 0.4 )">
                         <h2>What did we do well?</h2>
 <div style="text-align: left; ">
 <ul>
@@ -484,7 +539,7 @@
             <h2>Title</h2>
 </section>
         </section>
-        <section data-id="693591e8594114379e2d6417d74dcc49" data-background-color="rgba( 50, 200, 90, 0.4 )">
+<section data-id="693591e8594114379e2d6417d74dcc49" data-background-color="rgba( 50, 200, 90, 0.4 )">
             <h2>What can we do better?</h2>
     <div style="text-align: left; ">
         <ul>
@@ -524,7 +579,7 @@
 </div>
     </div>
 </section>
-            <section data-id="8cdfadf646adba0c976bdf0ff5a40232" data-background-color="rgba( 50, 200, 90, 0.4 )">
+<section data-id="8cdfadf646adba0c976bdf0ff5a40232" data-background-color="rgba( 50, 200, 90, 0.4 )">
                 <h2>What puzzles us?</h2>
     <div style="text-align: left; ">
         <ul>
@@ -558,7 +613,7 @@
 </div>
     </div>
 </section>
-                <section data-id="8dae991dd3e2b724cba6f4a67efc0616" data-background-color="rgba( 50, 200, 90, 0.4 )">
+<section data-id="8dae991dd3e2b724cba6f4a67efc0616" data-background-color="rgba( 50, 200, 90, 0.4 )">
                     <h2>what did itsafeature do well?</h2>
     <div style="text-align: left; ">
         <br>
@@ -609,7 +664,7 @@
 </div>
     </div>
 </section>
-                    <section data-id="49fbf52542a835bb822b1c8ae728a3da" data-background-color="rgba( 50, 200, 90, 0.4 )">
+<section data-id="49fbf52542a835bb822b1c8ae728a3da" data-background-color="rgba( 50, 200, 90, 0.4 )">
                         <h2>what did we learn from itsafeature?</h2>
     <div>
         <br>
@@ -639,7 +694,7 @@
 </div>
     </div>
 </section>
-                        <section data-id="177621ad4af59d59dc31747287ef0ad7" data-background-color="rgba( 50, 200, 90, 0.4 )">
+<section data-id="177621ad4af59d59dc31747287ef0ad7" data-background-color="rgba( 50, 200, 90, 0.4 )">
                             <h2>what can itsafeature do better?</h2>
     <div style="text-align: left; ">
         <ul>
@@ -685,7 +740,7 @@
 </div>
     </div>
 </section>
-                            <section data-id="87f513b2ef4b7074ba02fc0d25c2d622" data-background-color="rgba( 50, 200, 90, 0.4 )">
+<section data-id="87f513b2ef4b7074ba02fc0d25c2d622" data-background-color="rgba( 50, 200, 90, 0.4 )">
                                 <h2>what did itsafeature do to puzzle us?</h2>
     <div style="text-align: left; ">
         <ul>
@@ -709,4 +764,4 @@
 </div>
     </div>
 </section>
-                            </div>
+</div>
