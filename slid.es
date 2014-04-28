@@ -333,3 +333,360 @@
 </section>
 </div>
 
+
+<div class="slides">
+    <section data-background-size="initial" data-background-color="rgba( 50, 200, 90, 0.4 )" data-id="4e2823ca311db096c8aaff3bce84e409">
+        <h1>
+<font style="font-size: 112px;">THE SUPER BOWL INTERNET DATABASE</font>
+        <br>
+</h1>
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/trentkan/images/340180/football_620x350.jpg">
+        <br>
+        <div align="left">
+<br>
+        <div align="center">
+            <blockquote>Created by: The Inglorious Bashers<br>
+</blockquote>
+        </div>
+</div>
+    </section>
+    <section data-id="d124789e05d5ca4c23778d2042e621c8" data-background-color="rgba( 50, 200, 90, 0.4 )">
+        <h2>What did we do well?</h2>
+<div style="text-align: left; ">
+<ul>
+        <li>
+            <font style="font-size: 42px;">Extensive &nbsp;coverage of Super Bowl history<br>
+            </font>
+        </li>
+    </ul>
+<div>
+    <span style="font-size: 42.349727630615234px;">
+        <br>
+    </span>
+</div>
+<ul>
+<li>
+    <font style="font-size: 42px;">
+        <span>Consistent template design for our three main models with effective social media integration</span>
+        <br>
+    </font>
+</li>
+</ul>
+<div>
+<span style="font-size: 42.349727630615234px;">
+    <br>
+</span>
+</div>
+<ul>
+<li>
+    <font>
+        <span style="font-size: 42px;">API </span>
+        <font style="font-size: 42px;">implementation</font>
+    </font>
+</li>
+</ul>
+<span>&nbsp;</span>
+</div>
+<div style="text-align: left; ">
+    <br>
+<ul>
+    <li>
+<span>
+    <font style="font-size: 42px;">Presentability</font>
+</span>
+<br>
+</li>
+</ul>
+<div>
+<span style="font-size: 42.349727630615234px;">
+    <br>
+</span>
+</div>
+<div>
+    <span style="font-size: 42.349727630615234px;">
+        <br>
+    </span>
+</div>
+<ul>
+</ul>
+</div>
+</section>
+<section data-id="37b226190035ed0f99367a7ba47e4ed4">
+    <section data-id="11aeeaeda85016cf025f42ab2e5d1cf8" data-background-color="rgba( 50, 200, 90, 0.4 )">
+        <h2>what have we learned?</h2>
+<div style="text-align: left; ">
+<ul>
+        <li>Django -- the basics</li>
+    </ul>
+    <div>
+        <br>
+    </div>
+    <ul>
+        <li>How to build an API</li>
+    </ul>
+<div>
+    <br>
+</div>
+<div>
+<ul>
+<li>JavaScript</li>
+<ul>
+<li>
+<font style="font-size: 24px;">Navigation bar animation</font>
+</li>
+<li>
+<font style="font-size: 24px;">"Display" button for SQL queries</font>
+</li>
+</ul>
+</ul>
+<div>
+<br>
+</div>
+</div>
+<div>
+<ul>
+<li>Pull requests and establishing a work flow</li>
+</ul>
+<div>
+<br>
+</div>
+</div>
+<div>
+<ul>
+<li>Work in a large team setting</li>
+</ul>
+</div>
+</div>
+</section>
+<section data-id="c356eeef4f6569957d42916fc607ad0f">
+    <h2>Title</h2>
+</section>
+</section>
+<section data-id="693591e8594114379e2d6417d74dcc49" data-background-color="rgba( 50, 200, 90, 0.4 )">
+    <h2>What can we do better?</h2>
+    <div style="text-align: left; ">
+        <ul>
+            <li>Continuous integration</li>
+        </ul>
+        <div>
+            <br>
+        </div>
+        <div>
+            <ul>
+                <li>Establish a strict workflow</li>
+            </ul>
+            <div>
+                <br>
+            </div>
+        </div>
+        <div>
+            <ul>
+                <li>Better coordination among group members</li>
+            </ul>
+            <div>
+                <br>
+            </div>
+        </div>
+        <div>
+            <ul>
+                <li>Create subgroups within our team</li>
+            </ul>
+            <div>
+                <br>
+            </div>
+        </div>
+        <div>
+            <ul>
+                <li>Data collection</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<section data-id="8cdfadf646adba0c976bdf0ff5a40232" data-background-color="rgba( 50, 200, 90, 0.4 )">
+    <h2>What puzzles us?</h2>
+    <div style="text-align: left; ">
+        <ul>
+            <li>Search capability</li>
+            <ul>
+                <li>Relation fields do not appear in search</li>
+                <li>Highlighting search terms</li>
+            </ul>
+        </ul>
+        <div>
+            <br>
+        </div>
+        <div>
+            <ul>
+                <li>Databases</li>
+                <ul>
+                    <li>Q: What's under the hood?&nbsp;</li>
+                    <li>
+                        <span>A: We don't know, it's abstracted by Django!</span>
+                    </li>
+                </ul>
+            </ul>
+            <div>
+                <br>
+            </div>
+        </div>
+        <div>
+            <ul>
+                <li>How Django works</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<section data-id="8dae991dd3e2b724cba6f4a67efc0616" data-background-color="rgba( 50, 200, 90, 0.4 )">
+    <h2>what did itsafeature do well?</h2>
+    <div style="text-align: left; ">
+        <br>
+    </div>
+    <div style="text-align: left; ">
+        <ul>
+            <li>Site design fits well with their project</li>
+        </ul>
+        <div>
+            <br>
+        </div>
+        <div>
+            <ul>
+                <li>Graphs on the stats page</li>
+            </ul>
+            <div>
+                <br>
+            </div>
+        </div>
+        <div>
+            <ul>
+                <li>Menu collapses very nicely</li>
+            </ul>
+            <div>
+                <br>
+            </div>
+        </div>
+        <div>
+            <ul>
+                <li>Scalability -- everything scales</li>
+            </ul>
+            <div>
+                <br>
+            </div>
+        </div>
+        <div>
+            <ul>
+                <li>Footer</li>
+            </ul>
+            <div>
+                <br>
+            </div>
+        </div>
+        <div>
+            <ul>
+                <li>Consistent templates</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<section data-id="49fbf52542a835bb822b1c8ae728a3da" data-background-color="rgba( 50, 200, 90, 0.4 )">
+    <h2>what did we learn from itsafeature?</h2>
+    <div>
+        <br>
+    </div>
+    <div style="text-align: left; ">
+        <ul>
+            <li>Inheritance in their models&nbsp;</li>
+        </ul>
+        <div>
+            <br>
+        </div>
+        <div>
+            <ul>
+                <li>Hovering effects</li>
+            </ul>
+            <div>
+                <br>
+            </div>
+        </div>
+        <div>
+            <ul>
+                <li>Simplicity is better (sometimes)</li>
+                <ul>
+                    <li>Franchise vs. Companies page</li>
+                </ul>
+            </ul>
+        </div>
+    </div>
+</section>
+<section data-id="177621ad4af59d59dc31747287ef0ad7" data-background-color="rgba( 50, 200, 90, 0.4 )">
+    <h2>what can itsafeature do better?</h2>
+    <div style="text-align: left; ">
+        <ul>
+            <li>Eliminate repetition of pictures (tiling)</li>
+        </ul>
+        <div>
+            <br>
+        </div>
+        <ul>
+            <li>Scalability issues (text centering)</li>
+        </ul>
+        <div>
+            <br>
+        </div>
+        <ul>
+            <li>Implement more complex relations</li>
+        </ul>
+        <div>
+            <div>
+                <br>
+            </div>
+        </div>
+        <div>
+            <ul>
+                <li>SQL queries</li>
+            </ul>
+            <div>
+                <br>
+            </div>
+        </div>
+        <div>
+            <ul>
+                <li>Graphs don't make much sense with limited data sense</li>
+            </ul>
+            <div>
+                <br>
+            </div>
+        </div>
+        <div>
+            <ul>
+                <li>Conclusion: more data</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<section data-id="87f513b2ef4b7074ba02fc0d25c2d622" data-background-color="rgba( 50, 200, 90, 0.4 )">
+    <h2>what did itsafeature do to puzzle us?</h2>
+    <div style="text-align: left; ">
+        <ul>
+            <li>Centering of text in SQL query page</li>
+        </ul>
+        <div>
+            <br>
+        </div>
+        <div>
+            <ul>
+                <li>What defines retro video games?</li>
+            </ul>
+            <div>
+                <br>
+            </div>
+        </div>
+        <div>
+            <ul>
+                <li>Carousel&nbsp;</li>
+            </ul>
+        </div>
+    </div>
+</section>
+</div>
+
+
